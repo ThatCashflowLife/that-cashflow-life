@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "HelloWorld",
-    "slug": "expo-template-default",
+    "name": "CashFlow Life",
+    "slug": "cashflow-life",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -9,13 +9,15 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nathanvititoe.cashflowlife"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.nathanvititoe.cashflowlife"
     },
     "web": {
       "bundler": "metro",
@@ -36,6 +38,18 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "49a8415e-83d0-4d4e-b737-3c87919841bc"
+      }
+    },
+    "owner": "nathanvititoe",
+    "updates": {
+      "url": "https://u.expo.dev/49a8415e-83d0-4d4e-b737-3c87919841bc"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
     }
   }
 }
