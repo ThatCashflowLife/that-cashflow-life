@@ -1,48 +1,80 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import QRCodeScannerModal from './Scanner';
+import React, { useState } from "react";
+import {
+  Platform,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
+import { Camera } from "expo-camera";
 
-interface ScanUIProps {
- // add handle scan type here
-}
+import ScannerModal from "./ScannerModal"; // Assuming this is your QR scanner modal
 
-const ScanUI: React.FC<ScanUIProps> = ({  }) => {
+interface ScanUIProps {}
+
+const ScanUI: React.FC<ScanUIProps> = ({}) => {
   const [isModalVisible, setModalVisible] = useState(false);
 
-  const handleScan = (data: any | null) => {
-    // what do we want to do when it scans?
+  const requestCameraPermission = async () => {
+    const { status } = await Camera.requestCameraPermissionsAsync();
+
+    if (status === "granted") {
+      return true;
+    } else {
+      Alert.alert(
+        "Permission Denied",
+        "Camera permission is required to scan QR codes."
+      );
+      return false;
+    }
+  };
+
+  const handleOpenScanner = async () => {
+    const hasPermission = await requestCameraPermission();
+    if (hasPermission) {
+      setModalVisible(true); // Open the modal if permission is granted
+    }
+  };
+
+  const handleScan = (data: string | null) => {
+    if (data) {
+      console.log("Scanned Data:", data);
+    }
   };
 
   return (
-    <View style={styles.card}>
-      <Text style={styles.title}>Scan a Card</Text>
+    <>
+      {/* Button to open the scanner */}
+      <TouchableOpacity style={styles.button} onPress={handleOpenScanner}>
+        <Text style={styles.buttonText}>Scan a Card</Text>
+      </TouchableOpacity>
 
       {/* QR Scanner Modal */}
-      <QRCodeScannerModal
+      <ScannerModal
         visible={isModalVisible}
         onClose={() => setModalVisible(false)}
         onScan={handleScan}
       />
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  card: {
-    backgroundColor: '#1e1e1e',
+  button: {
+    backgroundColor: "#1e1e1e",
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 10,
     marginBottom: 8,
-    alignItems: 'center',
-    justifyContent: "center"
+    alignItems: "center",
+    justifyContent: "center",
   },
-  title: {
-    color: '#fff',
+  buttonText: {
+    color: "#fff",
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: "bold",
+    textAlign: "center",
   },
-
 });
 
 export default ScanUI;

@@ -25,7 +25,13 @@
       "favicon": "./app/assets/ThatCashFlowIcon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Give CashFlow Life permission to access your camera?"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
