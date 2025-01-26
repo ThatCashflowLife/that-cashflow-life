@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Camera } from "expo-camera";
 
-import ScannerModal from "./ScannerModal"; // Assuming this is your QR scanner modal
+import ScannerModal from "./ScannerModal";
 
 interface ScanUIProps {}
 
