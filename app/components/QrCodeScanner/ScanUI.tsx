@@ -30,16 +30,17 @@ const ScanUI: React.FC<ScanUIProps> = ({  }) => {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#1e1e1e',
-    padding: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
     borderRadius: 10,
-    marginVertical: 8,
+    marginBottom: 8,
     alignItems: 'center',
+    justifyContent: "center"
   },
   title: {
     color: '#fff',
     fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 12,
+    fontWeight: 'bold'
   },
 
 });

@@ -21,7 +21,8 @@ const TransactionLogs = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 5
   },
   title: {
     fontSize: 20,
