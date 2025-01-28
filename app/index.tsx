@@ -31,7 +31,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1, // ensure app takes up whole screen
-    backgroundColor: "#121212",
+    backgroundColor: "#121212", // Can test changes with this line
   },
   appContent: {
     padding: 16,
