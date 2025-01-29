@@ -1,65 +1,67 @@
 // import necessary libraries/methods and components
 import React, { useState } from "react";
-import {
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
-import { Camera } from "expo-camera";
+import { Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { Camera, useCameraPermissions } from "expo-camera";
 import ScannerModal from "./ScannerModal";
 
 // Properties passed to the Scanner Button component (similiar to a class definition)
-interface ScannerButtonProps {}
+interface ScannerButtonProps {
+  onDataScan: (data: string) => void; // callback to get data from Scanner Modal
+}
 
-const ScannerButton: React.FC<ScannerButtonProps> = ({}) => {
+export type scanResult = {
+  type: string;
+  data: string;
+};
+
+const ScannerButton: React.FC<ScannerButtonProps> = ({ onDataScan }) => {
   // Logic/Functions Section
   const [isModalVisible, setModalVisible] = useState(false); // Boolean for modal visibility
+  const [permission, requestPermission] = useCameraPermissions(); //set camera permission hook
 
-  // function to get device camera permission from user 
-  const requestCameraPermission = async () => {
-    const { status } = await Camera.requestCameraPermissionsAsync();
-
-    if (status === "granted") {
-      return true;
-    } else {
-      Alert.alert(
-        "Permission Denied",
-        "Camera permission is required to scan QR codes."
-      );
-      return false;
-    }
-  };
-
-  // handle opening the Qr Code Scanner
+  // handle opening the qr code scanner
   const handleOpenScanner = async () => {
-    const hasPermission = await requestCameraPermission(); // get permission
-    if (hasPermission) {
-      setModalVisible(true); // if theres permission flip the visible boolean
+    if (!permission?.granted) {
+      // if we don't have permission, get it
+      const permissionResult = await requestPermission();
+      if (!permissionResult?.granted) {
+        // If permission is denied, notify user
+        Alert.alert(
+          "Permission required",
+          "Camera permission is required to scan QR Codes."
+        );
+        return;
+      }
     }
+    setModalVisible(true); // open modal if we have permission
   };
 
-  // handle the scanned data
-  const handleScan = (data: string | null) => {
-    if (data) {
-      console.log("Scanned Data:", data);
+  // handles the logic post scan
+  const handleScan = ({ type, data }: scanResult) => {
+    if (type === "qr") {
+      onDataScan(data); // pass data back to index.tsx
+      setModalVisible(false); // close the modal
+    } else {
+      Alert.alert("Not a QR Code", "The Scanned item must be a QR code.");
     }
   };
 
   // Tsx Section
   return (
     <>
-      {/* Button to open the scanner */}
+      {/* Button to Open Modal */}
       <TouchableOpacity style={styles.button} onPress={handleOpenScanner}>
-        <Text style={styles.buttonText}>Scan a Card</Text>
+        <Text style={styles.buttonText}>Scan QR Code</Text>
       </TouchableOpacity>
 
-      {/* QR Scanner Modal */}
-      <ScannerModal
-        visible={isModalVisible} // pass the visible prop to the modal
-        onClose={() => setModalVisible(false)} // close modal by making it not visible
-        onScan={handleScan} // what function runs when it scans
-      />
+      {/* QR Scanner Modal Component */}
+      {isModalVisible && (
+        <ScannerModal
+          visible={isModalVisible}
+          onClose={() => setModalVisible(false)}
+          onScan={handleScan}
+        />
+      )}
     </>
   );
 };

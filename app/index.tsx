@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Platform } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { Card } from "react-native-paper";
 import Header from "./components/Header";
 import UserFinances from "./components/UserFinances";
 import TransactionLogs from "./components/TransactionLogs";
@@ -12,33 +11,33 @@ import ScannerButton from "./components/QrCodeScanner/ScannerButton";
 // Sometimes this is called App.tsx, but expo looks for index.tsx
 export default function App() {
   // logic/Functions Section
-
+  const handleDataScan = () => {
+    console.log("getting data from qr scan.");
+  };
   // Tsx section (similar to html)
   return (
     // Safe Area avoids the phones header (battery, cell service)
     <SafeAreaProvider>
       <SafeAreaView style={[styles.container]}>
-
         {/*Header Component*/}
         <Header />
 
         {/*Qr Code Scanner Button/Components*/}
         <View style={[styles.appContent]}>
-          <Card style={styles.card}>
-            <ScannerButton />
-          </Card>
+          <View style={styles.card}>
+            <ScannerButton onDataScan={handleDataScan} />
+          </View>
 
           {/*User's Finance's Component*/}
-          <Card style={styles.card}>
+          <View style={styles.card}>
             <UserFinances />
-          </Card>
+          </View>
 
           {/*Transaction Logs Component*/}
-          <Card style={styles.card}>
+          <View style={styles.card}>
             <TransactionLogs />
-          </Card>
+          </View>
         </View>
-
       </SafeAreaView>
     </SafeAreaProvider>
   );
