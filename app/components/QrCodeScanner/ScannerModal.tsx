@@ -1,38 +1,47 @@
+// import necessary libraries/methods and components
 import React, { useState, useEffect } from "react";
 import { View, Text, Modal, TouchableOpacity } from "react-native";
 
+// Properties definition for the modal (similiar to a class definition)
 interface ScannerModalProps {
   visible: boolean;
   onClose: () => void;
   onScan: (data: string) => void;
 }
-
+// Ensure the Props are passed to the modal component itself
 const ScannerModal: React.FC<ScannerModalProps> = ({
   visible,
   onClose,
   onScan,
 }) => {
+  // Logic/ Functions Section
   const [error, setError] = useState<string | null>(null);
 
+  // whenever visible state changes, it will run this code
   useEffect(() => {
     if (visible) {
+      // if the modal is visible it logs
       console.log("Attempting to access camera");
     }
   }, [visible]);
 
+  // simulating a scan for emulator purposes
   const simulateScan = () => {
     const mockQRCode = "https://example.com/sample-qr-code";
     onScan(mockQRCode);
     onClose();
   };
 
+  // Tsx Section
   return (
+    // Modal Component (imported from react-native)
     <Modal
-      visible={visible}
-      transparent={true}
-      animationType="slide"
-      onRequestClose={onClose}
+      visible={visible} // is the modal visible
+      transparent={true} // renders modal over a transparent bg
+      animationType="none"
+      onRequestClose={onClose} // What happens when user hits the back btn on their phone
     >
+      {/* Container for the Scanner */}
       <View
         style={{
           flex: 1,
@@ -41,6 +50,7 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
           backgroundColor: "rgba(0,0,0,0.5)",
         }}
       >
+        {/* Text Container */}
         <View
           style={{
             backgroundColor: "white",
@@ -59,6 +69,7 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
             QR Code Scanner
           </Text>
 
+          {/* if error is true, Show the error text */}
           {error && (
             <Text
               style={{
@@ -76,6 +87,7 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
               justifyContent: "space-between",
             }}
           >
+            {/* Simulate Scan Button */}
             <TouchableOpacity
               onPress={simulateScan}
               style={{
@@ -86,7 +98,7 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
             >
               <Text style={{ color: "white" }}>Simulate Scan</Text>
             </TouchableOpacity>
-
+            {/* Close Scanner button */}
             <TouchableOpacity
               onPress={onClose}
               style={{
@@ -104,4 +116,5 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
   );
 };
 
+// exported to be called within ScannerButton.tsx
 export default ScannerModal;

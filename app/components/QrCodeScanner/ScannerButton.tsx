@@ -1,20 +1,22 @@
+// import necessary libraries/methods and components
 import React, { useState } from "react";
 import {
-  Platform,
   Text,
   StyleSheet,
   TouchableOpacity,
   Alert,
 } from "react-native";
 import { Camera } from "expo-camera";
-
 import ScannerModal from "./ScannerModal";
 
-interface ScanUIProps {}
+// Properties passed to the Scanner Button component (similiar to a class definition)
+interface ScannerButtonProps {}
 
-const ScanUI: React.FC<ScanUIProps> = ({}) => {
-  const [isModalVisible, setModalVisible] = useState(false);
+const ScannerButton: React.FC<ScannerButtonProps> = ({}) => {
+  // Logic/Functions Section
+  const [isModalVisible, setModalVisible] = useState(false); // Boolean for modal visibility
 
+  // function to get device camera permission from user 
   const requestCameraPermission = async () => {
     const { status } = await Camera.requestCameraPermissionsAsync();
 
@@ -29,19 +31,22 @@ const ScanUI: React.FC<ScanUIProps> = ({}) => {
     }
   };
 
+  // handle opening the Qr Code Scanner
   const handleOpenScanner = async () => {
-    const hasPermission = await requestCameraPermission();
+    const hasPermission = await requestCameraPermission(); // get permission
     if (hasPermission) {
-      setModalVisible(true); // Open the modal if permission is granted
+      setModalVisible(true); // if theres permission flip the visible boolean
     }
   };
 
+  // handle the scanned data
   const handleScan = (data: string | null) => {
     if (data) {
       console.log("Scanned Data:", data);
     }
   };
 
+  // Tsx Section
   return (
     <>
       {/* Button to open the scanner */}
@@ -51,14 +56,15 @@ const ScanUI: React.FC<ScanUIProps> = ({}) => {
 
       {/* QR Scanner Modal */}
       <ScannerModal
-        visible={isModalVisible}
-        onClose={() => setModalVisible(false)}
-        onScan={handleScan}
+        visible={isModalVisible} // pass the visible prop to the modal
+        onClose={() => setModalVisible(false)} // close modal by making it not visible
+        onScan={handleScan} // what function runs when it scans
       />
     </>
   );
 };
 
+// Styling Section
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "#1e1e1e",
@@ -77,4 +83,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ScanUI;
+// exported to be called within Index.tsx
+export default ScannerButton;

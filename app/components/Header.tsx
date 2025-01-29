@@ -1,7 +1,11 @@
+// import necessary libraries/methods and components
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const Header = () => {
+  // Logic/Functions Section
+
+  // Tsx Section
   return (
     <View style={styles.header}>
       <Text style={styles.headerText}>Cashflow Life</Text>
@@ -10,6 +14,7 @@ const Header = () => {
   );
 };
 
+// Styling Section
 const styles = StyleSheet.create({
   header: {
     marginTop: 20,
@@ -30,4 +35,5 @@ const styles = StyleSheet.create({
   },
 });
 
+// exported to be called within Index.tsx
 export default Header;
