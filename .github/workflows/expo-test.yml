@@ -1,0 +1,45 @@
+name: Expo Workflow Testing
+on: 
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  preview:
+    name: Expo Compatibility Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: yarn
+
+      - name: Setup Expo
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPOTOKEN}}
+
+      - name: Install dependencies
+        run: |
+          yarn install
+          npx expo install
+
+      - name: Run compatibility checks
+        run: |
+          npx expo-doctor
+          npx expo diagnostics
+
+      - name: Verify Expo config
+        run: npx expo config
+
+      - name: Test build configuration
+        run: npx expo prebuild --no-install
+
+      - name: Check TypeScript
+        run: npx tsc --noEmit
