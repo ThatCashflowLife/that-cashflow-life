@@ -2,27 +2,27 @@
 import { ExpoRoot } from 'expo-router';
 import { Platform } from 'react-native';
 
-// type declaration for require.context
-declare namespace NodeJS {
-  interface Require {
-    context: (
-      directory: string,
-      useSubdirectories?: boolean,
-      regExp?: RegExp
-    ) => {
-      keys(): string[];
-      <T>(id: string): T;
-      resolve(id: string): string;
-      id: string;
-    };
-  }
-}
+// context type
+type ContextFunction = {
+  context: (
+    directory: string,
+    useSubdirectories?: boolean,
+    regExp?: RegExp
+  ) => {
+    keys(): string[];
+    <T>(id: string): T;
+    resolve(id: string): string;
+    id: string;
+  };
+};
 
 export default function App() {
+  const contextRequire = require as unknown as ContextFunction;
+  
   const getContext = Platform.select({
-    ios: () => require.context('./app'),
-    android: () => require.context('./app'),
-    web: () => require.context('./app'),
+    ios: () => contextRequire.context('./app'),
+    android: () => contextRequire.context('./app'),
+    web: () => contextRequire.context('./app'),
   });
 
   if (!getContext) return null;
