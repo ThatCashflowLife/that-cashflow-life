@@ -1,8 +1,14 @@
+// import necessary libraries/methods and components
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const UserFinances = () => {
+  // Logic/Functions Section
+
+
+  // Tsx Section
   return (
+    //currently just filler hard coded data
     <View style={styles.container}>
       <Text style={styles.title}>User Finances</Text>
       <Text style={styles.text}>Income: $5,000</Text>
@@ -12,6 +18,7 @@ const UserFinances = () => {
   );
 };
 
+// Styling Section
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,
@@ -20,13 +27,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#ffffff', // Light text for dark mode
+    color: '#ffffff', 
     marginBottom: 8,
   },
   text: {
     fontSize: 16,
-    color: '#bbbbbb', // Slightly dimmer light text
+    color: '#bbbbbb', 
   },
 });
 
+// exported to be called within Index.tsx
 export default UserFinances;

@@ -8,6 +8,11 @@
     "scheme": "cashflowlife",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "splash": {
+      "image": "./app/assets/ThatCashFlowIcon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.nathanvititoe.cashflowlife"
@@ -15,7 +20,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/ThatCashFlowIcon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#000000"
       },
       "package": "com.nathanvititoe.cashflowlife"
     },
@@ -25,7 +30,13 @@
       "favicon": "./app/assets/ThatCashFlowIcon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow CashFlow Life to access your camera?"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
@@ -39,8 +50,6 @@
     "updates": {
       "url": "https://u.expo.dev/49a8415e-83d0-4d4e-b737-3c87919841bc"
     },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    }
+    "runtimeVersion": "1.0.0"
   }
 }

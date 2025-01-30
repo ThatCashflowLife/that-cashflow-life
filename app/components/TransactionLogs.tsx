@@ -1,12 +1,17 @@
+// import necessary libraries/methods and components
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 
+const TransactionLogs = () => {
+// Logic/Functions Section
+
+//this is all test/hard coded data 
 const transactions = [
   { id: '1', description: 'Bought Real Estate -$10,000' },
   { id: '2', description: 'Received Salary +$5,000' },
 ];
 
-const TransactionLogs = () => {
+// Tsx Section
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Transaction Logs</Text>
@@ -19,6 +24,7 @@ const TransactionLogs = () => {
   );
 };
 
+// Styling Section
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,
@@ -36,4 +42,5 @@ const styles = StyleSheet.create({
   },
 });
 
+// exported to be called within Index.tsx
 export default TransactionLogs;

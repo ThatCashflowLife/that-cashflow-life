@@ -1,33 +1,47 @@
+// import necessary libraries/methods and components
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Platform } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { Card } from "react-native-paper";
 import Header from "./components/Header";
-import ScanUI from "./components/QrCodeScanner/ScanUI";
 import UserFinances from "./components/UserFinances";
 import TransactionLogs from "./components/TransactionLogs";
+import ScannerButton from "./components/QrCodeScanner/ScannerButton";
 
+// App/index.tsx is the top level of the app, where all components reside (the home page)
+// Sometimes this is called App.tsx, but expo looks for index.tsx
 export default function App() {
+  // logic/Functions Section
+  const handleDataScan = () => {
+    console.log("getting data from qr scan.");
+  };
+  // Tsx section (similar to html)
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={[styles.container]}>
-        <Header />
-        <View style={[styles.appContent]}>
-          <Card style={styles.card}>
-            <ScanUI />
-          </Card>
-          <Card style={styles.card}>
-            <UserFinances />
-          </Card>
-          <Card style={styles.card}>
-            <TransactionLogs />
-          </Card>
+    // Safe Area avoids the phones header (battery, cell service)
+    <SafeAreaView style={[styles.container]}>
+      {/*Header Component*/}
+      <Header />
+
+      {/*Qr Code Scanner Button/Components*/}
+      <View style={[styles.appContent]}>
+        <View style={styles.card}>
+          <ScannerButton onDataScan={handleDataScan} />
         </View>
-      </SafeAreaView>
-    </SafeAreaProvider>
+
+        {/*User's Finance's Component*/}
+        <View style={styles.card}>
+          <UserFinances />
+        </View>
+
+        {/*Transaction Logs Component*/}
+        <View style={styles.card}>
+          <TransactionLogs />
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
+// styling and class names for the above components, defined by their "style" tag
 const styles = StyleSheet.create({
   container: {
     flex: 1, // ensure app takes up whole screen
@@ -37,7 +51,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   card: {
-    marginVertical: 8, // space between cards
+    marginVertical: 8, // space between components
     backgroundColor: "#1e1e1e", // lighter card background
     padding: 7,
     borderRadius: 10,
