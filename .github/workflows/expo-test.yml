@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
-          cache: yarn
+          cache: npm
 
       - name: Setup Expo
         uses: expo/expo-github-action@v8
@@ -27,7 +27,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          yarn install
+          npm install
           npx expo install
 
       - name: Run compatibility checks
