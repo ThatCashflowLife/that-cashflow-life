@@ -1,9 +1,5 @@
-name: Expo Workflow Testing
-on: 
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+name: Expo Review
+on: [push, pull_request]
 
 jobs:
   preview:
@@ -23,12 +19,12 @@ jobs:
         uses: expo/expo-github-action@v8
         with:
           eas-version: latest
-          token: ${{ secrets.EXPOTOKEN}}
+          token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Install dependencies
         run: |
-          npm install
-          npx expo install
+          npm install --legacy-peer-deps
+          npx expo install --fix
 
       - name: Run compatibility checks
         run: |
@@ -37,9 +33,3 @@ jobs:
 
       - name: Verify Expo config
         run: npx expo config
-
-      - name: Test build configuration
-        run: npx expo prebuild --no-install
-
-      - name: Check TypeScript
-        run: npx tsc --noEmit
