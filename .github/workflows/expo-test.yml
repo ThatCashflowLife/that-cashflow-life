@@ -29,10 +29,14 @@ jobs:
             npm install --no-package-lock
             npx expo install --fix
 
-      - name: Run compatibility checks
-        run: |
-          npx expo-doctor
-          npx expo diagnostics
+      - name: TypeScript Check
+        run: npx tsc --noEmit
 
-      - name: Verify Expo config
+      - name: Run Expo Doctor
+        run: npx expo-doctor
+
+      - name: Verify Expo Config
         run: npx expo config
+
+      - name: Check for valid app entry point
+        run: npx expo start --dry-run
