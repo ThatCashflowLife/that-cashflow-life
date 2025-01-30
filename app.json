@@ -8,6 +8,11 @@
     "scheme": "cashflowlife",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "splash": {
+      "image": "./app/assets/ThatCashFlowIcon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.nathanvititoe.cashflowlife"
@@ -31,8 +36,7 @@
         {
           "cameraPermission": "Allow CashFlow Life to access your camera?"
         }
-      ],
-      "expo-barcode-scanner"
+      ]
     ],
     "experiments": {
       "typedRoutes": true

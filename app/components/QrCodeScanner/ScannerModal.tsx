@@ -1,6 +1,5 @@
-import { CameraView } from "expo-camera";
+import { CameraView, BarcodeScanningResult } from "expo-camera";
 import { Modal, TouchableOpacity, Text, StyleSheet, View } from "react-native";
-import { scanResult } from "./ScannerButton";
 
 interface ScannerModalProps {
   visible: boolean;
@@ -13,15 +12,23 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
   onClose,
   onScan,
 }) => {
-  const handleScan = (scanResult: scanResult) => {
+  const handleScan = (scanResult: BarcodeScanningResult) => {
     onScan(scanResult);
   };
   return (
     // Modal to hold the Camera
-    <Modal visible={visible} onRequestClose={onClose} animationType="slide">
+    <Modal visible={visible} onRequestClose={onClose} animationType="none">
       <View style={styles.container}>
         {/* Camera for Scanning */}
-        <CameraView style={styles.camera} facing={"back"}>
+        <CameraView
+          style={styles.camera}
+          onBarcodeScanned={(result: BarcodeScanningResult) => {
+            onScan({ type: result.type, data: result.data });
+          }}
+          barcodeScannerSettings={{
+            barcodeTypes: ["qr"],
+          }}
+        >
           {/* Close button within Camera window */}
           <TouchableOpacity style={styles.closeButton} onPress={onClose}>
             <Text style={styles.closeText}>Close</Text>
