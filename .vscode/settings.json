@@ -12,5 +12,9 @@
   },
   "yaml.validate": false,
   "problems.decorations.enabled": false,
-  "yaml.schemaStore.enable": false
+  "yaml.schemaStore.enable": false,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.github": true
+  }
 }
