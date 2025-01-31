@@ -1,0 +1,39 @@
+name: Expo Review
+on: [push, pull_request]
+
+jobs:
+  preview:
+    name: Expo Compatibility Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: npm
+
+      - name: Setup Expo
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPOTOKEN }}
+
+      - name: Install dependencies
+        run: |
+            rm -rf node_modules
+            rm -f package-lock.json
+            npm cache clean --force
+            npm install --no-package-lock
+            npx expo install --fix
+
+      - name: TypeScript Check
+        run: npx tsc --noEmit
+
+      - name: Run Expo Doctor
+        run: npx expo-doctor
+
+      - name: Verify Expo Config
+        run: npx expo config
