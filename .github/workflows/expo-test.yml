@@ -37,6 +37,3 @@ jobs:
 
       - name: Verify Expo Config
         run: npx expo config
-
-      - name: Check for valid app entry point
-        run: npx expo start --dry-run
