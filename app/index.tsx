@@ -5,7 +5,6 @@ import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "./components/Header";
 import ScannerButton from "./components/QrCodeScanner/ScannerButton";
-import TransactionLogs from "./components/TransactionLog/TransactionLogBtn";
 import UserFinances from "./components/UserFinances";
 import blankUser from "@/testData/blankUser";
 import User from "@/interfaces/user";
@@ -68,7 +67,7 @@ export default function App() {
         <View style={styles.card}>
           <UserFinances user={user} />
         </View>
-
+        {/* Latest Transaction Component */}
         <View>
           <LatestTransaction />
         </View>

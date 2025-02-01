@@ -16,8 +16,8 @@ export type scanResult = {
 
 const ScannerButton: React.FC<ScannerButtonProps> = ({ onScan }) => {
   // Logic/Functions Section
-  const [isModalVisible, setModalVisible] = useState(false); // Boolean for modal visibility
-  const [permission, requestPermission] = useCameraPermissions(); //set camera permission hook
+  const [isModalVisible, setModalVisible] = useState(false); // boolean for modal visibility
+  const [permission, requestPermission] = useCameraPermissions(); // set camera permission hook
 
   // handle opening the qr code scanner
   const handleOpenScanner = async () => {
