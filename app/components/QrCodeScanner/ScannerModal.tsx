@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Modal, TouchableOpacity, Text, StyleSheet, View } from "react-native";
 import { CameraView, BarcodeScanningResult } from "expo-camera";
 
-// define the scannerModal properties object
+// Scanner modal properties definition
 interface ScannerModalProps {
   visible: boolean;
   onClose: () => void;
@@ -46,9 +46,7 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
           {/* Overlay with QR scan frame */}
           <View style={styles.overlay}>
             <View style={styles.scanFrame} />
-            <Text style={styles.scanText}>
-              Place QR Code here
-            </Text>
+            <Text style={styles.scanText}>Place QR Code here</Text>
           </View>
 
           {/* Close button */}
@@ -71,20 +69,25 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
   );
 };
 
+// Styling Section
 const styles = StyleSheet.create({
+  // Modal Container
   container: {
     flex: 1,
     backgroundColor: "#000",
   },
+  // Camera
   camera: {
     flex: 1,
   },
+  // overlay/background
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     justifyContent: "center",
     alignItems: "center",
   },
+  // scanner frame
   scanFrame: {
     width: 250,
     height: 250,
@@ -93,6 +96,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     borderRadius: 12,
   },
+  // text below frame
   scanText: {
     color: "#ffffff",
     fontSize: 16,
@@ -100,6 +104,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingHorizontal: 20,
   },
+  // close scanner btn
   closeButton: {
     position: "absolute",
     top: 50,
@@ -109,6 +114,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     zIndex: 2,
   },
+  // Close camera btn txt
   closeText: {
     color: "white",
     fontSize: 16,
@@ -129,4 +135,5 @@ const styles = StyleSheet.create({
   },
 });
 
+// export to call in ScannerButton.tsx
 export default ScannerModal;
