@@ -32,7 +32,7 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
     <Modal
       visible={visible}
       onRequestClose={onClose}
-      animationType="fade"
+      animationType="none"
       presentationStyle="fullScreen"
     >
       {/* Camera Container */}
@@ -47,7 +47,7 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
           <View style={styles.overlay}>
             <View style={styles.scanFrame} />
             <Text style={styles.scanText}>
-              Position QR code within the frame
+              Place QR Code here
             </Text>
           </View>
 
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   scanText: {
-    color: "#fff",
+    color: "#ffffff",
     fontSize: 16,
     marginTop: 20,
     textAlign: "center",
