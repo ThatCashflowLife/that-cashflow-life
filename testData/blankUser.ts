@@ -3,7 +3,7 @@ import User from "@/interfaces/user";
 const blankUser: User = {
   name: "",
   profession: "",
-  totalIncome: 2000,
+  totalIncome: 1500,
   incomeExplained: {
     Salary: 2000,
     Interest: 0,
