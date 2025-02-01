@@ -16,6 +16,7 @@ type ContextFunction = {
   };
 };
 
+// snack expo looks for this file & function, which will point it to our actual main app/index.tsx
 export default function App() {
   const contextRequire = require as unknown as ContextFunction;
   

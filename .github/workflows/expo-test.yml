@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/github-workflow.json
+# yaml-language-server: validate: false
 name: Expo Review
 on: [push, pull_request]
 
@@ -23,11 +25,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-            rm -rf node_modules
-            rm -f package-lock.json
-            npm cache clean --force
-            npm install --no-package-lock
-            npx expo install --fix
+          rm -rf node_modules
+          rm -f package-lock.json
+          npm cache clean --force
+          npm install --no-package-lock
+          npx expo install --fix
 
       - name: TypeScript Check
         run: npx tsc --noEmit

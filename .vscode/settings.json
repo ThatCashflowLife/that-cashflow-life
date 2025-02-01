@@ -3,5 +3,18 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit"
+  },
+  "files.associations": {
+    "*.yml": "yaml"
+  },
+  "yaml.schemas": {
+    "none": ["/.github/workflows/*.yml"]
+  },
+  "yaml.validate": false,
+  "problems.decorations.enabled": false,
+  "yaml.schemaStore.enable": false,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.github": true
   }
 }

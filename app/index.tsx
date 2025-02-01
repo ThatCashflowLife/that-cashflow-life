@@ -48,7 +48,7 @@ export default function App() {
   };
 
   // this will get the data from a qr scan
-  const handleDataScan = () => {
+  const handleScan = () => {
     console.log("getting data from qr scan.");
   };
   // Tsx section (similar to html)
@@ -61,7 +61,7 @@ export default function App() {
       {/*Qr Code Scanner Button/Components*/}
       <View style={[styles.appContent]}>
         <View style={styles.card}>
-          <ScannerButton onDataScan={handleDataScan} />
+          <ScannerButton onScan={handleScan} />
         </View>
 
         {/*User's Finance's Component*/}

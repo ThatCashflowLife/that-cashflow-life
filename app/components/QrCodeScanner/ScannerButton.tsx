@@ -6,7 +6,7 @@ import ScannerModal from "./ScannerModal";
 
 // Properties passed to the Scanner Button component (similiar to a class definition)
 interface ScannerButtonProps {
-  onDataScan: (data: string) => void; // callback to get data from Scanner Modal
+  onScan: (data: string) => void; // callback to get data from Scanner Modal
 }
 
 export type scanResult = {
@@ -14,7 +14,7 @@ export type scanResult = {
   data: string;
 };
 
-const ScannerButton: React.FC<ScannerButtonProps> = ({ onDataScan }) => {
+const ScannerButton: React.FC<ScannerButtonProps> = ({ onScan }) => {
   // Logic/Functions Section
   const [isModalVisible, setModalVisible] = useState(false); // Boolean for modal visibility
   const [permission, requestPermission] = useCameraPermissions(); //set camera permission hook
@@ -39,7 +39,7 @@ const ScannerButton: React.FC<ScannerButtonProps> = ({ onDataScan }) => {
   // handles the logic post scan
   const handleScan = ({ type, data }: scanResult) => {
     if (type === "qr") {
-      onDataScan(data); // pass data back to index.tsx
+      onScan(data); // pass data back to index.tsx
       setModalVisible(false); // close the modal
     } else {
       Alert.alert("Not a QR Code", "The Scanned item must be a QR code.");
