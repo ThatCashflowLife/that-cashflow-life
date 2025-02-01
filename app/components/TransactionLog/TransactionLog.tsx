@@ -1,12 +1,6 @@
 // import necessary libraries/methods and components
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Modal,
-} from "react-native";
+import { View, Text, StyleSheet, ScrollView, Modal } from "react-native";
 import { formatUSD } from "@/utils/currencyUtil";
 import { formatTimestamp } from "@/utils/timeUtil";
 import Transaction from "@/interfaces/transaction";
@@ -39,45 +33,44 @@ const TransactionLog: React.FC<TransactionLogProps> = ({
     }
   };
 
-  // Tsx Section
+  // Tsx for every transaction
   const renderTransaction = (transaction: Transaction) => (
-    <Modal visible={visible} onRequestClose={onClose} animationType="none">
-      <View key={transaction.id} style={styles.transactionCard}>
-        <View style={styles.transactionHeader}>
-          <Text style={styles.date}>
-            {formatTimestamp(transaction.timestamp)}
-          </Text>
-          <View
-            style={[
-              styles.typeTag,
-              { backgroundColor: getTypeColor(transaction.type) },
-            ]}
-          >
-            <Text style={styles.typeText}>
-              {transaction.type.toUpperCase()}
-            </Text>
-          </View>
-        </View>
-
-        <Text style={styles.description}>{transaction.description}</Text>
-
-        <View style={styles.changesContainer}>
-          <View style={styles.fieldChange}>
-            <Text style={styles.fieldName}>{transaction.fieldName}</Text>
-            <Text style={styles.amount}>{formatUSD(transaction.amount)}</Text>
-          </View>
+    <View key={transaction.id} style={styles.transactionCard}>
+      <View style={styles.transactionHeader}>
+        <Text style={styles.date}>
+          {formatTimestamp(transaction.timestamp)}
+        </Text>
+        <View
+          style={[
+            styles.typeTag,
+            { backgroundColor: getTypeColor(transaction.type) },
+          ]}
+        >
+          <Text style={styles.typeText}>{transaction.type.toUpperCase()}</Text>
         </View>
       </View>
-    </Modal>
+
+      <Text style={styles.description}>{transaction.description}</Text>
+
+      <View style={styles.changesContainer}>
+        <View style={styles.fieldChange}>
+          <Text style={styles.fieldName}>{transaction.fieldName}</Text>
+          <Text style={styles.amount}>{formatUSD(transaction.amount)}</Text>
+        </View>
+      </View>
+    </View>
   );
 
+  // Overall tsx section
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Transaction History</Text>
-      <ScrollView style={styles.scrollContainer}>
-        {testTransactions.map(renderTransaction)}
-      </ScrollView>
-    </View>
+    <Modal visible={visible} onRequestClose={onClose} animationType="none">
+      <View style={styles.container}>
+        <Text style={styles.title}>Transaction History</Text>
+        <ScrollView style={styles.scrollContainer}>
+          {testTransactions.map(renderTransaction)}
+        </ScrollView>
+      </View>
+    </Modal>
   );
 };
 
