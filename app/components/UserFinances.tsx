@@ -1,10 +1,11 @@
 // import necessary libraries/methods and components
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import User from '@/data/user';
 
 const UserFinances = () => {
   // Logic/Functions Section
-
+const [userFinanceReport, setUserFinanceReport] = useState({})
 
   // Tsx Section
   return (
