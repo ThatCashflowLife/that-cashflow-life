@@ -1,39 +1,45 @@
 // import necessary libraries/methods and components
-import React, { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "./components/Header";
-import UserFinances from "./components/UserFinances";
-import TransactionLogs from "./components/TransactionLogs";
 import ScannerButton from "./components/QrCodeScanner/ScannerButton";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import TransactionLogs from "./components/TransactionLog/TransactionLogs";
+import UserFinances from "./components/UserFinances";
+import blankUser from "@/testData/blankUser";
+import User from "@/interfaces/user";
 
 // App/index.tsx is the top level of the app, where all components reside (the home page)
 // Sometimes this is called App.tsx, but expo looks for index.tsx
 export default function App() {
-  const [username, setUsername] = useState("change username");
+  const [user, setUser] = useState<User>(blankUser);
   // logic/Functions Section
 
   // load the username when the component mounts
   useEffect(() => {
-    const loadUsername = async () => {
+    const loadUser = async () => {
       try {
-        const savedName = await AsyncStorage.getItem("username");
-        if (savedName) {
-          setUsername(savedName);
+        const savedUser = await AsyncStorage.getItem("user");
+        if (savedUser) {
+          setUser(JSON.parse(savedUser));
         }
       } catch (error) {
-        console.error("Error loading username:", error);
+        console.error("Error loading user:", error);
       }
     };
-    loadUsername();
+    loadUser();
   }, []);
 
   // saves the username in local/async storage
   const handleUpdateUsername = async (newName: string) => {
     try {
-      await AsyncStorage.setItem("username", newName);
-      setUsername(newName);
+      const updatedUser = {
+        ...user,
+        name: newName,
+      };
+      await AsyncStorage.setItem("user", JSON.stringify(updatedUser));
+      setUser(updatedUser);
     } catch (error) {
       console.error("Error saving username:", error);
     }
@@ -48,7 +54,7 @@ export default function App() {
     // Safe Area avoids the phones header (battery, cell service)
     <SafeAreaView style={[styles.container]}>
       {/*Header Component*/}
-      <Header username={username} updateUsername={handleUpdateUsername} />
+      <Header username={user.name} updateUsername={handleUpdateUsername} />
 
       {/*Qr Code Scanner Button/Components*/}
       <View style={[styles.appContent]}>
@@ -58,7 +64,7 @@ export default function App() {
 
         {/*User's Finance's Component*/}
         <View style={styles.card}>
-          <UserFinances />
+          <UserFinances user={user} />
         </View>
 
         {/*Transaction Logs Component*/}

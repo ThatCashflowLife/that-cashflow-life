@@ -3,7 +3,8 @@ import Assets from "./assets";
 import ChildCost from "./childCost";
 import Income from "./income";
 import Liabilities from "./liabilities";
-import Expenses from "./monthlyExpenses";
+import MonthlyExpenses from "./monthlyExpenses";
+
 
 // array of all users in the game
 export interface Users {
@@ -17,7 +18,7 @@ export default interface User {
   totalIncome: number;
   incomeExplained: Income;
   totalExpenses: number;
-  expensesExplained: Expenses;
+  expensesExplained: MonthlyExpenses;
   Assets: Assets;
   Liabilities: Liabilities;
   children: number;
