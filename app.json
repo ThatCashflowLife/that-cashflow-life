@@ -4,12 +4,11 @@
     "slug": "cashflow-life",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/ThatCashFlowIcon.png",
+    "icon": "./app/assets/CashFlowLifeNewHD.png",
     "scheme": "cashflowlife",
-    "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
-      "image": "./app/assets/ThatCashFlowIcon.png",
+      "image": "./app/assets/CashFlowLifeNewHD.png",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
@@ -19,7 +18,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./app/assets/ThatCashFlowIcon.png",
+        "foregroundImage": "./app/assets/CashFlowLifeNewHD.png",
         "backgroundColor": "#000000"
       },
       "package": "com.nathanvititoe.cashflowlife"
@@ -27,7 +26,7 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./app/assets/ThatCashFlowIcon.png"
+      "favicon": "./app/assets/CashFlowLifeNewHD.png"
     },
     "plugins": [
       "expo-router",
