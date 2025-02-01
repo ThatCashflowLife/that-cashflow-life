@@ -36,11 +36,7 @@ const testUser: User = {
     "Retail Debt": 100,
   },
   children: 2,
-  childCost: {
-    "babysitter cost": 200,
-    "daycare costs": 1000,
-    food: 200,
-  },
+  childCost: 0,
   failedAudits: 0,
   image: "/assets/avatars/glassesMan.png",
 };
