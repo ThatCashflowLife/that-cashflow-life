@@ -35,11 +35,7 @@ const blankUser: User = {
     "Retail Debt": 0,
   },
   children: 0,
-  childCost: {
-    "babysitter cost": 0,
-    "daycare costs": 0,
-    food: 200,
-  },
+  childCost: 0,
   failedAudits: 0,
   image: "",
 };
