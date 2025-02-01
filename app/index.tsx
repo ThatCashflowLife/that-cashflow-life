@@ -68,7 +68,7 @@ export default function App() {
           <UserFinances user={user} />
         </View>
         {/* Latest Transaction Component */}
-        <View>
+        <View style={styles.card}>
           <LatestTransaction />
         </View>
 
