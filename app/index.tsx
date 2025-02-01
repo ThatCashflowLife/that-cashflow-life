@@ -5,10 +5,12 @@ import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "./components/Header";
 import ScannerButton from "./components/QrCodeScanner/ScannerButton";
-import TransactionLogs from "./components/TransactionLog/TransactionLogs";
+import TransactionLogs from "./components/TransactionLog/TransactionLogBtn";
 import UserFinances from "./components/UserFinances";
 import blankUser from "@/testData/blankUser";
 import User from "@/interfaces/user";
+import TransactionLogBtn from "./components/TransactionLog/TransactionLogBtn";
+import LatestTransaction from "./components/LatestTransaction";
 
 // App/index.tsx is the top level of the app, where all components reside (the home page)
 // Sometimes this is called App.tsx, but expo looks for index.tsx
@@ -67,9 +69,13 @@ export default function App() {
           <UserFinances user={user} />
         </View>
 
-        {/*Transaction Logs Component*/}
+        <View>
+          <LatestTransaction />
+        </View>
+
+        {/*Transaction Logs Btn/ Full List*/}
         <View style={styles.card}>
-          <TransactionLogs />
+          <TransactionLogBtn />
         </View>
       </View>
     </SafeAreaView>

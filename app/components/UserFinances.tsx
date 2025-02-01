@@ -2,6 +2,7 @@
 import User from "@/interfaces/user";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import formatUSD from "@/utils/currencyUtil";
 
 // component properties type definition
 interface UserFinancesProps {
@@ -25,23 +26,10 @@ const UserFinances: React.FC<UserFinancesProps> = ({ user }) => {
     return totalAssets - totalLiabilities;
   };
 
-  // Format number as USD
-  const formatUSD = (amount: number) => {
-    if (typeof amount === "number" && amount > 0) {
-      return new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0,
-      }).format(amount);
-    } else {
-      return "$0.00";
-    }
-  };
   // Tsx Section
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{user.name}'s Finances</Text>
+      <Text style={styles.title}>{user.name}'s Financial Overview</Text>
 
       <View style={styles.row}>
         <Text style={styles.label}>Monthly Income:</Text>

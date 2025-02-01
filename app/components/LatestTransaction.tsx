@@ -1,21 +1,18 @@
 // import necessary libraries/methods and components
+// import necessary libraries/methods and components
 import React from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
-const TransactionLogs = () => {
+const LatestTransaction = () => {
   // Logic/Functions Section
 
   // Tsx Section
   return (
-    <TouchableOpacity style={styles.container}>
-      <Text style={styles.title}> View Full Transaction Log</Text>
-    </TouchableOpacity>
+    <>
+      <View style={styles.container}>
+        <Text style={styles.title}> Latest Transaction Here</Text>
+      </View>
+    </>
   );
 };
 
@@ -24,8 +21,8 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,
     paddingVertical: 10,
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     fontSize: 18,
@@ -36,4 +33,4 @@ const styles = StyleSheet.create({
 });
 
 // exported to be called within Index.tsx
-export default TransactionLogs;
+export default LatestTransaction;
