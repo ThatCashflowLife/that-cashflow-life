@@ -5,7 +5,7 @@ const blankUser: User = {
   profession: "",
   totalIncome: 1500,
   incomeExplained: {
-    Salary: 2000,
+    Salary: 2500,
     Interest: 0,
     Dividends: 0,
     "Real Estate Income": 0,
