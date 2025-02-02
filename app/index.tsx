@@ -55,7 +55,11 @@ export default function App() {
     // Safe Area avoids the phones header (battery, cell service)
     <SafeAreaView style={[styles.container]}>
       {/*Header Component*/}
-      <Header username={user.name} updateUsername={handleUpdateUsername} />
+      <Header
+        username={user.name}
+        updateUsername={handleUpdateUsername}
+        user={user}
+      />
 
       {/*Qr Code Scanner Button/Components*/}
       <View style={[styles.appContent]}>

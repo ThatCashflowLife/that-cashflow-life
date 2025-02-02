@@ -3,6 +3,7 @@ import User from "@/interfaces/user";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import formatUSD from "@/utils/currencyUtil";
+import { AntDesign } from "@expo/vector-icons";
 
 // component properties type definition
 interface UserFinancesProps {
@@ -30,6 +31,16 @@ const UserFinances: React.FC<UserFinancesProps> = ({ user }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{user.name}'s Financial Overview</Text>
+
+      {/* Profession Icon */}
+      <View style={styles.professionContainer}>
+        <AntDesign name="questioncircle" size={35} color="#ccc" />
+        <Text style={styles.professionTxt}>Profession</Text>
+        {/* TODO: Use below once we pass user data */}
+        {/* <Text style={styles.professionTxt}>{user.profession}</Text> */}
+      </View>
+
+      <View style={styles.separator} />
 
       <View style={styles.row}>
         <Text style={styles.label}>Monthly Income:</Text>
@@ -94,39 +105,62 @@ const UserFinances: React.FC<UserFinancesProps> = ({ user }) => {
 };
 
 const styles = StyleSheet.create({
+  // Financial Overview Card
   container: {
     padding: 15,
     backgroundColor: "#121212",
     borderRadius: 10,
     marginVertical: 10,
   },
+  // title
   title: {
     fontSize: 20,
     fontWeight: "bold",
     color: "#ffffff",
     marginBottom: 15,
   },
+  // profession container
+  professionContainer: {
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "30%",
+    flexDirection: "row",
+    color: "#bbbbbb",
+  },
+  // profession txt
+  professionTxt: {
+    fontSize: 15,
+    paddingTop: 4,
+    color: "#bbbbbb",
+    paddingLeft: 15,
+  },
+  // each row of txt
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginVertical: 5,
   },
+  // txt field name
   label: {
     fontSize: 16,
     color: "#bbbbbb",
   },
+  // txt value
   value: {
     fontSize: 16,
     color: "#ffffff",
     fontWeight: "500",
   },
+  // if $ is positive
   positive: {
     color: "#3e9c35",
   },
+  // if $ is negative
   negative: {
     color: "#ff4444",
   },
+  // dividing line
   separator: {
     height: 1,
     backgroundColor: "#333333",
