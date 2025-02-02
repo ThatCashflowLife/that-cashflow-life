@@ -1,6 +1,5 @@
 import User from "@/interfaces/user";
-import { Feather, Ionicons } from "@expo/vector-icons";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import { Feather } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
   Dimensions,
@@ -126,7 +125,6 @@ const styles = StyleSheet.create({
     color: "#22311d",
     alignItems: "center",
     maxWidth: 200,
-    overflowX: "hidden",
   },
   // CashFlow Life title
   title: {
