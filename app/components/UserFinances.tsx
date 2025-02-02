@@ -34,7 +34,9 @@ const UserFinances: React.FC<UserFinancesProps> = ({ user }) => {
 
       {/* Profession Icon */}
       <View style={styles.professionContainer}>
-        <AntDesign name="questioncircle" size={35} color="#ccc" />
+        <View style={styles.professionIconContainer}>
+          <AntDesign name="questioncircle" size={35} color="#000000" />
+        </View>
         <Text style={styles.professionTxt}>Profession</Text>
         {/* TODO: Use below once we pass user data */}
         {/* <Text style={styles.professionTxt}>{user.profession}</Text> */}
@@ -127,10 +129,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     color: "#bbbbbb",
   },
+  // profession icon container
+  professionIconContainer: {
+    height: 40,
+    width: 40,
+    backgroundColor: "#bbbbbb",
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   // profession txt
   professionTxt: {
     fontSize: 15,
-    paddingTop: 4,
     color: "#bbbbbb",
     paddingLeft: 15,
   },

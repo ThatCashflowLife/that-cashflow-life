@@ -36,6 +36,15 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
     });
   };
 
+  const handleEditUsername = () => {
+    setIsMenuVisible(false); // close the menu
+    setTempName(username); // reset temp name to current username
+    // short delay for smoothness
+    setTimeout(() => {
+      setIsEditing(true); // trigger text input to be visible in header
+    }, 100);
+  };
+
   const handleSubmit = () => {
     if (tempName.trim()) {
       updateUsername(tempName.trim()); // set to user input
@@ -43,6 +52,10 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
       setTempName(username); // set back to original
     }
     setIsEditing(false);
+  };
+
+  const handleNewGame = () => {
+    console.log("new game created");
   };
 
   return (
@@ -54,7 +67,21 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
           {/* Title */}
           <Text style={styles.title}>Cashflow Life</Text>
           {/* Username display */}
-          <Text style={styles.username}>{username}</Text>
+          {isEditing ? (
+            <TextInput
+              style={styles.usernameInput}
+              value={tempName}
+              onChangeText={setTempName}
+              onBlur={handleSubmit}
+              cursorColor={"#22311d"}
+              autoFocus
+              onSubmitEditing={handleSubmit}
+              placeholder={username}
+              placeholderTextColor="rgba(34, 65, 29, 0.5)"
+            />
+          ) : (
+            <Text style={styles.username}>{username}</Text>
+          )}
         </View>
         {/* Menu Btn */}
         <TouchableOpacity
@@ -71,13 +98,10 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
         isVisible={isMenuVisible}
         onClose={() => setIsMenuVisible(false)}
         onNewGame={() => {
-          console.log("new game created");
+          handleNewGame();
           setIsMenuVisible(false);
         }}
-        onEditUsername={() => {
-          setIsEditing(true);
-          setIsMenuVisible(false);
-        }}
+        onEditUsername={handleEditUsername}
         anchorPosition={menuPosition}
       />
     </>
@@ -89,7 +113,7 @@ const styles = StyleSheet.create({
   header: {
     marginTop: 5,
     width: "100%",
-    backgroundColor: "#3e9c35",
+    backgroundColor: "#4cb348",
     padding: 30,
     alignItems: "center",
     justifyContent: "center",
@@ -117,6 +141,17 @@ const styles = StyleSheet.create({
     color: "#22411d",
     textAlign: "center",
     marginTop: 4,
+  },
+  // username txt while editing
+  usernameInput: {
+    fontSize: 16,
+    color: "#22411d",
+    textAlign: "center",
+    marginTop: 4,
+    padding: 3,
+    minWidth: 120,
+    backgroundColor: "rgba(255, 255, 255, 0.15)",
+    borderRadius: 8,
   },
   // menu btn
   menu: {

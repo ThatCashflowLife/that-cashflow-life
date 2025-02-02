@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Modal,
-  StyleSheet,
-  Dimensions,
-} from "react-native";
+import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 interface UserMenuProps {
@@ -14,7 +7,7 @@ interface UserMenuProps {
   onClose: () => void;
   onNewGame: () => void;
   onEditUsername: () => void;
-  anchorPosition: { top: number; right: number }; // Position from the menu button
+  anchorPosition: { top: number; right: number }; // positioning relative to the menu btn
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({
@@ -42,24 +35,23 @@ const UserMenu: React.FC<UserMenuProps> = ({
           style={[
             styles.menuContainer,
             {
-              position: "absolute",
-              top: anchorPosition.top + 40, // Below the header
-              right: anchorPosition.right + 16, // Align with menu button
+              top: anchorPosition.top + 40, // keep menu below the header
+              right: anchorPosition.right + 16, // align left/right with menu btn
             },
           ]}
         >
           <TouchableOpacity style={styles.menuItem} onPress={onEditUsername}>
-            <Feather name="edit" size={18} color="#22311d" />
+            <Feather name="edit" size={18} color="#bbbbbb" />
             <Text style={styles.menuItemText}>Edit Username</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[styles.menuItem, styles.dangerItem]}
+            style={[styles.menuItem, styles.newGameBtn]}
             onPress={onNewGame}
           >
             <Feather name="trash-2" size={18} color="#d11a2a" />
-            <Text style={[styles.menuItemText, styles.dangerText]}>
-              New Game
+            <Text style={[styles.menuItemText, styles.newGameTxt]}>
+              Reset Game
             </Text>
           </TouchableOpacity>
         </View>
@@ -71,38 +63,44 @@ const UserMenu: React.FC<UserMenuProps> = ({
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.1)",
+    backgroundColor: "rgba(0, 0, 0, .4)",
   },
   menuContainer: {
-    backgroundColor: "#ffffff",
-    borderRadius: 8,
+    backgroundColor: "#1a1a1a",
+    borderRadius: 12,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 4,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
     minWidth: 180,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.1)",
+    position: "absolute",
   },
   menuItem: {
     flexDirection: "row",
     alignItems: "center",
     padding: 12,
     borderBottomWidth: 1,
-    borderBottomColor: "#f0f0f0",
+    borderBottomColor: "rgba(255, 255, 255, 0.08)",
   },
   menuItemText: {
     marginLeft: 12,
     fontSize: 14,
-    color: "#22311d",
+    color: "#bbbbbb",
+    fontWeight: 500,
   },
-  dangerItem: {
+  newGameBtn: {
     borderBottomWidth: 0,
+    backgroundColor: "rgba(255, 69, 69, 0.1)",
   },
-  dangerText: {
-    color: "#d11a2a",
+  newGameTxt: {
+    color: "#ff4545",
+    fontWeight: 600,
   },
 });
 
