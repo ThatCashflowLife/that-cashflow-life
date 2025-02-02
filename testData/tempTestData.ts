@@ -16,13 +16,13 @@ const testUser: User = {
   expensesExplained: {
     "monthly taxes": 300,
     "mortgage payment": 1900,
-    "rent payment": 0,
     "School Loans": 50,
     "Car Payment": 300,
     "Credit Card Payment": 200,
     "Retail Spending": 75,
     Other: 350,
     "Childcare Expenses": 800,
+    "Per Child Expense": 0,
   },
   Assets: {
     savings: 0,
