@@ -4,11 +4,10 @@ import Income from "./income";
 import Liabilities from "./liabilities";
 import MonthlyExpenses from "./monthlyExpenses";
 
-
 // obj containing all information about a single user
 export default interface User {
   name: string;
-  profession?: string;
+  profession: string;
   totalIncome: number;
   incomeExplained: Income;
   totalExpenses: number;

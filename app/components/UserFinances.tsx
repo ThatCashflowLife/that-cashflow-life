@@ -1,6 +1,6 @@
 // import necessary libraries/methods and components
 import User from "@/interfaces/user";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import formatUSD from "@/utils/currencyUtil";
 import { AntDesign } from "@expo/vector-icons";
@@ -12,7 +12,6 @@ interface UserFinancesProps {
 
 const UserFinances: React.FC<UserFinancesProps> = ({ user }) => {
   // Logic/Functions Section
-  const [finances, setFinances] = useState({});
 
   // Calculate net worth (Assets - Liabilities)
   const calculateNetWorth = () => {
@@ -37,9 +36,7 @@ const UserFinances: React.FC<UserFinancesProps> = ({ user }) => {
         <View style={styles.professionIconContainer}>
           <AntDesign name="questioncircle" size={35} color="#000000" />
         </View>
-        <Text style={styles.professionTxt}>Profession</Text>
-        {/* TODO: Use below once we pass user data */}
-        {/* <Text style={styles.professionTxt}>{user.profession}</Text> */}
+        <Text style={styles.professionTxt}>{user.profession}</Text>
       </View>
 
       <View style={styles.separator} />
