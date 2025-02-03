@@ -1,7 +1,9 @@
+// import necessary libraries/methods and components
 import React from "react";
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
+// type definition for menu properties
 interface UserMenuProps {
   isVisible: boolean;
   onClose: () => void;
@@ -17,20 +19,25 @@ const UserMenu: React.FC<UserMenuProps> = ({
   onEditUsername,
   anchorPosition,
 }) => {
+  // Logic/Functions Section
   if (!isVisible) return null;
 
+  // Tsx Section
   return (
+    // Modal for overlay
     <Modal
       visible={isVisible}
       transparent
       animationType="fade"
       onRequestClose={onClose}
     >
+      {/* Allows menu close */}
       <TouchableOpacity
         style={styles.overlay}
         onPress={onClose}
         activeOpacity={1}
       >
+        {/* Menu Container */}
         <View
           style={[
             styles.menuContainer,
@@ -40,16 +47,18 @@ const UserMenu: React.FC<UserMenuProps> = ({
             },
           ]}
         >
+          {/* Edit Username Btn */}
           <TouchableOpacity style={styles.menuItem} onPress={onEditUsername}>
             <Feather name="edit" size={18} color="#bbbbbb" />
             <Text style={styles.menuItemText}>Edit Username</Text>
           </TouchableOpacity>
 
+          {/* New Game btn */}
           <TouchableOpacity
             style={[styles.menuItem, styles.newGameBtn]}
             onPress={onNewGame}
           >
-            <Feather name="trash-2" size={18} color="#d11a2a" />
+            <Feather name="trash-2" size={18} color="#ff4545" />
             <Text style={[styles.menuItemText, styles.newGameTxt]}>
               Reset Game
             </Text>
@@ -60,11 +69,14 @@ const UserMenu: React.FC<UserMenuProps> = ({
   );
 };
 
+// Styling Section
 const styles = StyleSheet.create({
+  // overlay/background
   overlay: {
     flex: 1,
     backgroundColor: "rgba(0, 0, 0, .4)",
   },
+  // menu container
   menuContainer: {
     backgroundColor: "#1a1a1a",
     borderRadius: 12,
@@ -81,6 +93,7 @@ const styles = StyleSheet.create({
     borderColor: "rgba(255, 255, 255, 0.1)",
     position: "absolute",
   },
+  // general menu item
   menuItem: {
     flexDirection: "row",
     alignItems: "center",
@@ -88,16 +101,18 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "rgba(255, 255, 255, 0.08)",
   },
+  // general menu item txt
   menuItemText: {
     marginLeft: 12,
     fontSize: 14,
     color: "#bbbbbb",
     fontWeight: 500,
   },
+  // new game btn
   newGameBtn: {
     borderBottomWidth: 0,
-    backgroundColor: "rgba(255, 69, 69, 0.1)",
   },
+  // new game txt
   newGameTxt: {
     color: "#ff4545",
     fontWeight: 600,

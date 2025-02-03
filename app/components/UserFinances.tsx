@@ -31,7 +31,7 @@ const UserFinances: React.FC<UserFinancesProps> = ({ user }) => {
     <View style={styles.container}>
       <Text style={styles.title}>{user.name}'s Financial Overview</Text>
 
-      {/* Profession Icon */}
+      {/* Profession Section */}
       <View style={styles.professionContainer}>
         <View style={styles.professionIconContainer}>
           <AntDesign name="questioncircle" size={35} color="#000000" />
@@ -39,8 +39,10 @@ const UserFinances: React.FC<UserFinancesProps> = ({ user }) => {
         <Text style={styles.professionTxt}>{user.profession}</Text>
       </View>
 
+      {/* Separator Line */}
       <View style={styles.separator} />
 
+      {/* Monthly Overview */}
       <View style={styles.row}>
         <Text style={styles.label}>Monthly Income:</Text>
         <Text style={styles.value}>{formatUSD(user.totalIncome)}</Text>
@@ -65,8 +67,10 @@ const UserFinances: React.FC<UserFinancesProps> = ({ user }) => {
         </Text>
       </View>
 
+      {/* Separator Line */}
       <View style={styles.separator} />
 
+      {/* Assets/Liabilities Overview */}
       <View style={styles.row}>
         <Text style={styles.label}>Total Assets:</Text>
         <Text style={styles.value}>

@@ -1,11 +1,11 @@
 import User from "@/interfaces/user";
 
 const blankUser: User = {
-  name: "",
-  profession: "",
-  totalIncome: 2000,
+  name: "Username",
+  profession: "Profession",
+  totalIncome: 0,
   incomeExplained: {
-    Salary: 2000,
+    Salary: 0,
     Interest: 0,
     Dividends: 0,
     "Real Estate Income": 0,
@@ -13,7 +13,7 @@ const blankUser: User = {
   },
   totalExpenses: 20,
   expensesExplained: {
-    "monthly taxes": 20,
+    "monthly taxes": 0,
     "mortgage payment": 0,
     "rent payment": 0,
     "School Loans": 0,

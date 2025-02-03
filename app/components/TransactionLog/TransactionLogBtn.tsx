@@ -11,6 +11,7 @@ const TransactionLogBtn = () => {
   // Tsx Section
   return (
     <>
+      {/* Transaction Log Btn */}
       <TouchableOpacity
         style={styles.container}
         onPress={handleOpenTransactionLog}
@@ -18,24 +19,28 @@ const TransactionLogBtn = () => {
         <Text style={styles.title}> View Full Transaction Log</Text>
       </TouchableOpacity>
 
-      <TransactionLog visible={logVisible} onClose={handleLogsClose} />
+      {/* Transaction Log */}
+      {logVisible && (
+        <TransactionLog visible={logVisible} onClose={handleLogsClose} />
+      )}
     </>
   );
 };
 
 // Styling Section
 const styles = StyleSheet.create({
+  // Button Container
   container: {
     paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingVertical: 15,
     alignItems: "center",
     justifyContent: "center",
   },
+  // Button title
   title: {
     fontSize: 18,
     fontWeight: "bold",
     color: "#ffffff",
-    marginBottom: 8,
   },
 });
 

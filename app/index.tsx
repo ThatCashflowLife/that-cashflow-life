@@ -24,6 +24,8 @@ export default function App() {
         const savedUser = await AsyncStorage.getItem("user");
         if (savedUser) {
           setUser(JSON.parse(savedUser));
+        } else {
+          setUser(blankUser);
         }
       } catch (error) {
         console.error("Error loading user:", error);
@@ -71,6 +73,7 @@ export default function App() {
         <View style={styles.card}>
           <UserFinances user={user} />
         </View>
+
         {/* Latest Transaction Component */}
         <View style={styles.card}>
           <LatestTransaction />

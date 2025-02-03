@@ -1,3 +1,4 @@
+// import necessary libraries/methods and components
 import User from "@/interfaces/user";
 import { Feather } from "@expo/vector-icons";
 import React, { useState } from "react";
@@ -10,7 +11,9 @@ import {
   View,
 } from "react-native";
 import UserMenu from "./UserMenu";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
+// type definition for header properties
 interface HeaderProps {
   username: string;
   updateUsername: (newName: string) => void;
@@ -25,6 +28,7 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
   const menuButtonRef = React.useRef<View>(null);
 
   const handleMenuVisibility = () => {
+    // Logic/ Functions Section
     // Get the position of the menu button
     menuButtonRef.current?.measureInWindow((x, y, width, height) => {
       setMenuPosition({
@@ -53,18 +57,28 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
     setIsEditing(false);
   };
 
-  const handleNewGame = () => {
-    console.log("new game created");
+  // clear async storage (wipes all saved data)
+  const handleNewGame = async () => {
+    try {
+      await AsyncStorage.clear();
+      console.log("Storage completely cleared!");
+    } catch (error) {
+      console.error("Failed to clear async storage:", error);
+    }
   };
 
+  // Tsx Section
   return (
     <>
       {/* Header Container */}
       <View style={styles.header}>
+
         {/* Header Text Container */}
         <View style={styles.headerText}>
+
           {/* Title */}
           <Text style={styles.title}>Cashflow Life</Text>
+
           {/* Username display */}
           {isEditing ? (
             <TextInput
@@ -82,6 +96,7 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
             <Text style={styles.username}>{username}</Text>
           )}
         </View>
+
         {/* Menu Btn */}
         <TouchableOpacity
           style={styles.menu}
@@ -92,6 +107,7 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
           <Feather name="menu" size={30} color="#22311d" />
         </TouchableOpacity>
       </View>
+
       {/* User Menu  */}
       <UserMenu
         isVisible={isMenuVisible}
@@ -107,6 +123,7 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
   );
 };
 
+// Styling Section
 const styles = StyleSheet.create({
   // header container
   header: {
@@ -156,7 +173,6 @@ const styles = StyleSheet.create({
     padding: 8,
     position: "absolute",
     right: 20,
-    top: "65%",
   },
 });
 
