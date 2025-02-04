@@ -156,4 +156,5 @@ const styles = StyleSheet.create({
   },
 });
 
+// exported to be called in TransactionLogBtn.tsx 
 export default TransactionLog;

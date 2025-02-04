@@ -1,15 +1,15 @@
 // import necessary libraries/methods and components
+import User from "@/interfaces/user";
+import blankUser from "@/testData/blankUser";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Header from "./components/Header";
-import ScannerButton from "./components/QrCodeScanner/ScannerButton";
-import UserFinances from "./components/UserFinances";
-import blankUser from "@/testData/blankUser";
-import User from "@/interfaces/user";
-import TransactionLogBtn from "./components/TransactionLog/TransactionLogBtn";
+import Header from "./components/Header/Header";
 import LatestTransaction from "./components/LatestTransaction";
+import ScannerButton from "./components/QrCodeScanner/ScannerButton";
+import TransactionLogBtn from "./components/TransactionLog/TransactionLogBtn";
+import FinancialOverview from "./components/UserFinances/FinancialOverview";
 
 // App/index.tsx is the top level of the app, where all components reside (the home page)
 // Sometimes this is called App.tsx, but expo looks for index.tsx
@@ -32,7 +32,7 @@ export default function App() {
       }
     };
     loadUser();
-  }, []);
+  }, [user]);
 
   // saves the username in local/async storage
   const handleUpdateUsername = async (newName: string) => {
@@ -71,7 +71,7 @@ export default function App() {
 
         {/*User's Finance's Component*/}
         <View style={styles.card}>
-          <UserFinances user={user} />
+          <FinancialOverview user={user} />
         </View>
 
         {/* Latest Transaction Component */}

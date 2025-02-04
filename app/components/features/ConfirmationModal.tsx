@@ -4,20 +4,14 @@ import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 // type definition for menu properties
-interface UserMenuProps {
+interface ConfirmationModalProps {
   isVisible: boolean;
   onClose: () => void;
-  onNewGame: () => void;
-  onEditUsername: () => void;
-  anchorPosition: { top: number; right: number }; // positioning relative to the menu btn
 }
 
-const UserMenu: React.FC<UserMenuProps> = ({
+const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   isVisible,
-  onClose,
-  onNewGame,
-  onEditUsername,
-  anchorPosition,
+  onClose
 }) => {
   // Logic/Functions Section
   if (!isVisible) return null;
@@ -41,28 +35,9 @@ const UserMenu: React.FC<UserMenuProps> = ({
         <View
           style={[
             styles.menuContainer,
-            {
-              top: anchorPosition.top + 40, // keep menu below the header
-              right: anchorPosition.right + 16, // align left/right with menu btn
-            },
           ]}
         >
-          {/* Edit Username Btn */}
-          <TouchableOpacity style={styles.menuItem} onPress={onEditUsername}>
-            <Feather name="edit" size={18} color="#bbbbbb" />
-            <Text style={styles.menuItemText}>Edit Username</Text>
-          </TouchableOpacity>
-
-          {/* New Game btn */}
-          <TouchableOpacity
-            style={[styles.menuItem, styles.newGameBtn]}
-            onPress={onNewGame}
-          >
-            <Feather name="trash-2" size={18} color="#ff4545" />
-            <Text style={[styles.menuItemText, styles.newGameTxt]}>
-              Reset Game
-            </Text>
-          </TouchableOpacity>
+            <Text>THIS WILL BE A CONFIRMATION MODAL</Text>
         </View>
       </TouchableOpacity>
     </Modal>
@@ -108,15 +83,7 @@ const styles = StyleSheet.create({
     color: "#bbbbbb",
     fontWeight: 500,
   },
-  // new game btn
-  newGameBtn: {
-    borderBottomWidth: 0,
-  },
-  // new game txt
-  newGameTxt: {
-    color: "#ff4545",
-    fontWeight: 600,
-  },
 });
 
-export default UserMenu;
+// to be imported wherever needed
+export default ConfirmationModal;

@@ -1,6 +1,7 @@
 // import necessary libraries/methods and components
 import User from "@/interfaces/user";
 import { Feather } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import {
   Dimensions,
@@ -11,7 +12,6 @@ import {
   View,
 } from "react-native";
 import UserMenu from "./UserMenu";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // type definition for header properties
 interface HeaderProps {
@@ -72,10 +72,8 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
     <>
       {/* Header Container */}
       <View style={styles.header}>
-
         {/* Header Text Container */}
         <View style={styles.headerText}>
-
           {/* Title */}
           <Text style={styles.title}>Cashflow Life</Text>
 
@@ -87,7 +85,8 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
               onChangeText={setTempName}
               onBlur={handleSubmit}
               cursorColor={"#22311d"}
-              autoFocus
+              autoFocus={true}
+              selectTextOnFocus={true}
               onSubmitEditing={handleSubmit}
               placeholder={username}
               placeholderTextColor="rgba(34, 65, 29, 0.5)"
@@ -176,4 +175,5 @@ const styles = StyleSheet.create({
   },
 });
 
+// exported to be called within Index.tsx
 export default Header;
