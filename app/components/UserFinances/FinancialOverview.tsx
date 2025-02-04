@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     marginBottom: 15,
     maxWidth: "50%",
-    overflowX: "hidden",
+    overflow: "hidden",
     flexShrink: 1,
   },
   // title
