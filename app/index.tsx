@@ -3,7 +3,7 @@ import User from "@/interfaces/user";
 import blankUser from "@/testData/blankUser";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "./components/Header/Header";
 import LatestTransaction from "./components/LatestTransaction";
@@ -63,27 +63,33 @@ export default function App() {
         user={user}
       />
 
-      {/*Qr Code Scanner Button/Components*/}
-      <View style={[styles.appContent]}>
-        <View style={styles.card}>
-          <ScannerButton onScan={handleScan} />
-        </View>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        {/*Qr Code Scanner Button/Components*/}
+        <View style={[styles.appContent]}>
+          <View style={styles.card}>
+            <ScannerButton onScan={handleScan} />
+          </View>
 
-        {/*User's Finance's Component*/}
-        <View style={styles.card}>
-          <FinancialOverview user={user} />
-        </View>
+          {/*User's Finance's Component*/}
+          <View style={styles.card}>
+            <FinancialOverview user={user} />
+          </View>
 
-        {/* Latest Transaction Component */}
-        <View style={styles.card}>
-          <LatestTransaction />
-        </View>
+          {/* Latest Transaction Component */}
+          <View style={styles.card}>
+            <LatestTransaction />
+          </View>
 
-        {/*Transaction Logs Btn/ Full List*/}
-        <View style={styles.card}>
-          <TransactionLogBtn />
+          {/*Transaction Logs Btn/ Full List*/}
+          <View style={styles.card}>
+            <TransactionLogBtn />
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -94,9 +100,20 @@ const styles = StyleSheet.create({
     flex: 1, // ensure app takes up whole screen
     backgroundColor: "#121212", // Can test changes with this line
   },
+  // scrollable view
+  scrollView: {
+    flex: 1,
+  },
+  // scrollable content
+  scrollContent: {
+    flexGrow: 1,
+    paddingBottom: 20,
+  },
+  // home page content
   appContent: {
     padding: 16,
   },
+  // card for each component
   card: {
     marginVertical: 8, // space between components
     backgroundColor: "#1e1e1e", // lighter card background
