@@ -13,8 +13,8 @@ const blankUser: User = {
   },
   totalExpenses: 0,
   expensesExplained: {
-    "Monthly taxes": 0,
-    "Mortgage payment": 0,
+    "Monthly Taxes": 0,
+    "Mortgage Payment": 0,
     "Rent Payment": 0,
     "School Loans": 0,
     "Car Payment": 0,
