@@ -25,7 +25,6 @@ const Janitor: profession = {
     assets: 
     {
         savings: 560,
-        investments: 0,
     },
     liabilities:
     {

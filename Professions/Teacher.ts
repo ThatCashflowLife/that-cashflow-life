@@ -25,7 +25,6 @@ const Teacher: profession = {
     assets: 
     {
         savings: 400,
-        investments: 0,
     },
     liabilities:
     {

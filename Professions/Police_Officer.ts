@@ -25,7 +25,6 @@ const Police_Officer: profession = {
     assets: 
     {
         savings: 520,
-        investments: 0,
     },
     liabilities:
     {

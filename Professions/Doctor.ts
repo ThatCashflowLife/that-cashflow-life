@@ -25,7 +25,6 @@ const Doctor: profession = {
     assets: 
     {
         savings: 400,
-        investments: 0,
     },
     liabilities:
     {

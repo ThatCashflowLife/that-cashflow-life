@@ -25,7 +25,6 @@ const Nurse: profession = {
     assets: 
     {
         savings: 480,
-        investments: 0,
     },
     liabilities:
     {

@@ -25,7 +25,6 @@ const Secretary: profession = {
     assets: 
     {
         savings: 710,
-        investments: 0,
     },
     liabilities:
     {

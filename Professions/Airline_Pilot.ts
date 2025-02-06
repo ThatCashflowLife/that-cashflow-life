@@ -25,7 +25,6 @@ const Airline_Pilot: profession = {
     assets: 
     {
         savings: 400,
-        investments: 0,
     },
     liabilities:
     {

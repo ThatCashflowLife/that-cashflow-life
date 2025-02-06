@@ -25,7 +25,6 @@ const Business_Manager: profession = {
     assets: 
     {
         savings: 400,
-        investments: 0,
     },
     liabilities:
     {

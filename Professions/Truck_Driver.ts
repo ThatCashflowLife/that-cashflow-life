@@ -25,7 +25,6 @@ const Truck_Driver: profession = {
     assets: 
     {
         savings: 750,
-        investments: 0,
     },
     liabilities:
     {
