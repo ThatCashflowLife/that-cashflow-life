@@ -37,7 +37,7 @@ const TransactionLog: React.FC<TransactionLogProps> = ({
   const renderTransaction = (transaction: Transaction) => (
     <View key={transaction.id} style={styles.transactionCard}>
       <View style={styles.transactionHeader}>
-        <Text style={styles.date}>
+        <Text style={styles.timestamp}>
           {formatTimestamp(transaction.timestamp)}
         </Text>
         <View
@@ -76,9 +76,11 @@ const TransactionLog: React.FC<TransactionLogProps> = ({
 
 // Styling Section
 const styles = StyleSheet.create({
+  // Full Log container
   container: {
     flex: 1,
   },
+  // Logs title
   title: {
     fontSize: 20,
     fontWeight: "bold",
@@ -86,9 +88,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
   },
+  // container that scrolls
   scrollContainer: {
     flex: 1,
   },
+  // card for each transaction
   transactionCard: {
     backgroundColor: "#2a2a2a",
     borderRadius: 8,
@@ -96,46 +100,55 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     marginHorizontal: 10,
   },
+  // header for each transaction
   transactionHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 8,
   },
-  date: {
+  // timestamp for each transaction
+  timestamp: {
     color: "#bbbbbb",
     fontSize: 14,
   },
+  // type of transaction container
   typeTag: {
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 4,
   },
+  // type of transaction txt
   typeText: {
     color: "#ffffff",
     fontSize: 12,
     fontWeight: "bold",
   },
+  // transaction description
   description: {
     color: "#ffffff",
     fontSize: 16,
     marginBottom: 8,
   },
+  // container for field change
   changesContainer: {
     borderTopWidth: 1,
     borderTopColor: "#3a3a3a",
     paddingTop: 8,
   },
+  // what field it affects
   fieldChange: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 4,
   },
+  // field name
   fieldName: {
     color: "#bbbbbb",
     fontSize: 14,
   },
+  // currency difference
   amount: {
     color: "#ffffff",
     fontSize: 14,
@@ -143,4 +156,5 @@ const styles = StyleSheet.create({
   },
 });
 
+// exported to be called in TransactionLogBtn.tsx 
 export default TransactionLog;

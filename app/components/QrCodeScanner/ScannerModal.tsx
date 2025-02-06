@@ -57,10 +57,10 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
           {/* Scan again / Redo button */}
           {!isScanning && (
             <TouchableOpacity
-              style={styles.scanAgainButton}
+              style={styles.tryAgainButton}
               onPress={() => setIsScanning(true)}
             >
-              <Text style={styles.scanAgainText}>Tap to Scan Again</Text>
+              <Text style={styles.tryAgainText}>Try Again</Text>
             </TouchableOpacity>
           )}
         </CameraView>
@@ -120,7 +120,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
   },
-  scanAgainButton: {
+  // try again btn
+  tryAgainButton: {
     position: "absolute",
     bottom: 50,
     alignSelf: "center",
@@ -128,7 +129,8 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.7)",
     borderRadius: 8,
   },
-  scanAgainText: {
+  // try again txt
+  tryAgainText: {
     color: "white",
     fontSize: 16,
     fontWeight: "600",
