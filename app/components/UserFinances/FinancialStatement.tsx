@@ -10,6 +10,7 @@ import {
   View,
 } from "react-native";
 import formatUSD from "@/utils/currencyUtil";
+import addValuesTogether from "@/utils/additionUtil";
 
 // component properties type definition
 interface FinancialStatementProps {
@@ -24,7 +25,6 @@ const FinancialStatement: React.FC<FinancialStatementProps> = ({
   onClose,
 }) => {
   // Logic/Functions Section
-  
 
   // Tsx Section
   return (
@@ -79,9 +79,7 @@ const FinancialStatement: React.FC<FinancialStatementProps> = ({
                 <Text style={styles.totalLabel}>Passive Income:</Text>
                 <Text style={styles.positive}>
                   {formatUSD(
-                    Object.values(
-                      user.incomeExplained["Passive Income"]
-                    ).reduce((a, b) => a + b, 0)
+                    addValuesTogether(user.incomeExplained["Passive Income"])
                   )}
                 </Text>
               </View>
