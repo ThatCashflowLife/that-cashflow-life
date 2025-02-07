@@ -5,6 +5,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import formatUSD from "@/utils/currencyUtil";
 import { AntDesign } from "@expo/vector-icons";
 import FinancialStatement from "./FinancialStatement";
+import addValuesTogether from "@/utils/additionUtil";
 
 // component properties type definition
 interface FinancialOverviewProps {
@@ -80,8 +81,17 @@ const FinancialOverview: React.FC<FinancialOverviewProps> = ({ user }) => {
 
       {/* Monthly Overview */}
       <View style={styles.row}>
+        <Text style={styles.label}>Salary:</Text>
+        <Text style={styles.value}>
+          {formatUSD(user.incomeExplained.Salary)}
+        </Text>
+      </View>
+
+      <View style={styles.row}>
         <Text style={styles.label}>Passive Income:</Text>
-        <Text style={styles.value}>{formatUSD(user.incomeExplained["Passive Income"])}</Text>
+        <Text style={styles.value}>
+          {formatUSD(addValuesTogether(user.incomeExplained["Passive Income"]))}
+        </Text>
       </View>
 
       <View style={styles.row}>
@@ -90,7 +100,7 @@ const FinancialOverview: React.FC<FinancialOverviewProps> = ({ user }) => {
       </View>
 
       <View style={styles.row}>
-        <Text style={styles.label}>Monthly Cashflow:</Text>
+        <Text style={styles.label}>Cashflow:</Text>
         <Text
           style={[
             styles.value,

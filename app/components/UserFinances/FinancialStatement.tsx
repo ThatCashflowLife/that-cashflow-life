@@ -25,8 +25,13 @@ const FinancialStatement: React.FC<FinancialStatementProps> = ({
 }) => {
   // Logic/Functions Section
   const findPassiveIncomeTotal = () => {
-    const totalPassiveIncome = formatUSD(user.Assets)
-  }
+    const passiveIncome = user.incomeExplained["Passive Income"];
+    const totalPassiveIncome = Object.values(passiveIncome).reduce(
+      (sum, value) => sum + value,
+      0
+    );
+    return formatUSD(totalPassiveIncome);
+  };
 
   // Tsx Section
   return (
@@ -53,22 +58,42 @@ const FinancialStatement: React.FC<FinancialStatementProps> = ({
           showsVerticalScrollIndicator={false}
         >
           <View style={styles.content}>
-            {/* Income */}
+            {/* Income Sources List */}
             <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Monthly Income</Text>
-              {Object.entries(user.incomeExplained).map(([source, amount]) => (
-                <View key={source} style={styles.row}>
-                  <Text style={styles.label}>{source}:</Text>
-                  <Text style={styles.value}>{formatUSD(amount)}</Text>
-                </View>
-              ))}
+              <Text style={styles.sectionTitle}>Income Sources</Text>
+
+              {/* Salary */}
+              <View style={styles.row}>
+                <Text style={styles.label}>Salary:</Text>
+                <Text style={styles.value}>
+                  {formatUSD(user.incomeExplained.Salary)}
+                </Text>
+              </View>
+              {/* Separator Line */}
+              <View style={styles.separator} />
+
+              {/* Passive Income */}
+              {Object.entries(user.incomeExplained["Passive Income"]).map(
+                ([source, amount]) => (
+                  <View key={source} style={styles.row}>
+                    <Text style={styles.label}>{source}:</Text>
+                    <Text style={styles.value}>{formatUSD(amount)}</Text>
+                  </View>
+                )
+              )}
+
               <View style={[styles.row, styles.totalRow]}>
                 <Text style={styles.totalLabel}>Passive Income:</Text>
                 <Text style={styles.positive}>
-                  {formatUSD(user.totalIncome)}
+                  {formatUSD(
+                    Object.values(
+                      user.incomeExplained["Passive Income"]
+                    ).reduce((a, b) => a + b, 0)
+                  )}
                 </Text>
               </View>
-              <View style={[styles.row, styles.totalRow]}>
+
+              <View style={[styles.row]}>
                 <Text style={styles.totalLabel}>Total Income:</Text>
                 <Text style={styles.positive}>
                   {formatUSD(user.totalIncome)}
@@ -242,6 +267,12 @@ const styles = StyleSheet.create({
     color: "#ff4444",
     fontSize: 16,
     fontWeight: "bold",
+  },
+  // dividing line
+  separator: {
+    height: 1,
+    backgroundColor: "#333333",
+    marginVertical: 3,
   },
 });
 
