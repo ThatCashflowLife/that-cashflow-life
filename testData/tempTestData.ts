@@ -14,8 +14,9 @@ const testUser: User = {
   },
   totalExpenses: 5300,
   expensesExplained: {
-    "monthly taxes": 300,
-    "mortgage payment": 1900,
+    "Monthly Taxes": 300,
+    "Mortgage Payment": 1900,
+    "Rent Payment": 0,
     "School Loans": 50,
     "Car Payment": 300,
     "Credit Card Payment": 200,
@@ -34,9 +35,9 @@ const testUser: User = {
     "Credit Card Loans": 2000,
     "Retail Debt": 100,
   },
-  children: 2,
-  childCost: 0,
-  failedAudits: 0,
+  Children: 2,
+  ChildCost: 0,
+  "Failed Audits": 0,
   image: "/assets/avatars/glassesMan.png",
 };
 

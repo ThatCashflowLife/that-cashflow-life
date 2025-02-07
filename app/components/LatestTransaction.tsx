@@ -1,5 +1,4 @@
 // import necessary libraries/methods and components
-// import necessary libraries/methods and components
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
@@ -18,17 +17,18 @@ const LatestTransaction = () => {
 
 // Styling Section
 const styles = StyleSheet.create({
+  // Latest Transaction Card Container
   container: {
     paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingVertical: 15,
     alignItems: "center",
     justifyContent: "center",
   },
+  // Latest Transaction Title
   title: {
     fontSize: 18,
     fontWeight: "bold",
     color: "#ffffff",
-    marginBottom: 8,
   },
 });
 

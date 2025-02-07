@@ -1,20 +1,21 @@
 import User from "@/interfaces/user";
 
 const blankUser: User = {
-  name: "",
-  profession: "",
-  totalIncome: 1500,
+  name: "Username",
+  profession: "Profession",
+  totalIncome: 0,
   incomeExplained: {
-    Salary: 2500,
+    Salary: 0,
     Interest: 0,
     Dividends: 0,
     "Real Estate Income": 0,
     "Business Income": 0,
   },
-  totalExpenses: 20,
+  totalExpenses: 0,
   expensesExplained: {
-    "monthly taxes": 20,
-    "mortgage payment": 0,
+    "Monthly Taxes": 0,
+    "Mortgage Payment": 0,
+    "Rent Payment": 0,
     "School Loans": 0,
     "Car Payment": 0,
     "Credit Card Payment": 0,
@@ -33,9 +34,9 @@ const blankUser: User = {
     "Credit Card Loans": 0,
     "Retail Debt": 0,
   },
-  children: 0,
-  childCost: 0,
-  failedAudits: 0,
+  Children: 0,
+  ChildCost: 0,
+  "Failed Audits": 0,
   image: "",
 };
 
