@@ -104,12 +104,17 @@ const FinancialOverview: React.FC<FinancialOverviewProps> = ({ user }) => {
         <Text
           style={[
             styles.value,
-            user.totalIncome - user.totalExpenses > 0
+            addValuesTogether(user.incomeExplained["Passive Income"]) -
+              user.totalExpenses >
+            0
               ? styles.positive
               : styles.negative,
           ]}
         >
-          {formatUSD(user.totalIncome - user.totalExpenses)}
+          {formatUSD(
+            addValuesTogether(user.incomeExplained["Passive Income"]) -
+              user.totalExpenses
+          )}
         </Text>
       </View>
 
