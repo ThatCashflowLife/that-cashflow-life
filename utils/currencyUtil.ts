@@ -1,5 +1,8 @@
+import Assets from "@/interfaces/assets";
+import { PassiveIncome } from "@/interfaces/income";
+
 // Format number as USD
-export const formatUSD = (amount: number) => {
+export const formatUSD = (amount: number | PassiveIncome | Assets) => {
   if (typeof amount === "number" && amount > 0) {
     return new Intl.NumberFormat("en-US", {
       style: "currency",

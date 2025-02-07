@@ -24,6 +24,9 @@ const FinancialStatement: React.FC<FinancialStatementProps> = ({
   onClose,
 }) => {
   // Logic/Functions Section
+  const findPassiveIncomeTotal = () => {
+    const totalPassiveIncome = formatUSD(user.Assets)
+  }
 
   // Tsx Section
   return (
@@ -59,6 +62,12 @@ const FinancialStatement: React.FC<FinancialStatementProps> = ({
                   <Text style={styles.value}>{formatUSD(amount)}</Text>
                 </View>
               ))}
+              <View style={[styles.row, styles.totalRow]}>
+                <Text style={styles.totalLabel}>Passive Income:</Text>
+                <Text style={styles.positive}>
+                  {formatUSD(user.totalIncome)}
+                </Text>
+              </View>
               <View style={[styles.row, styles.totalRow]}>
                 <Text style={styles.totalLabel}>Total Income:</Text>
                 <Text style={styles.positive}>

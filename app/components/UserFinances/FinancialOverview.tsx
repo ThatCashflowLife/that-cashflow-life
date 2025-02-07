@@ -80,8 +80,8 @@ const FinancialOverview: React.FC<FinancialOverviewProps> = ({ user }) => {
 
       {/* Monthly Overview */}
       <View style={styles.row}>
-        <Text style={styles.label}>Monthly Income:</Text>
-        <Text style={styles.value}>{formatUSD(user.totalIncome)}</Text>
+        <Text style={styles.label}>Passive Income:</Text>
+        <Text style={styles.value}>{formatUSD(user.incomeExplained["Passive Income"])}</Text>
       </View>
 
       <View style={styles.row}>

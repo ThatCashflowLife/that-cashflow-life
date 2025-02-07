@@ -6,10 +6,12 @@ const blankUser: User = {
   totalIncome: 0,
   incomeExplained: {
     Salary: 0,
-    Interest: 0,
-    Dividends: 0,
-    "Real Estate Income": 0,
-    "Business Income": 0,
+    "Passive Income": {
+      Interest: 0,
+      Dividends: 0,
+      "Real Estate Income": 0,
+      "Business Income": 0,
+    },
   },
   totalExpenses: 0,
   expensesExplained: {
