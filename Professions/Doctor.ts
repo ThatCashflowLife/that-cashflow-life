@@ -12,8 +12,8 @@ const Doctor: profession = {
     },
     expenses:
     {
-        "monthly taxes": 3420,
-        "mortgage payment": 1900,
+        "Monthly Taxes": 3420,
+        "Mortgage Payment": 1900,
         "School Loans": 750,
         "Car Payment": 380,
         "Credit Card Payment": 270,
@@ -24,7 +24,7 @@ const Doctor: profession = {
     },
     assets: 
     {
-        savings: 400,
+        Savings: 400,
     },
     liabilities:
     {

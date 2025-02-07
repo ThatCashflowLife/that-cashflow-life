@@ -12,8 +12,8 @@ const Business_Manager: profession = {
     },
     expenses:
     {
-        "monthly taxes": 910,
-        "mortgage payment": 700,
+        "Monthly Taxes": 910,
+        "Mortgage Payment": 700,
         "School Loans": 60,
         "Car Payment": 120,
         "Credit Card Payment": 90,
@@ -24,7 +24,7 @@ const Business_Manager: profession = {
     },
     assets: 
     {
-        savings: 400,
+        Savings: 400,
     },
     liabilities:
     {

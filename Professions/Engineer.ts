@@ -12,8 +12,8 @@ const Engineer: profession = {
     },
     expenses:
     {
-        "monthly taxes": 1050,
-        "mortgage payment": 700,
+        "Monthly Taxes": 1050,
+        "Mortgage Payment": 700,
         "School Loans": 60,
         "Car Payment": 140,
         "Credit Card Payment": 120,
@@ -24,7 +24,7 @@ const Engineer: profession = {
     },
     assets: 
     {
-        savings: 400,
+        Savings: 400,
     },
     liabilities:
     {

@@ -12,8 +12,8 @@ const Airline_Pilot: profession = {
     },
     expenses:
     {
-        "monthly taxes": 2350,
-        "mortgage payment": 1330,
+        "Monthly Taxes": 2350,
+        "Mortgage Payment": 1330,
         "School Loans": 0,
         "Car Payment": 300,
         "Credit Card Payment": 660,
@@ -24,7 +24,7 @@ const Airline_Pilot: profession = {
     },
     assets: 
     {
-        savings: 400,
+        Savings: 400,
     },
     liabilities:
     {

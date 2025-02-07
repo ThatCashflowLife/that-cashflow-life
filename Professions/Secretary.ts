@@ -12,8 +12,8 @@ const Secretary: profession = {
     },
     expenses:
     {
-        "monthly taxes": 460,
-        "mortgage payment": 400,
+        "Monthly Taxes": 460,
+        "Mortgage Payment": 400,
         "School Loans": 0,
         "Car Payment": 80,
         "Credit Card Payment": 60,
@@ -24,7 +24,7 @@ const Secretary: profession = {
     },
     assets: 
     {
-        savings: 710,
+        Savings: 710,
     },
     liabilities:
     {

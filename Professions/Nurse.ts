@@ -12,8 +12,8 @@ const Nurse: profession = {
     },
     expenses:
     {
-        "monthly taxes": 600,
-        "mortgage payment": 400,
+        "Monthly Taxes": 600,
+        "Mortgage Payment": 400,
         "School Loans": 30,
         "Car Payment": 100,
         "Credit Card Payment": 90,
@@ -24,7 +24,7 @@ const Nurse: profession = {
     },
     assets: 
     {
-        savings: 480,
+        Savings: 480,
     },
     liabilities:
     {

@@ -12,8 +12,8 @@ const Lawyer: profession = {
     },
     expenses:
     {
-        "monthly taxes": 1830,
-        "mortgage payment": 1100,
+        "Monthly Taxes": 1830,
+        "Mortgage Payment": 1100,
         "School Loans": 390,
         "Car Payment": 220,
         "Credit Card Payment": 180,
@@ -24,7 +24,7 @@ const Lawyer: profession = {
     },
     assets: 
     {
-        savings: 400,
+        Savings: 400,
     },
     liabilities:
     {

@@ -12,8 +12,8 @@ const Teacher: profession = {
     },
     expenses:
     {
-        "monthly taxes": 630,
-        "mortgage payment": 500,
+        "Monthly Taxes": 630,
+        "Mortgage Payment": 500,
         "School Loans": 60,
         "Car Payment": 100,
         "Credit Card Payment": 90,
@@ -24,7 +24,7 @@ const Teacher: profession = {
     },
     assets: 
     {
-        savings: 400,
+        Savings: 400,
     },
     liabilities:
     {

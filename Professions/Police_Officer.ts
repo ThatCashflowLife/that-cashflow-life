@@ -12,8 +12,8 @@ const Police_Officer: profession = {
     },
     expenses:
     {
-        "monthly taxes": 580,
-        "mortgage payment": 400,
+        "Monthly Taxes": 580,
+        "Mortgage Payment": 400,
         "School Loans": 0,
         "Car Payment": 100,
         "Credit Card Payment": 60,
@@ -24,7 +24,7 @@ const Police_Officer: profession = {
     },
     assets: 
     {
-        savings: 520,
+        Savings: 520,
     },
     liabilities:
     {

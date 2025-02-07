@@ -12,8 +12,8 @@ const Janitor: profession = {
     },
     expenses:
     {
-        "monthly taxes": 280,
-        "mortgage payment": 200,
+        "Monthly Taxes": 280,
+        "Mortgage Payment": 200,
         "School Loans": 0,
         "Car Payment": 60,
         "Credit Card Payment": 60,
@@ -24,7 +24,7 @@ const Janitor: profession = {
     },
     assets: 
     {
-        savings: 560,
+        Savings: 560,
     },
     liabilities:
     {

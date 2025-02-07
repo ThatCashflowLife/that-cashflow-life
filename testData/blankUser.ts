@@ -15,7 +15,6 @@ const blankUser: User = {
   expensesExplained: {
     "Monthly Taxes": 0,
     "Mortgage Payment": 0,
-    "Rent Payment": 0,
     "School Loans": 0,
     "Car Payment": 0,
     "Credit Card Payment": 0,
@@ -25,7 +24,7 @@ const blankUser: User = {
     "Per Child Expense": 0,
   },
   Assets: {
-    savings: 0,
+    Savings: 0,
   },
   Liabilities: {
     "Mortgage Total": 0,
