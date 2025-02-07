@@ -24,14 +24,7 @@ const FinancialStatement: React.FC<FinancialStatementProps> = ({
   onClose,
 }) => {
   // Logic/Functions Section
-  const findPassiveIncomeTotal = () => {
-    const passiveIncome = user.incomeExplained["Passive Income"];
-    const totalPassiveIncome = Object.values(passiveIncome).reduce(
-      (sum, value) => sum + value,
-      0
-    );
-    return formatUSD(totalPassiveIncome);
-  };
+  
 
   // Tsx Section
   return (
