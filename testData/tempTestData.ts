@@ -26,7 +26,6 @@ const testUser: User = {
   },
   Assets: {
     savings: 0,
-    investments: 6000,
   },
   Liabilities: {
     "Mortgage Total": 280000,

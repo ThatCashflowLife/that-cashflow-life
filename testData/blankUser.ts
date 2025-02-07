@@ -25,7 +25,6 @@ const blankUser: User = {
   },
   Assets: {
     savings: 0,
-    investments: 0,
   },
   Liabilities: {
     "Mortgage Total": 0,
