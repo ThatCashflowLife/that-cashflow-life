@@ -1,61 +1,72 @@
 // import necessary libraries/methods and components
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, Modal } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { formatUSD } from "@/utils/currencyUtil";
 import { formatTimestamp } from "@/utils/timeUtil";
 import Transaction from "@/interfaces/transaction";
 import { testTransactions } from "@/testData/testTransactions";
+import User from "@/interfaces/user";
 
+// component properties type definition
 interface TransactionLogProps {
-  visible: boolean;
-  onClose: () => void;
+  user: User;
 }
 
-const TransactionLog: React.FC<TransactionLogProps> = ({
-  visible,
-  onClose,
-}) => {
+const TransactionLog: React.FC<TransactionLogProps> = ({ user }) => {
   // Logic/Functions Section
 
   // determines the color based on the transaction type
   const getTypeColor = (type: Transaction["type"]) => {
     switch (type) {
-      case "income":
-        return "#3e9c35";
+      case "salary":
+        return "#3e9c35"; // income green
+      case "passive income":
+        return "#3e9c35"; // income green
       case "expense":
-        return "#ff4444";
+        return "#ff4444"; // expense red
       case "asset":
-        return "#4444ff";
+        return "#4444ff"; // asset purple
       case "liability":
-        return "#ff8c00";
+        return "#ff8c00"; // liability orange
       default:
-        return "#ffffff";
+        return "#4cb348"; // default green
     }
   };
 
   // Tsx for every transaction
   const renderTransaction = (transaction: Transaction) => (
-    <View key={transaction.id} style={styles.transactionCard}>
-      <View style={styles.transactionHeader}>
-        <Text style={styles.timestamp}>
-          {formatTimestamp(transaction.timestamp)}
-        </Text>
-        <View
-          style={[
-            styles.typeTag,
-            { backgroundColor: getTypeColor(transaction.type) },
-          ]}
-        >
-          <Text style={styles.typeText}>{transaction.type.toUpperCase()}</Text>
+    <View style={styles.card}>
+      <View key={transaction.id} style={styles.transactionCard}>
+        <View style={styles.transactionHeader}>
+          <Text style={styles.timestamp}>
+            {formatTimestamp(transaction.timestamp)}
+          </Text>
+          <View
+            style={[
+              styles.typeTag,
+              { backgroundColor: getTypeColor(transaction.type) },
+            ]}
+          >
+            <Text style={styles.typeText}>
+              {transaction.type.toUpperCase()}
+            </Text>
+          </View>
         </View>
-      </View>
 
-      <Text style={styles.description}>{transaction.description}</Text>
+        <Text style={styles.description}>{transaction.description}</Text>
 
-      <View style={styles.changesContainer}>
-        <View style={styles.fieldChange}>
-          <Text style={styles.fieldName}>{transaction.fieldName}</Text>
-          <Text style={styles.amount}>{formatUSD(transaction.amount)}</Text>
+        <View style={styles.changesContainer}>
+          <View style={styles.fieldChange}>
+            <Text
+              style={
+                transaction.amount > 0
+                  ? styles.positiveAmount
+                  : styles.negativeAmount
+              }
+            >
+              {formatUSD(transaction.amount)}
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -63,14 +74,11 @@ const TransactionLog: React.FC<TransactionLogProps> = ({
 
   // Overall tsx section
   return (
-    <Modal visible={visible} onRequestClose={onClose} animationType="none">
-      <View style={styles.container}>
-        <Text style={styles.title}>Transaction History</Text>
-        <ScrollView style={styles.scrollContainer}>
-          {testTransactions.map(renderTransaction)}
-        </ScrollView>
-      </View>
-    </Modal>
+    <View style={styles.container}>
+      <ScrollView style={styles.scrollContainer}>
+        {testTransactions.map(renderTransaction)}
+      </ScrollView>
+    </View>
   );
 };
 
@@ -80,25 +88,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  // Logs title
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#ffffff",
-    marginBottom: 10,
-    paddingHorizontal: 10,
-  },
   // container that scrolls
   scrollContainer: {
     flex: 1,
   },
+  // background container for each card
+  card: {
+    marginVertical: 5, // space between components
+    backgroundColor: "#1e1e1e", // lighter card background
+    padding: 7,
+    paddingVertical: 13,
+    borderRadius: 10,
+  },
   // card for each transaction
   transactionCard: {
-    backgroundColor: "#2a2a2a",
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 8,
-    marginHorizontal: 10,
+    backgroundColor: "#121212",
+    padding: 10,
+    borderRadius: 10,
   },
   // header for each transaction
   transactionHeader: {
@@ -134,12 +140,12 @@ const styles = StyleSheet.create({
   changesContainer: {
     borderTopWidth: 1,
     borderTopColor: "#3a3a3a",
-    paddingTop: 8,
+    paddingTop: 3,
   },
   // what field it affects
   fieldChange: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
     alignItems: "center",
     marginTop: 4,
   },
@@ -149,12 +155,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   // currency difference
-  amount: {
-    color: "#ffffff",
+  positiveAmount: {
+    color: "#3e9c35",
+    fontSize: 14,
+    fontWeight: "500",
+  },
+  // negative currency difference
+  negativeAmount: {
+    color: "#ff4444",
     fontSize: 14,
     fontWeight: "500",
   },
 });
 
-// exported to be called in TransactionLogBtn.tsx 
+// exported to be called in index.tsx by tab navigation
 export default TransactionLog;

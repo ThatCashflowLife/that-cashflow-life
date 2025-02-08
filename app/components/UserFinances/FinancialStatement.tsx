@@ -1,57 +1,30 @@
 // import necessary libraries/methods and components
 import User from "@/interfaces/user";
-import React, { useEffect, useState } from "react";
-import {
-  Modal,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import React from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import formatUSD from "@/utils/currencyUtil";
 import addValuesTogether from "@/utils/additionUtil";
 
 // component properties type definition
 interface FinancialStatementProps {
   user: User;
-  isVisible: boolean;
-  onClose: () => void;
 }
 
-const FinancialStatement: React.FC<FinancialStatementProps> = ({
-  user,
-  isVisible,
-  onClose,
-}) => {
+const FinancialStatement: React.FC<FinancialStatementProps> = ({ user }) => {
   // Logic/Functions Section
 
   // Tsx Section
   return (
-    <Modal
-      visible={isVisible}
-      animationType="slide"
-      onRequestClose={onClose}
-      presentationStyle="fullScreen"
-    >
-      <View style={styles.container}>
-        {/* Header */}
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>
-            {user.name}'s Financial Statement
-          </Text>
-          <TouchableOpacity style={styles.closeBtn} onPress={onClose}>
-            <Text style={styles.closeBtnTxt}>Close</Text>
-          </TouchableOpacity>
-        </View>
+    <View style={styles.container}>
+      <View style={styles.content}>
         {/* Statement Content */}
         <ScrollView
           style={styles.scrollView}
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
-          <View style={styles.content}>
-            {/* Income Sources List */}
+          {/* Income Sources List */}
+          <View style={styles.card}>
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Income Sources</Text>
 
@@ -62,6 +35,7 @@ const FinancialStatement: React.FC<FinancialStatementProps> = ({
                   {formatUSD(user.incomeExplained.Salary)}
                 </Text>
               </View>
+
               {/* Separator Line */}
               <View style={styles.separator} />
 
@@ -91,8 +65,10 @@ const FinancialStatement: React.FC<FinancialStatementProps> = ({
                 </Text>
               </View>
             </View>
+          </View>
 
-            {/* Expenses */}
+          {/* Expenses */}
+          <View style={styles.card}>
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Monthly Expenses</Text>
               {Object.entries(user.expensesExplained).map(
@@ -110,8 +86,10 @@ const FinancialStatement: React.FC<FinancialStatementProps> = ({
                 </Text>
               </View>
             </View>
+          </View>
 
-            {/* Assets */}
+          {/* Assets */}
+          <View style={styles.card}>
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Assets</Text>
               {Object.entries(user.Assets).map(([asset, amount]) => (
@@ -129,8 +107,10 @@ const FinancialStatement: React.FC<FinancialStatementProps> = ({
                 </Text>
               </View>
             </View>
+          </View>
 
-            {/* Liabilities */}
+          {/* Liabilities */}
+          <View style={styles.card}>
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Liabilities</Text>
               {Object.entries(user.Liabilities).map(([liability, amount]) => (
@@ -151,30 +131,14 @@ const FinancialStatement: React.FC<FinancialStatementProps> = ({
           </View>
         </ScrollView>
       </View>
-    </Modal>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   // full statement container
   container: {
-    flex: 1,
     backgroundColor: "#121212",
-  },
-  // header
-  header: {
-    padding: 20,
-    paddingTop: 20,
-    backgroundColor: "#1e1e1e",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  // title
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#ffffff",
   },
   // scrollable view
   scrollView: {
@@ -188,26 +152,21 @@ const styles = StyleSheet.create({
   // statement content container
   content: {
     flex: 1,
-    padding: 15,
+    padding: 5,
   },
-  // close btn
-  closeBtn: {
-    padding: 8,
-    backgroundColor: "#333333",
-    borderRadius: 8,
-  },
-  // close btn txt
-  closeBtnTxt: {
-    color: "#ffffff",
-    fontSize: 14,
-    fontWeight: "600",
+  // background container for each section
+  card: {
+    marginVertical: 8, // space between components
+    backgroundColor: "#1e1e1e", // lighter card background
+    padding: 7,
+    paddingVertical: 17,
+    borderRadius: 10,
   },
   // income/expenses/assets
   section: {
-    backgroundColor: "#1e1e1e",
+    backgroundColor: "#121212", // darker inner container
     padding: 15,
     borderRadius: 10,
-    marginBottom: 15,
   },
   // section titles
   sectionTitle: {
@@ -267,5 +226,5 @@ const styles = StyleSheet.create({
   },
 });
 
-// export the component, to be called in index.tsx
+// export to be called in index.tsx from tab navigation
 export default FinancialStatement;
