@@ -7,10 +7,12 @@ const testUser: User = {
   totalIncome: 8500,
   incomeExplained: {
     Salary: 7000,
-    Interest: 1000,
-    Dividends: 500,
-    "Real Estate Income": 0,
-    "Business Income": 200,
+    "Passive Income": {
+      Interest: 1000,
+      Dividends: 500,
+      "Real Estate Income": 0,
+      "Business Income": 200,
+    },
   },
   totalExpenses: 5300,
   expensesExplained: {
