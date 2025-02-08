@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import UserMenu from "./UserMenu";
+import UserMenu from "../Menus/UserMenu";
 
 // type definition for header properties
 interface HeaderProps {
