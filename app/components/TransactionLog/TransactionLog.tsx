@@ -35,8 +35,8 @@ const TransactionLog: React.FC<TransactionLogProps> = ({ user }) => {
 
   // Tsx for every transaction
   const renderTransaction = (transaction: Transaction) => (
-    <View style={styles.card}>
-      <View key={transaction.id} style={styles.transactionCard}>
+    <View style={styles.card} key={transaction.id}>
+      <View style={styles.transactionCard}>
         <View style={styles.transactionHeader}>
           <Text style={styles.timestamp}>
             {formatTimestamp(transaction.timestamp)}
