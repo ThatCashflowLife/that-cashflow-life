@@ -4,14 +4,14 @@ const defineConfig = ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: "CashFlow Life",
   slug: "cashflow-life",
-  version: "1.0.0",
+  version: "1.0.1",
   orientation: "portrait",
   icon: "./app/assets/CashFlowLifeNewHD.png",
   scheme: "cashflowlife",
   newArchEnabled: true,
   splash: {
     image: "./app/assets/CashFlowLifeNewHD.png",
-    resizeMode: "contain",
+    resizeMode: "cover",
     backgroundColor: "#121212",
   },
   ios: {
