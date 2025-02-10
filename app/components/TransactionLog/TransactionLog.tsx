@@ -1,6 +1,7 @@
 // import necessary libraries/methods and components
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
+
 import Transaction from "../../../interfaces/transaction";
 import User from "../../../interfaces/user";
 import { testTransactions } from "../../../testData/testTransactions";

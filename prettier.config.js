@@ -1,3 +1,4 @@
+// FOR DEV ENV FORMATTING
 /** @type {import('prettier').Config} */
 module.exports = {
   // Maximum line length before wrapping

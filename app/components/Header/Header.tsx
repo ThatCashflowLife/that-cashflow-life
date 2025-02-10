@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+
 import User from "../../../interfaces/user";
 import UserMenu from "../Menus/UserMenu";
 
@@ -84,9 +85,9 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
               value={tempName}
               onChangeText={setTempName}
               onBlur={handleSubmit}
-              cursorColor={"#22311d"}
-              autoFocus={true}
-              selectTextOnFocus={true}
+              cursorColor="#22311d"
+              autoFocus
+              selectTextOnFocus
               onSubmitEditing={handleSubmit}
               placeholder={username}
               placeholderTextColor="rgba(34, 65, 29, 0.5)"
