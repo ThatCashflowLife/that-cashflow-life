@@ -1,4 +1,4 @@
-import { ExpoConfig, ConfigContext } from "expo/config";
+import { ConfigContext, ExpoConfig } from "expo/config";
 
 const defineConfig = ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
@@ -12,7 +12,7 @@ const defineConfig = ({ config }: ConfigContext): ExpoConfig => ({
   splash: {
     image: "./app/assets/CashFlowLifeNewHD.png",
     resizeMode: "contain",
-    backgroundColor: "#000000",
+    backgroundColor: "#121212",
   },
   ios: {
     supportsTablet: true,
@@ -21,7 +21,7 @@ const defineConfig = ({ config }: ConfigContext): ExpoConfig => ({
   android: {
     adaptiveIcon: {
       foregroundImage: "./app/assets/CashFlowLifeNewHD.png",
-      backgroundColor: "#000000",
+      backgroundColor: "#121212",
     },
     package: "com.nathanvititoe.cashflowlife",
   },
