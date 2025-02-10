@@ -3,9 +3,8 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit",
-    "source.fixAll.eslint": "explicit" 
+    "source.fixAll.eslint": "explicit"
   },
-  // yaml files for github workflow
   "files.associations": {
     "*.yml": "yaml"
   },
@@ -15,28 +14,27 @@
   "yaml.validate": false,
   "problems.decorations.enabled": false,
   "yaml.schemaStore.enable": false,
-  // dont format git or github files
   "files.exclude": {
     "**/.git": true,
     "**/.github": true
   },
-  // path to prettier config
-  "prettier.configPath": "prettier.config.js",
-  // requires a config file (its in our repo)
-  "prettier.requireConfig": true,
-  // will format on save
   "editor.formatOnSave": true,
-  // set prettier as default formatter
+  // Set prettier as default formatter
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  // prettier formats ts files
+  // Explicitly set prettier for TypeScript files
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  // prettier formats tsx files
+  // Explicitly set prettier for TypeScript React files
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  // formats w prettier as you type or paste code
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
   "editor.formatOnPaste": true,
   "editor.formatOnType": true
 }

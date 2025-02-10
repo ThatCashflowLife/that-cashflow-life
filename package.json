@@ -8,7 +8,8 @@
     "reset-project": "node ./scripts/reset-project.js",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "format":"expo lint --format"
   },
   "jest": {
     "preset": "jest-expo"
@@ -16,7 +17,9 @@
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
     "@react-native-async-storage/async-storage": "1.23.1",
-    "eslint": "^9.20.0",
+    "@typescript-eslint/eslint-plugin": "^8.24.0",
+    "@typescript-eslint/parser": "^8.24.0",
+    "eslint-config-universe": "^14.0.0",
     "expo": "~52.0.31",
     "expo-blur": "~14.0.3",
     "expo-camera": "~16.0.15",
@@ -32,7 +35,6 @@
     "expo-system-ui": "~4.0.8",
     "expo-updates": "~0.26.17",
     "expo-web-browser": "~14.0.2",
-    "prettier": "^3.5.0",
     "react": "18.3.1",
     "react-dom": "18.3.1"
   },
