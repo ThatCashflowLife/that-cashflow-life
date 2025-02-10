@@ -1,7 +1,7 @@
 // import necessary libraries/methods and components
+import { useCameraPermissions } from "expo-camera";
 import React, { useState } from "react";
-import { Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
-import { Camera, useCameraPermissions } from "expo-camera";
+import { Alert, StyleSheet, Text, TouchableOpacity } from "react-native";
 import ScannerModal from "./ScannerModal";
 
 // Properties passed to the Scanner Button component (similiar to a class definition)

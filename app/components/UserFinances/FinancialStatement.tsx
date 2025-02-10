@@ -1,9 +1,9 @@
 // import necessary libraries/methods and components
-import User from "@/interfaces/user";
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import formatUSD from "@/utils/currencyUtil";
-import addValuesTogether from "@/utils/additionUtil";
+import User from "../../../interfaces/user";
+import addValuesTogether from "../../../utils/additionUtil";
+import formatUSD from "../../../utils/currencyUtil";
 
 // component properties type definition
 interface FinancialStatementProps {

@@ -1,13 +1,9 @@
 // import necessary libraries/methods and components
-import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-export type Tab =
-  | "home"
-  | "properties"
-  | "finances"
-  | "transactions";
+export type Tab = "home" | "properties" | "finances" | "transactions";
 
 // Tab Menu properties type definition
 interface TabMenuProps {

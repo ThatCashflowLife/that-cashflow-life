@@ -2,7 +2,8 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit",
-    "source.sortMembers": "explicit"
+    "source.sortMembers": "explicit",
+    "source.fixAll.eslint": "explicit"
   },
   "files.associations": {
     "*.yml": "yaml"
@@ -16,5 +17,24 @@
   "files.exclude": {
     "**/.git": true,
     "**/.github": true
-  }
+  },
+  "editor.formatOnSave": true,
+  // Set prettier as default formatter
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // Explicitly set prettier for TypeScript files
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // Explicitly set prettier for TypeScript React files
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true
 }

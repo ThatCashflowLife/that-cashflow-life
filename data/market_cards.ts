@@ -1,3 +1,1 @@
-export default interface Market_Cards {
-
-  }
+export default interface Market_Cards {}

@@ -1,18 +1,18 @@
 // import necessary libraries/methods and components
-import User from "@/interfaces/user";
-import blankUser from "@/testData/blankUser";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import User from "../interfaces/user";
+import blankUser from "../testData/blankUser";
 import Header from "./components/Header/Header";
-import LatestTransaction from "./components/TransactionLog/LatestTransaction";
-import ScannerButton from "./components/QrCodeScanner/ScannerButton";
-import FinancialOverview from "./components/UserFinances/FinancialOverview";
 import TabMenu, { Tab } from "./components/Menus/TabMenu";
-import FinancialStatement from "./components/UserFinances/FinancialStatement";
-import TransactionLog from "./components/TransactionLog/TransactionLog";
 import Properties from "./components/Properties/Properties";
+import ScannerButton from "./components/QrCodeScanner/ScannerButton";
+import LatestTransaction from "./components/TransactionLog/LatestTransaction";
+import TransactionLog from "./components/TransactionLog/TransactionLog";
+import FinancialOverview from "./components/UserFinances/FinancialOverview";
+import FinancialStatement from "./components/UserFinances/FinancialStatement";
 
 // App/index.tsx is the top level of the app, where all components reside (the home page)
 // Sometimes this is called App.tsx, but expo looks for index.tsx
