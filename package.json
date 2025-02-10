@@ -3,13 +3,20 @@
   "license": "0BSD",
   "main": "expo-router/entry",
   "version": "52.0.57",
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "listUnknownPackages": false
+      }
+    }
+  },
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
-    "format":"expo lint --format"
+    "format": "expo lint --format"
   },
   "jest": {
     "preset": "jest-expo"
