@@ -68,7 +68,7 @@ export default function App() {
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
           >
-            <View style={[styles.appContent]}>
+            <View style={styles.appContent}>
               <View style={styles.card}>
                 <ScannerButton onScan={handleScan} />
               </View>
@@ -130,7 +130,7 @@ export default function App() {
 
   return (
     // Safe Area avoids the phones header (battery, cell service)
-    <SafeAreaView style={[styles.container]}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.scrollView}>
         <Header
           username={user.name}

@@ -1,4 +1,4 @@
-import Small_Cards from "@/data/small_cards";
+import Small_Cards from "../data/small_cards";
 
 const Family_Car_Wash: Small_Cards = {
     // description: "Family car wash for sale. Family feuding. Wants out ASAP. Prime location in high-growth area.",

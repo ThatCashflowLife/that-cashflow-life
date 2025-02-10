@@ -1,4 +1,4 @@
-import profession from "@/interfaces/profession";
+import profession from "../interfaces/profession";
 
 const Airline_Pilot: profession = {
   name: "Airline Pilot",

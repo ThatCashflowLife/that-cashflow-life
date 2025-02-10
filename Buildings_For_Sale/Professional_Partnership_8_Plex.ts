@@ -1,4 +1,4 @@
-import Small_Cards from "@/data/small_cards";
+import Small_Cards from "../data/small_cards";
 
 const Professional_Partnership_8_Plex: Small_Cards = {
     // description: "Professional person urgently needs cash to save partnership. 8-plex for sale to raise capital. Good opportunity for the right person.",

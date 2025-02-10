@@ -1,4 +1,4 @@
-import Small_Cards from "@/data/small_cards";
+import Small_Cards from "../data/small_cards";
 
 const Parents_Condo: Small_Cards = {
     // description: "Parents selling 2/1 condo used by their child in college town. Lots of demand for rentals in this area.",

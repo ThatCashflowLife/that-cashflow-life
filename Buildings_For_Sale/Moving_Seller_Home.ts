@@ -1,4 +1,4 @@
-import Small_Cards from "@/data/small_cards";
+import Small_Cards from "../data/small_cards";
 
 const Moving_Seller_Home: Small_Cards = {
     // description: "Low down payment to pick up this 3/2 house, owner/seller unexpectedly moving out of town. Right person will do well.",

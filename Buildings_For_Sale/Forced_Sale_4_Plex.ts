@@ -1,4 +1,4 @@
-import Small_Cards from "@/data/small_cards";
+import Small_Cards from "../data/small_cards";
 
 const Forced_Sale_4_Plex: Small_Cards = {
     // description: "4-plex available, forced sale. Out-of-state, financially distressed owner years behind on taxes. Some records available.",
