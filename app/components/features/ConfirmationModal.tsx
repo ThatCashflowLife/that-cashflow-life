@@ -11,7 +11,7 @@ interface ConfirmationModalProps {
 
 const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   isVisible,
-  onClose
+  onClose,
 }) => {
   // Logic/Functions Section
   if (!isVisible) return null;
@@ -32,12 +32,8 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
         activeOpacity={1}
       >
         {/* Menu Container */}
-        <View
-          style={[
-            styles.menuContainer,
-          ]}
-        >
-            <Text>THIS WILL BE A CONFIRMATION MODAL</Text>
+        <View style={styles.menuContainer}>
+          <Text>THIS WILL BE A CONFIRMATION MODAL</Text>
         </View>
       </TouchableOpacity>
     </Modal>
@@ -73,15 +69,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: "rgba(255, 255, 255, 0.08)",
+    // borderBottomWidth: 1,
+    // borderBottomColor: "rgba(255, 255, 255, 0.08)",
   },
   // general menu item txt
   menuItemText: {
     marginLeft: 12,
     fontSize: 14,
     color: "#bbbbbb",
-    fontWeight: 500,
+    // fontWeight: 500,
   },
 });
 

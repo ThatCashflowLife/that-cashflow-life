@@ -149,11 +149,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 4,
   },
-  // field name
-  fieldName: {
-    color: "#bbbbbb",
-    fontSize: 14,
-  },
   // currency difference
   positiveAmount: {
     color: "#3e9c35",

@@ -58,7 +58,7 @@ const FinancialStatement: React.FC<FinancialStatementProps> = ({ user }) => {
                 </Text>
               </View>
 
-              <View style={[styles.row]}>
+              <View style={styles.row}>
                 <Text style={styles.totalLabel}>Total Income:</Text>
                 <Text style={styles.positive}>
                   {formatUSD(user.totalIncome)}
