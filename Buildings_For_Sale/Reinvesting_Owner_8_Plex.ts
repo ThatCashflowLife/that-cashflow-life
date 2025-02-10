@@ -1,4 +1,4 @@
-import Small_Cards from "@/data/small_cards";
+import Small_Cards from "../data/small_cards";
 
 const Reinvesting_Owner_8_Plex: Small_Cards = {
     // description: "Reinvesting owner offers 8-plex for sale at a reasonable price. Financing already in place. All it needs is your down payment.",

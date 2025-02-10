@@ -1,4 +1,4 @@
-import Small_Cards from "@/data/small_cards";
+import Small_Cards from "../data/small_cards";
 
 const Young_Couple_Condo: Small_Cards = {
     //description: "Older 2/1 condo offered by a young couple who wants to move up to a 3/2 house due to a growing family. Available Soon.",

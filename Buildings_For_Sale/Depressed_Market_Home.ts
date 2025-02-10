@@ -1,4 +1,4 @@
-import Small_Cards from "@/data/small_cards";
+import Small_Cards from "../data/small_cards";
 
 const Depressed_Market_Home: Small_Cards = {
     // description: "Nice 3/2 house available in depressed market due to layoffs. Would make good investment property for right buyer",

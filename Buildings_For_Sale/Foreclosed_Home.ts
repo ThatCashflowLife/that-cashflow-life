@@ -1,4 +1,4 @@
-import Small_Cards from "@/data/small_cards";
+import Small_Cards from "../data/small_cards";
 
 const Foreclosed_Home: Small_Cards = {
     // description: "Not lived in for 6 months, this bank-foreclosed house just reduced. Loan includes estimated repair costs.",

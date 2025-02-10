@@ -1,4 +1,4 @@
-import Small_Cards from "@/data/small_cards";
+import Small_Cards from "../data/small_cards";
 
 const Unit_Apartment_Home: Small_Cards = {
     // description: "12 unit apartment house offered by out-of-state heir of handyman/owner. Long waiting list forr apartments in this building.",

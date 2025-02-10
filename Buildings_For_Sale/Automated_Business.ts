@@ -1,4 +1,4 @@
-import Small_Cards from "@/data/small_cards";
+import Small_Cards from "../data/small_cards";
 
 const Automated_Business: Small_Cards = {
     // description: "Personal bankruptcy sale of busy, successful laundromat on busy highway. Absentee owner, contract cleaning.",

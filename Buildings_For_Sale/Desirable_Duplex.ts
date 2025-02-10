@@ -1,4 +1,4 @@
-import Small_Cards from "@/data/small_cards";
+import Small_Cards from "../data/small_cards";
 
 const Desireable_Duplex: Small_Cards = {
     // description: "Well maintained duplex in desireable area avaiable due to transfer of owner. Excellent investment opportunity for the right buyer.",

@@ -1,4 +1,4 @@
-import Small_Cards from "@/data/small_cards";
+import Small_Cards from "../data/small_cards";
 
 //"3/2 house in older area offered by Highway Department. Market has crashed. NO bids at last week's auction.",
 const Highway_Home: Small_Cards = {

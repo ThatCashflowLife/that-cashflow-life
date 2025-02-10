@@ -1,4 +1,4 @@
-import Small_Cards from "@/data/small_cards";
+import Small_Cards from "../data/small_cards";
 
 const Divorced_Home: Small_Cards = {
     // description: "Divorce leads to sale of this 3/2 house in an area full of owner occupied homes. Has been on the market for 5 months.",

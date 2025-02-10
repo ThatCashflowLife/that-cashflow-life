@@ -1,4 +1,4 @@
-import Small_Cards from "@/data/small_cards";
+import Small_Cards from "../data/small_cards";
 
 const Hospital_Bill_Duplex: Small_Cards = {
     // description: "Duplex owner must sell to pay hospital bills. Two tenants in place, all records, good investment opportunity.",

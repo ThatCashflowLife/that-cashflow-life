@@ -1,4 +1,4 @@
-import Small_Cards from "@/data/small_cards";
+import Small_Cards from "../data/small_cards";
 
 const Repossessed_Home: Small_Cards = {
     // description: "Older 3/2 house, repossessed by government agency. Ready to go with government financing and a tenant.",
