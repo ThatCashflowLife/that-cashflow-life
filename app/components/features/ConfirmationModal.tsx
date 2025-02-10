@@ -64,20 +64,20 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   // general menu item
-  menuItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 12,
-    // borderBottomWidth: 1,
-    // borderBottomColor: "rgba(255, 255, 255, 0.08)",
-  },
+  // menuItem: {
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   padding: 12,
+  //   // borderBottomWidth: 1,
+  //   // borderBottomColor: "rgba(255, 255, 255, 0.08)",
+  // },
   // general menu item txt
-  menuItemText: {
-    marginLeft: 12,
-    fontSize: 14,
-    color: "#bbbbbb",
-    // fontWeight: 500,
-  },
+  // menuItemText: {
+  //   marginLeft: 12,
+  //   fontSize: 14,
+  //   color: "#bbbbbb",
+  //   // fontWeight: 500,
+  // },
 });
 
 // to be imported wherever needed
