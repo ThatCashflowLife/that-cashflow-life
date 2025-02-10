@@ -1,17 +1,22 @@
 {
+  // Inherit Expo's base TypeScript configuration
   "extends": "expo/tsconfig.base",
+  
   "compilerOptions": {
-    "strict": true,
-    "paths": {
-      "@/*": [
-        "./*"
-      ]
-    }
+    // Enables all strict type checking options
+    "strict": true
   },
+  
+  // Files to include in compilation
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
+    "**/*.ts",        // All TypeScript files
+    "**/*.tsx",       // All TypeScript React files
+    ".expo/types/**/*.ts",  // Expo-specific type definitions
+    "expo-env.d.ts"   // Environment type declarations
+, "prettier.config.js"  ],
+  
+  // Files/folders to exclude
+  "exclude": [
+    "node_modules"    // Skip node_modules folder
   ]
 }

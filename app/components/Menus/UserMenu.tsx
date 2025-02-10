@@ -1,7 +1,7 @@
 // import necessary libraries/methods and components
-import React from "react";
-import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import React from "react";
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 // type definition for menu properties
 interface UserMenuProps {
