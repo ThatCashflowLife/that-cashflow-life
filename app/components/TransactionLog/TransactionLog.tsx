@@ -1,11 +1,11 @@
 // import necessary libraries/methods and components
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { formatUSD } from "@/utils/currencyUtil";
-import { formatTimestamp } from "@/utils/timeUtil";
-import Transaction from "@/interfaces/transaction";
-import { testTransactions } from "@/testData/testTransactions";
-import User from "@/interfaces/user";
+import { formatUSD } from "../../../utils/currencyUtil";
+import { formatTimestamp } from "../../../utils/timeUtil";
+import Transaction from "../../../interfaces/transaction";
+import { testTransactions } from "../../../testData/testTransactions";
+import User from "../../../interfaces/user";
 
 // component properties type definition
 interface TransactionLogProps {

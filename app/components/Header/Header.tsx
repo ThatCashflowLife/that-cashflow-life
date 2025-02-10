@@ -1,5 +1,5 @@
 // import necessary libraries/methods and components
-import User from "@/interfaces/user";
+import User from "../../../interfaces/user";
 import { Feather } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";

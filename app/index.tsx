@@ -1,6 +1,6 @@
 // import necessary libraries/methods and components
-import User from "@/interfaces/user";
-import blankUser from "@/testData/blankUser";
+import User from "../interfaces/user";
+import blankUser from "../testData/blankUser";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";

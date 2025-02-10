@@ -1,11 +1,11 @@
 // import necessary libraries/methods and components
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { formatUSD } from "@/utils/currencyUtil";
-import { formatTimestamp } from "@/utils/timeUtil";
-import User from "@/interfaces/user";
-import { RealEstate } from "@/interfaces/assets";
-import testProperties from "@/testData/testProperties";
+import { formatUSD } from "../../../utils/currencyUtil";
+import { formatTimestamp } from "../../../utils/timeUtil"
+import User from "../../../interfaces/user";
+import { RealEstate } from "../../../interfaces/assets";
+import testProperties from "../../../testData/testProperties";
 
 // component properties type definition
 interface PropertiesProps {
