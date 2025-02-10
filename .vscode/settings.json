@@ -1,9 +1,9 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit",
-    "source.organizeImports": "explicit",
-    "source.sortMembers": "explicit",
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll": "always",
+    "source.fixAll.eslint": "always",
+    "source.organizeImports": "always",
+    "source.sortMembers": "always"
   },
   "files.associations": {
     "*.yml": "yaml"
@@ -12,29 +12,32 @@
     "none": ["/.github/workflows/*.yml"]
   },
   "yaml.validate": false,
-  "problems.decorations.enabled": false,
   "yaml.schemaStore.enable": false,
+  "problems.decorations.enabled": false,
   "files.exclude": {
     "**/.git": true,
     "**/.github": true
   },
-  "editor.formatOnSave": true,
-  // Set prettier as default formatter
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.preferences.importModuleSpecifier": "relative",
+  "javascript.preferences.importModuleSpecifierEnding": "minimal",
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.importModuleSpecifierEnding": "minimal",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  // Explicitly set prettier for TypeScript files
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  // Explicitly set prettier for TypeScript React files
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true,
+  "eslint.format.enable": true,
   "eslint.validate": [
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact"
   ],
-  "editor.formatOnPaste": true,
-  "editor.formatOnType": true
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
