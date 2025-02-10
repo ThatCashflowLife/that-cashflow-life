@@ -1,4 +1,4 @@
-import profession from "@/interfaces/profession";
+import profession from "../interfaces/profession";
 
 const Police_Officer: profession = {
   name: "Police Officer",
