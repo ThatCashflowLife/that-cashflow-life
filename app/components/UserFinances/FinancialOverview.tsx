@@ -1,10 +1,11 @@
 // import necessary libraries/methods and components
-import User from "@/interfaces/user";
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import formatUSD from "@/utils/currencyUtil";
 import { AntDesign } from "@expo/vector-icons";
-import addValuesTogether from "@/utils/additionUtil";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+
+import User from "../../../interfaces/user";
+import addValuesTogether from "../../../utils/additionUtil";
+import formatUSD from "../../../utils/currencyUtil";
 
 // component properties type definition
 interface FinancialOverviewProps {

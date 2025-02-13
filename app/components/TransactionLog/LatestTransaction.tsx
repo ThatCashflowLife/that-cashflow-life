@@ -1,6 +1,6 @@
 // import necessary libraries/methods and components
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 const LatestTransaction = () => {
   // Logic/Functions Section

@@ -1,7 +1,7 @@
 // import necessary libraries/methods and components
+import { BarcodeScanningResult, CameraView } from "expo-camera";
 import React, { useState } from "react";
-import { Modal, TouchableOpacity, Text, StyleSheet, View } from "react-native";
-import { CameraView, BarcodeScanningResult } from "expo-camera";
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 // Scanner modal properties definition
 interface ScannerModalProps {
