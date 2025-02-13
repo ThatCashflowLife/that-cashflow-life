@@ -13,6 +13,7 @@ import TabMenu, { Tab } from "./components/Menus/TabMenu";
 import FinancialStatement from "./components/UserFinances/FinancialStatement";
 import TransactionLog from "./components/TransactionLog/TransactionLog";
 import Properties from "./components/Properties/Properties";
+import Theme from "../interfaces/Theme.js"
 
 // App/index.tsx is the top level of the app, where all components reside (the home page)
 // Sometimes this is called App.tsx, but expo looks for index.tsx
@@ -64,12 +65,12 @@ export default function App() {
       case "home":
         return (
           <ScrollView
-            style={styles.scrollView}
+            style={[styles.scrollView, {backgroundColor: Theme.Colors.CFL_black}]}
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
           >
             <View style={styles.appContent}>
-              <View style={styles.card}>
+              <View style={[styles.card, {backgroundColor: Theme.Colors.CFL_black}]}>
                 <ScannerButton onScan={handleScan} />
               </View>
               <View style={styles.card}>
@@ -85,7 +86,7 @@ export default function App() {
       case "transactions":
         return (
           <ScrollView
-            style={styles.scrollView}
+            style={[styles.scrollView, {backgroundColor: Theme.Colors.CFL_black}]}
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
           >
@@ -100,7 +101,7 @@ export default function App() {
       case "finances":
         return (
           <ScrollView
-            style={styles.scrollView}
+            style={[styles.scrollView, {backgroundColor: Theme.Colors.CFL_black}]}
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
           >
@@ -114,7 +115,7 @@ export default function App() {
       case "properties":
         return (
           <ScrollView
-            style={styles.scrollView}
+            style={[styles.scrollView, {backgroundColor: Theme.Colors.CFL_black}]}
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
           >
