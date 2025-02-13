@@ -11,9 +11,9 @@ import {
   View,
 } from "react-native";
 
+import Theme from "../../../interfaces/theme";
 import User from "../../../interfaces/user";
 import UserMenu from "../Menus/UserMenu";
-import Theme from "@/interfaces/Theme.js";
 
 // type definition for header properties
 interface HeaderProps {
@@ -73,9 +73,19 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
   return (
     <>
       {/* Header Container */}
-      <View style={[styles.header, {backgroundColor: Theme.Colors.CFL_dark_green}]}>
+      <View
+        style={[
+          styles.header,
+          { backgroundColor: Theme.Colors.CFL_dark_green },
+        ]}
+      >
         {/* Header Text Container */}
-        <View style={[styles.headerText, {backgroundColor: Theme.Colors.CFL_dark_green}]}>
+        <View
+          style={[
+            styles.headerText,
+            { backgroundColor: Theme.Colors.CFL_dark_green },
+          ]}
+        >
           {/* Title */}
           <Text style={styles.title}>Cashflow Life</Text>
 
@@ -91,10 +101,12 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
               selectTextOnFocus
               onSubmitEditing={handleSubmit}
               placeholder={username}
-              placeholderTextColor="rgba(34, 65, 29, 0.5)" 
+              placeholderTextColor="rgba(34, 65, 29, 0.5)"
             />
           ) : (
-            <Text style={[styles.username, {color: Theme.Colors.CFL_yellow}]}>{username}</Text>
+            <Text style={[styles.username, { color: Theme.Colors.CFL_yellow }]}>
+              {username}
+            </Text>
           )}
         </View>
 

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import Theme from "../interfaces/theme";
 import User from "../interfaces/user";
 import blankUser from "../testData/blankUser";
 import Header from "./components/Header/Header";
@@ -14,7 +15,6 @@ import LatestTransaction from "./components/TransactionLog/LatestTransaction";
 import TransactionLog from "./components/TransactionLog/TransactionLog";
 import FinancialOverview from "./components/UserFinances/FinancialOverview";
 import FinancialStatement from "./components/UserFinances/FinancialStatement";
-import Theme from "../interfaces/Theme.js";
 
 // App/index.tsx is the top level of the app, where all components reside (the home page)
 // Sometimes this is called App.tsx, but expo looks for index.tsx
@@ -172,6 +172,7 @@ const styles = StyleSheet.create({
   // scrollable view
   scrollView: {
     flex: 1,
+    backgroundColor: Theme.Colors.CFL_black,
   },
   // scrollable content
   scrollContent: {
