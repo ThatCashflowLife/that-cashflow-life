@@ -2,12 +2,12 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
+import Theme from "../../../interfaces/theme";
 import Transaction from "../../../interfaces/transaction";
 import User from "../../../interfaces/user";
 import { testTransactions } from "../../../testData/testTransactions";
 import { formatUSD } from "../../../utils/currencyUtil";
 import { formatTimestamp } from "../../../utils/timeUtil";
-import Theme from "../../../interfaces/theme";
 
 // component properties type definition
 interface TransactionLogProps {
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   },
   // background container for each card
   card: {
-    marginVertical: 5, // space between components
+    marginVertical: Theme.CFL_card_spacing, // space between components
     backgroundColor: Theme.CFL_black, // lighter card background
     padding: 7,
     paddingVertical: 13,
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   // card for each transaction
   transactionCard: {
-    backgroundColor: Theme.CFL_background_black,
+    backgroundColor: Theme.CFL_card_background,
     padding: 10,
     borderRadius: 10,
   },
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   // container for field change
   changesContainer: {
     borderTopWidth: 1,
-    borderTopColor: "#3a3a3a",
+    borderTopColor: Theme.CFL_gray,
     paddingTop: 3,
   },
   // what field it affects

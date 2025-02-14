@@ -2,10 +2,10 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
+import Theme from "../../../interfaces/theme";
 import User from "../../../interfaces/user";
 import addValuesTogether from "../../../utils/additionUtil";
 import formatUSD from "../../../utils/currencyUtil";
-import Theme from "../../../interfaces/theme";
 
 // component properties type definition
 interface FinancialStatementProps {
@@ -140,7 +140,7 @@ const FinancialStatement: React.FC<FinancialStatementProps> = ({ user }) => {
 const styles = StyleSheet.create({
   // full statement container
   container: {
-    backgroundColor: Theme.CFL_background_black,
+    backgroundColor: Theme.CFL_app_background,
   },
   // scrollable view
   scrollView: {
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
   },
   // background container for each section
   card: {
-    marginVertical: 8, // space between components
+    marginVertical: Theme.CFL_card_spacing, // space between components
     backgroundColor: Theme.CFL_black, // lighter card background
     padding: 7,
     paddingVertical: 17,
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   },
   // income/expenses/assets
   section: {
-    backgroundColor: Theme.CFL_background_black, // darker inner container
+    backgroundColor: Theme.CFL_card_background, // inner container black
     padding: 15,
     borderRadius: 10,
   },
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingTop: 10,
     borderTopWidth: 1,
-    borderTopColor: Theme.CFL_light_grey,
+    borderTopColor: Theme.CFL_gray,
   },
   // labels
   label: {
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
   // dividing line
   separator: {
     height: 1,
-    backgroundColor: Theme.CFL_light_grey,
+    backgroundColor: Theme.CFL_gray,
     marginVertical: 3,
   },
 });

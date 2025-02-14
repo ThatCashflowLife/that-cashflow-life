@@ -73,13 +73,9 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
   return (
     <>
       {/* Header Container */}
-      <View
-        style={styles.header}
-      >
+      <View style={styles.header}>
         {/* Header Text Container */}
-        <View
-          style={styles.headerText}
-        >
+        <View style={styles.headerText}>
           {/* Title */}
           <Text style={styles.title}>Cashflow Life</Text>
 
@@ -90,7 +86,7 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
               value={tempName}
               onChangeText={setTempName}
               onBlur={handleSubmit}
-              cursorColor="#22311d"
+              cursorColor={Theme.CFL_black}
               autoFocus
               selectTextOnFocus
               onSubmitEditing={handleSubmit}
@@ -98,9 +94,7 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
               placeholderTextColor="rgba(34, 65, 29, 0.5)"
             />
           ) : (
-            <Text style={styles.username}>
-              {username}
-            </Text>
+            <Text style={styles.username}>{username}</Text>
           )}
         </View>
 
@@ -111,7 +105,7 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
           activeOpacity={0.7}
           ref={menuButtonRef}
         >
-          <Feather name="menu" size={30} color="#22311d" />
+          <Feather name="menu" size={30} color={Theme.CFL_black} />
         </TouchableOpacity>
       </View>
 
@@ -146,7 +140,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 24,
     fontWeight: "bold",
-    color: Theme.CFL_yellow, 
+    color: Theme.CFL_yellow,
     alignItems: "center",
     maxWidth: 200,
   },

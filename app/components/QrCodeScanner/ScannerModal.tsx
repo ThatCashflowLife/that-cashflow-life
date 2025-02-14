@@ -3,6 +3,8 @@ import { BarcodeScanningResult, CameraView } from "expo-camera";
 import React, { useState } from "react";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
+import Theme from "../../../interfaces/theme";
+
 // Scanner modal properties definition
 interface ScannerModalProps {
   visible: boolean;
@@ -74,7 +76,7 @@ const styles = StyleSheet.create({
   // Modal Container
   container: {
     flex: 1,
-    backgroundColor: "#000",
+    backgroundColor: Theme.CFL_app_background,
   },
   // Camera
   camera: {
@@ -92,13 +94,13 @@ const styles = StyleSheet.create({
     width: 250,
     height: 250,
     borderWidth: 2,
-    borderColor: "#fff",
+    borderColor: Theme.CFL_app_background,
     backgroundColor: "transparent",
     borderRadius: 12,
   },
   // text below frame
   scanText: {
-    color: "#ffffff",
+    color: Theme.CFL_white,
     fontSize: 16,
     marginTop: 20,
     textAlign: "center",

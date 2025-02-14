@@ -71,9 +71,7 @@ export default function App() {
             showsVerticalScrollIndicator={false}
           >
             <View style={styles.appContent}>
-              <View
-                style={styles.card}
-              >
+              <View style={styles.card}>
                 <ScannerButton onScan={handleScan} />
               </View>
               <View style={styles.card}>
@@ -152,12 +150,11 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1, // ensure app takes up whole screen
-    backgroundColor: Theme.CFL_background_black,
+    backgroundColor: Theme.CFL_app_background,
   },
   // scrollable view
   scrollView: {
     flex: 1,
-    backgroundColor: Theme.CFL_background_black,
   },
   // scrollable content
   scrollContent: {
@@ -170,9 +167,9 @@ const styles = StyleSheet.create({
   },
   // card for each component
   card: {
-    marginVertical: 8, // space between components
+    marginVertical: Theme.CFL_card_spacing, // space between components
     backgroundColor: Theme.CFL_black, // lighter card background
-    padding: 7,
+    padding: 6,
     borderRadius: 10,
   },
 });

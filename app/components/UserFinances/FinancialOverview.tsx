@@ -3,10 +3,10 @@ import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
+import Theme from "../../../interfaces/theme";
 import User from "../../../interfaces/user";
 import addValuesTogether from "../../../utils/additionUtil";
 import formatUSD from "../../../utils/currencyUtil";
-import Theme from "../../../interfaces/theme";
 
 // component properties type definition
 interface FinancialOverviewProps {
@@ -55,7 +55,11 @@ const FinancialOverview: React.FC<FinancialOverviewProps> = ({ user }) => {
       {/* Profession Section */}
       <View style={styles.professionContainer}>
         <View style={styles.professionIconContainer}>
-          <AntDesign name="questioncircle" size={35} color="#000000" />
+          <AntDesign
+            name="questioncircle"
+            size={35}
+            color={Theme.CFL_midnight}
+          />
         </View>
         <Text style={styles.professionTxt}>{user.profession}</Text>
       </View>
@@ -146,7 +150,7 @@ const styles = StyleSheet.create({
   // Financial Overview Card
   container: {
     padding: 15,
-    backgroundColor: Theme.CFL_background_black,
+    backgroundColor: Theme.CFL_card_background,
     borderRadius: 10,
     marginVertical: 10,
   },
@@ -231,7 +235,7 @@ const styles = StyleSheet.create({
   // dividing line
   separator: {
     height: 1,
-    backgroundColor: Theme.CFL_light_grey,
+    backgroundColor: Theme.CFL_gray,
     marginVertical: 10,
   },
 });

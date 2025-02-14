@@ -2,6 +2,8 @@
 import React from "react";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
+import Theme from "../../../interfaces/theme";
+
 // type definition for menu properties
 interface ConfirmationModalProps {
   isVisible: boolean;
@@ -48,9 +50,9 @@ const styles = StyleSheet.create({
   },
   // menu container
   menuContainer: {
-    backgroundColor: "#1a1a1a",
+    backgroundColor: Theme.CFL_app_background,
     borderRadius: 12,
-    shadowColor: "#000",
+    shadowColor: Theme.CFL_border_black,
     shadowOffset: {
       width: 0,
       height: 4,
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
     elevation: 8,
     minWidth: 180,
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
+    borderColor: Theme.CFL_border_black,
     position: "absolute",
   },
   // general menu item

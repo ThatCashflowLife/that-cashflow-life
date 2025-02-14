@@ -3,6 +3,7 @@ import { useCameraPermissions } from "expo-camera";
 import React, { useState } from "react";
 import { Alert, StyleSheet, Text, TouchableOpacity } from "react-native";
 
+import Theme from "../../../interfaces/theme";
 import ScannerModal from "./ScannerModal";
 
 // Properties passed to the Scanner Button component (similiar to a class definition)
@@ -70,15 +71,15 @@ const ScannerButton: React.FC<ScannerButtonProps> = ({ onScan }) => {
 // Styling Section
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#1e1e1e",
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    backgroundColor: Theme.CFL_card_background,
+    padding: 15,
+    marginVertical: 4,
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
   },
   buttonText: {
-    color: "#fff",
+    color: Theme.CFL_white,
     fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",

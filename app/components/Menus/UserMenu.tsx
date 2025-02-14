@@ -2,6 +2,7 @@
 import { Feather } from "@expo/vector-icons";
 import React from "react";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
 import Theme from "../../../interfaces/theme";
 
 // type definition for menu properties
@@ -50,7 +51,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
         >
           {/* Edit Username Btn */}
           <TouchableOpacity style={styles.menuItem} onPress={onEditUsername}>
-            <Feather name="edit" size={18} color="#bbbbbb" />
+            <Feather name="edit" size={18} color={Theme.CFL_light_grey} />
             <Text style={styles.menuItemText}>Edit Username</Text>
           </TouchableOpacity>
 
@@ -59,7 +60,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
             style={[styles.menuItem, styles.newGameBtn]}
             onPress={onNewGame}
           >
-            <Feather name="trash-2" size={18} color="#ff4545" />
+            <Feather name="trash-2" size={18} color={Theme.CFL_red} />
             <Text style={[styles.menuItemText, styles.newGameTxt]}>
               Reset Game
             </Text>
