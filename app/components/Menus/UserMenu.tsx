@@ -2,6 +2,7 @@
 import { Feather } from "@expo/vector-icons";
 import React from "react";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Theme from "../../../interfaces/theme";
 
 // type definition for menu properties
 interface UserMenuProps {
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
   menuItemText: {
     marginLeft: 12,
     fontSize: 14,
-    color: "#bbbbbb",
+    color: Theme.CFL_light_grey,
     fontWeight: 500,
   },
   // new game btn
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
   },
   // new game txt
   newGameTxt: {
-    color: "#ff4545",
+    color: Theme.CFL_red,
     fontWeight: 600,
   },
 });

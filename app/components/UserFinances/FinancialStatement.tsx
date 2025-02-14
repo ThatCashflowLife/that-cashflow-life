@@ -5,6 +5,7 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 import User from "../../../interfaces/user";
 import addValuesTogether from "../../../utils/additionUtil";
 import formatUSD from "../../../utils/currencyUtil";
+import Theme from "../../../interfaces/theme";
 
 // component properties type definition
 interface FinancialStatementProps {
@@ -139,7 +140,7 @@ const FinancialStatement: React.FC<FinancialStatementProps> = ({ user }) => {
 const styles = StyleSheet.create({
   // full statement container
   container: {
-    backgroundColor: "#121212",
+    backgroundColor: Theme.CFL_background_black,
   },
   // scrollable view
   scrollView: {
@@ -158,14 +159,14 @@ const styles = StyleSheet.create({
   // background container for each section
   card: {
     marginVertical: 8, // space between components
-    backgroundColor: "#1e1e1e", // lighter card background
+    backgroundColor: Theme.CFL_black, // lighter card background
     padding: 7,
     paddingVertical: 17,
     borderRadius: 10,
   },
   // income/expenses/assets
   section: {
-    backgroundColor: "#121212", // darker inner container
+    backgroundColor: Theme.CFL_background_black, // darker inner container
     padding: 15,
     borderRadius: 10,
   },
@@ -173,7 +174,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#ffffff",
+    color: Theme.CFL_white,
     marginBottom: 10,
   },
   // row
@@ -188,41 +189,41 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingTop: 10,
     borderTopWidth: 1,
-    borderTopColor: "#333333",
+    borderTopColor: Theme.CFL_light_grey,
   },
   // labels
   label: {
     fontSize: 16,
-    color: "#bbbbbb",
+    color: Theme.CFL_light_grey,
   },
   // values
   value: {
     fontSize: 16,
-    color: "#ffffff",
+    color: Theme.CFL_white,
     fontWeight: "500",
   },
   // labels for totals
   totalLabel: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#ffffff",
+    color: Theme.CFL_white,
   },
   // if $ is positive
   positive: {
-    color: "#3e9c35",
+    color: Theme.CFL_lime_green,
     fontSize: 16,
     fontWeight: "bold",
   },
   // if $ is negative
   negative: {
-    color: "#ff4444",
+    color: Theme.CFL_red,
     fontSize: 16,
     fontWeight: "bold",
   },
   // dividing line
   separator: {
     height: 1,
-    backgroundColor: "#333333",
+    backgroundColor: Theme.CFL_light_grey,
     marginVertical: 3,
   },
 });

@@ -74,17 +74,11 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
     <>
       {/* Header Container */}
       <View
-        style={[
-          styles.header,
-          { backgroundColor: Theme.Colors.CFL_dark_green },
-        ]}
+        style={styles.header}
       >
         {/* Header Text Container */}
         <View
-          style={[
-            styles.headerText,
-            { backgroundColor: Theme.Colors.CFL_dark_green },
-          ]}
+          style={styles.headerText}
         >
           {/* Title */}
           <Text style={styles.title}>Cashflow Life</Text>
@@ -104,7 +98,7 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
               placeholderTextColor="rgba(34, 65, 29, 0.5)"
             />
           ) : (
-            <Text style={[styles.username, { color: Theme.Colors.CFL_yellow }]}>
+            <Text style={styles.username}>
               {username}
             </Text>
           )}
@@ -142,7 +136,7 @@ const styles = StyleSheet.create({
   header: {
     marginTop: 5,
     width: "100%",
-    backgroundColor: "#4cb348",
+    backgroundColor: Theme.CFL_green,
     padding: 30,
     alignItems: "center",
     justifyContent: "center",
@@ -152,7 +146,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#22311d",
+    color: Theme.CFL_yellow, 
     alignItems: "center",
     maxWidth: 200,
   },
@@ -160,25 +154,25 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#22311d",
+    color: Theme.CFL_yellow,
     textAlign: "center",
   },
   // username txt
   username: {
     fontSize: 16,
-    color: "#22411d",
+    color: Theme.CFL_black,
     textAlign: "center",
     marginTop: 4,
   },
   // username txt while editing
   usernameInput: {
     fontSize: 16,
-    color: "#22411d",
+    color: Theme.CFL_black,
     textAlign: "center",
     marginTop: 4,
     padding: 3,
     minWidth: 120,
-    backgroundColor: "rgba(255, 255, 255, 0.15)",
+    backgroundColor: Theme.CFL_black,
     borderRadius: 8,
   },
   // menu btn

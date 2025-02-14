@@ -2,6 +2,7 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Theme from "../../../interfaces/theme";
 
 export type Tab = "home" | "properties" | "finances" | "transactions";
 
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   activeTabLabel: {
-    color: "#ffffff",
+    color: Theme.CFL_white,
   },
 });
 

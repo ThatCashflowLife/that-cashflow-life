@@ -1,6 +1,7 @@
 // import necessary libraries/methods and components
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Theme from "../../../interfaces/theme";
 
 const LatestTransaction = () => {
   // Logic/Functions Section
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#ffffff",
+    color: Theme.CFL_white,
   },
 });
 

@@ -7,6 +7,7 @@ import User from "../../../interfaces/user";
 import testProperties from "../../../testData/testProperties";
 import { formatUSD } from "../../../utils/currencyUtil";
 import { formatTimestamp } from "../../../utils/timeUtil";
+import Theme from "../../../interfaces/theme";
 
 // component properties type definition
 interface PropertiesProps {
@@ -20,11 +21,11 @@ const Properties: React.FC<PropertiesProps> = ({ user }) => {
   const getTypeColor = (type: RealEstate["type"]) => {
     switch (type) {
       case "house":
-        return "#9B6B9E";
+        return Theme.CFL_pink;
       case "business":
-        return "#4A9690";
+        return Theme.CFL_cyan;
       default:
-        return "#4cb348"; // default green
+        return Theme.CFL_lime_green; // default green
     }
   };
 
@@ -111,14 +112,14 @@ const styles = StyleSheet.create({
   // each property card
   card: {
     marginVertical: 5,
-    backgroundColor: "#1e1e1e",
+    backgroundColor: Theme.CFL_black,
     padding: 7,
     paddingVertical: 13,
     borderRadius: 10,
   },
   // inner property card
   propertyCard: {
-    backgroundColor: "#121212",
+    backgroundColor: Theme.CFL_background_black,
     padding: 10,
     borderRadius: 10,
   },
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
   },
   // timestamp
   timestamp: {
-    color: "#bbbbbb",
+    color: Theme.CFL_light_grey,
     fontSize: 14,
   },
   // property type tag
@@ -143,20 +144,20 @@ const styles = StyleSheet.create({
   },
   // property type text
   typeText: {
-    color: "#ffffff",
+    color: Theme.CFL_white,
     fontSize: 12,
     fontWeight: "bold",
   },
   // name of property
   propertyName: {
-    color: "#ffffff",
+    color: Theme.CFL_white,
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 4,
   },
   // property description
   description: {
-    color: "#ffffff",
+    color: Theme.CFL_white,
     fontSize: 14,
     marginBottom: 8,
   },
@@ -175,24 +176,24 @@ const styles = StyleSheet.create({
   },
   // name of change
   fieldName: {
-    color: "#bbbbbb",
+    color: Theme.CFL_light_grey,
     fontSize: 14,
   },
   // value of change (neutral)
   value: {
-    color: "#ffffff",
+    color: Theme.CFL_white,
     fontSize: 14,
     fontWeight: "500",
   },
   // if its positive
   positiveAmount: {
-    color: "#3e9c35",
+    color: Theme.CFL_lime_green,
     fontSize: 14,
     fontWeight: "500",
   },
   // if its negative
   negativeAmount: {
-    color: "#ff4444",
+    color: Theme.CFL_red,
     fontSize: 14,
     fontWeight: "500",
   },

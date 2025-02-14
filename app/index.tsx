@@ -66,19 +66,13 @@ export default function App() {
       case "home":
         return (
           <ScrollView
-            style={[
-              styles.scrollView,
-              { backgroundColor: Theme.Colors.CFL_black },
-            ]}
+            style={styles.scrollView}
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
           >
             <View style={styles.appContent}>
               <View
-                style={[
-                  styles.card,
-                  { backgroundColor: Theme.Colors.CFL_black },
-                ]}
+                style={styles.card}
               >
                 <ScannerButton onScan={handleScan} />
               </View>
@@ -95,10 +89,7 @@ export default function App() {
       case "transactions":
         return (
           <ScrollView
-            style={[
-              styles.scrollView,
-              { backgroundColor: Theme.Colors.CFL_black },
-            ]}
+            style={styles.scrollView}
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
           >
@@ -113,10 +104,7 @@ export default function App() {
       case "finances":
         return (
           <ScrollView
-            style={[
-              styles.scrollView,
-              { backgroundColor: Theme.Colors.CFL_black },
-            ]}
+            style={styles.scrollView}
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
           >
@@ -130,10 +118,7 @@ export default function App() {
       case "properties":
         return (
           <ScrollView
-            style={[
-              styles.scrollView,
-              { backgroundColor: Theme.Colors.CFL_black },
-            ]}
+            style={styles.scrollView}
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
           >
@@ -167,12 +152,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1, // ensure app takes up whole screen
-    backgroundColor: "#121212",
+    backgroundColor: Theme.CFL_background_black,
   },
   // scrollable view
   scrollView: {
     flex: 1,
-    backgroundColor: Theme.Colors.CFL_black,
+    backgroundColor: Theme.CFL_background_black,
   },
   // scrollable content
   scrollContent: {
@@ -186,7 +171,7 @@ const styles = StyleSheet.create({
   // card for each component
   card: {
     marginVertical: 8, // space between components
-    backgroundColor: "#1e1e1e", // lighter card background
+    backgroundColor: Theme.CFL_black, // lighter card background
     padding: 7,
     borderRadius: 10,
   },
