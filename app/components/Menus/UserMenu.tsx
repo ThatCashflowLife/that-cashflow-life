@@ -80,9 +80,9 @@ const styles = StyleSheet.create({
   },
   // menu container
   menuContainer: {
-    backgroundColor: "#1a1a1a",
+    backgroundColor: Theme.CFL_app_background,
     borderRadius: 12,
-    shadowColor: "#000",
+    shadowColor: Theme.CFL_gray,
     shadowOffset: {
       width: 0,
       height: 4,
