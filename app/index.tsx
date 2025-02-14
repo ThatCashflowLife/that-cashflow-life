@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import Theme from "../interfaces/theme";
 import User from "../interfaces/user";
 import blankUser from "../testData/blankUser";
 import Header from "./components/Header/Header";
@@ -149,7 +150,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1, // ensure app takes up whole screen
-    backgroundColor: "#121212",
+    backgroundColor: Theme.CFL_app_background,
   },
   // scrollable view
   scrollView: {
@@ -166,9 +167,9 @@ const styles = StyleSheet.create({
   },
   // card for each component
   card: {
-    marginVertical: 8, // space between components
-    backgroundColor: "#1e1e1e", // lighter card background
-    padding: 7,
+    marginVertical: Theme.CFL_card_spacing, // space between components
+    backgroundColor: Theme.CFL_black, // lighter card background
+    padding: 6,
     borderRadius: 10,
   },
 });

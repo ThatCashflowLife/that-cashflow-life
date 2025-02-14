@@ -11,6 +11,7 @@ import {
   View,
 } from "react-native";
 
+import Theme from "../../../interfaces/theme";
 import User from "../../../interfaces/user";
 import UserMenu from "../Menus/UserMenu";
 
@@ -85,7 +86,7 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
               value={tempName}
               onChangeText={setTempName}
               onBlur={handleSubmit}
-              cursorColor="#22311d"
+              cursorColor={Theme.CFL_black}
               autoFocus
               selectTextOnFocus
               onSubmitEditing={handleSubmit}
@@ -104,7 +105,7 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
           activeOpacity={0.7}
           ref={menuButtonRef}
         >
-          <Feather name="menu" size={30} color="#22311d" />
+          <Feather name="menu" size={30} color={Theme.CFL_black} />
         </TouchableOpacity>
       </View>
 
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
   header: {
     marginTop: 5,
     width: "100%",
-    backgroundColor: "#4cb348",
+    backgroundColor: Theme.CFL_green,
     padding: 30,
     alignItems: "center",
     justifyContent: "center",
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#22311d",
+    color: Theme.CFL_yellow,
     alignItems: "center",
     maxWidth: 200,
   },
@@ -147,25 +148,25 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#22311d",
+    color: Theme.CFL_yellow,
     textAlign: "center",
   },
   // username txt
   username: {
     fontSize: 16,
-    color: "#22411d",
+    color: Theme.CFL_black,
     textAlign: "center",
     marginTop: 4,
   },
   // username txt while editing
   usernameInput: {
     fontSize: 16,
-    color: "#22411d",
+    color: Theme.CFL_black,
     textAlign: "center",
     marginTop: 4,
     padding: 3,
     minWidth: 120,
-    backgroundColor: "rgba(255, 255, 255, 0.15)",
+    backgroundColor: Theme.CFL_dark_green,
     borderRadius: 8,
   },
   // menu btn

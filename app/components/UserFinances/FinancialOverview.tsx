@@ -3,6 +3,7 @@ import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
+import Theme from "../../../interfaces/theme";
 import User from "../../../interfaces/user";
 import addValuesTogether from "../../../utils/additionUtil";
 import formatUSD from "../../../utils/currencyUtil";
@@ -54,7 +55,11 @@ const FinancialOverview: React.FC<FinancialOverviewProps> = ({ user }) => {
       {/* Profession Section */}
       <View style={styles.professionContainer}>
         <View style={styles.professionIconContainer}>
-          <AntDesign name="questioncircle" size={35} color="#000000" />
+          <AntDesign
+            name="questioncircle"
+            size={35}
+            color={Theme.CFL_midnight}
+          />
         </View>
         <Text style={styles.professionTxt}>{user.profession}</Text>
       </View>
@@ -145,7 +150,7 @@ const styles = StyleSheet.create({
   // Financial Overview Card
   container: {
     padding: 15,
-    backgroundColor: "#121212",
+    backgroundColor: Theme.CFL_card_background,
     borderRadius: 10,
     marginVertical: 10,
   },
@@ -166,7 +171,7 @@ const styles = StyleSheet.create({
   titleUsername: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#ffffff",
+    color: Theme.CFL_white,
     maxWidth: "50%",
     overflow: "hidden",
     flexShrink: 1,
@@ -175,7 +180,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#ffffff",
+    color: Theme.CFL_white,
     flexShrink: 0,
   },
   // profession container
@@ -184,13 +189,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "30%",
     flexDirection: "row",
-    color: "#bbbbbb",
+    color: Theme.CFL_light_gray,
   },
   // profession icon container
   professionIconContainer: {
     height: 40,
     width: 40,
-    backgroundColor: "#bbbbbb",
+    backgroundColor: Theme.CFL_light_gray,
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
@@ -198,7 +203,7 @@ const styles = StyleSheet.create({
   // profession txt
   professionTxt: {
     fontSize: 15,
-    color: "#bbbbbb",
+    color: Theme.CFL_light_gray,
     paddingLeft: 15,
   },
   // each row of txt
@@ -211,26 +216,26 @@ const styles = StyleSheet.create({
   // txt field name
   label: {
     fontSize: 16,
-    color: "#bbbbbb",
+    color: Theme.CFL_light_gray,
   },
   // txt value
   value: {
     fontSize: 16,
-    color: "#ffffff",
+    color: Theme.CFL_white,
     fontWeight: "500",
   },
   // if $ is positive
   positive: {
-    color: "#3e9c35",
+    color: Theme.CFL_lime_green,
   },
   // if $ is negative
   negative: {
-    color: "#ff4444",
+    color: Theme.CFL_red,
   },
   // dividing line
   separator: {
     height: 1,
-    backgroundColor: "#333333",
+    backgroundColor: Theme.CFL_gray,
     marginVertical: 10,
   },
 });

@@ -3,6 +3,8 @@ import { Feather } from "@expo/vector-icons";
 import React from "react";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
+import Theme from "../../../interfaces/theme";
+
 // type definition for menu properties
 interface UserMenuProps {
   isVisible: boolean;
@@ -49,7 +51,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
         >
           {/* Edit Username Btn */}
           <TouchableOpacity style={styles.menuItem} onPress={onEditUsername}>
-            <Feather name="edit" size={18} color="#bbbbbb" />
+            <Feather name="edit" size={18} color={Theme.CFL_light_gray} />
             <Text style={styles.menuItemText}>Edit Username</Text>
           </TouchableOpacity>
 
@@ -58,7 +60,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
             style={[styles.menuItem, styles.newGameBtn]}
             onPress={onNewGame}
           >
-            <Feather name="trash-2" size={18} color="#ff4545" />
+            <Feather name="trash-2" size={18} color={Theme.CFL_red} />
             <Text style={[styles.menuItemText, styles.newGameTxt]}>
               Reset Game
             </Text>
@@ -74,13 +76,13 @@ const styles = StyleSheet.create({
   // overlay/background
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, .4)",
+    backgroundColor: Theme.CFL_camera_overlay,
   },
   // menu container
   menuContainer: {
-    backgroundColor: "#1a1a1a",
+    backgroundColor: Theme.CFL_app_background,
     borderRadius: 12,
-    shadowColor: "#000",
+    shadowColor: Theme.CFL_gray,
     shadowOffset: {
       width: 0,
       height: 4,
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
     elevation: 8,
     minWidth: 180,
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
+    borderColor: Theme.CFL_border_black,
     position: "absolute",
   },
   // general menu item
@@ -99,13 +101,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 12,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255, 255, 255, 0.08)",
+    borderBottomColor: Theme.CFL_gray,
   },
   // general menu item txt
   menuItemText: {
     marginLeft: 12,
     fontSize: 14,
-    color: "#bbbbbb",
+    color: Theme.CFL_light_gray,
     fontWeight: 500,
   },
   // new game btn
@@ -114,7 +116,7 @@ const styles = StyleSheet.create({
   },
   // new game txt
   newGameTxt: {
-    color: "#ff4545",
+    color: Theme.CFL_red,
     fontWeight: 600,
   },
 });

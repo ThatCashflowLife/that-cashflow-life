@@ -3,6 +3,8 @@ import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
+import Theme from "../../../interfaces/theme";
+
 export type Tab = "home" | "properties" | "finances" | "transactions";
 
 // Tab Menu properties type definition
@@ -33,7 +35,11 @@ const TabMenu: React.FC<TabMenuProps> = ({ activeTab, onTabChange }) => {
           <MaterialIcons
             name={tab.icon}
             size={24}
-            color={activeTab === tab.key ? "#ffffff" : "#666666"}
+            color={
+              activeTab === tab.key
+                ? Theme.CFL_white
+                : Theme.CFL_inactive_tab_font
+            }
           />
           <Text
             style={[
@@ -53,7 +59,9 @@ const TabMenu: React.FC<TabMenuProps> = ({ activeTab, onTabChange }) => {
 const styles = StyleSheet.create({
   tabBar: {
     flexDirection: "row",
-    backgroundColor: "#1e1e1e",
+    backgroundColor: Theme.CFL_inactive_tab,
+    borderTopColor: Theme.CFL_active_tab,
+    borderWidth: 4,
   },
   tab: {
     flex: 1,
@@ -61,15 +69,15 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   activeTab: {
-    backgroundColor: "#2e2e2e",
+    backgroundColor: Theme.CFL_active_tab,
   },
   tabLabel: {
     fontSize: 12,
-    color: "#666666",
+    color: Theme.CFL_inactive_tab_font,
     marginTop: 4,
   },
   activeTabLabel: {
-    color: "#ffffff",
+    color: Theme.CFL_white,
   },
 });
 

@@ -2,6 +2,8 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
+import Theme from "../../../interfaces/theme";
+
 const LatestTransaction = () => {
   // Logic/Functions Section
 
@@ -19,16 +21,18 @@ const LatestTransaction = () => {
 const styles = StyleSheet.create({
   // Latest Transaction Card Container
   container: {
-    paddingHorizontal: 10,
-    paddingVertical: 15,
+    padding: 15,
+    marginVertical: 4,
+    borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: Theme.CFL_card_background,
   },
   // Latest Transaction Title
   title: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#ffffff",
+    color: Theme.CFL_white,
   },
 });
 

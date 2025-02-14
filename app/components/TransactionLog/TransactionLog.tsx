@@ -2,6 +2,7 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
+import Theme from "../../../interfaces/theme";
 import Transaction from "../../../interfaces/transaction";
 import User from "../../../interfaces/user";
 import { testTransactions } from "../../../testData/testTransactions";
@@ -20,17 +21,17 @@ const TransactionLog: React.FC<TransactionLogProps> = ({ user }) => {
   const getTypeColor = (type: Transaction["type"]) => {
     switch (type) {
       case "salary":
-        return "#3e9c35"; // income green
+        return Theme.CFL_green; // income green
       case "passive income":
-        return "#3e9c35"; // income green
+        return Theme.CFL_green; // income green
       case "expense":
-        return "#ff4444"; // expense red
+        return Theme.CFL_red; // expense red
       case "asset":
-        return "#4444ff"; // asset purple
+        return Theme.CFL_purple; // asset purple
       case "liability":
-        return "#ff8c00"; // liability orange
+        return Theme.CFL_orange; // liability orange
       default:
-        return "#4cb348"; // default green
+        return Theme.CFL_light_gray; // default gray
     }
   };
 
@@ -95,15 +96,15 @@ const styles = StyleSheet.create({
   },
   // background container for each card
   card: {
-    marginVertical: 5, // space between components
-    backgroundColor: "#1e1e1e", // lighter card background
+    marginVertical: Theme.CFL_card_spacing, // space between components
+    backgroundColor: Theme.CFL_black, // lighter card background
     padding: 7,
     paddingVertical: 13,
     borderRadius: 10,
   },
   // card for each transaction
   transactionCard: {
-    backgroundColor: "#121212",
+    backgroundColor: Theme.CFL_card_background,
     padding: 10,
     borderRadius: 10,
   },
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
   },
   // timestamp for each transaction
   timestamp: {
-    color: "#bbbbbb",
+    color: Theme.CFL_light_gray,
     fontSize: 14,
   },
   // type of transaction container
@@ -127,20 +128,20 @@ const styles = StyleSheet.create({
   },
   // type of transaction txt
   typeText: {
-    color: "#ffffff",
+    color: Theme.CFL_white,
     fontSize: 12,
     fontWeight: "bold",
   },
   // transaction description
   description: {
-    color: "#ffffff",
+    color: Theme.CFL_white,
     fontSize: 16,
     marginBottom: 8,
   },
   // container for field change
   changesContainer: {
     borderTopWidth: 1,
-    borderTopColor: "#3a3a3a",
+    borderTopColor: Theme.CFL_gray,
     paddingTop: 3,
   },
   // what field it affects
@@ -152,13 +153,13 @@ const styles = StyleSheet.create({
   },
   // currency difference
   positiveAmount: {
-    color: "#3e9c35",
+    color: Theme.CFL_lime_green,
     fontSize: 14,
     fontWeight: "500",
   },
   // negative currency difference
   negativeAmount: {
-    color: "#ff4444",
+    color: Theme.CFL_red,
     fontSize: 14,
     fontWeight: "500",
   },
