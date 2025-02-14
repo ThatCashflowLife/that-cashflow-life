@@ -51,7 +51,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
         >
           {/* Edit Username Btn */}
           <TouchableOpacity style={styles.menuItem} onPress={onEditUsername}>
-            <Feather name="edit" size={18} color={Theme.CFL_light_grey} />
+            <Feather name="edit" size={18} color={Theme.CFL_light_gray} />
             <Text style={styles.menuItemText}>Edit Username</Text>
           </TouchableOpacity>
 
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   // overlay/background
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, .4)",
+    backgroundColor: Theme.CFL_camera_overlay,
   },
   // menu container
   menuContainer: {
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     elevation: 8,
     minWidth: 180,
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
+    borderColor: Theme.CFL_border_black,
     position: "absolute",
   },
   // general menu item
@@ -101,13 +101,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 12,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255, 255, 255, 0.08)",
+    borderBottomColor: Theme.CFL_gray,
   },
   // general menu item txt
   menuItemText: {
     marginLeft: 12,
     fontSize: 14,
-    color: Theme.CFL_light_grey,
+    color: Theme.CFL_light_gray,
     fontWeight: 500,
   },
   // new game btn

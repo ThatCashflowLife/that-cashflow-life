@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
     padding: 3,
     minWidth: 120,
-    backgroundColor: Theme.CFL_light_grey,
+    backgroundColor: Theme.CFL_dark_green,
     borderRadius: 8,
   },
   // menu btn

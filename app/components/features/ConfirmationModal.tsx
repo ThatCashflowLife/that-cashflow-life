@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   // overlay/background
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, .4)",
+    backgroundColor: Theme.CFL_camera_overlay,
   },
   // menu container
   menuContainer: {

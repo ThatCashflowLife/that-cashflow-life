@@ -189,13 +189,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "30%",
     flexDirection: "row",
-    color: Theme.CFL_light_grey,
+    color: Theme.CFL_light_gray,
   },
   // profession icon container
   professionIconContainer: {
     height: 40,
     width: 40,
-    backgroundColor: Theme.CFL_light_grey,
+    backgroundColor: Theme.CFL_light_gray,
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
   // profession txt
   professionTxt: {
     fontSize: 15,
-    color: Theme.CFL_light_grey,
+    color: Theme.CFL_light_gray,
     paddingLeft: 15,
   },
   // each row of txt
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
   // txt field name
   label: {
     fontSize: 16,
-    color: Theme.CFL_light_grey,
+    color: Theme.CFL_light_gray,
   },
   // txt value
   value: {

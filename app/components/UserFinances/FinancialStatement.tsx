@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
   // labels
   label: {
     fontSize: 16,
-    color: Theme.CFL_light_grey,
+    color: Theme.CFL_light_gray,
   },
   // values
   value: {

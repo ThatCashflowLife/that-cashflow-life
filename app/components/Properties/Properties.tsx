@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   },
   // timestamp
   timestamp: {
-    color: Theme.CFL_light_grey,
+    color: Theme.CFL_light_gray,
     fontSize: 14,
   },
   // property type tag
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
   },
   // name of change
   fieldName: {
-    color: Theme.CFL_light_grey,
+    color: Theme.CFL_light_gray,
     fontSize: 14,
   },
   // value of change (neutral)

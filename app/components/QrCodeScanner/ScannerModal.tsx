@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   // Modal Container
   container: {
     flex: 1,
-    backgroundColor: Theme.CFL_app_background,
+    backgroundColor: Theme.CFL_card_background,
   },
   // Camera
   camera: {
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   // overlay/background
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: Theme.CFL_camera_overlay,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     width: 250,
     height: 250,
     borderWidth: 2,
-    borderColor: Theme.CFL_app_background,
+    borderColor: Theme.CFL_white,
     backgroundColor: "transparent",
     borderRadius: 12,
   },
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     top: 50,
     right: 20,
     padding: 12,
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    backgroundColor: Theme.CFL_black,
     borderRadius: 8,
     zIndex: 2,
   },

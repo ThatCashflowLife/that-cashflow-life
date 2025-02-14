@@ -1,4 +1,4 @@
-const Theme = {
+export const Theme = {
   CFL_midnight: "#000000",
   CFL_yellow: "#E6E335",
   CFL_lime_green: "#76D618",
@@ -9,7 +9,7 @@ const Theme = {
   CFL_black: "#2F2F30",
   CFL_red: "#ff4444",
   CFL_purple: "#4444ff",
-  CFL_light_grey: "#bbbbbb",
+  CFL_light_gray: "#bbbbbb",
   CFL_gray: "#424242",
   CFL_app_background: "#121212",
   CFL_card_background: "#1F1F1F",
@@ -18,7 +18,8 @@ const Theme = {
   CFL_border_black: "rgba(255, 255, 255, 0.1)",
   CFL_active_tab: "#2E2E2E",
   CFL_inactive_tab: "#1E1E1E",
-  CFL_inactive_tab_icon: "#666666",
+  CFL_inactive_tab_font: "#666666",
+  CFL_camera_overlay: "rgba(0, 0, 0, 0.4)",
   CFL_card_spacing: 7,
 };
 

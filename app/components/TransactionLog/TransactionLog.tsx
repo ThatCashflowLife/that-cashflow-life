@@ -31,7 +31,7 @@ const TransactionLog: React.FC<TransactionLogProps> = ({ user }) => {
       case "liability":
         return Theme.CFL_orange; // liability orange
       default:
-        return Theme.CFL_green; // default green
+        return Theme.CFL_light_gray; // default gray
     }
   };
 
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   },
   // timestamp for each transaction
   timestamp: {
-    color: Theme.CFL_light_grey,
+    color: Theme.CFL_light_gray,
     fontSize: 14,
   },
   // type of transaction container

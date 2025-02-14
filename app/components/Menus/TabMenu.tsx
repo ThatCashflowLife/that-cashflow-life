@@ -38,7 +38,7 @@ const TabMenu: React.FC<TabMenuProps> = ({ activeTab, onTabChange }) => {
             color={
               activeTab === tab.key
                 ? Theme.CFL_white
-                : Theme.CFL_inactive_tab_icon
+                : Theme.CFL_inactive_tab_font
             }
           />
           <Text
@@ -60,6 +60,8 @@ const styles = StyleSheet.create({
   tabBar: {
     flexDirection: "row",
     backgroundColor: Theme.CFL_inactive_tab,
+    borderTopColor: Theme.CFL_active_tab,
+    borderWidth: 4,
   },
   tab: {
     flex: 1,
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
   },
   tabLabel: {
     fontSize: 12,
-    color: Theme.CFL_inactive_tab_icon,
+    color: Theme.CFL_inactive_tab_font,
     marginTop: 4,
   },
   activeTabLabel: {
