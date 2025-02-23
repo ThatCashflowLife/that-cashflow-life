@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     fontSize: 14,
     color: Theme.CFL_light_gray,
+    fontFamily: Theme.CFL_primary_font,
     fontWeight: 500,
   },
   // new game btn
@@ -117,6 +118,7 @@ const styles = StyleSheet.create({
   // new game txt
   newGameTxt: {
     color: Theme.CFL_red,
+    fontFamily: Theme.CFL_primary_font,
     fontWeight: 600,
   },
 });

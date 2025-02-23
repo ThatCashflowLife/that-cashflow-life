@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   buttonText: {
+    fontFamily: Theme.CFL_primary_font,
     color: Theme.CFL_white,
     fontSize: 20,
     fontWeight: "bold",

@@ -83,11 +83,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: Theme.CFL_white,
+    fontFamily: Theme.CFL_title_font,
     marginBottom: 10,
   },
   message: {
     fontSize: 16,
     color: Theme.CFL_light_gray,
+    fontFamily: Theme.CFL_primary_font,
     textAlign: "center",
     marginBottom: 20,
   },
@@ -115,9 +117,11 @@ const styles = StyleSheet.create({
   cancelText: {
     color: Theme.CFL_midnight,
     fontWeight: "bold",
+    fontFamily: Theme.CFL_primary_font,
   },
   confirmText: {
     color: Theme.CFL_midnight,
     fontWeight: "bold",
+    fontFamily: Theme.CFL_primary_font,
   },
 });

@@ -5,7 +5,15 @@ const titleFont =
     ? "System"
     : Platform.OS === "android"
       ? "sans-serif-condensed"
-      : "sans-serif";
+      : "normal";
+
+const secondaryFont =
+  Platform.OS === "ios"
+    ? "Courier New"
+    : Platform.OS === "android"
+      ? "sans-serif-medium"
+      : "normal";
+
 export const Theme = {
   // colors
   CFL_midnight: "#000000",
@@ -15,6 +23,7 @@ export const Theme = {
   CFL_dark_green: "#519C4F",
   CFL_orange: "#DE8F33",
   CFL_white: "#FFFFFF",
+  CFL_offwhite: "#DDDDDD",
   CFL_black: "#2F2F30",
   CFL_red: "#ff4444",
   CFL_purple: "#4444ff",
@@ -29,11 +38,19 @@ export const Theme = {
   CFL_inactive_tab: "#1E1E1E",
   CFL_inactive_tab_font: "#666666",
   CFL_camera_overlay: "rgba(0, 0, 0, 0.4)",
+  CFL_danger_button: "#ff4444",
 
   // spacings
   CFL_card_spacing: 7,
-  // fonts
+
+  // text colors
+  CFL_dark_text: "#121212",
+  CFL_light_text: "#bbbbbb",
+
+  // font families
   CFL_title_font: titleFont,
+  CFL_primary_font: secondaryFont,
+  CFL_emphasis_font: "Helvetica",
 };
 
 export default Theme;

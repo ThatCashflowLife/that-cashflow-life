@@ -74,10 +74,13 @@ const styles = StyleSheet.create({
   tabLabel: {
     fontSize: 12,
     color: Theme.CFL_inactive_tab_font,
+    fontFamily: Theme.CFL_primary_font,
     marginTop: 4,
   },
   activeTabLabel: {
+    fontFamily: Theme.CFL_primary_font,
     color: Theme.CFL_white,
+    marginTop: 4,
   },
 });
 

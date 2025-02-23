@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
   },
   // timestamp for each transaction
   timestamp: {
+    fontFamily: Theme.CFL_primary_font,
     color: Theme.CFL_light_gray,
     fontSize: 14,
   },
@@ -119,17 +120,22 @@ const styles = StyleSheet.create({
     color: Theme.CFL_white,
     fontSize: 12,
     fontWeight: "bold",
+    fontFamily: Theme.CFL_emphasis_font,
+    textTransform: "uppercase",
   },
   // transaction name
   name: {
+    fontFamily: Theme.CFL_primary_font,
     color: Theme.CFL_white,
     fontSize: 16,
     marginBottom: 8,
+    fontWeight: "bold",
   },
   // transaction description
   description: {
-    color: Theme.CFL_light_gray,
-    fontSize: 12,
+    fontFamily: Theme.CFL_primary_font,
+    color: Theme.CFL_offwhite,
+    fontSize: 14,
     marginBottom: 5,
   },
   // container for field change
@@ -148,12 +154,14 @@ const styles = StyleSheet.create({
   // positive currency difference
   positiveAmount: {
     color: Theme.CFL_lime_green,
+    fontFamily: Theme.CFL_primary_font,
     fontSize: 14,
     fontWeight: "500",
   },
   // negative currency difference
   negativeAmount: {
     color: Theme.CFL_red,
+    fontFamily: Theme.CFL_primary_font,
     fontSize: 14,
     fontWeight: "500",
   },
