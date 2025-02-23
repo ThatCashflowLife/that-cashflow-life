@@ -1,6 +1,6 @@
 // import necessary libraries/methods and components
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, View, Text } from "react-native";
 
 import Theme from "../../../interfaces/theme";
 import Transaction from "../../../interfaces/transaction";
@@ -8,32 +8,19 @@ import User from "../../../interfaces/user";
 import { testTransactions } from "../../../testData/testTransactions";
 import { formatUSD } from "../../../utils/currencyUtil";
 import { formatTimestamp } from "../../../utils/timeUtil";
+import { getTypeColor } from "../../../utils/transactionUtil";
 
 // component properties type definition
 interface TransactionLogProps {
   user: User;
+  onNewTransaction: (transaction: Transaction) => void;
 }
 
-const TransactionLog: React.FC<TransactionLogProps> = ({ user }) => {
+const TransactionLog: React.FC<TransactionLogProps> = ({
+  user,
+  onNewTransaction,
+}) => {
   // Logic/Functions Section
-
-  // determines the color based on the transaction type
-  const getTypeColor = (type: Transaction["type"]) => {
-    switch (type) {
-      case "salary":
-        return Theme.CFL_green; // income green
-      case "passive income":
-        return Theme.CFL_green; // income green
-      case "expense":
-        return Theme.CFL_red; // expense red
-      case "asset":
-        return Theme.CFL_purple; // asset purple
-      case "liability":
-        return Theme.CFL_orange; // liability orange
-      default:
-        return Theme.CFL_light_gray; // default gray
-    }
-  };
 
   // Tsx for every transaction
   const renderTransaction = (transaction: Transaction) => (
@@ -55,9 +42,10 @@ const TransactionLog: React.FC<TransactionLogProps> = ({ user }) => {
           </View>
         </View>
 
-        <Text style={styles.description}>{transaction.description}</Text>
+        <Text style={styles.name}>{transaction.name}</Text>
 
         <View style={styles.changesContainer}>
+          <Text style={styles.description}>{transaction.description}</Text>
           <View style={styles.fieldChange}>
             <Text
               style={
@@ -132,11 +120,17 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "bold",
   },
-  // transaction description
-  description: {
+  // transaction name
+  name: {
     color: Theme.CFL_white,
     fontSize: 16,
     marginBottom: 8,
+  },
+  // transaction description
+  description: {
+    color: Theme.CFL_light_gray,
+    fontSize: 12,
+    marginBottom: 5,
   },
   // container for field change
   changesContainer: {
@@ -151,7 +145,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 4,
   },
-  // currency difference
+  // positive currency difference
   positiveAmount: {
     color: Theme.CFL_lime_green,
     fontSize: 14,

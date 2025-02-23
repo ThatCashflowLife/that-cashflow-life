@@ -1,4 +1,5 @@
 export const Theme = {
+  // colors
   CFL_midnight: "#000000",
   CFL_yellow: "#E6E335",
   CFL_lime_green: "#76D618",
@@ -20,6 +21,8 @@ export const Theme = {
   CFL_inactive_tab: "#1E1E1E",
   CFL_inactive_tab_font: "#666666",
   CFL_camera_overlay: "rgba(0, 0, 0, 0.4)",
+
+  // spacings
   CFL_card_spacing: 7,
 };
 
