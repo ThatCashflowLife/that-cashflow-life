@@ -1,11 +1,11 @@
 // import necessary libraries/methods and components
 import React from "react";
-import { ScrollView, StyleSheet, View, Text } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 
+import { testTransactions } from "../../../data/testData/testTransactions";
 import Theme from "../../../interfaces/theme";
 import Transaction from "../../../interfaces/transaction";
 import User from "../../../interfaces/user";
-import { testTransactions } from "../../../testData/testTransactions";
 import { formatUSD } from "../../../utils/currencyUtil";
 import { formatTimestamp } from "../../../utils/timeUtil";
 import { getTypeColor } from "../../../utils/transactionUtil";

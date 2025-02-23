@@ -2,10 +2,10 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
+import testProperties from "../../../data/testData/testProperties";
 import { RealEstate } from "../../../interfaces/assets";
 import Theme from "../../../interfaces/theme";
 import User from "../../../interfaces/user";
-import testProperties from "../../../testData/testProperties";
 import { formatUSD } from "../../../utils/currencyUtil";
 import { formatTimestamp } from "../../../utils/timeUtil";
 
