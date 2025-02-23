@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   },
   // try again txt
   tryAgainText: {
-    fontFamily: Theme.CFL_emphasis_font,
+    fontFamily: Theme.CFL_primary_font,
     color: "white",
     fontSize: 16,
     fontWeight: "600",

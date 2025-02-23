@@ -7,7 +7,7 @@ const titleFont =
       ? "sans-serif-condensed"
       : "sans-serif";
 
-const secondaryFont =
+const primaryFont =
   Platform.OS === "ios"
     ? "System"
     : Platform.OS === "android"
@@ -49,7 +49,7 @@ export const Theme = {
 
   // font families
   CFL_title_font: titleFont,
-  CFL_primary_font: secondaryFont,
+  CFL_primary_font: primaryFont,
 };
 
 export default Theme;

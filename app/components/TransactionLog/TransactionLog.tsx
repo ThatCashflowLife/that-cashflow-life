@@ -120,7 +120,8 @@ const styles = StyleSheet.create({
     color: Theme.CFL_white,
     fontSize: 12,
     fontWeight: "bold",
-    fontFamily: Theme.CFL_emphasis_font,
+    fontFamily: Theme.CFL_primary_font,
+
     textTransform: "uppercase",
   },
   // transaction name

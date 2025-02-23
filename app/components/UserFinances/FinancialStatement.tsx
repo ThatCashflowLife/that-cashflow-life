@@ -215,14 +215,16 @@ const styles = StyleSheet.create({
   // if $ is positive
   positive: {
     color: Theme.CFL_lime_green,
-    fontFamily: Theme.CFL_emphasis_font,
+    fontFamily: Theme.CFL_primary_font,
+
     fontSize: 16,
     fontWeight: "bold",
   },
   // if $ is negative
   negative: {
     color: Theme.CFL_red,
-    fontFamily: Theme.CFL_emphasis_font,
+    fontFamily: Theme.CFL_primary_font,
+
     fontSize: 16,
     fontWeight: "bold",
   },

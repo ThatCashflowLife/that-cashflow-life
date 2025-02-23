@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   },
   // property type tag
   typeTag: {
-    fontFamily: Theme.CFL_emphasis_font,
+    fontFamily: Theme.CFL_primary_font,
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 4,
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   },
   // property type text
   typeText: {
-    fontFamily: Theme.CFL_emphasis_font,
+    fontFamily: Theme.CFL_primary_font,
     color: Theme.CFL_white,
     fontSize: 12,
     fontWeight: "bold",

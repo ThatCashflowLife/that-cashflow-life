@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   },
   // type of transaction txt
   typeText: {
-    fontFamily: Theme.CFL_emphasis_font,
+    fontFamily: Theme.CFL_primary_font,
     color: Theme.CFL_white,
     fontSize: 12,
     fontWeight: "bold",
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     color: Theme.CFL_dark_text,
     fontSize: 12,
     fontWeight: "900",
-    fontFamily: Theme.CFL_emphasis_font,
+    fontFamily: Theme.CFL_primary_font,
     textTransform: "uppercase",
     letterSpacing: 0.5,
   },
