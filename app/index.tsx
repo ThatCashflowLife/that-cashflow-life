@@ -5,8 +5,11 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import Theme from "../interfaces/theme";
+import Transaction from "../interfaces/transaction";
 import User from "../interfaces/user";
 import blankUser from "../testData/blankUser";
+import { testTransactions } from "../testData/testTransactions";
+import { findLatestTransaction } from "../utils/transactionUtil";
 import Header from "./components/Header/Header";
 import TabMenu, { Tab } from "./components/Menus/TabMenu";
 import Properties from "./components/Properties/Properties";
@@ -19,11 +22,13 @@ import FinancialStatement from "./components/UserFinances/FinancialStatement";
 // App/index.tsx is the top level of the app, where all components reside (the home page)
 // Sometimes this is called App.tsx, but expo looks for index.tsx
 export default function App() {
+  // state/ref management section
   const [user, setUser] = useState<User>(blankUser);
   const [activeTab, setActiveTab] = useState<Tab>("home");
+  const [latestTransaction, setLatestTransaction] =
+    useState<Transaction | null>(() => findLatestTransaction(testTransactions));
   // logic/Functions Section
-
-  // load the username when the component mounts
+  // load the user when the component mounts
   useEffect(() => {
     const loadUser = async () => {
       try {
@@ -60,6 +65,7 @@ export default function App() {
     const currTime = new Date().toISOString().slice(0, 16);
     console.log("time of scan: ", currTime);
   };
+
   // chooses which component to render based on activeTab
   const renderTabContent = () => {
     switch (activeTab) {
@@ -71,15 +77,22 @@ export default function App() {
             showsVerticalScrollIndicator={false}
           >
             <View style={styles.appContent}>
+              {/* Qr Scanner Button */}
               <View style={styles.card}>
                 <ScannerButton onScan={handleScan} />
               </View>
+
+              {/* Financial Overview */}
               <View style={styles.card}>
                 <FinancialOverview user={user} />
               </View>
-              <View style={styles.card}>
-                <LatestTransaction />
-              </View>
+
+              {/* Latest Transaction */}
+              {latestTransaction && (
+                <View style={styles.card}>
+                  <LatestTransaction transaction={latestTransaction} />
+                </View>
+              )}
             </View>
           </ScrollView>
         );
@@ -93,7 +106,10 @@ export default function App() {
           >
             <View style={styles.appContent}>
               <View>
-                <TransactionLog user={user} />
+                <TransactionLog
+                  user={user}
+                  onNewTransaction={setLatestTransaction}
+                />
               </View>
             </View>
           </ScrollView>
