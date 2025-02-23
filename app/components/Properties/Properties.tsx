@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   },
   // timestamp
   timestamp: {
-    color: Theme.CFL_light_gray,
+    color: Theme.CFL_light_text,
     fontFamily: Theme.CFL_primary_font,
     fontSize: 14,
   },
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   // name of change
   fieldName: {
     fontFamily: Theme.CFL_primary_font,
-    color: Theme.CFL_light_gray,
+    color: Theme.CFL_light_text,
     fontSize: 14,
   },
   // value of change (neutral)

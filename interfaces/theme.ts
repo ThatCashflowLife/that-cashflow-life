@@ -5,14 +5,14 @@ const titleFont =
     ? "System"
     : Platform.OS === "android"
       ? "sans-serif-condensed"
-      : "normal";
+      : "sans-serif";
 
 const secondaryFont =
   Platform.OS === "ios"
-    ? "Courier New"
+    ? "System"
     : Platform.OS === "android"
       ? "sans-serif-medium"
-      : "normal";
+      : "sans-serif";
 
 export const Theme = {
   // colors
@@ -50,7 +50,6 @@ export const Theme = {
   // font families
   CFL_title_font: titleFont,
   CFL_primary_font: secondaryFont,
-  CFL_emphasis_font: "Helvetica",
 };
 
 export default Theme;

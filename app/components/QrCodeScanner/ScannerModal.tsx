@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   // Close camera btn txt
   closeText: {
     fontFamily: Theme.CFL_primary_font,
-    color: "white",
+    color: Theme.CFL_white,
     fontSize: 16,
     fontWeight: "600",
   },

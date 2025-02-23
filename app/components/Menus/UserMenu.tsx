@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   menuItemText: {
     marginLeft: 12,
     fontSize: 14,
-    color: Theme.CFL_light_gray,
+    color: Theme.CFL_light_text,
     fontFamily: Theme.CFL_primary_font,
     fontWeight: 500,
   },

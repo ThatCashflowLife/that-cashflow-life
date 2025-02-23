@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "30%",
     flexDirection: "row",
-    color: Theme.CFL_light_gray,
+    color: Theme.CFL_light_text,
   },
   // profession icon container
   professionIconContainer: {
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
   professionTxt: {
     fontSize: 15,
     fontFamily: Theme.CFL_primary_font,
-    color: Theme.CFL_light_gray,
+    color: Theme.CFL_light_text,
     paddingLeft: 15,
   },
   // each row of txt
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     fontFamily: Theme.CFL_primary_font,
-    color: Theme.CFL_light_gray,
+    color: Theme.CFL_light_text,
   },
   // txt value
   value: {

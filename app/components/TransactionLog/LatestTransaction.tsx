@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   // timestamp for each transaction
   timestamp: {
     fontFamily: Theme.CFL_primary_font,
-    color: Theme.CFL_light_gray,
+    color: Theme.CFL_light_text,
     fontSize: 14,
   },
   // type of transaction container
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
   // new tag txt
   newText: {
-    color: Theme.CFL_black,
+    color: Theme.CFL_dark_text,
     fontSize: 12,
     fontWeight: "900",
     fontFamily: Theme.CFL_emphasis_font,

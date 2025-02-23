@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   message: {
     fontSize: 16,
-    color: Theme.CFL_light_gray,
+    color: Theme.CFL_light_text,
     fontFamily: Theme.CFL_primary_font,
     textAlign: "center",
     marginBottom: 20,
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   cancelButton: {
     flex: 1,
     paddingVertical: 12,
-    backgroundColor: Theme.CFL_red,
+    backgroundColor: Theme.CFL_danger_button,
     borderRadius: 8,
     alignItems: "center",
     marginRight: 5,
@@ -115,12 +115,12 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   cancelText: {
-    color: Theme.CFL_midnight,
+    color: Theme.CFL_white,
     fontWeight: "bold",
     fontFamily: Theme.CFL_primary_font,
   },
   confirmText: {
-    color: Theme.CFL_midnight,
+    color: Theme.CFL_white,
     fontWeight: "bold",
     fontFamily: Theme.CFL_primary_font,
   },
