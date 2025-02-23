@@ -1,0 +1,45 @@
+import User from "../../interfaces/user";
+
+// temporary testing object for full user data
+const testUser: User = {
+  name: "John Smith",
+  profession: "Software Developer",
+  totalIncome: 8500,
+  incomeExplained: {
+    Salary: 7000,
+    "Passive Income": {
+      Interest: 1000,
+      Dividends: 500,
+      "Real Estate Income": 0,
+      "Business Income": 200,
+    },
+  },
+  totalExpenses: 5300,
+  expensesExplained: {
+    "Monthly Taxes": 300,
+    "Mortgage Payment": 1900,
+    "School Loans": 50,
+    "Car Payment": 300,
+    "Credit Card Payment": 200,
+    "Retail Spending": 75,
+    Other: 350,
+    "Childcare Expenses": 800,
+    "Per Child Expense": 0,
+  },
+  Assets: {
+    Savings: 0,
+  },
+  Liabilities: {
+    "Mortgage Total": 280000,
+    "School Loans Total": 18000,
+    "Car Loans": 5000,
+    "Credit Card Loans": 2000,
+    "Retail Debt": 100,
+  },
+  Children: 2,
+  ChildCost: 0,
+  "Failed Audits": 0,
+  image: "/assets/avatars/glassesMan.png",
+};
+
+export default testUser;

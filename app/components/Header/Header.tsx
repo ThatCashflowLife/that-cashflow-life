@@ -14,6 +14,7 @@ import {
 import Theme from "../../../interfaces/theme";
 import User from "../../../interfaces/user";
 import UserMenu from "../Menus/UserMenu";
+import ConfirmationModal from "../features/ConfirmationModal";
 
 // type definition for header properties
 interface HeaderProps {
@@ -27,6 +28,7 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
   const [tempName, setTempName] = useState(username); // user typed input
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [menuPosition, setMenuPosition] = useState({ top: 0, right: 0 });
+  const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false);
   const menuButtonRef = React.useRef<View>(null);
 
   const handleMenuVisibility = () => {
@@ -60,13 +62,19 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
   };
 
   // clear async storage (wipes all saved data)
-  const handleNewGame = async () => {
+  const resetGame = async () => {
     try {
       await AsyncStorage.clear();
-      console.log("Storage completely cleared!");
+      console.log("Game has been reset.");
+      setIsConfirmModalVisible(false);
+      setIsMenuVisible(false);
     } catch (error) {
       console.error("Failed to clear async storage:", error);
     }
+  };
+
+  const newGameRequest = () => {
+    setIsConfirmModalVisible(true);
   };
 
   // Tsx Section
@@ -113,12 +121,19 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
       <UserMenu
         isVisible={isMenuVisible}
         onClose={() => setIsMenuVisible(false)}
-        onNewGame={() => {
-          handleNewGame();
-          setIsMenuVisible(false);
-        }}
+        onNewGame={newGameRequest}
         onEditUsername={handleEditUsername}
         anchorPosition={menuPosition}
+      />
+      {/* Confirmation Modal */}
+      <ConfirmationModal
+        isVisible={isConfirmModalVisible}
+        title=""
+        message="Are you sure you want to reset the game? All progress will be lost."
+        confirmText="Reset"
+        cancelText="Cancel"
+        onConfirm={resetGame}
+        onCancel={() => setIsConfirmModalVisible(false)}
       />
     </>
   );
@@ -150,18 +165,21 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: Theme.CFL_yellow,
     textAlign: "center",
+    fontFamily: Theme.CFL_title_font,
   },
   // username txt
   username: {
     fontSize: 16,
-    color: Theme.CFL_black,
+    color: Theme.CFL_dark_text,
+    fontFamily: Theme.CFL_primary_font,
     textAlign: "center",
     marginTop: 4,
   },
   // username txt while editing
   usernameInput: {
     fontSize: 16,
-    color: Theme.CFL_black,
+    color: Theme.CFL_dark_text,
+    fontFamily: Theme.CFL_primary_font,
     textAlign: "center",
     marginTop: 4,
     padding: 3,

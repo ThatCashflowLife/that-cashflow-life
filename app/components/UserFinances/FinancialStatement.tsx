@@ -175,6 +175,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: Theme.CFL_white,
+    fontFamily: Theme.CFL_title_font,
     marginBottom: 10,
   },
   // row
@@ -194,29 +195,36 @@ const styles = StyleSheet.create({
   // labels
   label: {
     fontSize: 16,
-    color: Theme.CFL_light_gray,
+    color: Theme.CFL_light_text,
+    fontFamily: Theme.CFL_primary_font,
   },
   // values
   value: {
     fontSize: 16,
     color: Theme.CFL_white,
     fontWeight: "500",
+    fontFamily: Theme.CFL_primary_font,
   },
   // labels for totals
   totalLabel: {
     fontSize: 16,
     fontWeight: "bold",
     color: Theme.CFL_white,
+    fontFamily: Theme.CFL_primary_font,
   },
   // if $ is positive
   positive: {
     color: Theme.CFL_lime_green,
+    fontFamily: Theme.CFL_primary_font,
+
     fontSize: 16,
     fontWeight: "bold",
   },
   // if $ is negative
   negative: {
     color: Theme.CFL_red,
+    fontFamily: Theme.CFL_primary_font,
+
     fontSize: 16,
     fontWeight: "bold",
   },

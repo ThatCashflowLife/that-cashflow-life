@@ -172,6 +172,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: Theme.CFL_white,
+    fontFamily: Theme.CFL_primary_font,
     maxWidth: "50%",
     overflow: "hidden",
     flexShrink: 1,
@@ -179,6 +180,7 @@ const styles = StyleSheet.create({
   // title
   title: {
     fontSize: 20,
+    fontFamily: Theme.CFL_primary_font,
     fontWeight: "bold",
     color: Theme.CFL_white,
     flexShrink: 0,
@@ -189,7 +191,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "30%",
     flexDirection: "row",
-    color: Theme.CFL_light_gray,
+    color: Theme.CFL_light_text,
   },
   // profession icon container
   professionIconContainer: {
@@ -203,7 +205,8 @@ const styles = StyleSheet.create({
   // profession txt
   professionTxt: {
     fontSize: 15,
-    color: Theme.CFL_light_gray,
+    fontFamily: Theme.CFL_primary_font,
+    color: Theme.CFL_light_text,
     paddingLeft: 15,
   },
   // each row of txt
@@ -216,21 +219,25 @@ const styles = StyleSheet.create({
   // txt field name
   label: {
     fontSize: 16,
-    color: Theme.CFL_light_gray,
+    fontFamily: Theme.CFL_primary_font,
+    color: Theme.CFL_light_text,
   },
   // txt value
   value: {
     fontSize: 16,
+    fontFamily: Theme.CFL_primary_font,
     color: Theme.CFL_white,
     fontWeight: "500",
   },
   // if $ is positive
   positive: {
     color: Theme.CFL_lime_green,
+    fontFamily: Theme.CFL_primary_font,
   },
   // if $ is negative
   negative: {
     color: Theme.CFL_red,
+    fontFamily: Theme.CFL_primary_font,
   },
   // dividing line
   separator: {

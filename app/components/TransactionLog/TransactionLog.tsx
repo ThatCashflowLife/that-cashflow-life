@@ -1,11 +1,11 @@
 // import necessary libraries/methods and components
 import React from "react";
-import { ScrollView, StyleSheet, View, Text } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 
+import { testTransactions } from "../../../data/testData/testTransactions";
 import Theme from "../../../interfaces/theme";
 import Transaction from "../../../interfaces/transaction";
 import User from "../../../interfaces/user";
-import { testTransactions } from "../../../testData/testTransactions";
 import { formatUSD } from "../../../utils/currencyUtil";
 import { formatTimestamp } from "../../../utils/timeUtil";
 import { getTypeColor } from "../../../utils/transactionUtil";
@@ -105,7 +105,8 @@ const styles = StyleSheet.create({
   },
   // timestamp for each transaction
   timestamp: {
-    color: Theme.CFL_light_gray,
+    fontFamily: Theme.CFL_primary_font,
+    color: Theme.CFL_light_text,
     fontSize: 14,
   },
   // type of transaction container
@@ -119,17 +120,23 @@ const styles = StyleSheet.create({
     color: Theme.CFL_white,
     fontSize: 12,
     fontWeight: "bold",
+    fontFamily: Theme.CFL_primary_font,
+
+    textTransform: "uppercase",
   },
   // transaction name
   name: {
+    fontFamily: Theme.CFL_primary_font,
     color: Theme.CFL_white,
     fontSize: 16,
     marginBottom: 8,
+    fontWeight: "bold",
   },
   // transaction description
   description: {
-    color: Theme.CFL_light_gray,
-    fontSize: 12,
+    fontFamily: Theme.CFL_primary_font,
+    color: Theme.CFL_offwhite,
+    fontSize: 14,
     marginBottom: 5,
   },
   // container for field change
@@ -148,12 +155,14 @@ const styles = StyleSheet.create({
   // positive currency difference
   positiveAmount: {
     color: Theme.CFL_lime_green,
+    fontFamily: Theme.CFL_primary_font,
     fontSize: 14,
     fontWeight: "500",
   },
   // negative currency difference
   negativeAmount: {
     color: Theme.CFL_red,
+    fontFamily: Theme.CFL_primary_font,
     fontSize: 14,
     fontWeight: "500",
   },

@@ -1,86 +1,127 @@
-// import necessary libraries/methods and components
 import React from "react";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import Theme from "../../../interfaces/theme";
 
-// type definition for menu properties
+// define modal props
 interface ConfirmationModalProps {
   isVisible: boolean;
-  onClose: () => void;
+  title?: string; // optional title
+  message: string; // required message
+  confirmText?: string; // can be passed custom msg, has default
+  cancelText?: string; // can be passed custom msg, has default
+  onConfirm: () => void;
+  onCancel: () => void;
 }
 
 const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   isVisible,
-  onClose,
+  title = "", // default title
+  message,
+  confirmText = "Confirm", // default confirm text
+  cancelText = "Cancel", // default cancel text
+  onConfirm,
+  onCancel,
 }) => {
   // Logic/Functions Section
   if (!isVisible) return null;
 
-  // Tsx Section
   return (
-    // Modal for overlay
     <Modal
       visible={isVisible}
       transparent
-      animationType="fade"
-      onRequestClose={onClose}
+      animationType="none"
+      onRequestClose={onCancel}
     >
-      {/* Allows menu close */}
-      <TouchableOpacity
-        style={styles.overlay}
-        onPress={onClose}
-        activeOpacity={1}
-      >
-        {/* Menu Container */}
-        <View style={styles.menuContainer}>
-          <Text>THIS WILL BE A CONFIRMATION MODAL</Text>
+      <View style={styles.overlay}>
+        <View style={styles.modalContainer}>
+          {/* Title */}
+          {title.length > 0 && <Text style={styles.title}>{title}</Text>}
+
+          {/* Message */}
+          <Text style={styles.message}>{message}</Text>
+
+          {/* Buttons */}
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.cancelButton} onPress={onCancel}>
+              <Text style={styles.cancelText}>{cancelText}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.confirmButton} onPress={onConfirm}>
+              <Text style={styles.confirmText}>{confirmText}</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </TouchableOpacity>
+      </View>
     </Modal>
   );
 };
 
+// export to be imported where its needed
+export default ConfirmationModal;
+
 // Styling Section
 const styles = StyleSheet.create({
-  // overlay/background
   overlay: {
     flex: 1,
-    backgroundColor: Theme.CFL_camera_overlay,
+    backgroundColor: Theme.CFL_camera_overlay, // opaque overlay
+    justifyContent: "center",
+    alignItems: "center",
   },
-  // menu container
-  menuContainer: {
+  modalContainer: {
+    width: 300,
     backgroundColor: Theme.CFL_app_background,
     borderRadius: 12,
-    shadowColor: Theme.CFL_border_black,
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
+    padding: 20,
+    alignItems: "center",
+    shadowColor: Theme.CFL_light_gray,
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 8,
-    minWidth: 180,
-    borderWidth: 1,
-    borderColor: Theme.CFL_border_black,
-    position: "absolute",
   },
-  // general menu item
-  // menuItem: {
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   padding: 12,
-  //   // borderBottomWidth: 1,
-  //   // borderBottomColor: "rgba(255, 255, 255, 0.08)",
-  // },
-  // general menu item txt
-  // menuItemText: {
-  //   marginLeft: 12,
-  //   fontSize: 14,
-  //   color: "#bbbbbb",
-  //   // fontWeight: 500,
-  // },
+  title: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: Theme.CFL_white,
+    fontFamily: Theme.CFL_title_font,
+    marginBottom: 10,
+  },
+  message: {
+    fontSize: 16,
+    color: Theme.CFL_light_text,
+    fontFamily: Theme.CFL_primary_font,
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  cancelButton: {
+    flex: 1,
+    paddingVertical: 12,
+    backgroundColor: Theme.CFL_danger_button,
+    borderRadius: 8,
+    alignItems: "center",
+    marginRight: 5,
+  },
+  confirmButton: {
+    flex: 1,
+    paddingVertical: 12,
+    backgroundColor: Theme.CFL_green,
+    borderRadius: 8,
+    alignItems: "center",
+    marginLeft: 5,
+  },
+  cancelText: {
+    color: Theme.CFL_white,
+    fontWeight: "bold",
+    fontFamily: Theme.CFL_primary_font,
+  },
+  confirmText: {
+    color: Theme.CFL_white,
+    fontWeight: "bold",
+    fontFamily: Theme.CFL_primary_font,
+  },
 });
-
-// to be imported wherever needed
-export default ConfirmationModal;

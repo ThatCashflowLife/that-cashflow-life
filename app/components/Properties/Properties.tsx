@@ -2,10 +2,10 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
+import testProperties from "../../../data/testData/testProperties";
 import { RealEstate } from "../../../interfaces/assets";
 import Theme from "../../../interfaces/theme";
 import User from "../../../interfaces/user";
-import testProperties from "../../../testData/testProperties";
 import { formatUSD } from "../../../utils/currencyUtil";
 import { formatTimestamp } from "../../../utils/timeUtil";
 
@@ -132,11 +132,13 @@ const styles = StyleSheet.create({
   },
   // timestamp
   timestamp: {
-    color: Theme.CFL_light_gray,
+    color: Theme.CFL_light_text,
+    fontFamily: Theme.CFL_primary_font,
     fontSize: 14,
   },
   // property type tag
   typeTag: {
+    fontFamily: Theme.CFL_primary_font,
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 4,
@@ -144,12 +146,15 @@ const styles = StyleSheet.create({
   },
   // property type text
   typeText: {
+    fontFamily: Theme.CFL_primary_font,
     color: Theme.CFL_white,
     fontSize: 12,
     fontWeight: "bold",
+    textTransform: "uppercase",
   },
   // name of property
   propertyName: {
+    fontFamily: Theme.CFL_title_font,
     color: Theme.CFL_white,
     fontSize: 18,
     fontWeight: "bold",
@@ -157,7 +162,8 @@ const styles = StyleSheet.create({
   },
   // property description
   description: {
-    color: Theme.CFL_white,
+    fontFamily: Theme.CFL_primary_font,
+    color: Theme.CFL_offwhite,
     fontSize: 14,
     marginBottom: 8,
   },
@@ -176,7 +182,8 @@ const styles = StyleSheet.create({
   },
   // name of change
   fieldName: {
-    color: Theme.CFL_light_gray,
+    fontFamily: Theme.CFL_primary_font,
+    color: Theme.CFL_light_text,
     fontSize: 14,
   },
   // value of change (neutral)
@@ -188,12 +195,14 @@ const styles = StyleSheet.create({
   // if its positive
   positiveAmount: {
     color: Theme.CFL_lime_green,
+    fontFamily: Theme.CFL_primary_font,
     fontSize: 14,
     fontWeight: "500",
   },
   // if its negative
   negativeAmount: {
     color: Theme.CFL_red,
+    fontFamily: Theme.CFL_primary_font,
     fontSize: 14,
     fontWeight: "500",
   },

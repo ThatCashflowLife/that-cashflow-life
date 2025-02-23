@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
   },
   // text below frame
   scanText: {
+    fontFamily: Theme.CFL_primary_font,
     color: Theme.CFL_white,
     fontSize: 16,
     marginTop: 20,
@@ -112,13 +113,14 @@ const styles = StyleSheet.create({
     top: 50,
     right: 20,
     padding: 12,
-    backgroundColor: Theme.CFL_black,
+    backgroundColor: Theme.CFL_danger_button,
     borderRadius: 8,
     zIndex: 2,
   },
   // Close camera btn txt
   closeText: {
-    color: "white",
+    fontFamily: Theme.CFL_primary_font,
+    color: Theme.CFL_white,
     fontSize: 16,
     fontWeight: "600",
   },
@@ -133,6 +135,7 @@ const styles = StyleSheet.create({
   },
   // try again txt
   tryAgainText: {
+    fontFamily: Theme.CFL_primary_font,
     color: "white",
     fontSize: 16,
     fontWeight: "600",
