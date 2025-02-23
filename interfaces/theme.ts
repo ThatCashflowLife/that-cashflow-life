@@ -1,3 +1,11 @@
+import { Platform } from "react-native";
+
+const titleFont =
+  Platform.OS === "ios"
+    ? "System"
+    : Platform.OS === "android"
+      ? "sans-serif-condensed"
+      : "sans-serif";
 export const Theme = {
   // colors
   CFL_midnight: "#000000",
@@ -24,6 +32,8 @@ export const Theme = {
 
   // spacings
   CFL_card_spacing: 7,
+  // fonts
+  CFL_title_font: titleFont,
 };
 
 export default Theme;
