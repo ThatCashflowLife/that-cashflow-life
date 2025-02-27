@@ -18,7 +18,7 @@ import LatestTransaction from "./components/TransactionLog/LatestTransaction";
 import TransactionLog from "./components/TransactionLog/TransactionLog";
 import FinancialOverview from "./components/UserFinances/FinancialOverview";
 import FinancialStatement from "./components/UserFinances/FinancialStatement";
-//
+
 // App/index.tsx is the top level of the app, where all components reside (the home page)
 // Sometimes this is called App.tsx, but expo looks for index.tsx
 export default function App() {
