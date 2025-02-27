@@ -37,7 +37,7 @@ const TabMenu: React.FC<TabMenuProps> = ({ activeTab, onTabChange }) => {
             size={24}
             color={
               activeTab === tab.key
-                ? Theme.CFL_white
+                ? Theme.CFL_cyan
                 : Theme.CFL_inactive_tab_font
             }
           />
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   activeTabLabel: {
     fontFamily: Theme.CFL_primary_font,
-    color: Theme.CFL_white,
+    color: Theme.CFL_cyan,
     marginTop: 4,
   },
 });
