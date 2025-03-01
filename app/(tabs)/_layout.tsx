@@ -68,12 +68,18 @@ export const TabLayout = () => {
           <Tabs
             screenOptions={{
               headerShown: false,
-              tabBarActiveTintColor: Theme.CFL_white,
-              tabBarInactiveTintColor: Theme.CFL_inactive_tab_font,
-              tabBarActiveBackgroundColor: Theme.CFL_active_tab,
-              tabBarInactiveBackgroundColor: Theme.CFL_inactive_tab,
+              // active colors
+              tabBarActiveTintColor: Theme.CFL_black,
+              tabBarActiveBackgroundColor: Theme.CFL_green,
+              // inactive colors
+              tabBarInactiveTintColor: Theme.CFL_midnight,
+              tabBarInactiveBackgroundColor: "#3C8F3A",
+              // icon size
               tabBarIconStyle: { width: 24, height: 24 },
+              // more styling
               tabBarStyle: styles.tabBar,
+              tabBarItemStyle: styles.tabBarItems,
+              tabBarAllowFontScaling: true,
             }}
           >
             <Tabs.Screen
@@ -83,6 +89,7 @@ export const TabLayout = () => {
                 tabBarIcon: ({ color, size }) => (
                   <MaterialIcons name="home" size={size} color={color} />
                 ),
+                tabBarLabelStyle: styles.tabLabel,
               }}
             />
             <Tabs.Screen
@@ -106,6 +113,7 @@ export const TabLayout = () => {
                 tabBarIcon: ({ color, size }) => (
                   <MaterialIcons name="receipt" size={size} color={color} />
                 ),
+                tabBarLabelStyle: styles.tabLabel,
               }}
             />
             <Tabs.Screen
@@ -115,6 +123,7 @@ export const TabLayout = () => {
                 tabBarIcon: ({ color, size }) => (
                   <MaterialIcons name="apartment" size={size} color={color} />
                 ),
+                tabBarLabelStyle: styles.tabLabel,
               }}
             />
           </Tabs>
@@ -133,16 +142,19 @@ const styles = StyleSheet.create({
   // label for each
   tabLabel: {
     fontSize: 12,
-    color: Theme.CFL_inactive_tab_font,
     fontFamily: Theme.CFL_primary_font,
-    marginTop: 4,
   },
   // whole tab menu bar
   tabBar: {
-    // backgroundColor: Theme.CFL_inactive_tab,
+    height: 70,
+    paddingVertical: 10,
     backgroundColor: Theme.CFL_green,
-    borderTopColor: Theme.CFL_active_tab,
-    borderWidth: 4,
+  },
+  // label and icon together
+  tabBarItems: {
+    justifyContent: "center",
+    alignItems: "center",
+    // backgroundColor: "#3C8F3A",
   },
 });
 
