@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import profession from "../../interfaces/profession";
 
 const Business_Manager: profession = {
@@ -19,7 +20,6 @@ const Business_Manager: profession = {
     "Credit Card Payment": 90,
     "Retail Spending": 50,
     Other: 1000,
-    "Childcare Expenses": 0,
     "Per Child Expense": 240,
   },
   assets: {

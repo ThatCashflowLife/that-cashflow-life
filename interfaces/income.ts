@@ -1,11 +1,10 @@
-// this is test data, to be reviewed/refined by clayton
 export default interface Income {
   Salary: number;
   "Passive Income": PassiveIncome;
 }
 
 export interface PassiveIncome {
-  //passive income types
+  // passive income types
   Interest: number;
   Dividends: number;
   "Real Estate Income": number;

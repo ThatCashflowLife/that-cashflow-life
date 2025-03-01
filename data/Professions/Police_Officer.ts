@@ -19,7 +19,6 @@ const Police_Officer: profession = {
     "Credit Card Payment": 60,
     "Retail Spending": 50,
     Other: 690,
-    "Childcare Expenses": 0,
     "Per Child Expense": 160,
   },
   assets: {

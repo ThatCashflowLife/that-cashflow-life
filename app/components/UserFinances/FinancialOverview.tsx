@@ -3,18 +3,14 @@ import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
+import { useUser } from "../../(tabs)/_layout";
 import Theme from "../../../interfaces/theme";
 import User from "../../../interfaces/user";
 import addValuesTogether from "../../../utils/additionUtil";
 import formatUSD from "../../../utils/currencyUtil";
 
-// component properties type definition
-interface FinancialOverviewProps {
-  user: User;
-}
-
-const FinancialOverview: React.FC<FinancialOverviewProps> = ({ user }) => {
-  // Logic/Functions Section
+const FinancialOverview = () => {
+  const user: User = useUser();
 
   // Calculate net worth (Assets - Liabilities)
   const calculateNetWorth = () => {

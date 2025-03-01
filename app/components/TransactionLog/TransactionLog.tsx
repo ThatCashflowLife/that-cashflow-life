@@ -2,6 +2,7 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
+import { useUser } from "../../(tabs)/_layout";
 import { testTransactions } from "../../../data/testData/testTransactions";
 import Theme from "../../../interfaces/theme";
 import Transaction from "../../../interfaces/transaction";
@@ -12,16 +13,14 @@ import { getTypeColor } from "../../../utils/transactionUtil";
 
 // component properties type definition
 interface TransactionLogProps {
-  user: User;
   onNewTransaction: (transaction: Transaction) => void;
 }
 
 const TransactionLog: React.FC<TransactionLogProps> = ({
-  user,
   onNewTransaction,
 }) => {
   // Logic/Functions Section
-
+  const user: User = useUser();
   // Tsx for every transaction
   const renderTransaction = (transaction: Transaction) => (
     <View style={styles.card} key={transaction.id}>
@@ -64,23 +63,20 @@ const TransactionLog: React.FC<TransactionLogProps> = ({
 
   // Overall tsx section
   return (
-    <View style={styles.container}>
-      <ScrollView style={styles.scrollContainer}>
+    <ScrollView style={styles.scrollContainer}>
+      <View style={styles.content}>
         {testTransactions.map(renderTransaction)}
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 
 // Styling Section
 const styles = StyleSheet.create({
-  // Full Log container
-  container: {
-    flex: 1,
-  },
   // container that scrolls
   scrollContainer: {
     flex: 1,
+    backgroundColor: Theme.CFL_app_background,
   },
   // background container for each card
   card: {
@@ -89,6 +85,10 @@ const styles = StyleSheet.create({
     padding: 7,
     paddingVertical: 13,
     borderRadius: 10,
+  },
+  // page content
+  content: {
+    padding: 16,
   },
   // card for each transaction
   transactionCard: {

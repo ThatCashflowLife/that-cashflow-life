@@ -2,20 +2,19 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
+import { useUser } from "../../(tabs)/_layout";
 import testProperties from "../../../data/testData/testProperties";
 import { RealEstate } from "../../../interfaces/assets";
 import Theme from "../../../interfaces/theme";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import User from "../../../interfaces/user";
 import { formatUSD } from "../../../utils/currencyUtil";
 import { formatTimestamp } from "../../../utils/timeUtil";
 
-// component properties type definition
-interface PropertiesProps {
-  user: User;
-}
-
-const Properties: React.FC<PropertiesProps> = ({ user }) => {
-  // Logic/Functions Section
+const Properties = () => {
+  // import user from react context
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const user: User = useUser();
 
   // determines the color based on the transaction type
   const getTypeColor = (type: RealEstate["type"]) => {
@@ -91,23 +90,22 @@ const Properties: React.FC<PropertiesProps> = ({ user }) => {
 
   // Overall tsx section
   return (
-    <View style={styles.container}>
-      <ScrollView style={styles.scrollContainer}>
-        {testProperties.map(renderProperty)}
-      </ScrollView>
-    </View>
+    <ScrollView style={styles.scrollContainer}>
+      <View style={styles.content}>{testProperties.map(renderProperty)}</View>
+    </ScrollView>
   );
 };
 
 // Styling Section
 const styles = StyleSheet.create({
-  // component container
-  container: {
-    flex: 1,
-  },
   // scrollable container
   scrollContainer: {
     flex: 1,
+  },
+  // component container
+  content: {
+    padding: 16,
+    backgroundColor: Theme.CFL_app_background,
   },
   // each property card
   card: {

@@ -8,6 +8,9 @@ export interface Investments {
   "Real Estate": RealEstate;
   Stocks: number;
   Gold_Count: number;
+  Bitcoin: number;
+  "Bitcoin Value": number;
+  "Certificate Deposit": number;
 }
 
 export interface RealEstate {

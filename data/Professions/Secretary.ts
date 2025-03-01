@@ -19,7 +19,6 @@ const Secretary: profession = {
     "Credit Card Payment": 60,
     "Retail Spending": 50,
     Other: 570,
-    "Childcare Expenses": 0,
     "Per Child Expense": 140,
   },
   assets: {

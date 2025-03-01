@@ -19,7 +19,6 @@ const Nurse: profession = {
     "Credit Card Payment": 90,
     "Retail Spending": 50,
     Other: 710,
-    "Childcare Expenses": 0,
     "Per Child Expense": 170,
   },
   assets: {

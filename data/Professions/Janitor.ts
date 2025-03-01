@@ -19,7 +19,6 @@ const Janitor: profession = {
     "Credit Card Payment": 60,
     "Retail Spending": 50,
     Other: 300,
-    "Childcare Expenses": 0,
     "Per Child Expense": 70,
   },
   assets: {

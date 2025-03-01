@@ -16,6 +16,5 @@ export default interface User {
   Liabilities: Liabilities;
   Children: number;
   ChildCost: number;
-  "Failed Audits": number;
   image: string; // this should be the route to the image for profession they're using
 }

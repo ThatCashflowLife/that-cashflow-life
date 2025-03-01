@@ -17,32 +17,34 @@ const FinancialStatement: React.FC<FinancialStatementProps> = ({ user }) => {
 
   // Tsx Section
   return (
-    <View style={styles.container}>
+    // Statement Container
+    <ScrollView
+      style={styles.scrollView}
+      contentContainerStyle={styles.scrollContent}
+      showsVerticalScrollIndicator={false}
+    >
       <View style={styles.content}>
-        {/* Statement Content */}
-        <ScrollView
-          style={styles.scrollView}
-          contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
-        >
-          {/* Income Sources List */}
-          <View style={styles.card}>
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Income Sources</Text>
+        {/* Income Sources List */}
+        <View style={styles.card}>
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Income Sources</Text>
 
-              {/* Salary */}
-              <View style={styles.row}>
-                <Text style={styles.label}>Salary:</Text>
-                <Text style={styles.value}>
-                  {formatUSD(user.incomeExplained.Salary)}
-                </Text>
-              </View>
+            {/* Salary */}
+            <View style={styles.row}>
+              <Text style={styles.label}>Salary:</Text>
+              <Text style={styles.value}>
+                {user.incomeExplained
+                  ? formatUSD(user.incomeExplained.Salary)
+                  : "undefined"}
+              </Text>
+            </View>
 
-              {/* Separator Line */}
-              <View style={styles.separator} />
+            {/* Separator Line */}
+            <View style={styles.separator} />
 
-              {/* Passive Income */}
-              {Object.entries(user.incomeExplained["Passive Income"]).map(
+            {/* Passive Income */}
+            {user.incomeExplained &&
+              Object.entries(user.incomeExplained["Passive Income"]).map(
                 ([source, amount]) => (
                   <View key={source} style={styles.row}>
                     <Text style={styles.label}>{source}:</Text>
@@ -51,110 +53,101 @@ const FinancialStatement: React.FC<FinancialStatementProps> = ({ user }) => {
                 )
               )}
 
-              <View style={[styles.row, styles.totalRow]}>
-                <Text style={styles.totalLabel}>Passive Income:</Text>
-                <Text style={styles.positive}>
-                  {formatUSD(
+            <View style={[styles.row, styles.totalRow]}>
+              <Text style={styles.totalLabel}>Passive Income:</Text>
+              <Text style={styles.positive}>
+                {user.incomeExplained &&
+                  formatUSD(
                     addValuesTogether(user.incomeExplained["Passive Income"])
                   )}
-                </Text>
-              </View>
+              </Text>
+            </View>
 
-              <View style={styles.row}>
-                <Text style={styles.totalLabel}>Total Income:</Text>
-                <Text style={styles.positive}>
-                  {formatUSD(user.totalIncome)}
-                </Text>
-              </View>
+            <View style={styles.row}>
+              <Text style={styles.totalLabel}>Total Income:</Text>
+              <Text style={styles.positive}>{formatUSD(user.totalIncome)}</Text>
             </View>
           </View>
+        </View>
 
-          {/* Expenses */}
-          <View style={styles.card}>
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Monthly Expenses</Text>
-              {Object.entries(user.expensesExplained).map(
-                ([expense, amount]) => (
-                  <View key={expense} style={styles.row}>
-                    <Text style={styles.label}>{expense}:</Text>
-                    <Text style={styles.value}>{formatUSD(amount)}</Text>
-                  </View>
-                )
-              )}
-              <View style={[styles.row, styles.totalRow]}>
-                <Text style={styles.totalLabel}>Total Expenses:</Text>
-                <Text style={styles.negative}>
-                  {formatUSD(user.totalExpenses)}
-                </Text>
+        {/* Expenses */}
+        <View style={styles.card}>
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Monthly Expenses</Text>
+            {Object.entries(user.expensesExplained).map(([expense, amount]) => (
+              <View key={expense} style={styles.row}>
+                <Text style={styles.label}>{expense}:</Text>
+                <Text style={styles.value}>{formatUSD(amount)}</Text>
               </View>
+            ))}
+            <View style={[styles.row, styles.totalRow]}>
+              <Text style={styles.totalLabel}>Total Expenses:</Text>
+              <Text style={styles.negative}>
+                {formatUSD(user.totalExpenses)}
+              </Text>
             </View>
           </View>
+        </View>
 
-          {/* Assets */}
-          <View style={styles.card}>
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Assets</Text>
-              {Object.entries(user.Assets).map(([asset, amount]) => (
-                <View key={asset} style={styles.row}>
-                  <Text style={styles.label}>{asset}:</Text>
-                  <Text style={styles.value}>{formatUSD(amount)}</Text>
-                </View>
-              ))}
-              <View style={[styles.row, styles.totalRow]}>
-                <Text style={styles.totalLabel}>Total Assets:</Text>
-                <Text style={styles.positive}>
-                  {formatUSD(
-                    Object.values(user.Assets).reduce((a, b) => a + b, 0)
-                  )}
-                </Text>
+        {/* Assets */}
+        <View style={styles.card}>
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Assets</Text>
+            {Object.entries(user.Assets).map(([asset, amount]) => (
+              <View key={asset} style={styles.row}>
+                <Text style={styles.label}>{asset}:</Text>
+                <Text style={styles.value}>{formatUSD(amount)}</Text>
               </View>
+            ))}
+            <View style={[styles.row, styles.totalRow]}>
+              <Text style={styles.totalLabel}>Total Assets:</Text>
+              <Text style={styles.positive}>
+                {formatUSD(
+                  Object.values(user.Assets).reduce((a, b) => a + b, 0)
+                )}
+              </Text>
             </View>
           </View>
+        </View>
 
-          {/* Liabilities */}
-          <View style={styles.card}>
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Liabilities</Text>
-              {Object.entries(user.Liabilities).map(([liability, amount]) => (
-                <View key={liability} style={styles.row}>
-                  <Text style={styles.label}>{liability}:</Text>
-                  <Text style={styles.value}>{formatUSD(amount)}</Text>
-                </View>
-              ))}
-              <View style={[styles.row, styles.totalRow]}>
-                <Text style={styles.totalLabel}>Total Liabilities:</Text>
-                <Text style={styles.negative}>
-                  {formatUSD(
-                    Object.values(user.Liabilities).reduce((a, b) => a + b, 0)
-                  )}
-                </Text>
+        {/* Liabilities */}
+        <View style={styles.card}>
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Liabilities</Text>
+            {Object.entries(user.Liabilities).map(([liability, amount]) => (
+              <View key={liability} style={styles.row}>
+                <Text style={styles.label}>{liability}:</Text>
+                <Text style={styles.value}>{formatUSD(amount)}</Text>
               </View>
+            ))}
+            <View style={[styles.row, styles.totalRow]}>
+              <Text style={styles.totalLabel}>Total Liabilities:</Text>
+              <Text style={styles.negative}>
+                {formatUSD(
+                  Object.values(user.Liabilities).reduce((a, b) => a + b, 0)
+                )}
+              </Text>
             </View>
           </View>
-        </ScrollView>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  // full statement container
-  container: {
-    backgroundColor: Theme.CFL_app_background,
-  },
-  // scrollable view
+  // scrollable container
   scrollView: {
+    backgroundColor: Theme.CFL_app_background,
     flex: 1,
   },
-  // scrollable content
   scrollContent: {
     flexGrow: 1,
     paddingBottom: 20,
   },
   // statement content container
   content: {
-    flex: 1,
-    padding: 5,
+    padding: 16,
   },
   // background container for each section
   card: {
