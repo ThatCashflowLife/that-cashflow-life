@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Profession from "../../interfaces/Profession";
+//  MUST MAKE SURE COMPLETE JSON FORMAT BEFORE MAKING INTO QR CODES
 
 const Doctor: Profession = {
   name: "Doctor",

@@ -1,4 +1,5 @@
 import Profession from "../../interfaces/Profession";
+//  MUST MAKE SURE COMPLETE JSON FORMAT BEFORE MAKING INTO QR CODES
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Janitor: Profession = {
