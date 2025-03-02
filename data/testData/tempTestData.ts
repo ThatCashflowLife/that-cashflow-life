@@ -23,7 +23,6 @@ const testUser: User = {
     "Credit Card Payment": 200,
     "Retail Spending": 75,
     Other: 350,
-    "Childcare Expenses": 800,
     "Per Child Expense": 0,
   },
   Assets: {
