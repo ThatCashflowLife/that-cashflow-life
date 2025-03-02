@@ -58,7 +58,7 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
       setScanData(scan);
     } catch (error) {
       console.error("QR does not contain valid JSON data", error);
-      Alert.alert("QR Code does not contain the expected format.");
+      Alert.alert(`QR Code does not contain the expected format: ${error}`);
     }
   };
   // figures out if scanned data is transaction, profession or other and returns a popup info obj
@@ -107,7 +107,7 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
     <Modal
       visible={visible}
       onRequestClose={onClose}
-      animationType="none"
+      animationType="fade"
       presentationStyle="fullScreen"
     >
       {/* Camera Container */}
@@ -142,12 +142,21 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
           )}
           {/* Scan again / Redo button */}
           {!isScanning && (
-            <TouchableOpacity
-              style={styles.tryAgainButton}
-              onPress={() => setIsScanning(true)}
+            <Modal
+              visible={!isScanning}
+              onRequestClose={onClose}
+              presentationStyle="fullScreen"
+              animationType="none"
             >
-              <Text style={styles.tryAgainText}>Try Again</Text>
-            </TouchableOpacity>
+              <View style={styles.tryAgainContainer}>
+                <TouchableOpacity
+                  style={styles.tryAgainButton}
+                  onPress={() => setIsScanning(true)}
+                >
+                  <Text style={styles.tryAgainText}>Try Again</Text>
+                </TouchableOpacity>
+              </View>
+            </Modal>
           )}
         </CameraView>
       </View>
@@ -207,6 +216,11 @@ const styles = StyleSheet.create({
     color: Theme.CFL_white,
     fontSize: 16,
     fontWeight: "600",
+  },
+  // try again container
+  tryAgainContainer: {
+    justifyContent: "center",
+    alignItems: "center",
   },
   // try again btn
   tryAgainButton: {
