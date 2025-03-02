@@ -36,7 +36,6 @@ const blankUser: User = {
   },
   Children: 0,
   ChildCost: 0,
-  "Failed Audits": 0,
   image: "",
 };
 

@@ -37,7 +37,6 @@ const testUser: User = {
   },
   Children: 2,
   ChildCost: 0,
-  "Failed Audits": 0,
   image: "/assets/avatars/glassesMan.png",
 };
 
