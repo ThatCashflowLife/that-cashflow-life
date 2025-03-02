@@ -2,7 +2,7 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Tabs } from "expo-router";
-import { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 
 import blankUser from "../../data/testData/blankUser";
@@ -68,18 +68,27 @@ export const TabLayout = () => {
           <Tabs
             screenOptions={{
               headerShown: false,
-              // active colors
-              tabBarActiveTintColor: Theme.CFL_black,
-              tabBarActiveBackgroundColor: Theme.CFL_green,
-              // inactive colors
-              tabBarInactiveTintColor: Theme.CFL_midnight,
-              tabBarInactiveBackgroundColor: "#3C8F3A",
+              // green tabbar active colors
+              tabBarActiveTintColor: Theme.CFL_dark_text,
+              tabBarActiveBackgroundColor: "#3C8F3A",
+              // green tabbar inactive colors
+              tabBarInactiveTintColor: Theme.CFL_black,
+              tabBarInactiveBackgroundColor: Theme.CFL_green,
               // icon size
-              tabBarIconStyle: { width: 24, height: 24 },
+              tabBarIconStyle: { width: 24, height: 24, marginTop: 5 },
               // more styling
               tabBarStyle: styles.tabBar,
-              tabBarItemStyle: styles.tabBarItems,
               tabBarAllowFontScaling: true,
+              tabBarItemStyle: {
+                flex: 1,
+                width: "25%",
+              },
+              // // dark tabbar active colors
+              // tabBarActiveTintColor: Theme.CFL_white,
+              // tabBarActiveBackgroundColor: Theme.CFL_active_tab,
+              // // dark tabbarinactive colors
+              // tabBarInactiveTintColor: Theme.CFL_inactive_tab_font,
+              // tabBarInactiveBackgroundColor: Theme.CFL_inactive_tab,
             }}
           >
             <Tabs.Screen
@@ -143,18 +152,11 @@ const styles = StyleSheet.create({
   tabLabel: {
     fontSize: 12,
     fontFamily: Theme.CFL_primary_font,
+    paddingTop: 5,
   },
   // whole tab menu bar
   tabBar: {
-    height: 70,
-    paddingVertical: 10,
-    backgroundColor: Theme.CFL_green,
-  },
-  // label and icon together
-  tabBarItems: {
-    justifyContent: "center",
-    alignItems: "center",
-    // backgroundColor: "#3C8F3A",
+    height: 65,
   },
 });
 
