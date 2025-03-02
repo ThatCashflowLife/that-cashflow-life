@@ -19,7 +19,6 @@ const Teacher: profession = {
     "Credit Card Payment": 90,
     "Retail Spending": 50,
     Other: 760,
-    "Childcare Expenses": 0,
     "Per Child Expense": 180,
   },
   assets: {

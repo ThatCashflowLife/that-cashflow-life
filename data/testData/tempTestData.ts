@@ -23,7 +23,6 @@ const testUser: User = {
     "Credit Card Payment": 200,
     "Retail Spending": 75,
     Other: 350,
-    "Childcare Expenses": 800,
     "Per Child Expense": 0,
   },
   Assets: {
@@ -38,7 +37,6 @@ const testUser: User = {
   },
   Children: 2,
   ChildCost: 0,
-  "Failed Audits": 0,
   image: "/assets/avatars/glassesMan.png",
 };
 

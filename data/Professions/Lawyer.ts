@@ -19,7 +19,6 @@ const Lawyer: profession = {
     "Credit Card Payment": 180,
     "Retail Spending": 50,
     Other: 1650,
-    "Childcare Expenses": 0,
     "Per Child Expense": 380,
   },
   assets: {

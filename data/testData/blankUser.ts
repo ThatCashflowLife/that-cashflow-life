@@ -22,7 +22,6 @@ const blankUser: User = {
     "Credit Card Payment": 0,
     "Retail Spending": 0,
     Other: 0,
-    "Childcare Expenses": 0,
     "Per Child Expense": 0,
   },
   Assets: {
@@ -37,7 +36,6 @@ const blankUser: User = {
   },
   Children: 0,
   ChildCost: 0,
-  "Failed Audits": 0,
   image: "",
 };
 
