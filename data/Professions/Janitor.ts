@@ -1,7 +1,9 @@
-import profession from "../../interfaces/profession";
+import Profession from "../../interfaces/Profession";
 
-const Janitor: profession = {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Janitor: Profession = {
   name: "Janitor",
+  scanType: "Profession",
   income: {
     Salary: 1600,
     "Passive Income": {

@@ -1,4 +1,3 @@
-// this is test data, to be reviewed/refined by clayton
 export default interface MonthlyExpenses {
   "Monthly Taxes": number;
   "Mortgage Payment": number;

@@ -12,9 +12,9 @@ import {
 } from "react-native";
 
 import Theme from "../../../interfaces/theme";
-import User from "../../../interfaces/user";
-import UserMenu from "../Menus/UserMenu";
+import User from "../../../interfaces/User";
 import ConfirmationModal from "../features/ConfirmationModal";
+import UserMenu from "../Menus/UserMenu";
 
 // type definition for header properties
 interface HeaderProps {

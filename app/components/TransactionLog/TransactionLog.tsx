@@ -1,12 +1,11 @@
 // import necessary libraries/methods and components
-import React from "react";
+import React, { useEffect } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { useUser } from "../../(tabs)/_layout";
 import { testTransactions } from "../../../data/testData/testTransactions";
 import Theme from "../../../interfaces/theme";
-import Transaction from "../../../interfaces/transaction";
-import User from "../../../interfaces/user";
+import Transaction from "../../../interfaces/Transaction";
 import { formatUSD } from "../../../utils/currencyUtil";
 import { formatTimestamp } from "../../../utils/timeUtil";
 import { getTypeColor } from "../../../utils/transactionUtil";
@@ -20,7 +19,12 @@ const TransactionLog: React.FC<TransactionLogProps> = ({
   onNewTransaction,
 }) => {
   // Logic/Functions Section
-  const user: User = useUser();
+  const { user } = useUser();
+  useEffect(() => {
+    console.log("Transaction user assets:", user.Assets);
+    console.log("Transaction user expenses:", user.expensesExplained);
+    console.log("transaction user salary:", user.incomeExplained.Salary);
+  });
   // Tsx for every transaction
   const renderTransaction = (transaction: Transaction) => (
     <View style={styles.card} key={transaction.id}>

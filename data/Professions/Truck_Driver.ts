@@ -1,7 +1,9 @@
-import profession from "../../interfaces/profession";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import Profession from "../../interfaces/Profession";
 
-const Truck_Driver: profession = {
+const Truck_Driver: Profession = {
   name: "Truck Driver",
+  scanType: "Profession",
   income: {
     Salary: 2500,
     "Passive Income": {

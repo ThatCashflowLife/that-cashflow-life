@@ -1,10 +1,11 @@
-import Assets from "./assets";
-import Income from "./income";
-import Liabilities from "./liabilities";
-import MonthlyExpenses from "./monthlyExpenses";
+import Assets from "./Assets";
+import Income from "./Income";
+import Liabilities from "./Liabilities";
+import MonthlyExpenses from "./MonthlyExpenses";
 
-export default interface profession {
+export default interface Profession {
   name: string;
+  scanType: "Profession";
   income: Income;
   expenses: MonthlyExpenses;
   assets: Assets;

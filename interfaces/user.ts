@@ -1,8 +1,7 @@
-// this is test data, to be reviewed/refined by clayton
-import Assets from "./assets";
-import Income from "./income";
-import Liabilities from "./liabilities";
-import MonthlyExpenses from "./monthlyExpenses";
+import Assets from "./Assets";
+import Income from "./Income";
+import Liabilities from "./Liabilities";
+import MonthlyExpenses from "./MonthlyExpenses";
 
 // obj containing all information about a single user
 export default interface User {
@@ -16,5 +15,16 @@ export default interface User {
   Liabilities: Liabilities;
   Children: number;
   ChildCost: number;
-  image: string; // this should be the route to the image for profession they're using
+  professionIcon: Icon; // this should be the name of the expo/vector icon for the profession and which library its from
+}
+
+export interface Icon {
+  name: string;
+  library:
+    | "AntDesign"
+    | "FontAwesome6"
+    | "MaterialIcons"
+    | "Octicons"
+    | "Entypo"
+    | "FontAwesome5";
 }
