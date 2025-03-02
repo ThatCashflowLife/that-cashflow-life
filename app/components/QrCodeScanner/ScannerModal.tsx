@@ -47,7 +47,7 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
         type: result.type,
         data: JSON.parse(result.data),
       };
-
+      Alert.alert("Data", scan.data.toString());
       // get popup info based on scan type
       const popup = getPopupMessage(scan);
       onScan(scan);
@@ -59,6 +59,7 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
     } catch (error) {
       console.error("QR does not contain valid JSON data", error);
       Alert.alert(`QR Code does not contain the expected format: ${error}`);
+      setIsScanning(false);
     }
   };
   // figures out if scanned data is transaction, profession or other and returns a popup info obj
