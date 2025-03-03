@@ -108,10 +108,7 @@ const FinancialOverview = () => {
         <Text style={styles.label}>Total Assets:</Text>
         <Text style={styles.value}>
           {formatUSD(
-            Object.values(user.Assets).reduce(
-              (sum: number, value: number) => sum + value,
-              0
-            )
+            Object.values(user.Assets).reduce((sum, value) => sum + value, 0)
           )}
         </Text>
       </View>
