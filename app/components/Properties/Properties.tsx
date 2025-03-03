@@ -7,14 +7,13 @@ import testProperties from "../../../data/testData/testProperties";
 import { RealEstate } from "../../../interfaces/Assets";
 import Theme from "../../../interfaces/theme";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import User from "../../../interfaces/User";
 import { formatUSD } from "../../../utils/currencyUtil";
 import { formatTimestamp } from "../../../utils/timeUtil";
 
 const Properties = () => {
   // import user from react context
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const user: User = useUser();
+  const { user } = useUser();
 
   // determines the color based on the transaction type
   const getTypeColor = (type: RealEstate["type"]) => {
