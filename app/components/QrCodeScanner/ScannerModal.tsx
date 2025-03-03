@@ -57,8 +57,19 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
       setScanData(scan);
     } catch (error) {
       console.error("QR does not contain valid JSON data", error);
-      Alert.alert(`QR Code does not contain the expected format`);
-      setIsScanning(false);
+      Alert.alert(
+        "QR Code Error", // title
+        "QR Code does not contain the expected format.", // message
+        [
+          {
+            text: "OK",
+            onPress: () => {
+              // allow rescan after clearing error
+              setIsScanning(true);
+            },
+          },
+        ]
+      );
     }
   };
   // figures out if scanned data is transaction, profession or other and returns a popup info obj
