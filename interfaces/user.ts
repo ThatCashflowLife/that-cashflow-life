@@ -4,7 +4,7 @@ import Liabilities from "./Liabilities";
 import MonthlyExpenses from "./MonthlyExpenses";
 
 // obj containing all information about a single user
-export default interface User {
+export interface User {
   name: string;
   profession: string;
   totalIncome: number;
@@ -17,7 +17,6 @@ export default interface User {
   ChildCost: number;
   professionIcon: Icon; // this should be the name of the expo/vector icon for the profession and which library its from
 }
-
 export interface Icon {
   name: string;
   library:
@@ -28,3 +27,5 @@ export interface Icon {
     | "Entypo"
     | "FontAwesome5";
 }
+
+export default User;
