@@ -1,4 +1,4 @@
-import User from "../../interfaces/User";
+import User from "../../interfaces/user-temp";
 
 // temporary testing object for full user data
 const testUser: User = {

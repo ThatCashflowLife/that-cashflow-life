@@ -12,7 +12,7 @@ import {
 } from "react-native";
 
 import Theme from "../../../interfaces/theme";
-import User from "../../../interfaces/User";
+import User from "../../../interfaces/user-temp";
 import ConfirmationModal from "../features/ConfirmationModal";
 import UserMenu from "../Menus/UserMenu";
 

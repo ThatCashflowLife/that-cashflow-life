@@ -7,7 +7,7 @@ import { SafeAreaView, StyleSheet, View } from "react-native";
 
 import blankUser from "../../data/testData/blankUser";
 import Theme from "../../interfaces/theme";
-import User from "../../interfaces/User";
+import User from "../../interfaces/user-temp";
 import Header from "../components/Header/Header";
 
 interface UserContextType {

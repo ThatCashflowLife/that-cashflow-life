@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import Theme from "../../../interfaces/theme";
-import Transaction from "../../../interfaces/Transaction";
+import Transaction from "../../../interfaces/transaction-temp";
 import formatUSD from "../../../utils/currencyUtil";
 import formatTimestamp from "../../../utils/timeUtil";
 import getTypeColor from "../../../utils/transactionUtil";

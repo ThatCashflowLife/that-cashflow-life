@@ -1,4 +1,4 @@
-import Transaction from "../../interfaces/Transaction";
+import Transaction from "../../interfaces/transaction-temp";
 // these values are just sample for testing and are likely to be changed
 export const testTransactions: Transaction[] = [
   {

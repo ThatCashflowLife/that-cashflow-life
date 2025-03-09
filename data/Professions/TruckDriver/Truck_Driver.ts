@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import Profession from "../../../interfaces/Profession";
+import Profession from "../../../interfaces/profession-temp";
 
 // ANYTIME THIS FILE IS CHANGED THE CORRESPONDING JSON AND QRCODE PNG MUST BE CHANGED TO MATCH
 const Truck_Driver: Profession = {

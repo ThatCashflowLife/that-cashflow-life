@@ -1,5 +1,5 @@
 // testData/testProperties.ts
-import { RealEstate } from "../../interfaces/Assets";
+import { RealEstate } from "../../interfaces/assets-temp";
 
 export const testProperties: RealEstate[] = [
   // Properties
