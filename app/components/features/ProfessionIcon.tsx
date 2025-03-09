@@ -8,7 +8,7 @@ import {
 } from "@expo/vector-icons";
 import React from "react";
 
-import { Icon } from "../../../interfaces/user-temp";
+import { Icon } from "../../../interfaces/User";
 
 interface ProfessionIconProps {
   icon: Icon;

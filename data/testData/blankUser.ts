@@ -1,4 +1,4 @@
-import User from "../../interfaces/user-temp";
+import User from "../../interfaces/User";
 
 const blankUser: User = {
   name: "Username",

@@ -1,5 +1,5 @@
-import Profession from "../../../interfaces/profession-temp";
-import User, { Icon } from "../../../interfaces/user-temp";
+import Profession from "../../../interfaces/Profession";
+import User, { Icon } from "../../../interfaces/User";
 
 /**
  * Get the icon name that matches the profession name,

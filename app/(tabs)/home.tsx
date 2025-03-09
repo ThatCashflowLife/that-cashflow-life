@@ -11,7 +11,7 @@ import {
 import { testTransactions } from "../../data/testData/testTransactions";
 import { QRData } from "../../interfaces/qrTypes";
 import Theme from "../../interfaces/theme";
-import Transaction from "../../interfaces/transaction-temp";
+import Transaction from "../../interfaces/Transaction";
 import { findLatestTransaction } from "../../utils/transactionUtil";
 import ScannerButton from "../components/QrCodeScanner/ScannerButton";
 import {

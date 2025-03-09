@@ -1,7 +1,7 @@
-import Assets from "./assets-temp";
-import Income from "./income-temp";
-import Liabilities from "./liabilities-temp";
-import MonthlyExpenses from "./monthlyexpenses-temp";
+import Assets from "./Assets";
+import Income from "./Income";
+import Liabilities from "./Liabilities";
+import MonthlyExpenses from "./MonthlyExpenses";
 
 // obj containing all information about a single user
 export interface User {

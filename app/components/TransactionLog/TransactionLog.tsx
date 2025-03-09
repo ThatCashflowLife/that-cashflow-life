@@ -5,7 +5,7 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { useUser } from "../../(tabs)/_layout";
 import { testTransactions } from "../../../data/testData/testTransactions";
 import Theme from "../../../interfaces/theme";
-import Transaction from "../../../interfaces/transaction-temp";
+import Transaction from "../../../interfaces/Transaction";
 import { formatUSD } from "../../../utils/currencyUtil";
 import { formatTimestamp } from "../../../utils/timeUtil";
 import { getTypeColor } from "../../../utils/transactionUtil";

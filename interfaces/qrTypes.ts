@@ -1,5 +1,5 @@
-import Profession from "./profession-temp";
-import Transaction from "./transaction-temp";
+import Profession from "./Profession";
+import Transaction from "./Transaction";
 
 // obj containing all scannable types
 export default interface QRType {

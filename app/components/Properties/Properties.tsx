@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { useUser } from "../../(tabs)/_layout";
 import testProperties from "../../../data/testData/testProperties";
-import { RealEstate } from "../../../interfaces/assets-temp";
+import { RealEstate } from "../../../interfaces/Assets";
 import Theme from "../../../interfaces/theme";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { formatUSD } from "../../../utils/currencyUtil";
