@@ -1,5 +1,5 @@
 // import necessary libraries/methods and components
-import React, { useEffect } from "react";
+import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { useUser } from "../../(tabs)/_layout";
@@ -19,12 +19,13 @@ const TransactionLog: React.FC<TransactionLogProps> = ({
   onNewTransaction,
 }) => {
   // Logic/Functions Section
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { user } = useUser();
-  useEffect(() => {
-    console.log("Transaction user assets:", user.Assets);
-    console.log("Transaction user expenses:", user.expensesExplained);
-    console.log("transaction user salary:", user.incomeExplained.Salary);
-  });
+  // useEffect(() => {
+  //   console.log("Transaction user assets:", user.Assets);
+  //   console.log("Transaction user expenses:", user.expensesExplained);
+  //   console.log("transaction user salary:", user.incomeExplained.Salary);
+  // });
   // Tsx for every transaction
   const renderTransaction = (transaction: Transaction) => (
     <View style={styles.card} key={transaction.id}>

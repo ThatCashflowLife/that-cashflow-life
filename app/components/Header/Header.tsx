@@ -61,7 +61,7 @@ const Header = () => {
     try {
       // clear local storage
       await AsyncStorage.clear();
-      console.log("Game has been reset.");
+      await AsyncStorage.removeItem("user");
 
       // clear state
       setUser(blankUser);
@@ -70,9 +70,15 @@ const Header = () => {
       // close menus
       setIsConfirmModalVisible(false);
       setIsMenuVisible(false);
+      checkStorage();
     } catch (error) {
       console.error("Failed to clear async storage:", error);
     }
+  };
+
+  const checkStorage = async () => {
+    const allKeys = await AsyncStorage.getAllKeys();
+    console.log("Stored Keys:", allKeys); // Should be empty after reset
   };
 
   const newGameRequest = () => {

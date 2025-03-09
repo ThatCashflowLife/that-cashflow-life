@@ -1,5 +1,5 @@
 // import necessary libraries/methods and components
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   ActivityIndicator,
   ScrollView,
@@ -26,15 +26,15 @@ export const Home = () => {
   // state/ref management section
   const { user, setUser } = useUser();
 
-  // TODO: remove, for testing only
-  useEffect(() => {
-    console.log("username", user.name);
-    console.log("Home page income data: ", user.incomeExplained);
-    console.log("Home page Assets:", user.Assets);
-    console.log("Home page Liabilities:", user.Liabilities);
-    console.log("Home page profession:", user.profession);
-    console.log("Home page Profession Icon:", user.professionIcon);
-  }, [user]);
+  // // TODO: remove, for testing only
+  // useEffect(() => {
+  //   console.log("username", user.name);
+  //   console.log("Home page income data: ", user.incomeExplained);
+  //   console.log("Home page Assets:", user.Assets);
+  //   console.log("Home page Liabilities:", user.Liabilities);
+  //   console.log("Home page profession:", user.profession);
+  //   console.log("Home page Profession Icon:", user.professionIcon);
+  // }, [user]);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [latestTransaction, setLatestTransaction] =
