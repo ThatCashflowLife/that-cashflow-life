@@ -57,31 +57,13 @@ export const TabLayout = () => {
     saveUser();
   }, [user]); // runs every time user is updated
 
-  // saves the username in local/async storage
-  const handleUpdateUsername = async (newName: string) => {
-    try {
-      const updatedUser = {
-        ...user,
-        name: newName,
-      };
-      await AsyncStorage.setItem("user", JSON.stringify(updatedUser));
-      setUser(updatedUser);
-    } catch (error) {
-      console.error("Error saving username:", error);
-    }
-  };
-
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <View style={styles.container}>
         {/* Safe Area avoids the phones header (battery, cell service) */}
         <SafeAreaView style={styles.container}>
           {/* Header */}
-          <Header
-            username={user.name}
-            updateUsername={handleUpdateUsername}
-            user={user}
-          />
+          <Header />
 
           {/* Tab Menu, controls page display */}
           <Tabs
