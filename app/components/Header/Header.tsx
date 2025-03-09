@@ -11,6 +11,7 @@ import {
   View,
 } from "react-native";
 
+import blankUser from "../../../data/testData/blankUser";
 import Theme from "../../../interfaces/theme";
 import User from "../../../interfaces/User";
 import ConfirmationModal from "../features/ConfirmationModal";
@@ -64,8 +65,15 @@ const Header: React.FC<HeaderProps> = ({ username, updateUsername, user }) => {
   // clear async storage (wipes all saved data)
   const resetGame = async () => {
     try {
+      // clear local storage
       await AsyncStorage.clear();
       console.log("Game has been reset.");
+
+      // clear local state
+      updateUsername(blankUser.name);
+      setTempName(blankUser.name);
+
+      // close menus
       setIsConfirmModalVisible(false);
       setIsMenuVisible(false);
     } catch (error) {
