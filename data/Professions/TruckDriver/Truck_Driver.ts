@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import Profession from "../../interfaces/Profession";
-//  MUST MAKE SURE COMPLETE JSON FORMAT BEFORE MAKING INTO QR CODES
+import Profession from "../../../interfaces/Profession";
 
+// ANYTIME THIS FILE IS CHANGED THE CORRESPONDING JSON AND QRCODE PNG MUST BE CHANGED TO MATCH
 const Truck_Driver: Profession = {
   name: "Truck Driver",
   scanType: "Profession",
