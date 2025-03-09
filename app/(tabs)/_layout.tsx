@@ -25,7 +25,6 @@ export function useUser() {
   return useContext(UserContext);
 }
 export const TabLayout = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [user, setUser] = useState<User>(blankUser);
 
   // load the user when the component mounts
@@ -43,7 +42,7 @@ export const TabLayout = () => {
       }
     };
     loadUser();
-  }, []);
+  }, []); // runs only on initial mount
 
   // save user to storage every time it changes
   useEffect(() => {
