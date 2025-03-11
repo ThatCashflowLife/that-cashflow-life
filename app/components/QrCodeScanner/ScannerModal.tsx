@@ -224,8 +224,8 @@ const styles = StyleSheet.create({
   },
   // inner overlay
   innerOverlay: {
-    width: 350,
-    height: 350,
+    width: 300,
+    height: 300,
     backgroundColor: "transparent",
     borderColor: Theme.CFL_white,
     borderWidth: 2,
@@ -233,8 +233,8 @@ const styles = StyleSheet.create({
   },
   // scanner frame
   scanFrame: {
-    width: 350,
-    height: 350,
+    width: 300,
+    height: 300,
     borderWidth: 2,
     borderColor: Theme.CFL_white,
     backgroundColor: "transparent",
