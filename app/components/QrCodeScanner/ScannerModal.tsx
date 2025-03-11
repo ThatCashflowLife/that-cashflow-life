@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
   innerOverlay: {
     width: 300,
     height: 300,
-    backgroundColor: "transparent",
+    backgroundColor: "rgba(0,0,0,0)",
     borderColor: Theme.CFL_white,
     borderWidth: 2,
     borderRadius: 12,
