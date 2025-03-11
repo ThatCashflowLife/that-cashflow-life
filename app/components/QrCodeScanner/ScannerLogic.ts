@@ -6,21 +6,21 @@ import User, { Icon } from "../../../interfaces/User";
  * and the library the icon comes from within expo/vector icons
  *
  * @param professionName - name of newly scanned profession
- * @returns a string for the expo/vector AntDesign icon name
+ * @returns an object with the icon name and library
  */
 export const getIcon = (professionName: string): Icon => {
   const iconMapping: { [key: string]: Icon } = {
-    Airline_Pilot: { name: "plane-departure", library: "FontAwesome6" },
-    Business_Manager: { name: "user-tie", library: "FontAwesome6" },
+    "Airline Pilot": { name: "plane-departure", library: "FontAwesome6" },
+    "Business Manager": { name: "user-tie", library: "FontAwesome6" },
     Doctor: { name: "user-doctor", library: "FontAwesome6" },
     Engineer: { name: "user-gear", library: "FontAwesome6" },
     Janitor: { name: "cleaning-services", library: "MaterialIcons" },
     Lawyer: { name: "law", library: "Octicons" },
     Nurse: { name: "user-nurse", library: "FontAwesome6" },
-    Police_Officer: { name: "handcuffs", library: "FontAwesome6" },
+    "Police Officer": { name: "handcuffs", library: "FontAwesome6" },
     Secretary: { name: "old-phone", library: "Entypo" },
     Teacher: { name: "chalkboard-teacher", library: "FontAwesome5" },
-    Truck_Driver: { name: "truck", library: "FontAwesome5" },
+    "Truck Driver": { name: "truck", library: "FontAwesome5" },
   };
 
   return (
@@ -58,15 +58,15 @@ export const populateLaterProfession = (
   scannedProfession: Profession,
   currentUser: User
 ): User => {
-  const userInitialValues = {
+  const changedProfessionValues: User = {
     ...currentUser,
     profession: scannedProfession.name,
     incomeExplained: {
       ...currentUser.incomeExplained,
-      salary: scannedProfession.income.Salary,
+      Salary: scannedProfession.income.Salary,
     },
     professionIcon: getIcon(scannedProfession.name),
   };
-  return userInitialValues;
+  return changedProfessionValues;
 };
 export default populateFirstProfession;

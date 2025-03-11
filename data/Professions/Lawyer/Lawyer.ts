@@ -2,7 +2,7 @@
 import Profession from "../../../interfaces/Profession";
 
 // ANYTIME THIS FILE IS CHANGED THE CORRESPONDING JSON AND QRCODE PNG MUST BE CHANGED TO MATCH
-const Lawyer: Profession = {
+export const Lawyer: Profession = {
   name: "Lawyer",
   scanType: "Profession",
   income: {
@@ -35,3 +35,4 @@ const Lawyer: Profession = {
     "Retail Debt": 1000,
   },
 };
+export default Lawyer;

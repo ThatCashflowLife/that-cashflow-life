@@ -2,10 +2,10 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import { useUser } from "../../(tabs)/_layout";
 import Theme from "../../../interfaces/theme";
 import addValuesTogether from "../../../utils/additionUtil";
 import formatUSD from "../../../utils/currencyUtil";
+import { useUser } from "../context/UserContext";
 import ProfessionIcon from "../features/ProfessionIcon";
 
 const FinancialOverview = () => {
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
     backgroundColor: Theme.CFL_light_gray,
-    borderRadius: 20,
+    borderRadius: 15,
     alignItems: "center",
     justifyContent: "center",
     overflow: "hidden",

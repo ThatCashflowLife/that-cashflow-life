@@ -11,9 +11,9 @@ import {
   View,
 } from "react-native";
 
-import { useUser } from "../../(tabs)/_layout";
 import blankUser from "../../../data/testData/blankUser";
 import Theme from "../../../interfaces/theme";
+import { useUser } from "../context/UserContext";
 import ConfirmationModal from "../features/ConfirmationModal";
 import UserMenu from "../Menus/UserMenu";
 
@@ -70,15 +70,9 @@ const Header = () => {
       // close menus
       setIsConfirmModalVisible(false);
       setIsMenuVisible(false);
-      checkStorage();
     } catch (error) {
       console.error("Failed to clear async storage:", error);
     }
-  };
-
-  const checkStorage = async () => {
-    const allKeys = await AsyncStorage.getAllKeys();
-    console.log("Stored Keys:", allKeys); // Should be empty after reset
   };
 
   const newGameRequest = () => {

@@ -2,6 +2,8 @@ import React from "react";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import Theme from "../../../interfaces/theme";
+import { Icon } from "../../../interfaces/User";
+import ProfessionIcon from "./ProfessionIcon";
 
 // define modal props
 interface ConfirmationModalProps {
@@ -12,6 +14,7 @@ interface ConfirmationModalProps {
   cancelText?: string; // can be passed custom msg, has default
   onConfirm: () => void;
   onCancel: () => void;
+  professionIcon?: Icon;
 }
 
 const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
@@ -22,6 +25,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   cancelText = "Cancel", // default cancel text
   onConfirm,
   onCancel,
+  professionIcon,
 }) => {
   // Logic/Functions Section
   if (!isVisible) return null;
@@ -38,8 +42,20 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
           {/* Title */}
           {title.length > 0 && <Text style={styles.title}>{title}</Text>}
 
-          {/* Message */}
-          <Text style={styles.message}>{message}</Text>
+          {/* Message Container */}
+          <View style={styles.messageContainer}>
+            {professionIcon && (
+              <View style={styles.professionIconContainer}>
+                <ProfessionIcon
+                  icon={professionIcon}
+                  size={35}
+                  color={Theme.CFL_midnight}
+                />
+              </View>
+            )}
+            {/* Message Text */}
+            <Text style={styles.message}>{message}</Text>
+          </View>
 
           {/* Buttons */}
           <View style={styles.buttonContainer}>
@@ -61,12 +77,14 @@ export default ConfirmationModal;
 
 // Styling Section
 const styles = StyleSheet.create({
+  // modal overlay/background
   overlay: {
     flex: 1,
     backgroundColor: Theme.CFL_camera_overlay, // opaque overlay
     justifyContent: "center",
     alignItems: "center",
   },
+  // whole modal container
   modalContainer: {
     width: 300,
     backgroundColor: Theme.CFL_app_background,
@@ -79,6 +97,7 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 8,
   },
+  // confirmation title
   title: {
     fontSize: 18,
     fontWeight: "bold",
@@ -86,18 +105,39 @@ const styles = StyleSheet.create({
     fontFamily: Theme.CFL_title_font,
     marginBottom: 10,
   },
+  // message container
+  messageContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 25,
+    flexDirection: "row",
+    color: Theme.CFL_light_text,
+  },
+  // confirmation message
   message: {
     fontSize: 16,
     color: Theme.CFL_light_text,
     fontFamily: Theme.CFL_primary_font,
     textAlign: "center",
-    marginBottom: 20,
+    paddingLeft: 15,
   },
+  // profession icon container
+  professionIconContainer: {
+    height: 40,
+    width: 40,
+    backgroundColor: Theme.CFL_light_gray,
+    borderRadius: 15,
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
+  },
+  // btn container
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
   },
+  // cancel btn
   cancelButton: {
     flex: 1,
     paddingVertical: 12,
@@ -106,6 +146,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginRight: 5,
   },
+  // confirm btn
   confirmButton: {
     flex: 1,
     paddingVertical: 12,
@@ -114,11 +155,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginLeft: 5,
   },
+  // cancel btn txt
   cancelText: {
     color: Theme.CFL_white,
     fontWeight: "bold",
     fontFamily: Theme.CFL_primary_font,
   },
+  // confirm btn text
   confirmText: {
     color: Theme.CFL_white,
     fontWeight: "bold",

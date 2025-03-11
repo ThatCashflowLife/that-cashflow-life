@@ -2,13 +2,13 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
-import { useUser } from "../../(tabs)/_layout";
 import { testTransactions } from "../../../data/testData/testTransactions";
 import Theme from "../../../interfaces/theme";
 import Transaction from "../../../interfaces/Transaction";
 import { formatUSD } from "../../../utils/currencyUtil";
 import { formatTimestamp } from "../../../utils/timeUtil";
 import { getTypeColor } from "../../../utils/transactionUtil";
+import { useUser } from "../context/UserContext";
 
 // component properties type definition
 interface TransactionLogProps {
@@ -21,11 +21,6 @@ const TransactionLog: React.FC<TransactionLogProps> = ({
   // Logic/Functions Section
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { user } = useUser();
-  // useEffect(() => {
-  //   console.log("Transaction user assets:", user.Assets);
-  //   console.log("Transaction user expenses:", user.expensesExplained);
-  //   console.log("transaction user salary:", user.incomeExplained.Salary);
-  // });
   // Tsx for every transaction
   const renderTransaction = (transaction: Transaction) => (
     <View style={styles.card} key={transaction.id}>

@@ -13,6 +13,7 @@ import { QRData } from "../../interfaces/qrTypes";
 import Theme from "../../interfaces/theme";
 import Transaction from "../../interfaces/Transaction";
 import { findLatestTransaction } from "../../utils/transactionUtil";
+import { useUser } from "../components/context/UserContext";
 import ScannerButton from "../components/QrCodeScanner/ScannerButton";
 import {
   populateFirstProfession,
@@ -20,21 +21,10 @@ import {
 } from "../components/QrCodeScanner/ScannerLogic";
 import LatestTransaction from "../components/TransactionLog/LatestTransaction";
 import FinancialOverview from "../components/UserFinances/FinancialOverview";
-import { useUser } from "./_layout";
 
 export const Home = () => {
   // state/ref management section
   const { user, setUser } = useUser();
-
-  // // TODO: remove, for testing only
-  // useEffect(() => {
-  //   console.log("username", user.name);
-  //   console.log("Home page income data: ", user.incomeExplained);
-  //   console.log("Home page Assets:", user.Assets);
-  //   console.log("Home page Liabilities:", user.Liabilities);
-  //   console.log("Home page profession:", user.profession);
-  //   console.log("Home page Profession Icon:", user.professionIcon);
-  // }, [user]);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [latestTransaction, setLatestTransaction] =
@@ -47,7 +37,6 @@ export const Home = () => {
       // if this is their first job of the game
       if (user.profession === "Profession" || user.profession === "") {
         setUser(populateFirstProfession(data, user));
-        console.log("user after new job", user);
       } else {
         setUser(populateLaterProfession(data, user));
       }
@@ -59,8 +48,8 @@ export const Home = () => {
   if (!user) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#fff" />
-        <Text style={styles.loadingText}>Loading user...</Text>
+        <ActivityIndicator size="large" />
+        <Text style={styles.loadingText}>Loading User...</Text>
       </View>
     );
   }

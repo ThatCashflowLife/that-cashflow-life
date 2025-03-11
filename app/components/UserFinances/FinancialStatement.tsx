@@ -2,10 +2,10 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
-import { useUser } from "../../(tabs)/_layout";
 import Theme from "../../../interfaces/theme";
 import addValuesTogether from "../../../utils/additionUtil";
 import formatUSD from "../../../utils/currencyUtil";
+import { useUser } from "../context/UserContext";
 
 const FinancialStatement = () => {
   // Logic/Functions Section
