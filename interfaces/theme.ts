@@ -37,7 +37,7 @@ export const Theme = {
   CFL_active_tab: "#2E2E2E",
   CFL_inactive_tab: "#1E1E1E",
   CFL_inactive_tab_font: "#666666",
-  CFL_camera_overlay: "rgba(0, 0, 0, 0.75)",
+  CFL_camera_overlay: "rgba(0, 0, 0, 0.3)",
   CFL_danger_button: "#ff4444",
 
   // spacings

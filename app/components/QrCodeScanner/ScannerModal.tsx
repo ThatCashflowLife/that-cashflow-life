@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
   innerOverlay: {
     width: 300,
     height: 300,
-    backgroundColor: "rgba(0,0,0,0)",
+    backgroundColor: "rgba(255,255,255,0)",
     borderColor: Theme.CFL_white,
     borderWidth: 2,
     borderRadius: 12,
@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
     height: 300,
     borderWidth: 2,
     borderColor: Theme.CFL_white,
-    backgroundColor: "transparent",
+    backgroundColor: "rgba(255,255,255,0)",
     borderRadius: 12,
   },
   // text below frame
