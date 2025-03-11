@@ -3,18 +3,13 @@ import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 import Theme from "../../../interfaces/theme";
-import User from "../../../interfaces/user";
 import addValuesTogether from "../../../utils/additionUtil";
 import formatUSD from "../../../utils/currencyUtil";
+import { useUser } from "../context/UserContext";
 
-// component properties type definition
-interface FinancialStatementProps {
-  user: User;
-}
-
-const FinancialStatement: React.FC<FinancialStatementProps> = ({ user }) => {
+const FinancialStatement = () => {
   // Logic/Functions Section
-
+  const { user } = useUser();
   // Tsx Section
   return (
     // Statement Container

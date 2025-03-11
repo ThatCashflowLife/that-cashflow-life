@@ -1,17 +1,15 @@
 // import necessary libraries/methods and components
-import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import { useUser } from "../../(tabs)/_layout";
 import Theme from "../../../interfaces/theme";
-import User from "../../../interfaces/user";
 import addValuesTogether from "../../../utils/additionUtil";
 import formatUSD from "../../../utils/currencyUtil";
+import { useUser } from "../context/UserContext";
+import ProfessionIcon from "../features/ProfessionIcon";
 
 const FinancialOverview = () => {
-  const user: User = useUser();
-
+  const { user } = useUser();
   // Calculate net worth (Assets - Liabilities)
   const calculateNetWorth = () => {
     const totalAssets = Object.values(user.Assets).reduce(
@@ -51,8 +49,8 @@ const FinancialOverview = () => {
       {/* Profession Section */}
       <View style={styles.professionContainer}>
         <View style={styles.professionIconContainer}>
-          <AntDesign
-            name="questioncircle"
+          <ProfessionIcon
+            icon={user.professionIcon}
             size={35}
             color={Theme.CFL_midnight}
           />
@@ -194,9 +192,10 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
     backgroundColor: Theme.CFL_light_gray,
-    borderRadius: 20,
+    borderRadius: 15,
     alignItems: "center",
     justifyContent: "center",
+    overflow: "hidden",
   },
   // profession txt
   professionTxt: {

@@ -9,17 +9,22 @@ import {
 } from "react-native";
 
 import { testTransactions } from "../../data/testData/testTransactions";
+import { QRData } from "../../interfaces/qrTypes";
 import Theme from "../../interfaces/theme";
-import Transaction from "../../interfaces/transaction";
+import Transaction from "../../interfaces/Transaction";
 import { findLatestTransaction } from "../../utils/transactionUtil";
+import { useUser } from "../components/context/UserContext";
 import ScannerButton from "../components/QrCodeScanner/ScannerButton";
+import {
+  populateFirstProfession,
+  populateLaterProfession,
+} from "../components/QrCodeScanner/ScannerLogic";
 import LatestTransaction from "../components/TransactionLog/LatestTransaction";
 import FinancialOverview from "../components/UserFinances/FinancialOverview";
-import { useUser } from "./_layout";
 
 export const Home = () => {
   // state/ref management section
-  const user = useUser();
+  const { user, setUser } = useUser();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [latestTransaction, setLatestTransaction] =
@@ -27,17 +32,24 @@ export const Home = () => {
   // logic/Functions Section
 
   // this will get the data from a qr scan
-  const handleScan = () => {
-    console.log("getting data from qr scan.");
-    const currTime = new Date().toISOString().slice(0, 16);
-    console.log("time of scan: ", currTime);
+  const handleScan = (data: QRData) => {
+    if (data.scanType === "Profession") {
+      // if this is their first job of the game
+      if (user.profession === "Profession" || user.profession === "") {
+        setUser(populateFirstProfession(data, user));
+      } else {
+        setUser(populateLaterProfession(data, user));
+      }
+    } else if (data.scanType === "Transaction") {
+      // add logic for determining transaction type, etc..
+    }
   };
 
   if (!user) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#fff" />
-        <Text style={styles.loadingText}>Loading user...</Text>
+        <ActivityIndicator size="large" />
+        <Text style={styles.loadingText}>Loading User...</Text>
       </View>
     );
   }
@@ -93,12 +105,14 @@ const styles = StyleSheet.create({
   content: {
     padding: 16,
   },
+  // loading indicator
   loadingContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: Theme.CFL_app_background,
   },
+  // loading text
   loadingText: {
     color: Theme.CFL_light_text,
     marginTop: 50,
