@@ -6,17 +6,17 @@ import Theme from "../../../interfaces/theme";
 import addValuesTogether from "../../../utils/additionUtil";
 import formatUSD from "../../../utils/currencyUtil";
 import { useUser } from "../context/UserContext";
-import { calculateTotalIncome } from "./FinancialOverview";
+import { calculateTotals } from "./FinancialOverview";
 
 const FinancialStatement = () => {
   // Logic/Functions Section
   const { user, setUser } = useUser();
 
-  // recalculate everytime income values change
+  // recalculate everytime income/expenses values change
   useEffect(() => {
-    calculateTotalIncome(user, setUser);
-  }, [user.income])
-  // Tsx Section
+    calculateTotals(user, setUser);
+  }, [user.income, user.expenses])
+
   return (
     // Statement Container
     <ScrollView

@@ -15,13 +15,14 @@ export const calculateNetWorth = (user: User, setUser: Dispatch<SetStateAction<U
   const totalAssets = Object.values(user.Assets).reduce((sum, value) => sum + value, 0);
   const totalLiabilities = Object.values(user.Liabilities).reduce((sum, value) => sum + value, 0);
   const netWorth = totalAssets - totalLiabilities;
-  setUser((prevUser) => ({ ...prevUser, totalAssets, totalLiabilities, netWorth }))
+  setUser((prevUser) => ({ ...prevUser, totalAssets, totalLiabilites: totalLiabilities, netWorth }))
 };
 
-// calculate total income (Salary + passive income)
-export const calculateTotalIncome = (user: User, setUser: Dispatch<SetStateAction<User>>) => {
+// calculate total income (Salary + passive income) and total expenses (all expenses summed)
+export const calculateTotals = (user: User, setUser: Dispatch<SetStateAction<User>>) => {
   const totalIncome = addValuesTogether(user.income["Passive Income"]) + user.income.Salary
-  setUser((prevUser) => ({ ...prevUser, totalIncome }))
+  const totalExpenses = addValuesTogether(user.expenses);
+  setUser((prevUser) => ({ ...prevUser, totalIncome, totalExpenses }))
 }
 
 const FinancialOverview = () => {
