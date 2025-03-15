@@ -44,8 +44,8 @@ export const populateFirstProfession = (
   const userInitialValues: User = {
     ...currentUser,
     profession: scannedProfession.name,
-    incomeExplained: scannedProfession.income,
-    expensesExplained: scannedProfession.expenses,
+    income: scannedProfession.income,
+    expenses: scannedProfession.expenses,
     Assets: scannedProfession.assets,
     Liabilities: scannedProfession.liabilities,
     professionIcon: getIcon(scannedProfession.name),
@@ -61,12 +61,13 @@ export const populateLaterProfession = (
   const changedProfessionValues: User = {
     ...currentUser,
     profession: scannedProfession.name,
-    incomeExplained: {
-      ...currentUser.incomeExplained,
+    income: {
+      ...currentUser.income,
       Salary: scannedProfession.income.Salary,
     },
     professionIcon: getIcon(scannedProfession.name),
   };
   return changedProfessionValues;
 };
+
 export default populateFirstProfession;

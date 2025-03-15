@@ -9,7 +9,7 @@ export const testTransactions: Transaction[] = [
     type: "salary",
     description: "user got a promotion to manager!",
     amount: 1000,
-    fieldName: "incomeExplained.salary",
+    fieldName: "income.salary",
   },
   {
     id: "2",
@@ -19,7 +19,7 @@ export const testTransactions: Transaction[] = [
     type: "expense",
     description: "User had to pay their monthly car payment",
     amount: -400,
-    fieldName: "expensesExplained.carPayment",
+    fieldName: "expenses.carPayment",
   },
   {
     id: "3",
@@ -49,6 +49,6 @@ export const testTransactions: Transaction[] = [
     type: "passive income",
     description: "Exon Stock paid out $5.00 quarterly dividends",
     amount: 5,
-    fieldName: "incomeExplained.salary",
+    fieldName: "income.salary",
   },
 ];

@@ -20,7 +20,7 @@ import {
   populateLaterProfession,
 } from "../components/QrCodeScanner/ScannerLogic";
 import LatestTransaction from "../components/TransactionLog/LatestTransaction";
-import FinancialOverview from "../components/UserFinances/FinancialOverview";
+import FinancialOverview, { calculateNetWorth } from "../components/UserFinances/FinancialOverview";
 
 export const Home = () => {
   // state/ref management section
@@ -37,6 +37,7 @@ export const Home = () => {
       // if this is their first job of the game
       if (user.profession === "Profession" || user.profession === "") {
         setUser(populateFirstProfession(data, user));
+        calculateNetWorth(user, setUser);
       } else {
         setUser(populateLaterProfession(data, user));
       }

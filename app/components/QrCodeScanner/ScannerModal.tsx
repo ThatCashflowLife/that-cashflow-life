@@ -11,7 +11,7 @@ import {
 } from "react-native";
 
 // import AirlinePilotData from "../../../data/Professions/AirlinePilot/Airline_Pilot.json";
-// import DoctorData from "../../../data/Professions/Doctor/Doctor.json";
+import DoctorData from "../../../data/Professions/Doctor/Doctor.json";
 // import TruckDriverData from "../../../data/Professions/TruckDriver/Truck_Driver.json";
 import QRType from "../../../interfaces/qrTypes";
 import Theme from "../../../interfaces/theme";
@@ -44,20 +44,20 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
   }>({ title: "", message: "", confirmText: "", cancelText: "" });
 
   // TODO: remove after finalized functionality
-  // const simulatedResult: BarcodeScanningResult = {
-  //   type: "qr",
-  //   data: JSON.stringify(DoctorData),
-  //   cornerPoints: [
-  //     { x: 100, y: 100 },
-  //     { x: 200, y: 100 },
-  //     { x: 200, y: 200 },
-  //     { x: 100, y: 200 },
-  //   ],
-  //   bounds: {
-  //     origin: { x: 100, y: 100 },
-  //     size: { width: 100, height: 100 },
-  //   },
-  // };
+  const simulatedResult: BarcodeScanningResult = {
+    type: "qr",
+    data: JSON.stringify(DoctorData),
+    cornerPoints: [
+      { x: 100, y: 100 },
+      { x: 200, y: 100 },
+      { x: 200, y: 200 },
+      { x: 100, y: 200 },
+    ],
+    bounds: {
+      origin: { x: 100, y: 100 },
+      size: { width: 100, height: 100 },
+    },
+  };
 
   // how app will handle a scanned qr code
   const handleScan = (result: BarcodeScanningResult) => {
@@ -146,9 +146,9 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
   };
 
   // TODO: remove after finalized functionality
-  // const testScan = () => {
-  //   handleScan(simulatedResult);
-  // };
+  const testScan = () => {
+    handleScan(simulatedResult);
+  };
 
   // Tsx Section
   return (
@@ -177,8 +177,8 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
 
           {/* TODO: FIX THIS AFTER TESTING */}
           {/* Close button */}
-          <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-            {/* <TouchableOpacity style={styles.closeButton} onPress={testScan}> */}
+          {/* <TouchableOpacity style={styles.closeButton} onPress={onClose}> */}
+            <TouchableOpacity style={styles.closeButton} onPress={testScan}>
             <Text style={styles.closeText}>Close</Text>
           </TouchableOpacity>
 

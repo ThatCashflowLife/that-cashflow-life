@@ -9,7 +9,9 @@
     "*.yml": "yaml"
   },
   "yaml.schemas": {
-    "none": ["/.github/workflows/*.yml"]
+    "none": [
+      "/.github/workflows/*.yml"
+    ]
   },
   "yaml.validate": false,
   "yaml.schemaStore.enable": false,
@@ -23,6 +25,7 @@
   "javascript.preferences.importModuleSpecifierEnding": "minimal",
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.importModuleSpecifierEnding": "minimal",
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
@@ -35,9 +38,9 @@
     "typescriptreact"
   ],
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   }
 }

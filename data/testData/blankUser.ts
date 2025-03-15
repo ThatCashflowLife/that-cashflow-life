@@ -4,7 +4,7 @@ const blankUser: User = {
   name: "Username",
   profession: "Profession",
   totalIncome: 0,
-  incomeExplained: {
+  income: {
     Salary: 0,
     "Passive Income": {
       Interest: 0,
@@ -14,7 +14,7 @@ const blankUser: User = {
     },
   },
   totalExpenses: 0,
-  expensesExplained: {
+  expenses: {
     "Monthly Taxes": 0,
     "Mortgage Payment": 0,
     "School Loans": 0,
@@ -27,6 +27,7 @@ const blankUser: User = {
   Assets: {
     Savings: 0,
   },
+  totalAssets: 0,
   Liabilities: {
     "Mortgage Total": 0,
     "School Loans Total": 0,
@@ -34,6 +35,8 @@ const blankUser: User = {
     "Credit Card Loans": 0,
     "Retail Debt": 0,
   },
+  totalLiabilites: 0,
+  netWorth: 0,
   Children: 0,
   ChildCost: 0,
   professionIcon: { name: "questioncircle", library: "AntDesign" },
