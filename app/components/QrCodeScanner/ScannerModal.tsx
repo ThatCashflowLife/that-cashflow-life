@@ -43,10 +43,10 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
     professionIcon?: Icon;
   }>({ title: "", message: "", confirmText: "", cancelText: "" });
 
-  // TODO: remove after finalized functionality
+  // // TODO: remove after finalized functionality
   // const simulatedResult: BarcodeScanningResult = {
   //   type: "qr",
-  //   data: JSON.stringify(DoctorData),
+  //   data: JSON.stringify(AirlinePilotData),
   //   cornerPoints: [
   //     { x: 100, y: 100 },
   //     { x: 200, y: 100 },
@@ -99,12 +99,12 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
     scan: QRType
   ):
     | {
-        title: string;
-        professionIcon?: Icon;
-        message: string;
-        confirmText: string;
-        cancelText: string;
-      }
+      title: string;
+      professionIcon?: Icon;
+      message: string;
+      confirmText: string;
+      cancelText: string;
+    }
     | undefined => {
     if (scan && scan.data) {
       if (scan.data.scanType === "Transaction") {
@@ -145,7 +145,7 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
     }
   };
 
-  // TODO: remove after finalized functionality
+  // // TODO: remove after finalized functionality
   // const testScan = () => {
   //   handleScan(simulatedResult);
   // };
