@@ -33,6 +33,12 @@ const FinancialOverview = () => {
     calculateNetWorth(user, setUser);
   }, [user.Liabilities, user.Assets])
 
+  const getCashflow = (): number => {
+    if (user.totalExpenses) { 
+      return (addValuesTogether(user.income["Passive Income"])) - user.totalExpenses;
+    }
+    return 0;
+  }
   // Tsx Section
   return (
     <View style={styles.container}>
@@ -88,7 +94,7 @@ const FinancialOverview = () => {
 
       <View style={styles.row}>
         <Text style={styles.label}>Monthly Expenses:</Text>
-        <Text style={styles.value}>{formatUSD(user.totalExpenses)}</Text>
+        <Text style={styles.value}>{formatUSD(user.totalExpenses ?? 0)}</Text>
       </View>
 
       <View style={styles.row}>
@@ -96,14 +102,12 @@ const FinancialOverview = () => {
         <Text
           style={[
             styles.value,
-            addValuesTogether(user.income["Passive Income"]) -
-              user.totalExpenses >=
-              0
+            getCashflow() >= 0
               ? styles.positive
               : styles.negative,
           ]}
         >
-          {formatUSD(addValuesTogether(user.income["Passive Income"]) - user.totalExpenses)}
+          {formatUSD(getCashflow())}
         </Text>
       </View>
 
@@ -114,14 +118,14 @@ const FinancialOverview = () => {
       <View style={styles.row}>
         <Text style={styles.label}>Total Assets:</Text>
         <Text style={styles.value}>
-          {formatUSD(user.totalAssets)}
+          {formatUSD(user.totalAssets ?? 0)}
         </Text>
       </View>
 
       <View style={styles.row}>
         <Text style={styles.label}>Total Liabilities:</Text>
         <Text style={styles.value}>
-          {formatUSD(user.totalLiabilites)}
+          {formatUSD(user.totalLiabilites ?? 0)}
         </Text>
       </View>
 
@@ -130,10 +134,10 @@ const FinancialOverview = () => {
         <Text
           style={[
             styles.value,
-            user.netWorth >= 0 ? styles.positive : styles.negative,
+            user.netWorth ?? 0 >= 0 ? styles.positive : styles.negative,
           ]}
         >
-          {formatUSD(user.netWorth)}
+          {formatUSD(user.netWorth ?? 0)}
         </Text>
       </View>
     </View>

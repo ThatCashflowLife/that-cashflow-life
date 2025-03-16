@@ -10,8 +10,8 @@ import {
   View,
 } from "react-native";
 
-// import AirlinePilotData from "../../../data/Professions/AirlinePilot/Airline_Pilot.json";
-import DoctorData from "../../../data/Professions/Doctor/Doctor.json";
+import AirlinePilotData from "../../../data/Professions/AirlinePilot/Airline_Pilot.json";
+// import DoctorData from "../../../data/Professions/Doctor/Doctor.json";
 // import TruckDriverData from "../../../data/Professions/TruckDriver/Truck_Driver.json";
 import QRType from "../../../interfaces/qrTypes";
 import Theme from "../../../interfaces/theme";
@@ -46,7 +46,7 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
   // TODO: remove after finalized functionality
   const simulatedResult: BarcodeScanningResult = {
     type: "qr",
-    data: JSON.stringify(DoctorData),
+    data: JSON.stringify(AirlinePilotData),
     cornerPoints: [
       { x: 100, y: 100 },
       { x: 200, y: 100 },

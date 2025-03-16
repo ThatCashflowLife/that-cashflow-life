@@ -61,7 +61,7 @@ const FinancialStatement = () => {
 
             <View style={styles.row}>
               <Text style={styles.totalLabel}>Total Income:</Text>
-              <Text style={styles.positive}>{formatUSD(user.totalIncome)}</Text>
+              <Text style={styles.positive}>{formatUSD(user.totalIncome ?? 0)}</Text>
             </View>
           </View>
         </View>
@@ -79,7 +79,7 @@ const FinancialStatement = () => {
             <View style={[styles.row, styles.totalRow]}>
               <Text style={styles.totalLabel}>Total Expenses:</Text>
               <Text style={styles.negative}>
-                {formatUSD(user.totalExpenses)}
+                {formatUSD(user.totalExpenses ?? 0)}
               </Text>
             </View>
           </View>
@@ -98,7 +98,7 @@ const FinancialStatement = () => {
             <View style={[styles.row, styles.totalRow]}>
               <Text style={styles.totalLabel}>Total Assets:</Text>
               <Text style={styles.positive}>
-                {formatUSD(user.totalAssets)}
+                {formatUSD(user.totalAssets ?? 0)}
               </Text>
             </View>
           </View>
@@ -117,7 +117,7 @@ const FinancialStatement = () => {
             <View style={[styles.row, styles.totalRow]}>
               <Text style={styles.totalLabel}>Total Liabilities:</Text>
               <Text style={styles.negative}>
-                {formatUSD(user.totalLiabilites)}
+                {formatUSD(user.totalLiabilites ?? 0)}
               </Text>
             </View>
           </View>
