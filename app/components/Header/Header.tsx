@@ -13,7 +13,7 @@ import {
 
 import blankUser from "../../../data/testData/blankUser";
 import Theme from "../../../interfaces/theme";
-import { useUser } from "../context/UserContext";
+import { useUser } from "../context/UserProvider";
 import ConfirmationModal from "../features/ConfirmationModal";
 import UserMenu from "../Menus/UserMenu";
 

@@ -1,40 +1,51 @@
 // import necessary libraries/methods and components
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import Theme from "../../../interfaces/theme";
 import Transaction from "../../../interfaces/Transaction";
 import formatUSD from "../../../utils/currencyUtil";
 import formatTimestamp from "../../../utils/timeUtil";
-import getTypeColor from "../../../utils/transactionUtil";
+import getTypeColor, { findLatestTransaction } from "../../../utils/transactionUtil";
+import { useTransactions } from "../context/TransactionProvider";
 
-// component properties type definition
-interface LatestTransactionProps {
-  transaction: Transaction;
-}
+const LatestTransaction = () => {
+  const { getTransactions } = useTransactions();
+  const [latestTransaction, setLatestTransaction] = useState<Transaction | null>(null);
 
-const LatestTransaction: React.FC<LatestTransactionProps> = ({
-  transaction,
-}) => {
-  // Logic/Functions Section
-  if (!transaction) return;
+  useEffect(() => {
+    const transactions = getTransactions();
+    if (transactions.length > 0) {
+      setLatestTransaction(findLatestTransaction(transactions))
+    }
+  }, [getTransactions])
 
-  // Tsx Section
+  // if no transactions, display this message
+  if (!latestTransaction) {
+    return (
+      <View style={styles.card}>
+        <Text style={styles.noTransaction}>No Transactions Available</Text>
+      </View>
+    );
+  }
+
+  // if theres a transaction, display it
   return (
-    <View style={styles.card} key={transaction.id}>
+    latestTransaction &&
+    <View style={styles.card} key={latestTransaction.timestamp}>
       <View style={styles.transactionCard}>
         <View style={styles.transactionHeader}>
           <Text style={styles.timestamp}>
-            {formatTimestamp(transaction.timestamp)}
+            {formatTimestamp(latestTransaction.timestamp)}
           </Text>
           <View
             style={[
               styles.typeTag,
-              { backgroundColor: getTypeColor(transaction.type) },
+              { backgroundColor: getTypeColor(latestTransaction.type) },
             ]}
           >
             <Text style={styles.typeText}>
-              {transaction.type.toUpperCase()}
+              {latestTransaction.type.toUpperCase()}
             </Text>
           </View>
         </View>
@@ -43,20 +54,20 @@ const LatestTransaction: React.FC<LatestTransactionProps> = ({
           <View style={styles.newTag}>
             <Text style={styles.newText}>New</Text>
           </View>
-          <Text style={styles.name}>{transaction.name}</Text>
+          <Text style={styles.name}>{latestTransaction.name}</Text>
         </View>
 
         <View style={styles.changesContainer}>
-          <Text style={styles.description}>{transaction.description}</Text>
+          <Text style={styles.description}>{latestTransaction.description}</Text>
           <View style={styles.fieldChange}>
             <Text
               style={
-                transaction.amount > 0
+                latestTransaction.amount > 0
                   ? styles.positiveAmount
                   : styles.negativeAmount
               }
             >
-              {formatUSD(transaction.amount)}
+              {formatUSD(latestTransaction.amount)}
             </Text>
           </View>
         </View>
@@ -134,6 +145,14 @@ const styles = StyleSheet.create({
     color: Theme.CFL_white,
     fontWeight: "bold",
     fontSize: 16,
+  },
+  // no transaction txt
+  noTransaction: {
+    fontFamily: Theme.CFL_primary_font,
+    color: Theme.CFL_light_text,
+    fontSize: 12,
+    padding: 2,
+    marginLeft: 20,
   },
   // transaction description
   description: {

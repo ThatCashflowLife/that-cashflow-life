@@ -6,7 +6,7 @@ import Theme from "../../../interfaces/theme";
 import User from "../../../interfaces/User";
 import addValuesTogether from "../../../utils/additionUtil";
 import formatUSD from "../../../utils/currencyUtil";
-import { useUser } from "../context/UserContext";
+import { useUser } from "../context/UserProvider";
 import ProfessionIcon from "../features/ProfessionIcon";
 
 
@@ -34,7 +34,7 @@ const FinancialOverview = () => {
   }, [user.Liabilities, user.Assets])
 
   const getCashflow = (): number => {
-    if (user.totalExpenses) { 
+    if (user.totalExpenses) {
       return (addValuesTogether(user.income["Passive Income"])) - user.totalExpenses;
     }
     return 0;

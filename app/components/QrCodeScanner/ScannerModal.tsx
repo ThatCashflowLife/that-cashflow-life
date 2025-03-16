@@ -99,12 +99,12 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
     scan: QRType
   ):
     | {
-        title: string;
-        professionIcon?: Icon;
-        message: string;
-        confirmText: string;
-        cancelText: string;
-      }
+      title: string;
+      professionIcon?: Icon;
+      message: string;
+      confirmText: string;
+      cancelText: string;
+    }
     | undefined => {
     if (scan && scan.data) {
       if (scan.data.scanType === "Transaction") {
@@ -178,7 +178,7 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
           {/* TODO: FIX THIS AFTER TESTING */}
           {/* Close button */}
           {/* <TouchableOpacity style={styles.closeButton} onPress={onClose}> */}
-            <TouchableOpacity style={styles.closeButton} onPress={testScan}>
+          <TouchableOpacity style={styles.closeButton} onPress={testScan}>
             <Text style={styles.closeText}>Close</Text>
           </TouchableOpacity>
 

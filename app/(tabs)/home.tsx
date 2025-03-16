@@ -1,5 +1,5 @@
 // import necessary libraries/methods and components
-import React, { useState } from "react";
+import React from "react";
 import {
   ActivityIndicator,
   ScrollView,
@@ -8,28 +8,24 @@ import {
   View,
 } from "react-native";
 
-import { testTransactions } from "../../data/testData/testTransactions";
 import { QRData } from "../../interfaces/qrTypes";
 import Theme from "../../interfaces/theme";
-import Transaction from "../../interfaces/Transaction";
-import { findLatestTransaction } from "../../utils/transactionUtil";
-import { useUser } from "../components/context/UserContext";
+import { useTransactions } from "../components/context/TransactionProvider";
+import { useUser } from "../components/context/UserProvider";
 import ScannerButton from "../components/QrCodeScanner/ScannerButton";
 import {
+  createProfessionTransaction,
   populateFirstProfession,
-  populateLaterProfession,
+  populateLaterProfession
 } from "../components/QrCodeScanner/ScannerLogic";
 import LatestTransaction from "../components/TransactionLog/LatestTransaction";
 import FinancialOverview, { calculateNetWorth } from "../components/UserFinances/FinancialOverview";
 
+
 export const Home = () => {
   // state/ref management section
   const { user, setUser } = useUser();
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [latestTransaction, setLatestTransaction] =
-    useState<Transaction | null>(() => findLatestTransaction(testTransactions));
-  // logic/Functions Section
+  const { addTransactions } = useTransactions();
 
   // this will get the data from a qr scan
   const handleScan = (data: QRData) => {
@@ -41,6 +37,9 @@ export const Home = () => {
       } else {
         setUser(populateLaterProfession(data, user));
       }
+      const newJobTransaction = createProfessionTransaction(data);
+      // Add transaction to global state
+      addTransactions([newJobTransaction]);
     } else if (data.scanType === "Transaction") {
       // add logic for determining transaction type, etc..
     }
@@ -73,12 +72,9 @@ export const Home = () => {
           <FinancialOverview />
         </View>
 
-        {/* Latest Transaction */}
-        {latestTransaction && (
-          <View style={styles.card}>
-            <LatestTransaction transaction={latestTransaction} />
-          </View>
-        )}
+        <View style={styles.card}>
+          <LatestTransaction />
+        </View>
       </View>
     </ScrollView>
   );

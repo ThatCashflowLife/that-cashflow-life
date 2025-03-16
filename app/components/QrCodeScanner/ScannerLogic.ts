@@ -1,5 +1,7 @@
 import Profession from "../../../interfaces/Profession";
+import Transaction from "../../../interfaces/Transaction";
 import User, { Icon } from "../../../interfaces/User";
+import formatTimestamp from "../../../utils/timeUtil";
 
 /**
  * Get the icon name that matches the profession name,
@@ -50,10 +52,16 @@ export const populateFirstProfession = (
     Liabilities: scannedProfession.liabilities,
     professionIcon: getIcon(scannedProfession.name),
   };
+
   return userInitialValues;
 };
 
-/* only populate profession name, icon and salary for all professions after the first */
+/**
+ * only populate profession name, icon and salary for all professions after the first
+ * @param scannedProfession 
+ * @param currentUser 
+ * @returns user object w changed profession, salary and icon 
+ */
 export const populateLaterProfession = (
   scannedProfession: Profession,
   currentUser: User
@@ -67,7 +75,28 @@ export const populateLaterProfession = (
     },
     professionIcon: getIcon(scannedProfession.name),
   };
+
   return changedProfessionValues;
 };
+
+/**
+ * Creates transaction for a new job
+ * @param scannedProfession 
+ * @returns transaction object
+ */
+export const createProfessionTransaction = (scannedProfession: Profession): Transaction => {
+  const timestamp = formatTimestamp(new Date().toISOString());
+
+  const newJobTransaction: Transaction = {
+    scanType: "Transaction",
+    name: `New Job: ${scannedProfession.name}`,
+    timestamp,
+    type: "career",
+    description: `Now employed as a ${scannedProfession.name}.`,
+    amount: scannedProfession.income.Salary,
+    fieldName: "Salary",
+  };
+  return newJobTransaction;
+}
 
 export default populateFirstProfession;

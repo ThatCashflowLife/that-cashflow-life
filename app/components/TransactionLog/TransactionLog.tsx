@@ -6,9 +6,8 @@ import { testTransactions } from "../../../data/testData/testTransactions";
 import Theme from "../../../interfaces/theme";
 import Transaction from "../../../interfaces/Transaction";
 import { formatUSD } from "../../../utils/currencyUtil";
-import { formatTimestamp } from "../../../utils/timeUtil";
 import { getTypeColor } from "../../../utils/transactionUtil";
-import { useUser } from "../context/UserContext";
+import { useUser } from "../context/UserProvider";
 
 // component properties type definition
 interface TransactionLogProps {
@@ -23,11 +22,11 @@ const TransactionLog: React.FC<TransactionLogProps> = ({
   const { user } = useUser();
   // Tsx for every transaction
   const renderTransaction = (transaction: Transaction) => (
-    <View style={styles.card} key={transaction.id}>
+    <View style={styles.card} key={transaction.timestamp}>
       <View style={styles.transactionCard}>
         <View style={styles.transactionHeader}>
           <Text style={styles.timestamp}>
-            {formatTimestamp(transaction.timestamp)}
+            {transaction.timestamp}
           </Text>
           <View
             style={[

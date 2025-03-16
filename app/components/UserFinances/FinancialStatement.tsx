@@ -5,7 +5,7 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 import Theme from "../../../interfaces/theme";
 import addValuesTogether from "../../../utils/additionUtil";
 import formatUSD from "../../../utils/currencyUtil";
-import { useUser } from "../context/UserContext";
+import { useUser } from "../context/UserProvider";
 import { calculateTotals } from "./FinancialOverview";
 
 const FinancialStatement = () => {
