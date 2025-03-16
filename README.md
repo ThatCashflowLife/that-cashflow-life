@@ -21,7 +21,6 @@ Ensure you have the following installed:
 - **Node.js** (Latest LTS recommended), NVM set for 20.18.0
 - **Expo CLI**
 
-Centos 9 with nvm node manager:  
 ```sh
  
 git clone https://github.com/Nathanvititoe/cashflow-life
@@ -49,3 +48,7 @@ expo go
 ### 4️⃣ Auditor Verification
 * The Auditor reviews the financial statement.
 * If everything is correct, they press Complete to finalize the transaction.
+
+* Instructions for Developers Here
+* (dev environment setup instructions)
+* (links to useful documentation)
