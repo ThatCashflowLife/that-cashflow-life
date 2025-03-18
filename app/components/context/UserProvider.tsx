@@ -4,20 +4,24 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import blankUser from "../../../data/testData/blankUser";
 import User from "../../../interfaces/User";
 
+// define UserContext type
 interface UserContextType {
   user: User;
   setUser: React.Dispatch<React.SetStateAction<User>>;
 }
 
+// create the user context
 const UserContext = createContext<UserContextType>({
   user: blankUser,
   setUser: () => {},
 });
 
+// export the user context
 export function useUser() {
   return useContext(UserContext);
 }
 
+// create user provider
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {

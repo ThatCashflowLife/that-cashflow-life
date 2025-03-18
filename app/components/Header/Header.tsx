@@ -13,12 +13,14 @@ import {
 
 import blankUser from "../../../data/testData/blankUser";
 import Theme from "../../../interfaces/theme";
-import { useUser } from "../context/UserContext";
+import { useTransactions } from "../context/TransactionProvider";
+import { useUser } from "../context/UserProvider";
 import ConfirmationModal from "../features/ConfirmationModal";
 import UserMenu from "../Menus/UserMenu";
 
 const Header = () => {
   const { user, setUser } = useUser();
+  const { clearTransactions } = useTransactions();
   const [isEditing, setIsEditing] = useState(false);
   const [tempName, setTempName] = useState(user.name); // user typed input
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -62,9 +64,11 @@ const Header = () => {
       // clear local storage
       await AsyncStorage.clear();
       await AsyncStorage.removeItem("user");
+      await AsyncStorage.removeItem("transactions");
 
       // clear state
       setUser(blankUser);
+      clearTransactions();
       setTempName(blankUser.name);
 
       // close menus

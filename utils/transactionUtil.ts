@@ -14,6 +14,8 @@ export const getTypeColor = (type: Transaction["type"]) => {
       return Theme.CFL_purple; // asset purple
     case "liability":
       return Theme.CFL_orange; // liability orange
+    case "career":
+      return Theme.CFL_cyan;
     default:
       return Theme.CFL_light_gray; // default gray
   }

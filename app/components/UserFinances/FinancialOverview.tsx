@@ -1,28 +1,44 @@
 // import necessary libraries/methods and components
-import React from "react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import Theme from "../../../interfaces/theme";
+import User from "../../../interfaces/User";
 import addValuesTogether from "../../../utils/additionUtil";
 import formatUSD from "../../../utils/currencyUtil";
-import { useUser } from "../context/UserContext";
+import { useUser } from "../context/UserProvider";
 import ProfessionIcon from "../features/ProfessionIcon";
 
-const FinancialOverview = () => {
-  const { user } = useUser();
-  // Calculate net worth (Assets - Liabilities)
-  const calculateNetWorth = () => {
-    const totalAssets = Object.values(user.Assets).reduce(
-      (sum, value) => sum + value,
-      0
-    );
-    const totalLiabilities = Object.values(user.Liabilities).reduce(
-      (sum, value) => sum + value,
-      0
-    );
-    return totalAssets - totalLiabilities;
-  };
 
+// Calculate net worth (Assets - Liabilities)
+export const calculateNetWorth = (user: User, setUser: Dispatch<SetStateAction<User>>): void => {
+  const totalAssets = Object.values(user.Assets).reduce((sum, value) => sum + value, 0);
+  const totalLiabilities = Object.values(user.Liabilities).reduce((sum, value) => sum + value, 0);
+  const netWorth = totalAssets - totalLiabilities;
+  setUser((prevUser) => ({ ...prevUser, totalAssets, totalLiabilites: totalLiabilities, netWorth }))
+};
+
+// calculate total income (Salary + passive income) and total expenses (all expenses summed)
+export const calculateTotals = (user: User, setUser: Dispatch<SetStateAction<User>>) => {
+  const totalIncome = addValuesTogether(user.income["Passive Income"]) + user.income.Salary
+  const totalExpenses = addValuesTogether(user.expenses);
+  setUser((prevUser) => ({ ...prevUser, totalIncome, totalExpenses }))
+}
+
+const FinancialOverview = () => {
+  const { user, setUser } = useUser();
+
+  // update user everytime assets, or liabilities changes
+  useEffect(() => {
+    calculateNetWorth(user, setUser);
+  }, [user.Liabilities, user.Assets])
+
+  const getCashflow = (): number => {
+    if (user.totalExpenses) {
+      return (addValuesTogether(user.income["Passive Income"])) - user.totalExpenses;
+    }
+    return 0;
+  }
   // Tsx Section
   return (
     <View style={styles.container}>
@@ -65,20 +81,20 @@ const FinancialOverview = () => {
       <View style={styles.row}>
         <Text style={styles.label}>Salary:</Text>
         <Text style={styles.value}>
-          {formatUSD(user.incomeExplained.Salary)}
+          {formatUSD(user.income.Salary)}
         </Text>
       </View>
 
       <View style={styles.row}>
         <Text style={styles.label}>Passive Income:</Text>
         <Text style={styles.value}>
-          {formatUSD(addValuesTogether(user.incomeExplained["Passive Income"]))}
+          {formatUSD(addValuesTogether(user.income["Passive Income"]))}
         </Text>
       </View>
 
       <View style={styles.row}>
         <Text style={styles.label}>Monthly Expenses:</Text>
-        <Text style={styles.value}>{formatUSD(user.totalExpenses)}</Text>
+        <Text style={styles.value}>{formatUSD(user.totalExpenses ?? 0)}</Text>
       </View>
 
       <View style={styles.row}>
@@ -86,17 +102,12 @@ const FinancialOverview = () => {
         <Text
           style={[
             styles.value,
-            addValuesTogether(user.incomeExplained["Passive Income"]) -
-              user.totalExpenses >
-            0
+            getCashflow() >= 0
               ? styles.positive
               : styles.negative,
           ]}
         >
-          {formatUSD(
-            addValuesTogether(user.incomeExplained["Passive Income"]) -
-              user.totalExpenses
-          )}
+          {formatUSD(getCashflow())}
         </Text>
       </View>
 
@@ -107,21 +118,14 @@ const FinancialOverview = () => {
       <View style={styles.row}>
         <Text style={styles.label}>Total Assets:</Text>
         <Text style={styles.value}>
-          {formatUSD(
-            Object.values(user.Assets).reduce((sum, value) => sum + value, 0)
-          )}
+          {formatUSD(user.totalAssets ?? 0)}
         </Text>
       </View>
 
       <View style={styles.row}>
         <Text style={styles.label}>Total Liabilities:</Text>
         <Text style={styles.value}>
-          {formatUSD(
-            Object.values(user.Liabilities).reduce(
-              (sum, value) => sum + value,
-              0
-            )
-          )}
+          {formatUSD(user.totalLiabilites ?? 0)}
         </Text>
       </View>
 
@@ -130,10 +134,10 @@ const FinancialOverview = () => {
         <Text
           style={[
             styles.value,
-            calculateNetWorth() > 0 ? styles.positive : styles.negative,
+            user.netWorth ?? 0 >= 0 ? styles.positive : styles.negative,
           ]}
         >
-          {formatUSD(calculateNetWorth())}
+          {formatUSD(user.netWorth ?? 0)}
         </Text>
       </View>
     </View>

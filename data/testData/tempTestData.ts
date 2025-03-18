@@ -5,7 +5,7 @@ const testUser: User = {
   name: "John Smith",
   profession: "Teacher",
   totalIncome: 8500,
-  incomeExplained: {
+  income: {
     Salary: 7000,
     "Passive Income": {
       Interest: 1000,
@@ -15,7 +15,7 @@ const testUser: User = {
     },
   },
   totalExpenses: 5300,
-  expensesExplained: {
+  expenses: {
     "Monthly Taxes": 300,
     "Mortgage Payment": 1900,
     "School Loans": 50,
@@ -28,6 +28,7 @@ const testUser: User = {
   Assets: {
     Savings: 0,
   },
+  totalAssets: 0,
   Liabilities: {
     "Mortgage Total": 280000,
     "School Loans Total": 18000,
@@ -35,6 +36,8 @@ const testUser: User = {
     "Credit Card Loans": 2000,
     "Retail Debt": 100,
   },
+  totalLiabilites: 305100,
+  netWorth: -305100,
   Children: 2,
   ChildCost: 0,
   professionIcon: { name: "chalkboard-teacher", library: "FontAwesome5" },

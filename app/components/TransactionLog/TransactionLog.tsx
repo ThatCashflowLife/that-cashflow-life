@@ -2,32 +2,22 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
-import { testTransactions } from "../../../data/testData/testTransactions";
 import Theme from "../../../interfaces/theme";
 import Transaction from "../../../interfaces/Transaction";
 import { formatUSD } from "../../../utils/currencyUtil";
-import { formatTimestamp } from "../../../utils/timeUtil";
 import { getTypeColor } from "../../../utils/transactionUtil";
-import { useUser } from "../context/UserContext";
+import { useTransactions } from "../context/TransactionProvider";
 
-// component properties type definition
-interface TransactionLogProps {
-  onNewTransaction: (transaction: Transaction) => void;
-}
+const TransactionLog = () => {
+  const { transactions } = useTransactions();
 
-const TransactionLog: React.FC<TransactionLogProps> = ({
-  onNewTransaction,
-}) => {
-  // Logic/Functions Section
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { user } = useUser();
   // Tsx for every transaction
   const renderTransaction = (transaction: Transaction) => (
-    <View style={styles.card} key={transaction.id}>
+    <View style={styles.card} key={transaction.timestamp}>
       <View style={styles.transactionCard}>
         <View style={styles.transactionHeader}>
           <Text style={styles.timestamp}>
-            {formatTimestamp(transaction.timestamp)}
+            {transaction.timestamp}
           </Text>
           <View
             style={[
@@ -65,7 +55,13 @@ const TransactionLog: React.FC<TransactionLogProps> = ({
   return (
     <ScrollView style={styles.scrollContainer}>
       <View style={styles.content}>
-        {testTransactions.map(renderTransaction)}
+        {transactions.length > 0 ? (
+          transactions.map(renderTransaction)
+        ) : (
+          <View style={styles.card}>
+            <Text style={styles.noTransactions}>No Transactions Available</Text>
+          </View>
+        )}
       </View>
     </ScrollView>
   );
@@ -95,6 +91,14 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.CFL_card_background,
     padding: 10,
     borderRadius: 10,
+  },
+  // no transaction txt
+  noTransactions: {
+    fontFamily: Theme.CFL_primary_font,
+    color: Theme.CFL_light_text,
+    fontSize: 12,
+    padding: 2,
+    marginLeft: 20,
   },
   // header for each transaction
   transactionHeader: {

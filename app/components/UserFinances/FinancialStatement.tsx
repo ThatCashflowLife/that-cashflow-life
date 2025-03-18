@@ -1,16 +1,22 @@
 // import necessary libraries/methods and components
-import React from "react";
+import React, { useEffect } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 import Theme from "../../../interfaces/theme";
 import addValuesTogether from "../../../utils/additionUtil";
 import formatUSD from "../../../utils/currencyUtil";
-import { useUser } from "../context/UserContext";
+import { useUser } from "../context/UserProvider";
+import { calculateTotals } from "./FinancialOverview";
 
 const FinancialStatement = () => {
   // Logic/Functions Section
-  const { user } = useUser();
-  // Tsx Section
+  const { user, setUser } = useUser();
+
+  // recalculate everytime income/expenses values change
+  useEffect(() => {
+    calculateTotals(user, setUser);
+  }, [user.income, user.expenses])
+
   return (
     // Statement Container
     <ScrollView
@@ -28,9 +34,7 @@ const FinancialStatement = () => {
             <View style={styles.row}>
               <Text style={styles.label}>Salary:</Text>
               <Text style={styles.value}>
-                {user.incomeExplained
-                  ? formatUSD(user.incomeExplained.Salary)
-                  : "undefined"}
+                {formatUSD(user.income.Salary)}
               </Text>
             </View>
 
@@ -38,8 +42,8 @@ const FinancialStatement = () => {
             <View style={styles.separator} />
 
             {/* Passive Income */}
-            {user.incomeExplained &&
-              Object.entries(user.incomeExplained["Passive Income"]).map(
+            {user.income &&
+              Object.entries(user.income["Passive Income"]).map(
                 ([source, amount]) => (
                   <View key={source} style={styles.row}>
                     <Text style={styles.label}>{source}:</Text>
@@ -51,16 +55,13 @@ const FinancialStatement = () => {
             <View style={[styles.row, styles.totalRow]}>
               <Text style={styles.totalLabel}>Passive Income:</Text>
               <Text style={styles.positive}>
-                {user.incomeExplained &&
-                  formatUSD(
-                    addValuesTogether(user.incomeExplained["Passive Income"])
-                  )}
+                {formatUSD(addValuesTogether(user.income["Passive Income"]))}
               </Text>
             </View>
 
             <View style={styles.row}>
               <Text style={styles.totalLabel}>Total Income:</Text>
-              <Text style={styles.positive}>{formatUSD(user.totalIncome)}</Text>
+              <Text style={styles.positive}>{formatUSD(user.totalIncome ?? 0)}</Text>
             </View>
           </View>
         </View>
@@ -69,7 +70,7 @@ const FinancialStatement = () => {
         <View style={styles.card}>
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Monthly Expenses</Text>
-            {Object.entries(user.expensesExplained).map(([expense, amount]) => (
+            {Object.entries(user.expenses).map(([expense, amount]) => (
               <View key={expense} style={styles.row}>
                 <Text style={styles.label}>{expense}:</Text>
                 <Text style={styles.value}>{formatUSD(amount)}</Text>
@@ -78,7 +79,7 @@ const FinancialStatement = () => {
             <View style={[styles.row, styles.totalRow]}>
               <Text style={styles.totalLabel}>Total Expenses:</Text>
               <Text style={styles.negative}>
-                {formatUSD(user.totalExpenses)}
+                {formatUSD(user.totalExpenses ?? 0)}
               </Text>
             </View>
           </View>
@@ -97,9 +98,7 @@ const FinancialStatement = () => {
             <View style={[styles.row, styles.totalRow]}>
               <Text style={styles.totalLabel}>Total Assets:</Text>
               <Text style={styles.positive}>
-                {formatUSD(
-                  Object.values(user.Assets).reduce((a, b) => a + b, 0)
-                )}
+                {formatUSD(user.totalAssets ?? 0)}
               </Text>
             </View>
           </View>
@@ -118,9 +117,7 @@ const FinancialStatement = () => {
             <View style={[styles.row, styles.totalRow]}>
               <Text style={styles.totalLabel}>Total Liabilities:</Text>
               <Text style={styles.negative}>
-                {formatUSD(
-                  Object.values(user.Liabilities).reduce((a, b) => a + b, 0)
-                )}
+                {formatUSD(user.totalLiabilites ?? 0)}
               </Text>
             </View>
           </View>
