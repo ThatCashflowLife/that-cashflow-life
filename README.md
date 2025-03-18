@@ -24,14 +24,11 @@ Ensure you have the following installed:
 ```sh
  
 git clone https://github.com/Nathanvititoe/cashflow-life
-npm i npx -g
-npx expo start
+npm i expo -g #install expo globally
+npx expo install #install all dependencies through expo for compatibility
+npx expo start --go #start expo server in expo go "mode"
 ```
-other
-```sh
-npm install -g expo
-expo go
-```
+
 ## 📖 Basic User Instructions
 ### 1️⃣ Opening the App
 * Launch the app on your phone via Expo Go or run expo start.
