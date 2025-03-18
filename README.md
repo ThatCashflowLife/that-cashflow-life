@@ -18,16 +18,17 @@ A financial calculator app built with [**React Native**](https://reactnative.dev
 ### 🔧 Prerequisites
 Ensure you have the following installed:
 - **Ubuntu/WSL** (Recommended)
-- **Node.js** (Latest LTS recommended), NVM set for 20.18.0
+- **Node.js** (Latest LTS recommended)
 - **Expo CLI**
 
+  Setup instructions
 ```sh
- 
 git clone https://github.com/Nathanvititoe/cashflow-life
 npm i expo -g #install expo globally
 npx expo install #install all dependencies through expo for compatibility
 npx expo start --go #start expo server in expo go "mode"
 ```
+#include information about android studio here
 
 ## 📖 Basic User Instructions
 ### 1️⃣ Opening the App
