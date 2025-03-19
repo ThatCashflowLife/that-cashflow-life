@@ -1,10 +1,9 @@
-name: Auto Update README
 # only runs when something is merged into main
+name: Auto Update README
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   update-readme:
