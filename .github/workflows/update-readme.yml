@@ -1,0 +1,43 @@
+name: Auto Update README
+# only runs when something is merged into main
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # sets up node
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: npm
+      # installs dependencies
+      - name: Install Dependencies
+        run: npx expo install
+
+      # runs the update script
+      - name: Run README Update Script
+        run: npm run update-readme
+
+      # gets the latest commit message for last merge into main
+      - name: Get Latest Commit Message
+        id: last_commit
+        run: |
+          LATEST_MSG=$(git log -1 --pretty=format:%s)
+          echo "LAST_COMMIT_MSG=$LATEST_MSG" >> $GITHUB_ENV
+      
+      # uses the auto commit workflow to adjust the read me and push the change
+      - name: Commit and Push Changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Auto-update README for commit: ${{ env.LAST_COMMIT_MSG }}"
+          branch: main
