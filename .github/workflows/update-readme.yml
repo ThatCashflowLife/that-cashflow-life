@@ -4,13 +4,13 @@ name: "Auto Update README"
 
 on:
   workflow_run:
-    workflows: ["Expo Compatibility Check"]
+    workflows: ["Expo Review"]
     types:
       - completed
   workflow_dispatch:
 
 jobs:
-  update-readme:
+  Update README:
     if: |
       github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.head_branch == 'main'
