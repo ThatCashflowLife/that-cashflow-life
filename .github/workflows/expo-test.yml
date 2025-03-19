@@ -1,7 +1,11 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/github-workflow.json
-# yaml-language-server: validate: false
+---
 name: Expo Review
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   preview:
