@@ -10,12 +10,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  Update README:
+  preview:
+    name: Update README
+    runs-on: ubuntu-latest
     if: |
       github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.head_branch == 'main'
-    runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
