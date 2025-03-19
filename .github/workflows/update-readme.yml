@@ -9,6 +9,9 @@ on:
       - completed
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   preview:
     name: Update README
