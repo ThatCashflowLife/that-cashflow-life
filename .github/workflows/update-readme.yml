@@ -44,19 +44,28 @@ jobs:
           LATEST_MSG=$(git log -1 --pretty=format:%s)
           echo "LAST_COMMIT_MSG=$LATEST_MSG" >> $GITHUB_ENV
 
-      - name: Pull Latest main
+      - name: Commit and Push Changes to New Branch
         run: |
-          git config --global user.email \
-            "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name \
-            "github-actions[bot]"
-          echo "pulling latest origin/main"
-          git pull --rebase origin main || echo "No updates needed"
+          git checkout -b auto-update-readme-${{ github.run_id }}
+          git add .
+          git commit -m "updating README for commit: ${{ env.LAST_COMMIT_MSG }}"
+          git push origin auto-update-readme-${{ github.run_id }}
 
-      - name: Commit and Push Changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Create Pull Request
+        id: create_pr
+        uses: peter-evans/create-pull-request@v5
         with:
-          commit_message: >
-            Auto-update README for commit:
-            ${{ env.LAST_COMMIT_MSG }}
-          branch: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: auto-update-readme-${{ github.run_id }}
+          title: "Auto-update README"
+          body: "This PR updates the README automatically."
+          base: main
+          labels: "auto-merge"
+
+      - name: Auto-Merge the PR
+        if: ${{ steps.create_pr.outputs.pull-request-number }}
+        run: |
+          gh pr merge ${{ steps.create_pr.outputs.pull-request-number }} \
+            --merge --delete-branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
