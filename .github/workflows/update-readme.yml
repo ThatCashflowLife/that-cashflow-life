@@ -21,8 +21,12 @@ jobs:
           node-version: 18.x
           cache: npm
       # installs dependencies
-      - name: Install Dependencies
-        run: npx expo install
+       - name: Install dependencies
+        run: |
+          rm -rf node_modules
+          rm -f package-lock.json
+          npm install --no-package-lock
+          npx expo install --fix
 
       # runs the update script
       - name: Run README Update Script
