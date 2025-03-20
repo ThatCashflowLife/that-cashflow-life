@@ -54,15 +54,33 @@ jobs:
           LATEST_MSG=$(git log -1 --pretty=format:%s)
           echo "LAST_COMMIT_MSG=$LATEST_MSG" >> $GITHUB_ENV
 
+      - name: Fetch Latest Main
+        run: |
+          git fetch origin main
+
+      - name: Check for Changes
+        id: git_status
+        run: |
+          git add -A  # Stage all changes before checking
+          if git diff --cached --exit-code; then
+            echo "No changes to commit."
+            echo "SKIP_PR=true" >> $GITHUB_ENV
+          else
+            echo "Changes detected, proceeding with commit."
+            echo "SKIP_PR=false" >> $GITHUB_ENV
+          fi
+
       - name: Commit and Push Changes to New Branch
+        if: env.SKIP_PR == 'false'
         run: |
           git checkout -b auto-update-readme-${{ github.run_id }}
-          git add .
-          git commit -m "updating README for commit: ${{ env.LAST_COMMIT_MSG }}"
+          git commit -m "Auto-update README for commit: \
+            ${{ env.LAST_COMMIT_MSG }}"
           git push origin auto-update-readme-${{ github.run_id }}
 
       - name: Create Pull Request
         id: create_pr
+        if: env.SKIP_PR == 'false'
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
