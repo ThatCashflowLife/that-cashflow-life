@@ -90,6 +90,6 @@ jobs:
       - name: Auto-Merge the PR
         if: env.CHANGES_DETECTED == 'true' && steps.create-pull-request.outputs.pull-request-number != ''
         run: |
-          gh pr merge ${{ steps.create-pull-request.outputs.pull-request-number }} --merge --auto --delete-branch
+          gh pr merge ${{ steps.create-pull-request.outputs.pull-request-number }} --merge --admin --delete-branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
