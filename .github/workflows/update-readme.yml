@@ -88,9 +88,24 @@ jobs:
           base: main
           labels: "auto-pr"
 
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v7
+
+      - name: Show message for created Pull Request
+        if: ${{ steps.cpr.outputs.pull-request-url && \
+          steps.cpr.outputs.pull-request-operation != 'none' }}
+        shell: bash
+        env:
+          PR_URL: ${{ steps.cpr.outputs.pull-request-url }}
+          PR_OPERATION: ${{ steps.cpr.outputs.pull-request-operation }}
+        run: |
+          echo "::notice::${PR_URL} was ${PR_OPERATION}."
 
       - name: Log PR number
-        run: echo "${{ steps.create_pr.outputs.pull-request-number }}"
+        run: |
+          echo "First PR: ${{ steps.create_pr.outputs.pull-request-number }}"
+          echo "PR 2: ${{ steps.cpr.outputs.pull-request-number }}"
 
       - name: Force PR Number Output
         run: |
