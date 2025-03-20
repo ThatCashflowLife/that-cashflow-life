@@ -6,8 +6,8 @@ on:
     branches:
       - main
   workflows: ["Expo Review"]
-    types:
-      - completed
+  types:
+    - completed
   workflow_dispatch:
 
 permissions:
