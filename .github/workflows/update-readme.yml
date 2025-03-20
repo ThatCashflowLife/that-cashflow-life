@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: write
+  pull_requests: write
 
 jobs:
   preview:
@@ -86,6 +87,7 @@ jobs:
           body: "This PR updates the README automatically."
           base: main
           labels: "auto-merge"
+          always-create: true
 
       - name: Log PR number
         run: echo "${{ steps.create_pr.outputs.pull-request-number }}"
