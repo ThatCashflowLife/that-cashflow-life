@@ -40,19 +40,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          rm -rf node_modules
-          rm -f package-lock.json
-          npm install --no-package-lock
+          npm install 
           npx expo install --fix
-
-      - name: Test:Show README Before Update
-        run: cat README.md || echo "README not found"
       
       - name: Run README Update Script
         run: npm run update-readme
-
-      - name: Test:Show README After Update
-        run: cat README.md || echo "README not found"
       
       - name: Git Diff for Test
         run: git diff -- README.md
@@ -96,15 +88,24 @@ jobs:
           branch: auto-update-readme-${{ github.run_id }}
           title: "Auto-update README"
           body: "This PR updates the README automatically."
-          base: main
+          base: origin/main
           labels: "auto-merge"
+          draft: false
+          delete-branch: true
+
+      - name: Force PR Number Output
+        run: |
+          if [ -z "${{ steps.create_pr.outputs.pull-request-number }}" ]; then
+            echo "No PR was created. Failing workflow."
+            exit 1
+          else
+            echo "PR Created: #${{ steps.create_pr.outputs.pull-request-number }}"
+          fi
 
       - name: Auto-Merge the PR
         if: ${{ steps.create_pr.outputs.pull-request-number }}
         run: |
           gh pr merge ${{ steps.create_pr.outputs.pull-request-number }} \
             --merge --delete-branch
-          echo "did not merge to main, failing..."
-          exit 1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
