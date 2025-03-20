@@ -64,11 +64,12 @@ jobs:
         if: env.CHANGES_DETECTED == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_GITHUB_ACTIONS }}
           commit-message: "Auto-update README for commit: ${{ env.LAST_COMMIT_MSG }}"
           branch: auto-update-readme-${{ github.run_id }}
           delete-branch: true
           title: "Auto-update README"
+          assignees: "Nathanvititoe"
           body: |
             This PR updates the README automatically.
             
@@ -113,7 +114,7 @@ jobs:
             fi
           done
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_ACTIONS }}
 
 
       - name: Verify PR Creation
@@ -132,4 +133,4 @@ jobs:
         run: |
           gh pr merge ${{ steps.create-pull-request.outputs.pull-request-number }} --merge --admin --delete-branch
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_ACTIONS }}
