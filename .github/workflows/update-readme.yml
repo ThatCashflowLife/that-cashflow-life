@@ -35,8 +35,9 @@ jobs:
 
       - name: Skip if Auto-Merge trigger
         run: |
-          if [[ "${{ env.AUTHOR }}" == "github-actions[bot]" ]]; then
-            echo "Skipping workflow because the commit was merged by a bot."
+          if [[ "${{ env.AUTHOR }}" == "github-actions[bot]" ]] || echo "${{ env.LAST_COMMIT_MSG }}" | grep -q "Auto-update README"; 
+          then
+            echo "Skipping workflow because the commit was merged by a bot or it's an auto-update commit."
             exit 0
           fi
 
@@ -92,8 +93,8 @@ jobs:
       - name: Pull Latest Main and Rebase
         run: |
           git fetch origin main
-          git checkout main
-          git pull --rebase origin main
+
+          git pull --rebase origin/main
 
       - name: Verify PR Creation
         run: |
