@@ -26,13 +26,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
-      - name: Set Git User Identity
-        run: |
-          git config --global user.email \
-            "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name \
-            "github-actions[bot]"
+        with:
+          fetch-depth: 0  # Get all history for proper commit messages
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -53,75 +48,48 @@ jobs:
           LATEST_MSG=$(git log -1 --pretty=format:%s)
           echo "LAST_COMMIT_MSG=$LATEST_MSG" >> $GITHUB_ENV
 
-      - name: Fetch Latest Main
-        run: git fetch origin main
-
       - name: Check for Changes
         id: git_status
         run: |
-          git add -A  # Stage all changes before checking
-          if git diff --cached --exit-code; then
-            echo "No changes to commit."
-            echo "SKIP_PR=true" >> $GITHUB_ENV
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "CHANGES_DETECTED=true" >> $GITHUB_ENV
+            echo "Changes detected, will create PR"
           else
-            echo "Changes detected, proceeding with commit."
-            echo "SKIP_PR=false" >> $GITHUB_ENV
+            echo "CHANGES_DETECTED=false" >> $GITHUB_ENV
+            echo "No changes detected, skipping PR creation"
           fi
 
-      - name: Commit and Push Changes to New Branch
-        if: env.SKIP_PR == 'false'
-        run: |
-          git checkout -b auto-update-readme-${{ github.run_id }}
-          git commit -m "Auto-update README for commit: \
-            ${{ env.LAST_COMMIT_MSG }}"
-          git push origin auto-update-readme-${{ github.run_id }}
-
       - name: Create Pull Request
-        id: create_pr
-        if: env.SKIP_PR == 'false'
+        id: create-pull-request
+        if: env.CHANGES_DETECTED == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Auto-update README for commit: ${{ env.LAST_COMMIT_MSG }}"
           branch: auto-update-readme-${{ github.run_id }}
+          delete-branch: true
           title: "Auto-update README"
-          body: "This PR updates the README automatically."
+          body: |
+            This PR updates the README automatically.
+            
+            Based on commit: ${{ env.LAST_COMMIT_MSG }}
           base: main
           labels: "auto-pr"
 
-      - name: Create Pull Request
-        id: cpr
-        uses: peter-evans/create-pull-request@v7
-
-      - name: Show message for created Pull Request
-        if: |
-          ${{ steps.cpr.outputs.pull-request-url && 
-          steps.cpr.outputs.pull-request-operation != 'none' }}
-        shell: bash
-        env:
-          PR_URL: ${{ steps.cpr.outputs.pull-request-url }}
-          PR_OPERATION: ${{ steps.cpr.outputs.pull-request-operation }}
+      - name: Verify PR Creation
         run: |
-          echo "::notice::${PR_URL} was ${PR_OPERATION}."
-
-      - name: Log PR number
-        run: |
-          echo "First PR: ${{ steps.create_pr.outputs.pull-request-number }}"
-          echo "PR 2: ${{ steps.cpr.outputs.pull-request-number }}"
-
-      - name: Force PR Number Output
-        run: |
-          if [ -z "${{ steps.create_pr.outputs.pull-request-number }}" ]; then
-            echo "No PR was created. Failing workflow."
+          if [[ "${{ env.CHANGES_DETECTED }}" == "true" && -z "${{ steps.create-pull-request.outputs.pull-request-number }}" ]]; then
+            echo "::error::Failed to create PR despite changes being detected."
             exit 1
+          elif [[ "${{ env.CHANGES_DETECTED }}" == "false" ]]; then
+            echo "No changes detected. No PR needed."
           else
-            echo "PR Created: \
-              #${{ steps.create_pr.outputs.pull-request-number }}"
+            echo "PR #${{ steps.create-pull-request.outputs.pull-request-number }} created successfully."
           fi
 
       - name: Auto-Merge the PR
-        if: ${{ steps.create_pr.outputs.pull-request-number }}
+        if: env.CHANGES_DETECTED == 'true' && steps.create-pull-request.outputs.pull-request-number != ''
         run: |
-          gh pr merge ${{ steps.create_pr.outputs.pull-request-number }} \
-          --merge --delete-branch
+          gh pr merge ${{ steps.create-pull-request.outputs.pull-request-number }} --merge --delete-branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
