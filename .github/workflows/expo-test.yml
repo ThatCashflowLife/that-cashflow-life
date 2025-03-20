@@ -2,6 +2,8 @@
 name: Expo Review
 on:
   push:
+    branches:
+      -main
   pull_request:
     branches:
       - main
