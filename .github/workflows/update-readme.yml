@@ -40,12 +40,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install 
+          npm install
           npx expo install --fix
-      
+
       - name: Run README Update Script
         run: npm run update-readme
-      
+
       - name: Git Diff for Test
         run: git diff -- README.md
 
@@ -88,10 +88,9 @@ jobs:
           branch: auto-update-readme-${{ github.run_id }}
           title: "Auto-update README"
           body: "This PR updates the README automatically."
-          base: origin/main
+          base: main
           labels: "auto-merge"
-          draft: false
-          delete-branch: true
+        run: echo "${{ steps.create_pr.outputs.pull-request-number }}"
 
       - name: Force PR Number Output
         run: |
@@ -99,13 +98,14 @@ jobs:
             echo "No PR was created. Failing workflow."
             exit 1
           else
-            echo "PR Created: #${{ steps.create_pr.outputs.pull-request-number }}"
+            echo "PR Created: \
+              #${{ steps.create_pr.outputs.pull-request-number }}"
           fi
 
       - name: Auto-Merge the PR
         if: ${{ steps.create_pr.outputs.pull-request-number }}
         run: |
           gh pr merge ${{ steps.create_pr.outputs.pull-request-number }} \
-            --merge --delete-branch
+          --merge --delete-branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
