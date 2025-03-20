@@ -85,9 +85,9 @@ Ensure you have the following installed:
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
-- added read me to ignore for workflow2 (Nathanvititoe)
-- added read me to ignore for workflow (Nathanvititoe)
-- prevent m conflicts3 (Nathanvititoe)
+- hid workflows from vs code again (Nathanvititoe)
+- Auto-update README (#66) (Nathan Vititoe)
+- Auto-update README for commit: added read me to ignore for workflow2 (Nathanvititoe)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 150 commits)
@@ -99,4 +99,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-03-19 23:12:31 -0400_
+_Last updated: 2025-03-19 23:15:24 -0400_
