@@ -91,23 +91,20 @@ jobs:
   auto-merge:
     runs-on: ubuntu-latest
     needs: update-README
+    if: needs.update-readme.outputs.CHANGES_DETECTED == 'true'
     steps:
       - name: Auto-Merge the PR
-        if: env.CHANGES_DETECTED == 'true' && steps.create-pull-request.outputs.pull-request-number != ''
         run: |
           gh pr merge ${{ steps.create-pull-request.outputs.pull-request-number }} --merge --admin --delete-branch
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_ACTIONS }}
-  delete-branch:
-    runs-on: ubuntu-latest
-    needs: auto-merge
-    steps:
-      - name: Clean-up Merged README branch
-        runs-on: ubuntu-latest
-        steps:
-          - name: Delete Merged Branch
-            run: |
-              BRANCH_NAME="auto-update-readme-${{ github.run_id }}"
-              gh api -X DELETE repos/${{ github.repository }}/git/refs/heads/$BRANCH_NAME
-            env:
-              GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_ACTIONS }}
+  # verify-branch-deleted:
+  #   runs-on: ubuntu-latest
+  #   needs: auto-merge
+  #   steps:
+  #         - name: Delete Merged Branch
+  #           run: |
+  #             BRANCH_NAME="auto-update-readme-${{ github.run_id }}"
+  #             gh api -X DELETE repos/${{ github.repository }}/git/refs/heads/$BRANCH_NAME
+  #           env:
+  #             GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_ACTIONS }}
