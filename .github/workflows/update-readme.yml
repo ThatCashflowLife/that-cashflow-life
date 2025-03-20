@@ -93,7 +93,8 @@ jobs:
         uses: peter-evans/create-pull-request@v7
 
       - name: Show message for created Pull Request
-        if: ${{ steps.cpr.outputs.pull-request-url && \
+        if: |
+          ${{ steps.cpr.outputs.pull-request-url && 
           steps.cpr.outputs.pull-request-operation != 'none' }}
         shell: bash
         env:
