@@ -45,8 +45,17 @@ jobs:
           npm install --no-package-lock
           npx expo install --fix
 
+      - name: Test:Show README Before Update
+        run: cat README.md || echo "README not found"
+      
       - name: Run README Update Script
         run: npm run update-readme
+
+      - name: Test:Show README After Update
+        run: cat README.md || echo "README not found"
+      
+      - name: Git Diff for Test
+        run: git diff -- README.md
 
       - name: Get Latest Commit Message
         id: last_commit
@@ -95,5 +104,7 @@ jobs:
         run: |
           gh pr merge ${{ steps.create_pr.outputs.pull-request-number }} \
             --merge --delete-branch
+          echo "did not merge to main, failing..."
+          exit 1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
