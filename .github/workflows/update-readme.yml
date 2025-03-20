@@ -22,6 +22,19 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Get Latest Commit Message
+        id: last_commit
+        run: |
+          LATEST_MSG=$(git log -1 --pretty=format:%s)
+          echo "LAST_COMMIT_MSG=$LATEST_MSG" >> $GITHUB_ENV
+
+      - name: Skip if Auto-Update Commit
+        run: |
+          if echo "${{ env.LAST_COMMIT_MSG }}" | grep -q "Auto-update README"; then
+            echo "Skipping workflow because this is an auto-update commit."
+            exit 0
+          fi
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -34,12 +47,6 @@ jobs:
 
       - name: Run README Update Script
         run: npm run update-readme
-
-      - name: Get Latest Commit Message
-        id: last_commit
-        run: |
-          LATEST_MSG=$(git log -1 --pretty=format:%s)
-          echo "LAST_COMMIT_MSG=$LATEST_MSG" >> $GITHUB_ENV
 
       - name: Check for Changes
         id: git_status
@@ -61,7 +68,7 @@ jobs:
           token: ${{ secrets.PAT_GITHUB_ACTIONS }}
           commit-message: "Auto-update README for commit: ${{ env.LAST_COMMIT_MSG }}"
           branch: auto-update-readme-${{ github.run_id }}
-          delete-branch: true
+          delete-branch: false
           title: "Auto-update README"
           assignees: "Nathanvititoe"
           body: |
@@ -86,14 +93,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_ACTIONS }}
 
-      # - name: Delete Merged Branch (Redundancy Check)
-      #   run: |
-      #     BRANCH_NAME="auto-update-readme-${{ github.run_id }}"
-      #     if gh api repos/${{ github.repository }}/branches/$BRANCH_NAME >/dev/null 2>&1; then
-      #       echo "Branch $BRANCH_NAME still exists. Deleting..."
-      #       gh api -X DELETE repos/${{ github.repository }}/git/refs/heads/$BRANCH_NAME
-      #     else
-      #       echo "Branch $BRANCH_NAME has already been deleted."
-      #     fi
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_ACTIONS }}
+      - name: Delete Merged Branch (Redundancy Check)
+        run: |
+          BRANCH_NAME="auto-update-readme-${{ github.run_id }}"
+          if gh api repos/${{ github.repository }}/branches/$BRANCH_NAME >/dev/null 2>&1; then
+            echo "Branch $BRANCH_NAME still exists. Deleting..."
+            gh api -X DELETE repos/${{ github.repository }}/git/refs/heads/$BRANCH_NAME
+          else
+            echo "Branch $BRANCH_NAME has already been deleted."
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_ACTIONS }}
