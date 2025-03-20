@@ -46,13 +46,6 @@ jobs:
           LATEST_MSG=$(git log -1 --pretty=format:%s)
           echo "LAST_COMMIT_MSG=$LATEST_MSG" >> $GITHUB_ENV
 
-      - name: Skip if Auto-Update Commit
-        run: |
-          if echo "${{ env.LAST_COMMIT_MSG }}" | grep -q "Auto-update README"; then
-            echo "Skipping workflow because this is an auto-update commit."
-            exit 0
-          fi
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -77,6 +70,12 @@ jobs:
             echo "No changes detected. Exiting."
             exit 0  # Exit successfully if no changes
           fi
+          
+      - name: Pull Latest Main and Rebase
+        run: |
+          git fetch origin main
+          git checkout main
+          git pull --rebase origin main
 
       - name: Create Pull Request
         id: create-pr
@@ -86,7 +85,7 @@ jobs:
           token: ${{ secrets.PAT_GITHUB_ACTIONS }}
           commit-message: "Auto-update README for commit: ${{ env.LAST_COMMIT_MSG }}"
           branch: auto-update-readme-${{ github.run_id }}
-          delete-branch: false
+          delete-branch: true
           title: "Auto-update README"
           assignees: "Nathanvititoe"
           body: |
