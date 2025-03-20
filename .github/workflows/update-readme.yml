@@ -46,9 +46,6 @@ jobs:
       - name: Run README Update Script
         run: npm run update-readme
 
-      - name: Git Diff for Test
-        run: git diff -- README.md
-
       - name: Get Latest Commit Message
         id: last_commit
         run: |
@@ -56,8 +53,7 @@ jobs:
           echo "LAST_COMMIT_MSG=$LATEST_MSG" >> $GITHUB_ENV
 
       - name: Fetch Latest Main
-        run: |
-          git fetch origin main
+        run: git fetch origin main
 
       - name: Check for Changes
         id: git_status
@@ -90,6 +86,8 @@ jobs:
           body: "This PR updates the README automatically."
           base: main
           labels: "auto-merge"
+
+      - name: Log PR number
         run: echo "${{ steps.create_pr.outputs.pull-request-number }}"
 
       - name: Force PR Number Output
