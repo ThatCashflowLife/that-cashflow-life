@@ -70,12 +70,6 @@ jobs:
             echo "No changes detected. Exiting."
             exit 0  # Exit successfully if no changes
           fi
-          
-      - name: Pull Latest Main and Rebase
-        run: |
-          git fetch origin main
-          git checkout main
-          git pull --rebase origin main
 
       - name: Create Pull Request
         id: create-pr
@@ -94,6 +88,12 @@ jobs:
             Based on commit: ${{ env.LAST_COMMIT_MSG }}
           base: main
           labels: "auto-merge, README update"
+
+      - name: Pull Latest Main and Rebase
+        run: |
+          git fetch origin main
+          git checkout main
+          git pull --rebase origin main
 
       - name: Verify PR Creation
         run: |
