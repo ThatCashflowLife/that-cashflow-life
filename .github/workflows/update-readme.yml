@@ -14,7 +14,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  preview:
+  update-README:
     name: Update README
     runs-on: ubuntu-latest
     if: >
@@ -87,19 +87,18 @@ jobs:
           else
             echo "PR #${{ steps.create-pull-request.outputs.pull-request-number }} created successfully."
           fi
-preview:
-  name: Auto-Merge
-  runs-on: ubuntu-latest
-  if: env.CHANGES_DETECTED == 'true'
-  steps:
-    - name: Auto-Merge the PR
-      if: env.CHANGES_DETECTED == 'true' && steps.create-pull-request.outputs.pull-request-number != ''
-      run: |
-        gh pr merge ${{ steps.create-pull-request.outputs.pull-request-number }} --merge --admin --delete-branch
-      env:
-        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_ACTIONS }}
-  preview:
-    name: delete-branch
+
+  Auto-Merge:
+    runs-on: ubuntu-latest
+    if: env.CHANGES_DETECTED == 'true'
+    steps:
+      - name: Auto-Merge the PR
+        if: env.CHANGES_DETECTED == 'true' && steps.create-pull-request.outputs.pull-request-number != ''
+        run: |
+          gh pr merge ${{ steps.create-pull-request.outputs.pull-request-number }} --merge --admin --delete-branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_ACTIONS }}
+  delete-branch:
     runs-on: ubuntu-latest
     needs: Auto-Merge
     steps:
