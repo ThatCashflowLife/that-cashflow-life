@@ -81,7 +81,7 @@ jobs:
         run: |
           git fetch origin main
 
-          git pull --rebase origin/main
+          git pull --rebase origin main
 
       - name: Verify PR Creation
         run: |
