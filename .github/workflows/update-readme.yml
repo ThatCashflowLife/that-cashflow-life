@@ -51,13 +51,13 @@ jobs:
 
       - name: Check for Changes
         id: git_status
-        run: |
+         run: |
           if [ -n "$(git status --porcelain)" ]; then
             echo "CHANGES_DETECTED=true" >> $GITHUB_ENV
-            echo "Changes detected, will create PR"
+            echo "::set-output name=CHANGES_DETECTED::true"
           else
             echo "CHANGES_DETECTED=false" >> $GITHUB_ENV
-            echo "No changes detected, skipping PR creation"
+            echo "::set-output name=CHANGES_DETECTED::false"
           fi
 
       - name: Create Pull Request
