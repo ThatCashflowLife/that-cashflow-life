@@ -17,6 +17,8 @@ jobs:
   update-README:
     name: Update README
     runs-on: ubuntu-latest
+    outputs:
+      CHANGES_DETECTED: ${{ steps.git_status.outputs.CHANGES_DETECTED }}
     if: >
       (github.event_name == 'workflow_run' &&
       github.event.workflow_run.conclusion == 'success' &&
@@ -92,7 +94,7 @@ jobs:
   auto-merge:
     runs-on: ubuntu-latest
     needs: update-README
-    if: needs.update-readme.outputs.CHANGES_DETECTED == 'true'
+    if: needs.update-README.outputs.CHANGES_DETECTED == 'true'
     steps:
       - name: Auto-Merge the PR
         run: |
