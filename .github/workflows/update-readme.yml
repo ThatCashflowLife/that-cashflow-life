@@ -5,9 +5,10 @@ on:
   push:
     branches:
       - main
-  workflows: ["Expo Review"]
-  types:
-    - completed
+  workflow_run:
+    workflows: ["Expo Review"]
+    types:
+      - completed
   workflow_dispatch:
 
 permissions:
