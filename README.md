@@ -85,9 +85,9 @@ Ensure you have the following installed:
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
+- Auto-update README (#62) (Nathan Vititoe)
+- Auto-update README for commit: Auto-update README (#61) (Nathanvititoe)
 - Auto-update README (#61) (Nathan Vititoe)
-- Auto-update README for commit: prevent m conflicts2 (Nathanvititoe)
-- prevent m conflicts2 (Nathanvititoe)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 150 commits)
@@ -99,4 +99,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-03-19 23:06:56 -0400_
+_Last updated: 2025-03-19 23:07:36 -0400_
