@@ -18,6 +18,7 @@
   "problems.decorations.enabled": false,
   "files.exclude": {
     "**/.git": true,
+    "**/.github": true,
   },
   "typescript.updateImportsOnFileMove.enabled": "always",
   "javascript.preferences.importModuleSpecifier": "relative",
