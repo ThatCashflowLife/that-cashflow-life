@@ -85,13 +85,13 @@ Ensure you have the following installed:
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
+- Auto-update README (#68) (Nathan Vititoe)
+- Auto-update README for commit: Auto-update README (#67) (ClaytonHin)
 - Auto-update README (#67) (Nathan Vititoe)
-- Auto-update README for commit: hid workflows from vs code again (Nathanvititoe)
-- hid workflows from vs code again (Nathanvititoe)
 
 ## 👥 Contributors
-- [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 202 commits)
-- [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 12 commits)
+- [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 203 commits)
+- [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 13 commits)
 - [@D-flyRobotics](https://github.com/D-flyRobotics) (⭐ 2 commits)
 - [@expo-bot](https://github.com/expo-bot) (⭐ 1 commits)
 - [@rivasjeremy](https://github.com/rivasjeremy) (⭐ 1 commits)
@@ -99,4 +99,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-03-19 23:16:07 -0400_
+_Last updated: 2025-03-26 00:35:11 -0400_
