@@ -16,7 +16,7 @@
     "reset-project": "node ./scripts/reset-project.js",
     "web": "expo start --web",
     "lint": "expo lint",
-    "update-readme": "ts-node scripts/updateReadMe.ts"
+    "update-readme": "ts-node scripts/updateReadMe.mts"
   },
   "dependencies": {
     "@expo/server": "^0.5.1",
