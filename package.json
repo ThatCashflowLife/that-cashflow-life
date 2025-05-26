@@ -3,6 +3,7 @@
   "license": "0BSD",
   "main": "expo-router/entry",
   "version": "52.0.58",
+  "type": "module",
   "expo": {
     "doctor": {
       "reactNativeDirectoryCheck": {
