@@ -16,7 +16,7 @@
     "reset-project": "node ./scripts/reset-project.js",
     "web": "expo start --web",
     "lint": "expo lint",
-    "update-readme": "ts-node --loader ts-node/esm scripts/updateReadMe.ts"
+    "update-readme": "tsx scripts/updateReadMe.ts"
   },
   "dependencies": {
     "@expo/server": "^0.5.1",
@@ -61,6 +61,7 @@
     "eslint-config-universe": "^14.0.0",
     "prettier": "^3.5.0",
     "react-test-renderer": "19.0.0",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.4"
   }
 }
