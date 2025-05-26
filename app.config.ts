@@ -16,14 +16,14 @@ const defineConfig = ({ config }: ConfigContext): ExpoConfig => ({
   },
   ios: {
     supportsTablet: true,
-    bundleIdentifier: "com.nathanvititoe.cashflowlife",
+    bundleIdentifier: "com.thatcashflowlife.cashflowlife",
   },
   android: {
     adaptiveIcon: {
       foregroundImage: "./app/assets/icons/cashFlowLifeIcon.png",
       backgroundColor: "#121212",
     },
-    package: "com.nathanvititoe.cashflowlife",
+    package: "com.thatcashflowlife.cashflowlife",
   },
   web: {
     bundler: "metro",
@@ -44,13 +44,13 @@ const defineConfig = ({ config }: ConfigContext): ExpoConfig => ({
   },
   extra: {
     eas: {
-      projectId: "49a8415e-83d0-4d4e-b737-3c87919841bc",
+      projectId: "95ad9dd6-82ea-4256-902e-84b22b8dac98",
     },
   },
-  owner: "cashflowlife",
   updates: {
-    url: "https://u.expo.dev/49a8415e-83d0-4d4e-b737-3c87919841bc",
+    url: "https://u.expo.dev/95ad9dd6-82ea-4256-902e-84b22b8dac98",
   },
+  owner: "thatcashflowlife",
   runtimeVersion: "1.0.0",
 });
 
