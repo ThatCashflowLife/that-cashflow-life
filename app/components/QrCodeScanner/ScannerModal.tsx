@@ -108,13 +108,19 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
     | undefined => {
     if (scan && scan.data) {
       if (scan.data.scanType === "Transaction") {
+        const transactionName = scan.data.name || "";
+        const isBaby = transactionName.toLowerCase().includes("baby");
+
         return {
           ...popupInfo,
-          title: `Transaction`,
-          message: `Change to ${scan.data.type}`,
-          confirmText: `Confirm`,
-          cancelText: `Cancel`,
+          title: isBaby ? "It's a Baby!" : "Transaction",
+          message: isBaby
+            ? "You're about to add a new baby. This will increase your children count and update your expenses."
+            : `Apply transaction: ${transactionName}?`,
+          confirmText: isBaby ? "Add Baby" : "Confirm",
+          cancelText: "Cancel",
         };
+      
       } else if (scan.data.scanType === "Profession") {
         return {
           ...popupInfo,
@@ -133,6 +139,7 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
         confirmText: `Ok`,
         cancelText: `Cancel`,
       };
+    
     }
   };
 
@@ -227,7 +234,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
     backgroundColor: "rgba(255,255,255,0)",
-    borderColor: Theme.CFL_white,
+    borderColor: "rgba(255, 255, 255, 0)",
     borderWidth: 2,
     borderRadius: 12,
   },

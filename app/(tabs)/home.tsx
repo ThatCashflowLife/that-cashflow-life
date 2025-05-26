@@ -16,7 +16,7 @@ import ScannerButton from "../components/QrCodeScanner/ScannerButton";
 import {
   createProfessionTransaction,
   populateFirstProfession,
-  populateLaterProfession
+  populateLaterProfession, addChildToUser, createBabyTransaction
 } from "../components/QrCodeScanner/ScannerLogic";
 import LatestTransaction from "../components/TransactionLog/LatestTransaction";
 import FinancialOverview, { calculateNetWorth } from "../components/UserFinances/FinancialOverview";
@@ -30,7 +30,6 @@ export const Home = () => {
   // this will get the data from a qr scan
   const handleScan = (data: QRData) => {
     if (data.scanType === "Profession") {
-      // if this is their first job of the game
       if (user.profession === "Profession" || user.profession === "") {
         setUser(populateFirstProfession(data, user));
         calculateNetWorth(user, setUser);
@@ -38,10 +37,16 @@ export const Home = () => {
         setUser(populateLaterProfession(data, user));
       }
       const newJobTransaction = createProfessionTransaction(data);
-      // Add transaction to global state
       addTransactions([newJobTransaction]);
     } else if (data.scanType === "Transaction") {
-      // add logic for determining transaction type, etc..
+      if (data.name === "New Baby") {
+        const updatedUser = addChildToUser(user);
+        const babyTransaction = createBabyTransaction(user);
+        setUser(updatedUser);
+        console.log("Updated user:", updatedUser);
+
+        addTransactions([babyTransaction]);
+      }
     }
   };
 

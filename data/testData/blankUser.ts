@@ -21,8 +21,9 @@ const blankUser: User = {
     "Car Payment": 0,
     "Credit Card Payment": 0,
     "Retail Spending": 0,
+    "Per Child Expense":0,
     Other: 0,
-    "Per Child Expense": 0,
+    Children:0,
   },
   Assets: {
     Savings: 0,

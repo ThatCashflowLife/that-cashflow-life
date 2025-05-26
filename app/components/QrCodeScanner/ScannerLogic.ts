@@ -1,7 +1,11 @@
 import Profession from "../../../interfaces/Profession";
+import allProfessions from "../../../data/Professions";
 import Transaction from "../../../interfaces/Transaction";
 import User, { Icon } from "../../../interfaces/User";
 import formatTimestamp from "../../../utils/timeUtil";
+
+
+
 
 /**
  * Get the icon name that matches the profession name,
@@ -98,5 +102,61 @@ export const createProfessionTransaction = (scannedProfession: Profession): Tran
   };
   return newJobTransaction;
 }
+/**
+ * Creates transaction for a new baby
+ * @param scannedTransaction
+ * @returns transaction object
+ */
+export const createBabyTransaction = (currentUser: User): Transaction => {
+
+  const profession = allProfessions.find(
+    (p) => p.name === currentUser.profession
+  );
+
+  const perChildExpense = profession?.expenses?.["Per Child Expense"]  || 0;
+
+  const babyTransaction: Transaction = {
+    scanType: "Transaction",
+    name: "New Baby",
+    timestamp: formatTimestamp(new Date().toISOString()),
+    type: "expense",
+    description: `Player had a child.`,
+    amount: -perChildExpense, // dynamically calculated
+    fieldName: "Children",
+  };
+
+  return babyTransaction;
+};
+
+/**
+ * Increments the user's child count and updates the Children expense
+ * based on the Per Child Expense defined in their profession data.
+ *
+ * @param currentUser - The current user object
+ * @returns updated user object with incremented children and updated expenses
+ */
+export const addChildToUser = (currentUser: User): User => {
+  const updatedChildren = currentUser.Children + 1;
+
+  // Find matching profession data
+  const professionData: Profession | undefined = allProfessions.find(
+    (p) => p.name === currentUser.profession
+  );
+
+  // Default to 0 if not defined
+  const perChildExpense = professionData?.expenses?.["Per Child Expense"] || 0;
+
+  // Update user's children and child-related expense
+  return {
+    ...currentUser,
+    Children: updatedChildren,
+    expenses: {
+      ...currentUser.expenses,
+      Children: perChildExpense * updatedChildren,
+    },
+  };
+};
+
+
 
 export default populateFirstProfession;

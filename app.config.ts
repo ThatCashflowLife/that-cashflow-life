@@ -6,11 +6,11 @@ const defineConfig = ({ config }: ConfigContext): ExpoConfig => ({
   slug: "cashflow-life",
   version: "1.0.1",
   orientation: "portrait",
-  icon: "./app/assets/icons/cashFlowLifeIcon.png",
+  icon: "./app/assets/icons/That-Cashflow-LIFE.png",
   scheme: "cashflowlife",
   newArchEnabled: true,
   splash: {
-    image: "./app/assets/icons/cashFlowLifeIcon.png",
+    image: "./app/assets/icons/That-Cashflow-LIFE.png",
     resizeMode: "cover",
     backgroundColor: "#121212",
   },
@@ -20,7 +20,7 @@ const defineConfig = ({ config }: ConfigContext): ExpoConfig => ({
   },
   android: {
     adaptiveIcon: {
-      foregroundImage: "./app/assets/icons/cashFlowLifeIcon.png",
+      foregroundImage: "./app/assets/icons/That-Cashflow-LIFE.png",
       backgroundColor: "#121212",
     },
     package: "com.thatcashflowlife.cashflowlife",
@@ -28,7 +28,7 @@ const defineConfig = ({ config }: ConfigContext): ExpoConfig => ({
   web: {
     bundler: "metro",
     output: "static",
-    favicon: "./app/assets/icons/cashFlowLifeIcon.png",
+    favicon: "./app/assets/icons/That-Cashflow-LIFE.png",
   },
   plugins: [
     "expo-router",
