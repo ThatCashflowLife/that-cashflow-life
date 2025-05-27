@@ -87,19 +87,20 @@ Ensure you have the following installed:
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
+- Merge pull request #1 from ThatCashflowLife/auto-update-readme-15274651966 (ThatCashflowLife)
+- Auto-update README for commit: update app (ThatCashflowLife)
 - update app (Randal Morrow)
-- Update update-readme.yml (Randal Morrow)
-- Update update-readme.yml (Randal Morrow)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
 - [@rmorrow23](https://github.com/rmorrow23) (⭐ 21 commits)
 - [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 14 commits)
 - [@D-flyRobotics](https://github.com/D-flyRobotics) (⭐ 2 commits)
+- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 2 commits)
 - [@expo-bot](https://github.com/expo-bot) (⭐ 1 commits)
 - [@rivasjeremy](https://github.com/rivasjeremy) (⭐ 1 commits)
 
 
 ---
 
-_Last updated: 2025-05-27 07:41:47 -0400_
+_Last updated: 2025-05-27 08:01:12 -0400_
