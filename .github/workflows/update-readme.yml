@@ -69,7 +69,7 @@ jobs:
           branch: auto-update-readme-${{ github.run_id }}
           delete-branch: true
           title: "Auto-update README"
-          assignees: "Nathanvititoe"
+          assignees: "ThatCashflowLife"
           body: |
             This PR updates the README automatically.
 
