@@ -8,7 +8,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View,Image,
 } from "react-native";
 
 import blankUser from "../../../data/testData/blankUser";
@@ -91,7 +91,11 @@ const Header = () => {
         {/* Header Text Container */}
         <View style={styles.headerText}>
           {/* Title */}
-          <Text style={styles.title}>Cashflow Life</Text>
+          <Image
+            style={styles.logo}
+            source={require("app/assets/icons/CashflowLife-text.png")}
+            resizeMode="contain"
+          />
 
           {/* Username display */}
           {isEditing ? (
@@ -119,7 +123,7 @@ const Header = () => {
           activeOpacity={0.7}
           ref={menuButtonRef}
         >
-          <Feather name="menu" size={30} color={Theme.CFL_black} />
+          <Feather name="menu" size={40} color={Theme.CFL_black} />
         </TouchableOpacity>
       </View>
 
@@ -149,37 +153,35 @@ const Header = () => {
 const styles = StyleSheet.create({
   // header container
   header: {
-    marginTop: 5,
+    marginTop: 0,
     width: "100%",
     backgroundColor: Theme.CFL_green,
-    padding: 30,
-    alignItems: "center",
+    padding: 10,
+    alignItems: "flex-start",
     justifyContent: "center",
     zIndex: 1000,
   },
   // header txt
   headerText: {
-    fontSize: 24,
-    fontWeight: "bold",
     color: Theme.CFL_yellow,
     alignItems: "center",
-    maxWidth: 200,
+    flexDirection: "row",
   },
-  // CashFlow Life title
-  title: {
-    fontSize: 32,
-    fontWeight: "bold",
-    color: Theme.CFL_yellow,
-    textAlign: "center",
-    fontFamily: Theme.CFL_title_font,
+  // CashFlow Life logo
+  logo: {
+    width: 150,
+    height: 60,
+    marginTop: 20,
+    marginRight: 30,
+    marginLeft: -10,
   },
   // username txt
   username: {
-    fontSize: 16,
+    fontSize: 20,
     color: Theme.CFL_dark_text,
     fontFamily: Theme.CFL_primary_font,
     textAlign: "center",
-    marginTop: 4,
+    marginTop: 10,
   },
   // username txt while editing
   usernameInput: {
@@ -198,6 +200,7 @@ const styles = StyleSheet.create({
     padding: 8,
     position: "absolute",
     right: 20,
+    top:30,
   },
 });
 

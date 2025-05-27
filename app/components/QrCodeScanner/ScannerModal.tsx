@@ -1,4 +1,3 @@
-// import necessary libraries/methods and components
 import { BarcodeScanningResult, CameraView } from "expo-camera";
 import React, { useState } from "react";
 import {
@@ -9,31 +8,27 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
-// import AirlinePilotData from "../../../data/Professions/AirlinePilot/Airline_Pilot.json";
-// import DoctorData from "../../../data/Professions/Doctor/Doctor.json";
-// import TruckDriverData from "../../../data/Professions/TruckDriver/Truck_Driver.json";
 import QRType from "../../../interfaces/qrTypes";
 import Theme from "../../../interfaces/theme";
 import { Icon } from "../../../interfaces/User";
 import ConfirmationModal from "../features/ConfirmationModal";
 import { getIcon } from "./ScannerLogic";
+import LoanDialog from "../features/LoanDialog";
 
-// Scanner modal properties definition
 interface ScannerModalProps {
   visible: boolean;
   onClose: () => void;
   onScan: (scan: QRType) => void;
 }
-// ScannerModal function, passing it the properties object
+
 const ScannerModal: React.FC<ScannerModalProps> = ({
   visible,
   onClose,
   onScan,
 }) => {
-  // Logic/Functions Section
-  const [isScanning, setIsScanning] = useState(true); // state to know when it is actively scanning
-  const [popupVisible, setPopupVisible] = useState(false); // state controls post scan popup
+  const [isScanning, setIsScanning] = useState(true);
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [isLoan, setIsLoan] = useState(false);
   const [scanData, setScanData] = useState<QRType | null>(null);
   const [popupInfo, setPopupInfo] = useState<{
     title: string;
@@ -43,23 +38,6 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
     professionIcon?: Icon;
   }>({ title: "", message: "", confirmText: "", cancelText: "" });
 
-  // // TODO: remove after finalized functionality
-  // const simulatedResult: BarcodeScanningResult = {
-  //   type: "qr",
-  //   data: JSON.stringify(AirlinePilotData),
-  //   cornerPoints: [
-  //     { x: 100, y: 100 },
-  //     { x: 200, y: 100 },
-  //     { x: 200, y: 200 },
-  //     { x: 100, y: 200 },
-  //   ],
-  //   bounds: {
-  //     origin: { x: 100, y: 100 },
-  //     size: { width: 100, height: 100 },
-  //   },
-  // };
-
-  // how app will handle a scanned qr code
   const handleScan = (result: BarcodeScanningResult) => {
     if (!isScanning) return;
 
@@ -69,32 +47,28 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
         type: result.type,
         data: JSON.parse(result.data),
       };
-      // get popup info based on scan type
+
       const popup = getPopupMessage(scan);
       if (popup) setPopupInfo(popup);
 
-      // open popup and set state data for scan
+      const transactionName = scan.data.name?.toLowerCase() || "";
+      setIsLoan(transactionName.includes("loan"));
+
       setPopupVisible(true);
       setScanData(scan);
     } catch (error) {
       console.error("QR does not contain valid JSON data", error);
-      Alert.alert(
-        "QR Code Error", // title
-        "QR Code does not contain the expected format.", // message
-        [
-          {
-            text: "OK",
-            onPress: () => {
-              // allow rescan after clearing error
-              setIsScanning(true);
-            },
+      Alert.alert("QR Code Error", "QR Code does not contain the expected format.", [
+        {
+          text: "OK",
+          onPress: () => {
+            setIsScanning(true);
           },
-        ]
-      );
+        },
+      ]);
     }
   };
 
-  // figures out if scanned data is transaction, profession or other and returns a popup info obj
   const getPopupMessage = (
     scan: QRType
   ):
@@ -108,19 +82,35 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
     | undefined => {
     if (scan && scan.data) {
       if (scan.data.scanType === "Transaction") {
-        const transactionName = scan.data.name || "";
-        const isBaby = transactionName.toLowerCase().includes("baby");
+        const transactionName = scan.data.name?.toLowerCase() || "";
+        const isBaby = transactionName.includes("baby");
+        const isLoan = transactionName.includes("loan");
+
+        const title = isBaby
+          ? "It's a Baby!"
+          : isLoan
+            ? "You've Been Approved!"
+            : "Transaction";
+
+        const message = isBaby
+          ? "You're about to add a new baby. This will increase your children count and update your expenses."
+          : isLoan
+            ? "You're about to take out a loan. This will increase your loan count and increase your expenses."
+            : `Apply transaction: ${scan.data.name}?`;
+
+        const confirmText = isBaby
+          ? "Add Baby"
+          : isLoan
+            ? "Accept Loan"
+            : "Confirm";
 
         return {
           ...popupInfo,
-          title: isBaby ? "It's a Baby!" : "Transaction",
-          message: isBaby
-            ? "You're about to add a new baby. This will increase your children count and update your expenses."
-            : `Apply transaction: ${transactionName}?`,
-          confirmText: isBaby ? "Add Baby" : "Confirm",
+          title,
+          message,
+          confirmText,
           cancelText: "Cancel",
         };
-      
       } else if (scan.data.scanType === "Profession") {
         return {
           ...popupInfo,
@@ -131,7 +121,7 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
           cancelText: `Cancel`,
         };
       }
-      // user case here?
+
       return {
         ...popupInfo,
         title: "",
@@ -139,7 +129,6 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
         confirmText: `Ok`,
         cancelText: `Cancel`,
       };
-    
     }
   };
 
@@ -152,29 +141,19 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
     }
   };
 
-  // // TODO: remove after finalized functionality
-  // const testScan = () => {
-  //   handleScan(simulatedResult);
-  // };
-
-  // Tsx Section
   return (
-    // Modal to hold the CameraView
     <Modal
       visible={visible}
       onRequestClose={onClose}
       animationType="fade"
       presentationStyle="fullScreen"
     >
-      {/* Camera Container */}
       <View style={styles.container}>
-        {/* Camera */}
         <CameraView
           style={styles.camera}
           facing="back"
           onBarcodeScanned={isScanning ? handleScan : undefined}
         >
-          {/* Overlay with QR scan frame */}
           <View style={styles.backgroundOverlay}>
             <View style={styles.innerOverlay}>
               <View style={styles.scanFrame} />
@@ -182,28 +161,46 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
             </View>
           </View>
 
-          {/* TODO: FIX THIS AFTER TESTING */}
-          {/* Close button */}
           <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-            {/* <TouchableOpacity style={styles.closeButton} onPress={testScan}> */}
             <Text style={styles.closeText}>Close</Text>
           </TouchableOpacity>
 
-          {/* Post Scan Confirmation Popup */}
-          {popupVisible && (
-            <ConfirmationModal
+          {popupVisible && isLoan ? (
+            <LoanDialog
               isVisible={popupVisible}
-              title={popupInfo.title ? popupInfo.title : undefined}
-              professionIcon={
-                popupInfo.professionIcon ? popupInfo.professionIcon : undefined
-              }
-              message={popupInfo.message}
-              onConfirm={handleScanConfirm}
+              onSubmit={(loanAmount: string, paymentAmount: string, purpose: string) => {
+                setPopupVisible(false);
+                onScan({
+                  ...scanData!,
+                  data: {
+                    ...scanData!.data,
+                    loanDetails: {
+                      amount: parseFloat(loanAmount),
+                      payment: parseFloat(paymentAmount),
+                      purpose,
+                    },
+                  },
+                });
+              }}
               onCancel={() => {
                 setPopupVisible(false);
                 setIsScanning(true);
               }}
             />
+          ) : (
+            popupVisible && (
+              <ConfirmationModal
+                isVisible={popupVisible}
+                title={popupInfo.title}
+                professionIcon={popupInfo.professionIcon}
+                message={popupInfo.message}
+                onConfirm={handleScanConfirm}
+                onCancel={() => {
+                  setPopupVisible(false);
+                  setIsScanning(true);
+                }}
+              />
+            )
           )}
         </CameraView>
       </View>
@@ -211,25 +208,20 @@ const ScannerModal: React.FC<ScannerModalProps> = ({
   );
 };
 
-// Styling Section
 const styles = StyleSheet.create({
-  // Modal Container
   container: {
     flex: 1,
     backgroundColor: Theme.CFL_card_background,
   },
-  // Camera
   camera: {
     flex: 1,
   },
-  // overlay/background
   backgroundOverlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: Theme.CFL_camera_overlay,
     justifyContent: "center",
     alignItems: "center",
   },
-  // inner overlay
   innerOverlay: {
     width: 300,
     height: 300,
@@ -238,7 +230,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 12,
   },
-  // scanner frame
   scanFrame: {
     width: 300,
     height: 300,
@@ -247,7 +238,6 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0)",
     borderRadius: 12,
   },
-  // text below frame
   scanText: {
     fontFamily: Theme.CFL_primary_font,
     color: Theme.CFL_white,
@@ -256,7 +246,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingHorizontal: 20,
   },
-  // close scanner btn
   closeButton: {
     position: "absolute",
     top: 50,
@@ -266,7 +255,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     zIndex: 2,
   },
-  // Close camera btn txt
   closeText: {
     fontFamily: Theme.CFL_primary_font,
     color: Theme.CFL_white,
@@ -275,5 +263,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// export to call in ScannerButton.tsx
 export default ScannerModal;

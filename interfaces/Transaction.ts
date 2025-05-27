@@ -1,3 +1,4 @@
+import { LoanDetails } from "./LoanDetails";
 export interface Transaction {
   scanType: "Transaction";
   name: string;
@@ -6,6 +7,7 @@ export interface Transaction {
   description: string;
   amount: number;
   fieldName: string;
+  loanDetails?: LoanDetails;
 }
 
 export default Transaction;

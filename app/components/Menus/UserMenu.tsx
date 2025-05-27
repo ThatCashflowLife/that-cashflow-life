@@ -11,6 +11,7 @@ interface UserMenuProps {
   onClose: () => void;
   onNewGame: () => void;
   onEditUsername: () => void;
+  onAddLoan: () => void;
   anchorPosition: { top: number; right: number }; // positioning relative to the menu btn
 }
 
@@ -19,6 +20,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
   onClose,
   onNewGame,
   onEditUsername,
+  onAddLoan,
   anchorPosition,
 }) => {
   // Logic/Functions Section

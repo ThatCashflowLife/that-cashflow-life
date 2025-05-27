@@ -30,6 +30,7 @@ export const formatTimestamp = (input: string | Date) => {
         year: "numeric",
         hour: "numeric",
         minute: "numeric",
+        second:"numeric",
         hour12: true,
       });
     } else {

@@ -73,7 +73,9 @@ const FinancialStatement = () => {
             {Object.entries(user.expenses).map(([key, value]) => (
               <View key={key} style={styles.row}>
                 <Text style={styles.label}>{key}:</Text>
-                <Text style={styles.value}>{formatUSD(value)}</Text>
+                <Text style={styles.value}>
+                  {key === "Loans" ? value : formatUSD(value)}
+                </Text>
               </View>
             ))}
             <View style={[styles.row, styles.totalRow]}>
@@ -84,6 +86,7 @@ const FinancialStatement = () => {
             </View>
           </View>
         </View>
+
 
         {/* Assets */}
         <View style={styles.card}>

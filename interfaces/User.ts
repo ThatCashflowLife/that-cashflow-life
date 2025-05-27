@@ -18,6 +18,8 @@ export interface User {
   netWorth?: number; // possibly undefined when scanned in, calculated after
   Children: number;
   ChildCost: number;
+  Loans: number;
+  LoanPayment: number;
   professionIcon: Icon; // this should be the name of the expo/vector icon for the profession and which library its from
 }
 export interface Icon {

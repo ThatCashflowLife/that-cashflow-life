@@ -156,6 +156,76 @@ export const addChildToUser = (currentUser: User): User => {
     },
   };
 };
+/**
+ * Creates transaction for a new loan
+ * @param scannedTransaction
+ * @returns transaction object
+ */
+export const createLoanTransaction = (loanDetails: {
+  amount: number;
+  payment: number;
+  purpose: string;
+}): Transaction => {
+  const timestamp = formatTimestamp(new Date().toISOString());
+
+  return {
+    scanType: "Transaction",
+    name: `Loan: ${loanDetails.purpose}`,
+    timestamp,
+    type: "expense",
+    description: `Loan for ${loanDetails.purpose}`,
+    amount: -loanDetails.amount,
+    fieldName: "Loan",
+  };
+};
+
+
+
+
+/**
+ * Increments the user's loan count and updates the Loans expense
+ * based on the Per Loan Expense defined in their profession data.
+ *
+ * @param currentUser - The current user object
+ * @returns updated user object with incremented loans and updated expenses
+ */
+export const addLoanToUser = (
+  currentUser: User,
+  loanDetails: {
+    amount: number;
+    payment: number;
+    purpose: string;
+  }
+): User => {
+  const existingLoan = currentUser.Liabilities.Loan || 0;
+  const existingLoanPayment = currentUser.expenses["Loan Payment"] || 0;
+  const existingLoanCount = currentUser.expenses["Loans"] || 0;
+  console.log("Loan details:", loanDetails);
+  console.log("Current liabilities:", currentUser.Liabilities);
+  const updatedLiabilities = {
+    ...currentUser.Liabilities,
+    Loan: existingLoan + loanDetails.amount, // update total Loan value
+  };
+
+  const updatedExpenses = {
+    ...currentUser.expenses,
+    "Loan Payment": existingLoanPayment + loanDetails.payment, // update monthly payment total
+    "Loans": existingLoanCount + 1, // increment loan counter
+  };
+
+  console.log("Loan details:", loanDetails);
+  console.log("Updated liabilities:", updatedLiabilities);
+  return {
+    ...currentUser,
+    Liabilities: updatedLiabilities,
+    expenses: updatedExpenses,
+    Loans: (currentUser.Loans || 0) + 1, // for top-level field if needed
+    LoanPayment: (currentUser.LoanPayment || 0) + loanDetails.payment, // if you want this tracked globally too
+  };
+};
+
+
+
 
 
 

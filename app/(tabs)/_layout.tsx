@@ -25,10 +25,10 @@ export const TabLayout = () => {
                 headerShown: false,
                 // green tabbar active colors
                 tabBarActiveTintColor: Theme.CFL_dark_text,
-                tabBarActiveBackgroundColor: "#3C8F3A",
+                tabBarActiveBackgroundColor: Theme.CFL_green,
                 // green tabbar inactive colors
-                tabBarInactiveTintColor: Theme.CFL_black,
-                tabBarInactiveBackgroundColor: Theme.CFL_green,
+                tabBarInactiveTintColor: Theme.CFL_white,
+                tabBarInactiveBackgroundColor: Theme.CFL_black,
                 // icon size
                 tabBarIconStyle: { width: 24, height: 24, marginTop: 5 },
                 // more styling

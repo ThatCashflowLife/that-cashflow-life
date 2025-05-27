@@ -1,11 +1,11 @@
 // import necessary libraries/methods and components
-import React from "react";
+import React, { useState } from "react";
 import {
   ActivityIndicator,
   ScrollView,
   StyleSheet,
   Text,
-  View,
+  View,TouchableOpacity,
 } from "react-native";
 
 import { QRData } from "../../interfaces/qrTypes";
@@ -16,16 +16,20 @@ import ScannerButton from "../components/QrCodeScanner/ScannerButton";
 import {
   createProfessionTransaction,
   populateFirstProfession,
-  populateLaterProfession, addChildToUser, createBabyTransaction
+  populateLaterProfession, addChildToUser, createBabyTransaction, addLoanToUser, createLoanTransaction
 } from "../components/QrCodeScanner/ScannerLogic";
 import LatestTransaction from "../components/TransactionLog/LatestTransaction";
 import FinancialOverview, { calculateNetWorth } from "../components/UserFinances/FinancialOverview";
+import LoanDialog from "../components/features/LoanDialog";
 
 
 export const Home = () => {
   // state/ref management section
   const { user, setUser } = useUser();
   const { addTransactions } = useTransactions();
+  const [isLoanDialogVisible, setIsLoanDialogVisible] = useState(false);
+
+
 
   // this will get the data from a qr scan
   const handleScan = (data: QRData) => {
@@ -43,11 +47,15 @@ export const Home = () => {
         const updatedUser = addChildToUser(user);
         const babyTransaction = createBabyTransaction(user);
         setUser(updatedUser);
-        console.log("Updated user:", updatedUser);
-
         addTransactions([babyTransaction]);
+      } else if (data.name === "New Loan" && data.loanDetails) {
+        const updatedUser = addLoanToUser(user, data.loanDetails);
+        const loanTransaction = createLoanTransaction(data.loanDetails);
+        setUser(updatedUser);
+        addTransactions([loanTransaction]);
       }
     }
+    
   };
 
   if (!user) {
@@ -71,6 +79,16 @@ export const Home = () => {
         <View style={styles.card}>
           <ScannerButton onScan={handleScan} />
         </View>
+        {/* Add Loan Button */}
+        <View style={styles.card}>
+          <TouchableOpacity
+            style={styles.loanButton}
+            onPress={() => setIsLoanDialogVisible(true)}
+          >
+            <Text style={styles.loanButtonText}>Add Loan Manually</Text>
+          </TouchableOpacity>
+        </View>
+
 
         {/* Financial Overview */}
         <View style={styles.card}>
@@ -81,7 +99,33 @@ export const Home = () => {
           <LatestTransaction />
         </View>
       </View>
+      <LoanDialog
+        isVisible={isLoanDialogVisible}
+        onSubmit={(loanAmount: number, paymentAmount: number, purpose: string) => {
+          const updatedUser = addLoanToUser(user, {
+            amount: loanAmount,
+            payment: paymentAmount,
+            purpose: purpose,
+          });
+
+          const loanTransaction = createLoanTransaction({
+            amount: loanAmount,
+            payment: paymentAmount,
+            purpose,
+          });
+
+          setUser(updatedUser);
+          addTransactions([loanTransaction]);
+          calculateNetWorth(updatedUser, setUser);
+          setIsLoanDialogVisible(false);
+          
+        }}
+              
+        onCancel={() => setIsLoanDialogVisible(false)}
+      />
+
     </ScrollView>
+    
   );
 };
 
@@ -119,6 +163,20 @@ const styles = StyleSheet.create({
     color: Theme.CFL_light_text,
     marginTop: 50,
   },
+  loanButton: {
+    backgroundColor: Theme.CFL_green,
+    padding: 12,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+
+  loanButtonText: {
+    color: Theme.CFL_white,
+    fontSize: 16,
+    fontWeight: "600",
+    fontFamily: Theme.CFL_primary_font,
+  },
+  
 });
 
 export default Home;

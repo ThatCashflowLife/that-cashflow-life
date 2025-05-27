@@ -7,6 +7,10 @@ export default interface MonthlyExpenses {
   "Retail Spending": number;
   "Other": number;
   "Per Child Expense": number;
-  "Children"?: number;         //  Optional
+  "Per Loan Expense": number;
+  "Children"?: number;        //  Optional
+  "Loans"?: number;
+  "Loan Payment"?: number;
+
 }
 
