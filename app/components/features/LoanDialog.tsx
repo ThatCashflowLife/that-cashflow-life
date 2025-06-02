@@ -22,13 +22,13 @@ const LoanDialog = ({ isVisible, onSubmit, onCancel }) => {
 
         const parsedAmount = parseFloat(text);
         if (!isNaN(parsedAmount)) {
-            const calculatedPayment = (parsedAmount / 10).toFixed(2); // Simple 10% rule
+            const calculatedPayment = (parsedAmount / 12).toFixed(2); // Divide by 12 months
             setPayment(calculatedPayment);
         } else {
             setPayment(""); // Clear payment if invalid input
         }
     };
-    
+
     const handleFocus = (field: keyof typeof focusAnim) => {
         Animated.timing(focusAnim[field], {
             toValue: 1,
