@@ -88,15 +88,15 @@ Ensure you have the following installed:
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
-- Merge pull request #7 from ThatCashflowLife/auto-update-readme-15393694532 (ThatCashflowLife)
-- Auto-update README for commit: Merge pull request #6 from ThatCashflowLife/auto-update-readme-15393669197 (ThatCashflowLife)
-- Merge pull request #6 from ThatCashflowLife/auto-update-readme-15393669197 (ThatCashflowLife)
+- Merge branch 'main' of https://github.com/thatcashflowlife/that-cashflow-life (Randal Morrow)
+- Update LoanDialog.tsx (Randal Morrow)
+- Merge pull request #8 from ThatCashflowLife/auto-update-readme-15393709660 (ThatCashflowLife)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
 - [@rmorrow23](https://github.com/rmorrow23) (⭐ 24 commits)
 - [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 14 commits)
-- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 13 commits)
+- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 11 commits)
 - [@D-flyRobotics](https://github.com/D-flyRobotics) (⭐ 2 commits)
 - [@expo-bot](https://github.com/expo-bot) (⭐ 1 commits)
 - [@rivasjeremy](https://github.com/rivasjeremy) (⭐ 1 commits)
@@ -104,4 +104,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-06-02 09:35:42 -0400_
+_Last updated: 2025-06-02 10:07:30 -0400_
