@@ -57,41 +57,44 @@ Ensure you have the following installed:
 ## 📦 Dependencies
 - **@expo/server**: ^0.5.1
 - **@expo/vector-icons**: ^14.0.4
-- **@react-native-async-storage/async-storage**: 1.23.1
+- **@react-native-async-storage/async-storage**: 2.1.2
 - **eas**: ^0.1.0
-- **expo**: ~52.0.38
-- **expo-blur**: ~14.0.3
-- **expo-camera**: ~16.0.18
+- **expo**: ^53.0.9
+- **expo-blur**: ~14.1.4
+- **expo-camera**: ~16.1.6
 - **expo-config**: ^1.0.0
-- **expo-constants**: ~17.0.7
-- **expo-dev-client**: ~5.0.14
+- **expo-constants**: ~17.1.6
+- **expo-dev-client**: ~5.1.8
 - **expo-doctor**: ^1.12.5
-- **expo-haptics**: ~14.0.1
-- **expo-insights**: ~0.8.2
-- **expo-linking**: ~7.0.5
+- **expo-haptics**: ~14.1.4
+- **expo-insights**: ~0.9.3
+- **expo-linking**: ~7.1.5
 - **expo-module-scripts**: ^4.0.4
-- **expo-router**: ~4.0.19
-- **expo-symbols**: ~0.2.2
-- **expo-system-ui**: ~4.0.8
-- **expo-updates**: ~0.27.4
-- **expo-web-browser**: ~14.0.2
+- **expo-router**: ^5.0.7
+- **expo-symbols**: ~0.4.4
+- **expo-system-ui**: ~5.0.7
+- **expo-updates**: ~0.28.13
+- **expo-web-browser**: ~14.1.6
+- **fs-extra**: ^11.3.0
 - **metro-config**: ^0.81.1
-- **react**: 18.3.1
-- **react-dom**: 18.3.1
-- **react-native**: 0.76.7
-- **react-native-safe-area-context**: 4.12.0
-- **react-native-web**: ~0.19.13
+- **react**: 19.0.0
+- **react-dom**: 19.0.0
+- **react-native**: 0.79.2
+- **react-native-safe-area-context**: 5.4.0
+- **react-native-screens**: ^4.10.0
+- **react-native-web**: ^0.20.0
 - **react-refresh**: ^0.16.0
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
-- Auto-update README (#68) (Nathan Vititoe)
-- Auto-update README for commit: Auto-update README (#67) (ClaytonHin)
-- Auto-update README (#67) (Nathan Vititoe)
+- Merge pull request #3 from ThatCashflowLife/auto-update-readme-15274705757 (ThatCashflowLife)
+- Auto-update README for commit: Merge pull request #2 from ThatCashflowLife/auto-update-readme-15274682832 (ThatCashflowLife)
+- Merge pull request #2 from ThatCashflowLife/auto-update-readme-15274682832 (ThatCashflowLife)
 
 ## 👥 Contributors
-- [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 203 commits)
-- [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 13 commits)
+- [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
+- [@rmorrow23](https://github.com/rmorrow23) (⭐ 21 commits)
+- [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 14 commits)
 - [@D-flyRobotics](https://github.com/D-flyRobotics) (⭐ 2 commits)
 - [@expo-bot](https://github.com/expo-bot) (⭐ 1 commits)
 - [@rivasjeremy](https://github.com/rivasjeremy) (⭐ 1 commits)
@@ -99,4 +102,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-03-26 00:35:11 -0400_
+_Last updated: 2025-05-27 08:02:53 -0400_
