@@ -197,20 +197,19 @@ export const addLoanToUser = (
     purpose: string;
   }
 ): User => {
-  const existingLoan = currentUser.Liabilities.Loan || 0;
+  const existingLoan = currentUser.Liabilities["Personal Loans"] || 0;
   const existingLoanPayment = currentUser.expenses["Loan Payment"] || 0;
-  const existingLoanCount = currentUser.expenses["Loans"] || 0;
   console.log("Loan details:", loanDetails);
   console.log("Current liabilities:", currentUser.Liabilities);
   const updatedLiabilities = {
     ...currentUser.Liabilities,
-    Loan: existingLoan + loanDetails.amount, // update total Loan value
+    "Personal Loans": existingLoan + loanDetails.amount, // update total Loan value
   };
 
   const updatedExpenses = {
     ...currentUser.expenses,
     "Loan Payment": existingLoanPayment + loanDetails.payment, // update monthly payment total
-    "Loans": existingLoanCount + 1, // increment loan counter
+    
   };
 
   console.log("Loan details:", loanDetails);
@@ -219,7 +218,6 @@ export const addLoanToUser = (
     ...currentUser,
     Liabilities: updatedLiabilities,
     expenses: updatedExpenses,
-    Loans: (currentUser.Loans || 0) + 1, // for top-level field if needed
     LoanPayment: (currentUser.LoanPayment || 0) + loanDetails.payment, // if you want this tracked globally too
   };
 };
