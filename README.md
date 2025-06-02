@@ -58,6 +58,7 @@ Ensure you have the following installed:
 - **@expo/server**: ^0.5.1
 - **@expo/vector-icons**: ^14.0.4
 - **@react-native-async-storage/async-storage**: 2.1.2
+- **@react-native-picker/picker**: ^2.11.0
 - **eas**: ^0.1.0
 - **expo**: ^53.0.9
 - **expo-blur**: ~14.1.4
@@ -87,14 +88,15 @@ Ensure you have the following installed:
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
-- Merge pull request #3 from ThatCashflowLife/auto-update-readme-15274705757 (ThatCashflowLife)
-- Auto-update README for commit: Merge pull request #2 from ThatCashflowLife/auto-update-readme-15274682832 (ThatCashflowLife)
-- Merge pull request #2 from ThatCashflowLife/auto-update-readme-15274682832 (ThatCashflowLife)
+- Merge branch 'main' of https://github.com/thatcashflowlife/that-cashflow-life (Randal Morrow)
+- Updated Loan Form (Randal Morrow)
+- Merge pull request #4 from ThatCashflowLife/auto-update-readme-15274717359 (ThatCashflowLife)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
-- [@rmorrow23](https://github.com/rmorrow23) (⭐ 21 commits)
+- [@rmorrow23](https://github.com/rmorrow23) (⭐ 23 commits)
 - [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 14 commits)
+- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 8 commits)
 - [@D-flyRobotics](https://github.com/D-flyRobotics) (⭐ 2 commits)
 - [@expo-bot](https://github.com/expo-bot) (⭐ 1 commits)
 - [@rivasjeremy](https://github.com/rivasjeremy) (⭐ 1 commits)
@@ -102,4 +104,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-05-27 08:02:53 -0400_
+_Last updated: 2025-06-02 09:32:30 -0400_
