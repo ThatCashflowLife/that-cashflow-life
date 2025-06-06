@@ -88,14 +88,14 @@ Ensure you have the following installed:
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
+- Merge pull request #10 from ThatCashflowLife/auto-update-readme-15491103335 (ThatCashflowLife)
+- Auto-update README for commit: Merge branch 'main' of https://github.com/thatcashflowlife/that-cashflow-life (rmorrow23)
 - Merge branch 'main' of https://github.com/thatcashflowlife/that-cashflow-life (Randal Morrow)
-- Bug Fixes (Randal Morrow)
-- Merge pull request #9 from ThatCashflowLife/auto-update-readme-15394437063 (ThatCashflowLife)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
-- [@rmorrow23](https://github.com/rmorrow23) (⭐ 29 commits)
-- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 16 commits)
+- [@rmorrow23](https://github.com/rmorrow23) (⭐ 30 commits)
+- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 17 commits)
 - [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 14 commits)
 - [@D-flyRobotics](https://github.com/D-flyRobotics) (⭐ 2 commits)
 - [@expo-bot](https://github.com/expo-bot) (⭐ 1 commits)
@@ -104,4 +104,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-06-06 08:58:26 -0400_
+_Last updated: 2025-06-06 08:59:50 -0400_
