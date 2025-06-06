@@ -22,7 +22,12 @@ const LoanDialog = ({ isVisible, onSubmit, onCancel }) => {
 
         const parsedAmount = parseFloat(text);
         if (!isNaN(parsedAmount)) {
-            const calculatedPayment = (parsedAmount / 12).toFixed(2); // Divide by 12 months
+            const annualInterestRate = 0.10; // 10% APR
+            const monthlyInterestRate = annualInterestRate / 12; // 1% per month
+
+            const monthlyInterestPayment = parsedAmount * monthlyInterestRate;
+            const calculatedPayment = monthlyInterestPayment.toFixed(2);
+
             setPayment(calculatedPayment);
         } else {
             setPayment(""); // Clear payment if invalid input

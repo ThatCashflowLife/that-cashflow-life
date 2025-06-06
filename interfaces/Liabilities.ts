@@ -4,5 +4,6 @@ export default interface Liabilities {
   "Car Loans": number | number[];
   "Credit Card Loans": number | number[];
   "Retail Debt": number;
+  "Per Loan Expense": number;
   "Personal Loans": number;
 }

@@ -70,12 +70,15 @@ const FinancialStatement = () => {
         <View style={styles.card}>
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Monthly Expenses</Text>
-            {Object.entries(user.expenses).map(([key, value]) => (
-              <View key={key} style={styles.row}>
-                <Text style={styles.label}>{key}:</Text>
-                <Text style={styles.value}>{formatUSD(value)}</Text>
-              </View>
-            ))}
+            {Object.entries(user.expenses)
+              .filter(([key]) => key !== "Per Child Expense")  
+              .map(([key, value]) => (
+                <View key={key} style={styles.row}>
+                  <Text style={styles.label}>{key}:</Text>
+                  <Text style={styles.value}>{formatUSD(value)}</Text>
+                </View>
+              ))}
+
             <View style={[styles.row, styles.totalRow]}>
               <Text style={styles.totalLabel}>Total Expenses:</Text>
               <Text style={styles.negative}>

@@ -5,9 +5,8 @@ export default interface MonthlyExpenses {
   "Car Payment": number;
   "Credit Card Payment": number;
   "Retail Spending": number;
-  "Other": number;
   "Per Child Expense": number;
-  "Per Loan Expense": number;
+  "Other": number;
   "Children"?: number;
   "Loan Payment"?: number;
 

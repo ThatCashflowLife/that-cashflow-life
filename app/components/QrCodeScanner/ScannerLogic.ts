@@ -199,6 +199,8 @@ export const addLoanToUser = (
 ): User => {
   const existingLoan = currentUser.Liabilities["Personal Loans"] || 0;
   const existingLoanPayment = currentUser.expenses["Loan Payment"] || 0;
+  const expensesMonthly = currentUser.expenses;
+  console.log(expensesMonthly)
   console.log("Loan details:", loanDetails);
   console.log("Current liabilities:", currentUser.Liabilities);
   const updatedLiabilities = {

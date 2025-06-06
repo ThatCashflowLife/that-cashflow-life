@@ -21,7 +21,9 @@ export const calculateNetWorth = (user: User, setUser: Dispatch<SetStateAction<U
 // calculate total income (Salary + passive income) and total expenses (all expenses summed)
 export const calculateTotals = (user: User, setUser: Dispatch<SetStateAction<User>>) => {
   const totalIncome = addValuesTogether(user.income["Passive Income"]) + user.income.Salary
-  const totalExpenses = addValuesTogether(user.expenses);
+  const totalExpenses = Object.entries(user.expenses)
+    .filter(([key]) => key !== "Per Child Expense") // Exclude unwanted field
+    .reduce((sum, [_, value]) => sum + value, 0);
   setUser((prevUser) => ({ ...prevUser, totalIncome, totalExpenses }))
 }
 
@@ -134,7 +136,7 @@ const FinancialOverview = () => {
         <Text
           style={[
             styles.value,
-            user.netWorth ?? 0 >= 0 ? styles.positive : styles.negative,
+            user.netWorth ?? 0 >= 0 ? styles.negative : styles.positive,
           ]}
         >
           {formatUSD(user.netWorth ?? 0)}
