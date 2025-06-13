@@ -7,20 +7,18 @@ import {
   Text,
   View,TouchableOpacity,
 } from "react-native";
-
-import { QRData } from "../../interfaces/qrTypes";
 import Theme from "../../interfaces/theme";
 import { useTransactions } from "../components/context/TransactionProvider";
 import { useUser } from "../components/context/UserProvider";
-import ScannerButton from "../components/QrCodeScanner/ScannerButton";
-import {
-  createProfessionTransaction,
-  populateFirstProfession,
-  populateLaterProfession, addChildToUser, createBabyTransaction, addLoanToUser, createLoanTransaction
-} from "../components/QrCodeScanner/ScannerLogic";
+
 import LatestTransaction from "../components/TransactionLog/LatestTransaction";
 import FinancialOverview, { calculateNetWorth } from "../components/UserFinances/FinancialOverview";
 import LoanDialog from "../components/features/LoanDialog";
+import PaymentDialog from "../components/features/PaymentDialog";
+import { LoanCategory,PassiveIncomeCategory } from "../components/QrCodeScanner/ScannerLogic";
+import DealDialog from "../components/features/DealDialog";
+import formatUSD from "../../utils/currencyUtil";
+
 
 
 export const Home = () => {
@@ -28,35 +26,12 @@ export const Home = () => {
   const { user, setUser } = useUser();
   const { addTransactions } = useTransactions();
   const [isLoanDialogVisible, setIsLoanDialogVisible] = useState(false);
+  const [isPaymentDialogVisible, setIsPaymentDialogVisible] = useState(false);
+  const [isDealDialogVisible, setIsDealDialogVisible] = useState(false);
 
 
 
-  // this will get the data from a qr scan
-  const handleScan = (data: QRData) => {
-    if (data.scanType === "Profession") {
-      if (user.profession === "Profession" || user.profession === "") {
-        setUser(populateFirstProfession(data, user));
-        calculateNetWorth(user, setUser);
-      } else {
-        setUser(populateLaterProfession(data, user));
-      }
-      const newJobTransaction = createProfessionTransaction(data);
-      addTransactions([newJobTransaction]);
-    } else if (data.scanType === "Transaction") {
-      if (data.name === "New Baby") {
-        const updatedUser = addChildToUser(user);
-        const babyTransaction = createBabyTransaction(user);
-        setUser(updatedUser);
-        addTransactions([babyTransaction]);
-      } else if (data.name === "New Loan" && data.loanDetails) {
-        const updatedUser = addLoanToUser(user, data.loanDetails);
-        const loanTransaction = createLoanTransaction(data.loanDetails);
-        setUser(updatedUser);
-        addTransactions([loanTransaction]);
-      }
-    }
-    
-  };
+  
 
   if (!user) {
     return (
@@ -75,20 +50,32 @@ export const Home = () => {
       showsVerticalScrollIndicator={false}
     >
       <View style={styles.content}>
-        {/* Qr Scanner Button */}
-        <View style={styles.card}>
-          <ScannerButton onScan={handleScan} />
-        </View>
-        {/* Add Loan Button */}
-        <View style={styles.card}>
-          <TouchableOpacity
-            style={styles.loanButton}
-            onPress={() => setIsLoanDialogVisible(true)}
-          >
-            <Text style={styles.loanButtonText}>Add Loan Manually</Text>
-          </TouchableOpacity>
-        </View>
+       
 
+        {/* Paycheck Summary */}
+        <View style={styles.card}>
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Monthly Paycheck Summary</Text>
+            <View style={styles.row}>
+              <Text style={styles.label}>Salary + Passive Income:</Text>
+              <Text style={styles.value}>
+                {formatUSD(user.totalIncome ?? 0)}
+              </Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.label}>Total Expenses:</Text>
+              <Text style={styles.negative}>
+                {formatUSD(user.totalExpenses ?? 0)}
+              </Text>
+            </View>
+            <View style={[styles.row, styles.totalRow]}>
+              <Text style={styles.totalLabel}>Estimated Monthly Paycheck:</Text>
+              <Text style={styles.positive}>
+                {formatUSD((user.totalIncome ?? 0) - (user.totalExpenses ?? 0))}
+              </Text>
+            </View>
+          </View>
+        </View>
 
         {/* Financial Overview */}
         <View style={styles.card}>
@@ -99,30 +86,10 @@ export const Home = () => {
           <LatestTransaction />
         </View>
       </View>
-      <LoanDialog
-        isVisible={isLoanDialogVisible}
-        onSubmit={(loanAmount: number, paymentAmount: number, purpose: string) => {
-          const updatedUser = addLoanToUser(user, {
-            amount: loanAmount,
-            payment: paymentAmount,
-            purpose: purpose,
-          });
+      
 
-          const loanTransaction = createLoanTransaction({
-            amount: loanAmount,
-            payment: paymentAmount,
-            purpose,
-          });
 
-          setUser(updatedUser);
-          addTransactions([loanTransaction]);
-          calculateNetWorth(updatedUser, setUser);
-          setIsLoanDialogVisible(false);
-          
-        }}
-              
-        onCancel={() => setIsLoanDialogVisible(false)}
-      />
+
 
     </ScrollView>
     
@@ -134,8 +101,7 @@ const styles = StyleSheet.create({
   // card for each component
   card: {
     marginVertical: Theme.CFL_card_spacing, // space between components
-    backgroundColor: Theme.CFL_black, // lighter card background
-    padding: 6,
+    backgroundColor: Theme.CFL_card_background, // lighter card background
     borderRadius: 10,
   },
   // scrollable view
@@ -149,7 +115,7 @@ const styles = StyleSheet.create({
   },
   // all conntent
   content: {
-    padding: 16,
+    padding:0,
   },
   // loading indicator
   loadingContainer: {
@@ -163,19 +129,58 @@ const styles = StyleSheet.create({
     color: Theme.CFL_light_text,
     marginTop: 50,
   },
-  loanButton: {
-    backgroundColor: Theme.CFL_green,
-    padding: 12,
-    borderRadius: 8,
-    alignItems: "center",
+  section: {
+    padding: 10,
   },
 
-  loanButtonText: {
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 10,
     color: Theme.CFL_white,
-    fontSize: 16,
-    fontWeight: "600",
-    fontFamily: Theme.CFL_primary_font,
   },
+
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginVertical: 4,
+  },
+
+  label: {
+    fontSize: 16,
+    color: Theme.CFL_light_text,
+  },
+
+  value: {
+    fontSize: 16,
+    color: Theme.CFL_white,
+  },
+
+  totalRow: {
+    marginTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: "#777",
+    paddingTop: 10,
+  },
+
+  totalLabel: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: Theme.CFL_white,
+  },
+
+  positive: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "lightgreen",
+  },
+
+  negative: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "tomato",
+  },
+  
   
 });
 

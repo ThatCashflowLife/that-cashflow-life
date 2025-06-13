@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   // Financial Overview Card
   container: {
     padding: 15,
-    backgroundColor: Theme.CFL_card_background,
+    backgroundColor: "rgba(0,0,0,0)",
     borderRadius: 10,
     marginVertical: 10,
   },
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
     backgroundColor: Theme.CFL_light_gray,
-    borderRadius: 15,
+    borderRadius: 25,
     alignItems: "center",
     justifyContent: "center",
     overflow: "hidden",

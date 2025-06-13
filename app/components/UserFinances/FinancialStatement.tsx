@@ -143,20 +143,20 @@ const styles = StyleSheet.create({
   },
   // statement content container
   content: {
-    padding: 16,
+    padding: 0,
   },
   // background container for each section
   card: {
     marginVertical: Theme.CFL_card_spacing, // space between components
-    backgroundColor: Theme.CFL_black, // lighter card background
+    backgroundColor: Theme.CFL_card_background, // lighter card background
     padding: 7,
-    paddingVertical: 17,
+    paddingVertical: 5,
     borderRadius: 10,
   },
   // income/expenses/assets
   section: {
-    backgroundColor: Theme.CFL_card_background, // inner container black
-    padding: 15,
+    backgroundColor: Theme.CFL_transparent, // inner container black
+    padding: 5,
     borderRadius: 10,
   },
   // section titles

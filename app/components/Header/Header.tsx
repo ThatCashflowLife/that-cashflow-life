@@ -177,11 +177,13 @@ const styles = StyleSheet.create({
   },
   // username txt
   username: {
-    fontSize: 20,
+    fontSize: 16,
     color: Theme.CFL_dark_text,
     fontFamily: Theme.CFL_primary_font,
     textAlign: "center",
-    marginTop: 10,
+    marginTop: 15,
+    padding: 3,
+    minWidth: 100,
   },
   // username txt while editing
   usernameInput: {
@@ -189,7 +191,7 @@ const styles = StyleSheet.create({
     color: Theme.CFL_dark_text,
     fontFamily: Theme.CFL_primary_font,
     textAlign: "center",
-    marginTop: 4,
+    marginTop: 15,
     padding: 3,
     minWidth: 120,
     backgroundColor: Theme.CFL_dark_green,

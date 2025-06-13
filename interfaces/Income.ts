@@ -10,3 +10,6 @@ export interface PassiveIncome {
   "Real Estate Income": number;
   "Business Income": number;
 }
+
+
+export type PassiveIncomeCategory = keyof PassiveIncome;

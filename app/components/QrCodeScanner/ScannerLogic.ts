@@ -3,9 +3,12 @@ import allProfessions from "../../../data/Professions";
 import Transaction from "../../../interfaces/Transaction";
 import User, { Icon } from "../../../interfaces/User";
 import formatTimestamp from "../../../utils/timeUtil";
+import Liabilities from "../../../interfaces/Liabilities";
+import { PassiveIncome } from "../../../interfaces/Income";
 
 
 
+export type PassiveIncomeCategory = keyof PassiveIncome;
 
 /**
  * Get the icon name that matches the profession name,
@@ -113,7 +116,7 @@ export const createBabyTransaction = (currentUser: User): Transaction => {
     (p) => p.name === currentUser.profession
   );
 
-  const perChildExpense = profession?.expenses?.["Per Child Expense"]  || 0;
+  const perChildExpense = profession?.expenses?.["Per Child Expense"] || 0;
 
   const babyTransaction: Transaction = {
     scanType: "Transaction",
@@ -205,13 +208,13 @@ export const addLoanToUser = (
   console.log("Current liabilities:", currentUser.Liabilities);
   const updatedLiabilities = {
     ...currentUser.Liabilities,
-    "Personal Loans": existingLoan + loanDetails.amount, // update total Loan value
+    "Personal Loan": existingLoan + loanDetails.amount, // update total Loan value
   };
 
   const updatedExpenses = {
     ...currentUser.expenses,
     "Loan Payment": existingLoanPayment + loanDetails.payment, // update monthly payment total
-    
+
   };
 
   console.log("Loan details:", loanDetails);
@@ -224,7 +227,136 @@ export const addLoanToUser = (
   };
 };
 
+export const createPaymentTransaction = (amount: number, category: LoanCategory): Transaction => {
+  const timestamp = formatTimestamp(new Date().toISOString());
 
+  return {
+    scanType: "Transaction",
+    name: `Payment toward ${category}`,
+    timestamp,
+    type: "expense",
+    description: `Paid $${amount} toward ${category}`,
+    amount: -amount, // negative because it's money going out
+    fieldName: category,
+  };
+};
+export type LoanCategory = keyof Liabilities;
+
+export const applyPaymentToLoan = (
+  currentUser: User,
+  paymentAmount: number,
+  category: LoanCategory
+): User => {
+  const currentLoanBalance = currentUser.Liabilities[category] || 0;
+
+  const newLoanBalance = Math.max(currentLoanBalance - paymentAmount, 0);
+
+  const updatedLiabilities = {
+    ...currentUser.Liabilities,
+    [category]: newLoanBalance,
+  };
+
+  //  If loan is paid off, remove loan payment from expenses
+  const updatedExpenses = { ...currentUser.expenses };
+
+  if (newLoanBalance === 0) {
+    // Set Loan Payment to 0
+    updatedExpenses["Loan Payment"] = 0;
+  }
+
+  return {
+    ...currentUser,
+    Liabilities: updatedLiabilities,
+    expenses: updatedExpenses,
+  };
+};
+export const applyDealToUser = (
+  currentUser: User,
+  cashflow: number,
+  mortgage: number,
+  incomeType: keyof PassiveIncome
+): User => {
+  return {
+    ...currentUser,
+    income: {
+      ...currentUser.income,
+      "Passive Income": {
+        ...currentUser.income["Passive Income"],
+        [incomeType]: (currentUser.income["Passive Income"][incomeType] || 0) + cashflow,
+      },
+    },
+    Liabilities: {
+      ...currentUser.Liabilities,
+      "Mortgage Total": (currentUser.Liabilities["Mortgage Total"] || 0) + mortgage,
+    },
+  };
+};
+
+
+
+export const createDealTransaction = (
+  amount: number,
+  mortgage: number,
+  incomeCategory: PassiveIncomeCategory
+): Transaction => {
+  const timestamp = formatTimestamp(new Date().toISOString());
+
+  return {
+    scanType: "Transaction",
+    name: `New Deal (${incomeCategory})`,
+    timestamp,
+    type: "deal",
+    description: `New property adding $${amount}/month`,
+    amount: amount,
+    fieldName: incomeCategory,
+  };
+};
+
+/**
+ * Updates the user's Savings in Assets.
+ * @param user - The user object.
+ * @param amount - The amount to deposit or withdraw.
+ * @param type - Either "deposit" or "withdrawal".
+ * @returns Updated user object.
+ */
+export function updateSavingsAmount(
+  user: User,
+  amount: number,
+  type: "deposit" | "withdrawal"
+): User {
+  const updatedUser = { ...user };
+
+  // Ensure the field exists and is a number
+  if (typeof updatedUser.Assets.Savings !== "number") {
+    updatedUser.Assets.Savings = 0;
+  }
+
+  if (type === "deposit") {
+    updatedUser.Assets.Savings += amount;
+  } else if (type === "withdrawal") {
+    updatedUser.Assets.Savings = Math.max(0, updatedUser.Assets.Savings - amount);
+  }
+
+  return updatedUser;
+}
+
+
+export const createSavingsTransaction = (
+  amount: number,
+  type: "deposit" | "withdrawal"
+): Transaction => {
+  const timestamp = formatTimestamp(new Date().toISOString());
+
+  return {
+    scanType: "Transaction",
+    name: `Savings ${type === "deposit" ? "Deposit" : "Withdrawal"}`,
+    timestamp,
+    type: "savings",
+    description: `${type === "deposit" ? "Deposited" : "Withdrew"} $${amount} from savings.`,
+    amount: amount,
+    fieldName: "Savings",
+  };
+};
 
 
 

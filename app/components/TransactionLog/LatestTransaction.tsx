@@ -80,12 +80,12 @@ const styles = StyleSheet.create({
   // background container for each card
   card: {
     marginVertical: Theme.CFL_card_spacing, // space between components
-    backgroundColor: Theme.CFL_black, // lighter card background
+    backgroundColor: "rgba(0,0,0,0)", // lighter card background
     borderRadius: 10,
   },
   // card for each transaction
   transactionCard: {
-    backgroundColor: Theme.CFL_card_background,
+    backgroundColor: "rgba(0,0,0,0)",
     padding: 10,
     borderRadius: 10,
   },

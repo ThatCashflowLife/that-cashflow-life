@@ -29,8 +29,8 @@ export const Theme = {
   CFL_purple: "#4444ff",
   CFL_light_gray: "#bbbbbb",
   CFL_gray: "#424242",
-  CFL_app_background: "#121212",
-  CFL_card_background: "#1F1F1F",
+  CFL_app_background: "#000",
+  CFL_card_background: "rgba(255, 255, 255, 0.12)",
   CFL_pink: "#9B6B9E",
   CFL_cyan: "#4A9690",
   CFL_border_black: "rgba(255, 255, 255, 0.1)",
@@ -39,6 +39,7 @@ export const Theme = {
   CFL_inactive_tab_font: "#666666",
   CFL_camera_overlay: "rgba(0, 0, 0, 0.3)",
   CFL_danger_button: "#ff4444",
+  CFL_transparent:"rgba(0,0,0,0)",
 
   // spacings
   CFL_card_spacing: 7,

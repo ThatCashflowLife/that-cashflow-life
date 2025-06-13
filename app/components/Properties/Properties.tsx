@@ -103,20 +103,20 @@ const styles = StyleSheet.create({
   },
   // component container
   content: {
-    padding: 16,
+    padding: 0,
     backgroundColor: Theme.CFL_app_background,
   },
   // each property card
   card: {
     marginVertical: Theme.CFL_card_spacing,
-    backgroundColor: Theme.CFL_black,
+    backgroundColor: Theme.CFL_card_background,
     padding: 7,
     paddingVertical: 13,
     borderRadius: 10,
   },
   // inner property card
   propertyCard: {
-    backgroundColor: Theme.CFL_card_background,
+    backgroundColor: Theme.CFL_transparent,
     padding: 10,
     borderRadius: 10,
   },

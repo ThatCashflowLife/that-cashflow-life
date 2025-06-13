@@ -1,8 +1,8 @@
 // import necessary libraries/methods and components
 import { useCameraPermissions } from "expo-camera";
 import React, { useState } from "react";
-import { Alert, StyleSheet, Text, TouchableOpacity } from "react-native";
-
+import { Alert, StyleSheet, Text, TouchableOpacity, ViewStyle } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 import QRType, { QRData } from "../../../interfaces/qrTypes";
 import Theme from "../../../interfaces/theme";
 import ScannerModal from "./ScannerModal";
@@ -10,9 +10,12 @@ import ScannerModal from "./ScannerModal";
 // Properties passed to the Scanner Button component (similiar to a class definition)
 interface ScannerButtonProps {
   onScan: (data: QRData) => void; // callback to get data from Scanner Modal
+  buttonStyle?: ViewStyle;    // allow passing custom style
+  iconSize?: number;          // allow custom icon size
 }
 
-const ScannerButton: React.FC<ScannerButtonProps> = ({ onScan }) => {
+const ScannerButton: React.FC<ScannerButtonProps> = ({ onScan, buttonStyle, iconSize = 48 }) => {
+
   // Logic/Functions Section
   const [isCameraVisible, setCameraVisible] = useState(false); // boolean for camera modal visibility
   const [permission, requestPermission] = useCameraPermissions(); // set camera permission hook
@@ -48,8 +51,8 @@ const ScannerButton: React.FC<ScannerButtonProps> = ({ onScan }) => {
   return (
     <>
       {/* Button to Open Modal */}
-      <TouchableOpacity style={styles.button} onPress={handleOpenScanner}>
-        <Text style={styles.buttonText}>Scan QR Code</Text>
+      <TouchableOpacity style={[styles.button, buttonStyle]} onPress={handleOpenScanner}>
+        <MaterialIcons name="qr-code-scanner" size={iconSize} color="#fff" />
       </TouchableOpacity>
 
       {/* QR Scanner Modal Component */}
