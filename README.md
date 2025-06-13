@@ -60,43 +60,43 @@ Ensure you have the following installed:
 - **@react-native-async-storage/async-storage**: 2.1.2
 - **@react-native-picker/picker**: ^2.11.0
 - **eas**: ^0.1.0
-- **expo**: ^53.0.9
-- **expo-blur**: ~14.1.4
-- **expo-camera**: ~16.1.6
+- **expo**: 53.0.10
+- **expo-blur**: ~14.1.5
+- **expo-camera**: ~16.1.7
 - **expo-config**: ^1.0.0
 - **expo-constants**: ~17.1.6
-- **expo-dev-client**: ~5.1.8
+- **expo-dev-client**: ~5.2.0
 - **expo-doctor**: ^1.12.5
 - **expo-haptics**: ~14.1.4
 - **expo-insights**: ~0.9.3
 - **expo-linking**: ~7.1.5
 - **expo-module-scripts**: ^4.0.4
 - **expo-router**: ^5.0.7
-- **expo-symbols**: ~0.4.4
-- **expo-system-ui**: ~5.0.7
-- **expo-updates**: ~0.28.13
+- **expo-symbols**: ~0.4.5
+- **expo-system-ui**: ~5.0.8
+- **expo-updates**: ~0.28.14
 - **expo-web-browser**: ~14.1.6
 - **fs-extra**: ^11.3.0
 - **metro-config**: ^0.81.1
 - **react**: 19.0.0
 - **react-dom**: 19.0.0
-- **react-native**: 0.79.2
+- **react-native**: 0.79.3
 - **react-native-safe-area-context**: 5.4.0
-- **react-native-screens**: ^4.10.0
+- **react-native-screens**: ~4.11.1
 - **react-native-web**: ^0.20.0
 - **react-refresh**: ^0.16.0
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
-- Merge branch 'main' of https://github.com/thatcashflowlife/that-cashflow-life (Randal Morrow)
-- Update LoanDialog.tsx (Randal Morrow)
-- Merge pull request #8 from ThatCashflowLife/auto-update-readme-15393709660 (ThatCashflowLife)
+- Merge pull request #12 from ThatCashflowLife/auto-update-readme-15491142563 (ThatCashflowLife)
+- Auto-update README for commit: Merge pull request #11 from ThatCashflowLife/auto-update-readme-15491128334 (ThatCashflowLife)
+- Merge pull request #11 from ThatCashflowLife/auto-update-readme-15491128334 (ThatCashflowLife)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
-- [@rmorrow23](https://github.com/rmorrow23) (⭐ 24 commits)
+- [@rmorrow23](https://github.com/rmorrow23) (⭐ 30 commits)
+- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 17 commits)
 - [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 14 commits)
-- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 11 commits)
 - [@D-flyRobotics](https://github.com/D-flyRobotics) (⭐ 2 commits)
 - [@expo-bot](https://github.com/expo-bot) (⭐ 1 commits)
 - [@rivasjeremy](https://github.com/rivasjeremy) (⭐ 1 commits)
@@ -104,4 +104,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-06-02 10:07:30 -0400_
+_Last updated: 2025-06-06 09:01:09 -0400_
