@@ -60,9 +60,9 @@ Ensure you have the following installed:
 - **@react-native-async-storage/async-storage**: 2.1.2
 - **@react-native-picker/picker**: ^2.11.0
 - **eas**: ^0.1.0
-- **expo**: 53.0.10
+- **expo**: 53.0.11
 - **expo-blur**: ~14.1.5
-- **expo-camera**: ~16.1.7
+- **expo-camera**: ~16.1.8
 - **expo-config**: ^1.0.0
 - **expo-constants**: ~17.1.6
 - **expo-dev-client**: ~5.2.0
@@ -71,7 +71,7 @@ Ensure you have the following installed:
 - **expo-insights**: ~0.9.3
 - **expo-linking**: ~7.1.5
 - **expo-module-scripts**: ^4.0.4
-- **expo-router**: ^5.0.7
+- **expo-router**: ~5.1.0
 - **expo-symbols**: ~0.4.5
 - **expo-system-ui**: ~5.0.8
 - **expo-updates**: ~0.28.14
@@ -88,14 +88,14 @@ Ensure you have the following installed:
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
-- Merge pull request #12 from ThatCashflowLife/auto-update-readme-15491142563 (ThatCashflowLife)
-- Auto-update README for commit: Merge pull request #11 from ThatCashflowLife/auto-update-readme-15491128334 (ThatCashflowLife)
-- Merge pull request #11 from ThatCashflowLife/auto-update-readme-15491128334 (ThatCashflowLife)
+- Merge branch 'main' of https://github.com/thatcashflowlife/that-cashflow-life (Randal Morrow)
+- Added Features (Randal Morrow)
+- Merge pull request #13 from ThatCashflowLife/auto-update-readme-15491154920 (ThatCashflowLife)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
-- [@rmorrow23](https://github.com/rmorrow23) (⭐ 30 commits)
-- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 17 commits)
+- [@rmorrow23](https://github.com/rmorrow23) (⭐ 32 commits)
+- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 23 commits)
 - [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 14 commits)
 - [@D-flyRobotics](https://github.com/D-flyRobotics) (⭐ 2 commits)
 - [@expo-bot](https://github.com/expo-bot) (⭐ 1 commits)
@@ -104,4 +104,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-06-06 09:01:09 -0400_
+_Last updated: 2025-06-13 11:18:58 -0400_
