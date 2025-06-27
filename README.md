@@ -58,29 +58,29 @@ Ensure you have the following installed:
 - **@expo/server**: ^0.5.1
 - **@expo/vector-icons**: ^14.0.4
 - **@react-native-async-storage/async-storage**: 2.1.2
-- **@react-native-picker/picker**: ^2.11.0
+- **@react-native-picker/picker**: 2.11.1
 - **eas**: ^0.1.0
-- **expo**: 53.0.11
+- **expo**: 53.0.13
 - **expo-blur**: ~14.1.5
-- **expo-camera**: ~16.1.8
+- **expo-camera**: ~16.1.9
 - **expo-config**: ^1.0.0
 - **expo-constants**: ~17.1.6
-- **expo-dev-client**: ~5.2.0
+- **expo-dev-client**: ~5.2.2
 - **expo-doctor**: ^1.12.5
 - **expo-haptics**: ~14.1.4
 - **expo-insights**: ~0.9.3
 - **expo-linking**: ~7.1.5
 - **expo-module-scripts**: ^4.0.4
-- **expo-router**: ~5.1.0
+- **expo-router**: ~5.1.1
 - **expo-symbols**: ~0.4.5
-- **expo-system-ui**: ~5.0.8
-- **expo-updates**: ~0.28.14
-- **expo-web-browser**: ~14.1.6
+- **expo-system-ui**: ~5.0.9
+- **expo-updates**: ~0.28.15
+- **expo-web-browser**: ~14.2.0
 - **fs-extra**: ^11.3.0
 - **metro-config**: ^0.81.1
 - **react**: 19.0.0
 - **react-dom**: 19.0.0
-- **react-native**: 0.79.3
+- **react-native**: 0.79.4
 - **react-native-safe-area-context**: 5.4.0
 - **react-native-screens**: ~4.11.1
 - **react-native-web**: ^0.20.0
@@ -88,14 +88,14 @@ Ensure you have the following installed:
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
-- Merge pull request #15 from ThatCashflowLife/auto-update-readme-15638053553 (ThatCashflowLife)
-- Auto-update README for commit: Merge pull request #14 from ThatCashflowLife/auto-update-readme-15638026125 (ThatCashflowLife)
-- Merge pull request #14 from ThatCashflowLife/auto-update-readme-15638026125 (ThatCashflowLife)
+- Multiple Changes - Updates/Adds (Randal Morrow)
+- Merge pull request #16 from ThatCashflowLife/auto-update-readme-15638066359 (ThatCashflowLife)
+- Auto-update README for commit: Merge pull request #15 from ThatCashflowLife/auto-update-readme-15638053553 (ThatCashflowLife)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
-- [@rmorrow23](https://github.com/rmorrow23) (⭐ 33 commits)
-- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 26 commits)
+- [@rmorrow23](https://github.com/rmorrow23) (⭐ 34 commits)
+- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 28 commits)
 - [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 14 commits)
 - [@D-flyRobotics](https://github.com/D-flyRobotics) (⭐ 2 commits)
 - [@expo-bot](https://github.com/expo-bot) (⭐ 1 commits)
@@ -104,4 +104,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-06-13 11:21:04 -0400_
+_Last updated: 2025-06-27 10:27:58 -0400_
