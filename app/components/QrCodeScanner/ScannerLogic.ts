@@ -5,6 +5,7 @@ import User, { Icon } from "../../../interfaces/User";
 import formatTimestamp from "../../../utils/timeUtil";
 import Liabilities from "../../../interfaces/Liabilities";
 import { PassiveIncome } from "../../../interfaces/Income";
+import calculateTotalAssets from "../../../utils/calculateTotalAssets";
 
 
 
@@ -55,7 +56,32 @@ export const populateFirstProfession = (
     profession: scannedProfession.name,
     income: scannedProfession.income,
     expenses: scannedProfession.expenses,
-    Assets: scannedProfession.assets,
+    Assets: {
+      Savings: scannedProfession.assets.Savings ?? 0,
+      Investments: {
+        Mortgage: scannedProfession.assets.Investments?.Mortgage ?? 0,
+        "Real Estate": scannedProfession.assets.Investments?.["Real Estate"] ?? {
+          name: "",
+          type: "house",
+          description: "",
+          "Purchase Price": 0,
+          "Sale Range": "",
+          "Cash Flow": 0,
+          Mortgage: 0,
+          "Down Payment": 0,
+          purchaseTime: "",
+          saleTime: "",
+        },
+        Stocks: scannedProfession.assets.Investments?.Stocks ?? {
+          totalValue: 0,
+          holdings: {},
+        },
+        Gold_Count: scannedProfession.assets.Investments?.Gold_Count ?? 0,
+        Bitcoin: scannedProfession.assets.Investments?.Bitcoin ?? 0,
+        "Bitcoin Value": scannedProfession.assets.Investments?.["Bitcoin Value"] ?? 0,
+        "Certificate Deposit": scannedProfession.assets.Investments?.["Certificate Deposit"] ?? 0,
+      }
+    },
     Liabilities: scannedProfession.liabilities,
     professionIcon: getIcon(scannedProfession.name),
   };
@@ -178,9 +204,10 @@ export const createLoanTransaction = (loanDetails: {
     type: "expense",
     description: `Loan for ${loanDetails.purpose}`,
     amount: -loanDetails.amount,
-    fieldName: "Loan",
+    fieldName: loanDetails.purpose,
   };
 };
+
 
 
 
@@ -200,32 +227,25 @@ export const addLoanToUser = (
     purpose: string;
   }
 ): User => {
-  const existingLoan = currentUser.Liabilities["Personal Loans"] || 0;
-  const existingLoanPayment = currentUser.expenses["Loan Payment"] || 0;
-  const expensesMonthly = currentUser.expenses;
-  console.log(expensesMonthly)
-  console.log("Loan details:", loanDetails);
-  console.log("Current liabilities:", currentUser.Liabilities);
   const updatedLiabilities = {
     ...currentUser.Liabilities,
-    "Personal Loan": existingLoan + loanDetails.amount, // update total Loan value
+    [loanDetails.purpose]: loanDetails.amount, 
   };
+
+  const existingLoanPayment = currentUser.expenses["Loan Payment"] || 0;
 
   const updatedExpenses = {
     ...currentUser.expenses,
-    "Loan Payment": existingLoanPayment + loanDetails.payment, // update monthly payment total
-
+    "Loan Payment": existingLoanPayment + loanDetails.payment,
   };
 
-  console.log("Loan details:", loanDetails);
-  console.log("Updated liabilities:", updatedLiabilities);
   return {
     ...currentUser,
     Liabilities: updatedLiabilities,
     expenses: updatedExpenses,
-    LoanPayment: (currentUser.LoanPayment || 0) + loanDetails.payment, // if you want this tracked globally too
   };
 };
+
 
 export const createPaymentTransaction = (amount: number, category: LoanCategory): Transaction => {
   const timestamp = formatTimestamp(new Date().toISOString());
@@ -312,13 +332,7 @@ export const createDealTransaction = (
   };
 };
 
-/**
- * Updates the user's Savings in Assets.
- * @param user - The user object.
- * @param amount - The amount to deposit or withdraw.
- * @param type - Either "deposit" or "withdrawal".
- * @returns Updated user object.
- */
+
 export function updateSavingsAmount(
   user: User,
   amount: number,
@@ -326,19 +340,22 @@ export function updateSavingsAmount(
 ): User {
   const updatedUser = { ...user };
 
-  // Ensure the field exists and is a number
   if (typeof updatedUser.Assets.Savings !== "number") {
     updatedUser.Assets.Savings = 0;
   }
 
   if (type === "deposit") {
     updatedUser.Assets.Savings += amount;
-  } else if (type === "withdrawal") {
+  } else {
     updatedUser.Assets.Savings = Math.max(0, updatedUser.Assets.Savings - amount);
   }
 
+  updatedUser.totalAssets = calculateTotalAssets(updatedUser);
+
   return updatedUser;
 }
+
+
 
 
 export const createSavingsTransaction = (
@@ -357,6 +374,84 @@ export const createSavingsTransaction = (
     fieldName: "Savings",
   };
 };
+export function updateStocks(
+  user: User,
+  symbol: string,
+  shares: number,
+  pricePerShare: number,
+  type: "deposit" | "withdrawal"
+): User {
+  const updatedUser = { ...user };
+
+  // Initialize stock structure
+  if (!updatedUser.Assets.Investments) {
+    updatedUser.Assets.Investments = {} as any;
+  }
+
+  if (!updatedUser.Assets.Investments.Stocks) {
+    updatedUser.Assets.Investments.Stocks = {
+      totalValue: 0,
+      holdings: {},
+    };
+  }
+
+  const stocks = updatedUser.Assets.Investments.Stocks;
+
+  if (!stocks.holdings[symbol]) {
+    stocks.holdings[symbol] = { shares: 0, averagePrice: 0 };
+  }
+
+  const holding = stocks.holdings[symbol];
+
+  if (type === "deposit") {
+    const totalExistingValue = holding.shares * holding.averagePrice;
+    const totalNewValue = shares * pricePerShare;
+    const newTotalShares = holding.shares + shares;
+
+    holding.averagePrice = (totalExistingValue + totalNewValue) / newTotalShares;
+    holding.shares = newTotalShares;
+  } else {
+    holding.shares = Math.max(0, holding.shares - shares);
+    if (holding.shares === 0) {
+      holding.averagePrice = 0;
+    }
+  }
+
+  let totalValue = 0;
+  for (const key in stocks.holdings) {
+    const h = stocks.holdings[key];
+    totalValue += h.shares * h.averagePrice;
+  }
+
+  stocks.totalValue = totalValue;
+  updatedUser.totalAssets = calculateTotalAssets(updatedUser);
+
+  return updatedUser;
+}
+
+
+
+
+
+export const createStockTransaction = (
+  symbol: string,
+  shares: number,
+  price: number,
+  type: "deposit" | "withdrawal"
+): Transaction => {
+  const timestamp = formatTimestamp(new Date().toISOString());
+
+  return {
+    scanType: "Transaction",
+    name: `Stock ${type === "deposit" ? "Buy" : "Sell"}: ${symbol}`,
+    timestamp,
+    type: "stocks",
+    description: `${type === "deposit" ? "Bought" : "Sold"} ${shares} share(s) of ${symbol} at $${price}/share.`,
+    amount: shares * price,
+    fieldName: "stocks",
+  };
+};
+
 
 
 

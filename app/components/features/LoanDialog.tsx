@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-import { Modal, View, Text, TextInput, Button, TouchableOpacity, StyleSheet, Animated } from "react-native";
+import { Animated, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Theme from "../../../interfaces/theme";
 
 const LoanDialog = ({ isVisible, onSubmit, onCancel }) => {
     const [amount, setAmount] = useState("");
     const [payment, setPayment] = useState("");
     const [purpose, setPurpose] = useState("");
+
+    const [apr, setApr] = useState(0);
     const [isAmountFocused, setIsAmountFocused] = useState(false);
     const [isPurposeFocused, setIsPurposeFocused] = useState(false);
-    
+
     const [focusAnim, setFocusAnim] = useState({
         loan: new Animated.Value(0),
         purpose: new Animated.Value(0),
     });
-      
+
 
 
     // Function to auto-calculate payment
@@ -22,7 +24,7 @@ const LoanDialog = ({ isVisible, onSubmit, onCancel }) => {
 
         const parsedAmount = parseFloat(text);
         if (!isNaN(parsedAmount)) {
-            const annualInterestRate = 0.10; // 10% APR
+            const annualInterestRate = apr; // 10% APR
             const monthlyInterestRate = annualInterestRate / 12; // 1% per month
 
             const monthlyInterestPayment = parsedAmount * monthlyInterestRate;
@@ -31,6 +33,17 @@ const LoanDialog = ({ isVisible, onSubmit, onCancel }) => {
             setPayment(calculatedPayment);
         } else {
             setPayment(""); // Clear payment if invalid input
+        }
+    };
+    const selectApr = (selectedApr: number) => {
+        setApr(selectedApr);
+        if (amount) { // if user has entered amount already
+            const parsedAmount = parseFloat(amount);
+            if (!isNaN(parsedAmount)) {
+                const monthlyInterestRate = selectedApr / 12;
+                const monthlyInterestPayment = parsedAmount * monthlyInterestRate;
+                setPayment(monthlyInterestPayment.toFixed(2));
+            }
         }
     };
 
@@ -49,14 +62,14 @@ const LoanDialog = ({ isVisible, onSubmit, onCancel }) => {
             useNativeDriver: false,
         }).start();
     };
-     //change loan amount border-color and width 
+    //change loan amount border-color and width 
     const loanBorderColor = focusAnim.loan.interpolate({
         inputRange: [0, 1],
         outputRange: ["#ccc", Theme.CFL_green],
     });
     const loanBorderWidth = focusAnim.loan.interpolate({
         inputRange: [0, 1],
-        outputRange: [1,5],
+        outputRange: [1, 5],
     });
 
     //change loan purpose border-color and width 
@@ -69,15 +82,15 @@ const LoanDialog = ({ isVisible, onSubmit, onCancel }) => {
         inputRange: [0, 1],
         outputRange: [1, 5],
     });
-      
-      
+
+
     return (
         <Modal visible={isVisible} transparent animationType="slide">
             <View style={styles.overlay}>
                 <View style={styles.container}>
                     <Text style={styles.title}>Loan Details</Text>
 
-                    
+
                     <Animated.View style={[styles.inputContainer, { borderColor: loanBorderColor }, { borderBottomWidth: loanBorderWidth }]}>
 
                         <Text style={styles.label}>Loan Amount</Text>
@@ -89,36 +102,69 @@ const LoanDialog = ({ isVisible, onSubmit, onCancel }) => {
                             onChangeText={handleAmountChange}
                             onFocus={() => handleFocus('loan')}
                             onBlur={() => handleBlur('loan')}
-                        
+
                         />
                     </Animated.View>
 
 
-                    
-                    <Text style={styles.label}>Monthly Payment</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Automatically Calculated"
-                        placeholderTextColor="#777"
-                        keyboardType="numeric"
-                        value={payment}
-                        editable={false}
-                        />
-                    
+                    <Animated.View style={[styles.inputContainer, { borderColor: "#ccc" }, { borderBottomWidth: 1 }]}>
+                        <Text style={styles.label}>Interest Rate</Text>
+                        <View style={styles.aprContainer}>
+                            <TouchableOpacity
+                                style={[styles.aprButton, apr === 0.3 && styles.aprSelected]}
+                                onPress={() => selectApr(0.3)}
+                            >
+                                <Text style={styles.cancelText}>30%</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={[styles.aprButton, apr === 0.6 && styles.aprSelected]}
+                                onPress={() => selectApr(0.6)}
+                            >
+                                <Text style={styles.cancelText}>60%</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={[styles.aprButton, apr === 0.9 && styles.aprSelected]}
+                                onPress={() => selectApr(0.9)}
+                            >
+                                <Text style={styles.cancelText}>90%</Text>
+                            </TouchableOpacity>
 
-                    <Animated.View style={[styles.inputContainer, { borderColor:purposeBorderColor }, {borderBottomWidth:purposeBorderWidth}]}>
-                    <Text style={styles.label}>Purpose</Text>
-                    <TextInput
-                        style={
-                            styles.input
-                        }
-                        placeholder="Enter purpose"
-                        placeholderTextColor="#777"
-                        value={purpose}
+                            <TouchableOpacity
+                                style={[styles.aprButton, apr === 1.2 && styles.aprSelected]}
+                                onPress={() => selectApr(1.2)}
+                            >
+                                <Text style={styles.confirmText}>120%</Text>
+                            </TouchableOpacity>
+                        </View>
+
+
+                    </Animated.View>
+                    <Animated.View style={[styles.inputContainer, { borderColor: "#ccc" }, { borderBottomWidth: 1 }]}>
+
+                        <Text style={styles.label}>Monthly Payment</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Automatically Calculated"
+                            placeholderTextColor="#777"
+                            keyboardType="numeric"
+                            value={payment}
+                            editable={false}
+                        />
+                    </Animated.View>
+
+                    <Animated.View style={[styles.inputContainer, { borderColor: purposeBorderColor }, { borderBottomWidth: purposeBorderWidth }]}>
+                        <Text style={styles.label}>Purpose</Text>
+                        <TextInput
+                            style={
+                                styles.input
+                            }
+                            placeholder="Enter purpose"
+                            placeholderTextColor="#777"
+                            value={purpose}
                             onChangeText={setPurpose}
                             onFocus={() => handleFocus('purpose')}
                             onBlur={() => handleBlur('purpose')}
-                    /></Animated.View>
+                        /></Animated.View>
 
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.cancelButton} onPress={onCancel}>
@@ -164,41 +210,64 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: "#fff",
     },
-      
-      
+
+
     // btn container
-      buttonContainer: {
+    buttonContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
-          width: "100%",
-        marginTop:25,
-      },
-      // cancel btn
-      cancelButton: {
+        width: "100%",
+        marginTop: 25,
+    },
+    // cancel btn
+    cancelButton: {
         flex: 1,
         paddingVertical: 12,
         backgroundColor: Theme.CFL_danger_button,
         borderRadius: 8,
         alignItems: "center",
         marginRight: 5,
-      },
-      // confirm btn
-      confirmButton: {
-        flex: 1,
+    },
+    // confirm btn
+    confirmButton: {
+        flex: 3,
         paddingVertical: 12,
         backgroundColor: Theme.CFL_green,
         borderRadius: 8,
         alignItems: "center",
         marginLeft: 5,
-      },
-      // cancel btn txt
-      cancelText: {
+    },
+    aprContainer: {
+        flexDirection: "row",
+        width: "95%",
+        gap:5
+    },
+    // confirm btn
+    aprButton: {
+        width: "25%",
+        paddingVertical: 12,
+        backgroundColor: "rgba(255,255,255,0.1)",
+        borderRadius: 50,
+        alignItems: "center",
+    },
+
+    aprSelected: {
+        borderBottomColor: Theme.CFL_green,
+        borderBottomWidth: 2,
+        backgroundColor:"#000"
+    },
+      
+      
+
+    // cancel btn txt
+    cancelText: {
         color: Theme.CFL_white,
         fontWeight: "bold",
         fontFamily: Theme.CFL_primary_font,
-      },
-      // confirm btn text
-      confirmText: {
+        fontSize:15
+    },
+    // confirm btn text
+    confirmText: {
         color: Theme.CFL_white,
         fontWeight: "bold",
         fontFamily: Theme.CFL_primary_font,
@@ -211,7 +280,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         fontFamily: Theme.CFL_primary_font,
     },
-      
+
 });
 
 export default LoanDialog;

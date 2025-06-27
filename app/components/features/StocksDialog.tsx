@@ -1,27 +1,56 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+    Alert,
+    Modal,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
+} from "react-native";
 import Theme from "../../../interfaces/theme";
-import { createSavingsTransaction } from "../QrCodeScanner/ScannerLogic";
 
 interface Props {
     isVisible: boolean;
-    onSubmit: (amount: number, type: "deposit" | "withdrawal") => void;
+    onSubmit: (
+        symbol: string,
+        shares: number,
+        pricePerShare: number,
+        type: "deposit" | "withdrawal"
+    ) => void;
     onCancel: () => void;
 }
 
-const SavingsDialog: React.FC<Props> = ({ isVisible, onSubmit, onCancel }) => {
-    const [amount, setAmount] = useState("");
+const StocksDialog: React.FC<Props> = ({ isVisible, onSubmit, onCancel }) => {
+    const [symbol, setSymbol] = useState("");
+    const [shares, setShares] = useState("");
+    const [price, setPrice] = useState("");
     const [type, setType] = useState<"deposit" | "withdrawal">("deposit");
 
     const handleSubmit = () => {
-        const parsedAmount = parseFloat(amount);
-        if (isNaN(parsedAmount) || parsedAmount <= 0) {
-            Alert.alert("Invalid Amount", "Please enter a valid number greater than 0.");
+        const parsedShares = parseFloat(shares);
+        const parsedPrice = parseFloat(price);
+        const trimmedSymbol = symbol.trim().toUpperCase();
+
+        if (!trimmedSymbol) {
+            Alert.alert("Missing Symbol", "Please enter a valid stock symbol.");
             return;
         }
-        
-        onSubmit(parsedAmount, type);
-        setAmount("");
+
+        if (isNaN(parsedShares) || parsedShares <= 0) {
+            Alert.alert("Invalid Shares", "Please enter a number greater than 0 for shares.");
+            return;
+        }
+
+        if (isNaN(parsedPrice) || parsedPrice <= 0) {
+            Alert.alert("Invalid Price", "Please enter a valid price per share.");
+            return;
+        }
+
+        onSubmit(trimmedSymbol, parsedShares, parsedPrice, type);
+        setSymbol("");
+        setShares("");
+        setPrice("");
         setType("deposit");
     };
 
@@ -29,15 +58,33 @@ const SavingsDialog: React.FC<Props> = ({ isVisible, onSubmit, onCancel }) => {
         <Modal visible={isVisible} transparent animationType="slide">
             <View style={styles.overlay}>
                 <View style={styles.dialog}>
-                    <Text style={styles.title}>Manage Savings</Text>
+                    <Text style={styles.title}>Manage Stocks</Text>
 
                     <TextInput
-                        placeholder="Enter amount"
+                        placeholder="Stock Symbol (e.g. AAPL)"
+                        placeholderTextColor="#aaa"
+                        style={styles.input}
+                        value={symbol}
+                        onChangeText={setSymbol}
+                        autoCapitalize="characters"
+                    />
+
+                    <TextInput
+                        placeholder="Number of Shares"
                         placeholderTextColor="#aaa"
                         keyboardType="numeric"
                         style={styles.input}
-                        value={amount}
-                        onChangeText={setAmount}
+                        value={shares}
+                        onChangeText={setShares}
+                    />
+
+                    <TextInput
+                        placeholder="Price per Share"
+                        placeholderTextColor="#aaa"
+                        keyboardType="numeric"
+                        style={styles.input}
+                        value={price}
+                        onChangeText={setPrice}
                     />
 
                     <View style={styles.buttonRow}>
@@ -45,13 +92,13 @@ const SavingsDialog: React.FC<Props> = ({ isVisible, onSubmit, onCancel }) => {
                             style={[styles.toggle, type === "deposit" && styles.selected]}
                             onPress={() => setType("deposit")}
                         >
-                            <Text style={styles.toggleText}>Deposit</Text>
+                            <Text style={styles.toggleText}>Buy</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={[styles.toggle, type === "withdrawal" && styles.selected]}
                             onPress={() => setType("withdrawal")}
                         >
-                            <Text style={styles.toggleText}>Withdraw</Text>
+                            <Text style={styles.toggleText}>Sell</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -78,10 +125,9 @@ const styles = StyleSheet.create({
     },
     dialog: {
         width: "85%",
-        backgroundColor: "rgba(40,40,40,1)",
+        backgroundColor: "#282828",
         borderRadius: 20,
         padding: 20,
-        elevation: 6,
     },
     title: {
         fontSize: 20,
@@ -95,7 +141,7 @@ const styles = StyleSheet.create({
         color: "#fff",
         padding: 10,
         borderRadius: 10,
-        marginBottom: 15,
+        marginBottom: 12,
         fontSize: 16,
     },
     buttonRow: {
@@ -107,14 +153,14 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 12,
         backgroundColor: "#444",
-        borderRadius: 25,
+        borderRadius: 50,
         marginHorizontal: 5,
         alignItems: "center",
     },
     selected: {
-        borderBottomColor: Theme.CFL_green,
-        borderBottomWidth: 2,
         backgroundColor: "#000",
+        borderBottomColor: Theme.CFL_green,
+        borderBottomWidth:2
     },
     toggleText: {
         color: "#fff",
@@ -123,7 +169,6 @@ const styles = StyleSheet.create({
     actionRow: {
         flexDirection: "row",
         justifyContent: "flex-end",
-        marginTop: 25,
     },
     cancel: {
         marginRight: 15,
@@ -131,7 +176,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         paddingVertical: 10,
         borderRadius: 8,
-        flex:1,
     },
     cancelText: {
         color: "#000",
@@ -142,7 +186,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         paddingVertical: 10,
         borderRadius: 8,
-        flex:3,
     },
     submitText: {
         color: "#000",
@@ -151,4 +194,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default SavingsDialog;
+export default StocksDialog;

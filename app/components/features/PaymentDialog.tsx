@@ -1,12 +1,27 @@
 import React, { useState } from "react";
-import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, Animated } from "react-native";
+import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, Animated, ScrollView } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import Theme from "../../../interfaces/theme";
+interface PaymentDialogProps {
+    isVisible: boolean;
+    onSubmit: (amount: number, category: string) => void;
+    onCancel: () => void;
+    liabilities: { [key: string]: number };
+}
 
-const PaymentDialog = ({ isVisible, onSubmit, onCancel }) => {
+
+const PaymentDialog: React.FC<PaymentDialogProps> = ({
+    isVisible,
+    onSubmit,
+    onCancel,
+    liabilities,
+}) => {
 
     const [amount, setAmount] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("Personal Loan");
+
+    const [paymentType, setPaymentType] = useState("Personal Loan");
+    const remainingAmount = liabilities[selectedCategory] ?? 0;
 
     const [focusAnim, setFocusAnim] = useState({
         amount: new Animated.Value(0),
@@ -64,23 +79,41 @@ const PaymentDialog = ({ isVisible, onSubmit, onCancel }) => {
                         />
                     </Animated.View>
 
-                    {/* Dropdown Picker */}
+                    {/* Liabilities List */}
+
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Select Category</Text>
-                        <View style={styles.pickerContainer}>
-                            <Picker
-                                selectedValue={selectedCategory}
-                                style={styles.picker}
-                                dropdownIconColor="white"
-                                onValueChange={(itemValue) => setSelectedCategory(itemValue)}
-                            >
-                                <Picker.Item label="Personal Loan" value="Personal Loan" />
-                                <Picker.Item label="Student Loans" value="Student Loans" />
-                                <Picker.Item label="Car Loans" value="Car Loans" />
-                                <Picker.Item label="Mortgage" value="Mortgage" />
-                                <Picker.Item label="Credit Cards" value="Credit Card Loans" />
-                            </Picker>
-                        </View>
+
+                        <ScrollView
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            contentContainerStyle={styles.incomePillsContainer}
+                        >
+                            {Object.entries(liabilities).map(([key, value]) => (
+                                <TouchableOpacity
+                                    key={key}
+                                    style={[
+                                        styles.incomePill,
+                                        selectedCategory === key && styles.incomePillSelected,
+                                    ]}
+                                    onPress={() => setSelectedCategory(key)}
+                                >
+                                    <Text
+                                        style={[
+                                            styles.incomePillText,
+                                            selectedCategory === key && styles.incomePillTextSelected,
+                                        ]}
+                                    >
+                                        {key}
+                                    </Text>
+                                </TouchableOpacity>
+                            ))}
+                        </ScrollView>
+
+                        <Text style={styles.remainingText}>
+                            Remaining Balance: ${remainingAmount.toFixed(2)}
+                        </Text>
+
                     </View>
 
                     {/* Buttons */}
@@ -138,12 +171,38 @@ const styles = StyleSheet.create({
     pickerContainer: {
         borderWidth: 1,
         borderColor: "#999",
-        borderRadius: 8,
+        backgroundColor: "#000",
+        borderRadius: 50,
         marginBottom: 15,
         overflow: "hidden",
     },
     picker: {
         color: "#999",
+    },
+    incomePillsContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: 10,
+    },
+    incomePill: {
+        paddingVertical: 8,
+        paddingHorizontal: 12,
+        backgroundColor: "#444",
+        borderRadius: 25,
+        marginVertical: 4,
+        marginHorizontal: 4,
+    },
+    incomePillSelected: {
+        backgroundColor: "#000",
+        borderBottomColor: Theme.CFL_green,
+        borderBottomWidth: 2
+    },
+    incomePillText: {
+        color: "#fff",
+        fontFamily: Theme.CFL_primary_font,
+    },
+    incomePillTextSelected: {
+        color: "#fff",
     },
     buttonContainer: {
         flexDirection: "row",
@@ -160,7 +219,7 @@ const styles = StyleSheet.create({
         marginRight: 5,
     },
     confirmButton: {
-        flex: 1,
+        flex: 3,
         paddingVertical: 12,
         backgroundColor: Theme.CFL_green,
         borderRadius: 8,
@@ -177,6 +236,13 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontFamily: Theme.CFL_primary_font,
     },
+    remainingText: {
+        color: "#aaa",
+        fontSize: 16,
+        marginTop: 10,
+        fontFamily: Theme.CFL_primary_font,
+    },
+
 });
 
 export default PaymentDialog;

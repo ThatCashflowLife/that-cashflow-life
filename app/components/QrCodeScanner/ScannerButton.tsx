@@ -12,9 +12,10 @@ interface ScannerButtonProps {
   onScan: (data: QRData) => void; // callback to get data from Scanner Modal
   buttonStyle?: ViewStyle;    // allow passing custom style
   iconSize?: number;          // allow custom icon size
+  text: string;
 }
 
-const ScannerButton: React.FC<ScannerButtonProps> = ({ onScan, buttonStyle, iconSize = 48 }) => {
+const ScannerButton: React.FC<ScannerButtonProps> = ({ onScan, buttonStyle, iconSize = 48, text }) => {
 
   // Logic/Functions Section
   const [isCameraVisible, setCameraVisible] = useState(false); // boolean for camera modal visibility
@@ -53,6 +54,7 @@ const ScannerButton: React.FC<ScannerButtonProps> = ({ onScan, buttonStyle, icon
       {/* Button to Open Modal */}
       <TouchableOpacity style={[styles.button, buttonStyle]} onPress={handleOpenScanner}>
         <MaterialIcons name="qr-code-scanner" size={iconSize} color="#fff" />
+        <Text style={styles.buttonText}>{text}</Text>
       </TouchableOpacity>
 
       {/* QR Scanner Modal Component */}
@@ -70,19 +72,23 @@ const ScannerButton: React.FC<ScannerButtonProps> = ({ onScan, buttonStyle, icon
 // Styling Section
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: Theme.CFL_card_background,
-    padding: 15,
-    marginVertical: 4,
-    borderRadius: 10,
-    alignItems: "center",
+    width: 80,
+    height: 80,
+    borderRadius: 75,
+    backgroundColor: "#333",
     justifyContent: "center",
+    alignItems: "center",
+    marginHorizontal: 5,
+    elevation: 10,
+    shadowColor: "rgba(255,255,255,1)",
+    shadowOffset: { width: 0, height: 15 },
+    shadowOpacity: 0.8,
+    shadowRadius: 5,
   },
   buttonText: {
-    fontFamily: Theme.CFL_primary_font,
     color: Theme.CFL_white,
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
+    bottom: 0,
+    
   },
 });
 

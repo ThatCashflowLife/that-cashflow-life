@@ -9,14 +9,40 @@ import formatUSD from "../../../utils/currencyUtil";
 import { useUser } from "../context/UserProvider";
 import ProfessionIcon from "../features/ProfessionIcon";
 
+export const calculateNetWorth = (
+  user: User,
+  setUser: Dispatch<SetStateAction<User>>
+): void => {
+  const assets = user.Assets;
 
-// Calculate net worth (Assets - Liabilities)
-export const calculateNetWorth = (user: User, setUser: Dispatch<SetStateAction<User>>): void => {
-  const totalAssets = Object.values(user.Assets).reduce((sum, value) => sum + value, 0);
-  const totalLiabilities = Object.values(user.Liabilities).reduce((sum, value) => sum + value, 0);
+  // Sum top-level numeric fields in Assets (e.g., Savings)
+  let totalAssets = 0;
+  for (const [key, value] of Object.entries(assets)) {
+    if (typeof value === "number") {
+      totalAssets += value;
+    }
+  }
+
+  // Add Stocks total value if available
+  const stocksValue = assets.Investments?.Stocks?.totalValue ?? 0;
+  totalAssets += stocksValue;
+
+  // Sum liabilities normally (assuming all values are numeric)
+  const totalLiabilities = Object.values(user.Liabilities).reduce(
+    (sum, val) => sum + val,
+    0
+  );
+
   const netWorth = totalAssets - totalLiabilities;
-  setUser((prevUser) => ({ ...prevUser, totalAssets, totalLiabilites: totalLiabilities, netWorth }))
+
+  setUser((prevUser) => ({
+    ...prevUser,
+    totalAssets,
+    totalLiabilites: totalLiabilities,
+    netWorth,
+  }));
 };
+
 
 // calculate total income (Salary + passive income) and total expenses (all expenses summed)
 export const calculateTotals = (user: User, setUser: Dispatch<SetStateAction<User>>) => {

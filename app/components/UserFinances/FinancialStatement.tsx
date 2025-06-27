@@ -7,18 +7,45 @@ import addValuesTogether from "../../../utils/additionUtil";
 import formatUSD from "../../../utils/currencyUtil";
 import { useUser } from "../context/UserProvider";
 import { calculateTotals } from "./FinancialOverview";
+import calculateTotalAssets from "../../../utils/calculateTotalAssets";
 
 const FinancialStatement = () => {
-  // Logic/Functions Section
   const { user, setUser } = useUser();
 
-  // recalculate everytime income/expenses values change
   useEffect(() => {
     calculateTotals(user, setUser);
-  }, [user.income, user.expenses])
+  }, [user.income, user.expenses]);
+
+  const renderStockDetails = () => {
+    const stocks = user.Assets?.Investments?.Stocks;
+    if (!stocks || !stocks.holdings) return null;
+
+    return (
+      <>
+        <View style={styles.row}>
+          <Text style={styles.label}>Stocks Total Value:</Text>
+          <Text style={styles.value}>{formatUSD(stocks.totalValue)}</Text>
+        </View>
+
+        {Object.entries(stocks.holdings).map(([symbol, info]) => {
+          const shares = info.shares ?? 0;
+          const price = info.averagePrice ?? 0;
+          const value = shares * price;
+          return (
+            <View key={symbol} style={styles.row}>
+              <Text style={styles.label}>
+                {symbol} ({shares} @ {formatUSD(price)}):
+              </Text>
+              <Text style={styles.value}>{formatUSD(value)}</Text>
+            </View>
+          );
+        })}
+      </>
+    );
+  };
+  
 
   return (
-    // Statement Container
     <ScrollView
       style={styles.scrollView}
       contentContainerStyle={styles.scrollContent}
@@ -29,19 +56,11 @@ const FinancialStatement = () => {
         <View style={styles.card}>
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Income Sources</Text>
-
-            {/* Salary */}
             <View style={styles.row}>
               <Text style={styles.label}>Salary:</Text>
-              <Text style={styles.value}>
-                {formatUSD(user.income.Salary)}
-              </Text>
+              <Text style={styles.value}>{formatUSD(user.income.Salary)}</Text>
             </View>
-
-            {/* Separator Line */}
             <View style={styles.separator} />
-
-            {/* Passive Income */}
             {user.income &&
               Object.entries(user.income["Passive Income"]).map(
                 ([source, amount]) => (
@@ -51,14 +70,12 @@ const FinancialStatement = () => {
                   </View>
                 )
               )}
-
             <View style={[styles.row, styles.totalRow]}>
               <Text style={styles.totalLabel}>Passive Income:</Text>
               <Text style={styles.positive}>
                 {formatUSD(addValuesTogether(user.income["Passive Income"]))}
               </Text>
             </View>
-
             <View style={styles.row}>
               <Text style={styles.totalLabel}>Total Income:</Text>
               <Text style={styles.positive}>{formatUSD(user.totalIncome ?? 0)}</Text>
@@ -71,42 +88,71 @@ const FinancialStatement = () => {
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Monthly Expenses</Text>
             {Object.entries(user.expenses)
-              .filter(([key]) => key !== "Per Child Expense")  
+              .filter(([key]) => key !== "Per Child Expense")
               .map(([key, value]) => (
                 <View key={key} style={styles.row}>
                   <Text style={styles.label}>{key}:</Text>
                   <Text style={styles.value}>{formatUSD(value)}</Text>
                 </View>
               ))}
-
             <View style={[styles.row, styles.totalRow]}>
               <Text style={styles.totalLabel}>Total Expenses:</Text>
-              <Text style={styles.negative}>
-                {formatUSD(user.totalExpenses ?? 0)}
-              </Text>
+              <Text style={styles.negative}>{formatUSD(user.totalExpenses ?? 0)}</Text>
             </View>
           </View>
         </View>
 
-
-        {/* Assets */}
+        {/* Assets Section */}
         <View style={styles.card}>
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Assets</Text>
-            {Object.entries(user.Assets).map(([asset, amount]) => (
-              <View key={asset} style={styles.row}>
-                <Text style={styles.label}>{asset}:</Text>
-                <Text style={styles.value}>{formatUSD(amount)}</Text>
-              </View>
-            ))}
+
+            {/* Savings */}
+            <View style={styles.row}>
+              <Text style={styles.label}>Savings:</Text>
+              <Text style={styles.value}>{formatUSD(user.Assets.Savings)}</Text>
+            </View>
+
+            {/* Investments */}
+            <View style={styles.separator} />
+            <Text style={styles.sectionTitle}>Investments</Text>
+
+            {/* Stocks */}
+            {user.Assets?.Investments?.Stocks && (
+              <>
+                <View style={styles.row}>
+                  <Text style={styles.label}>Stocks Total Value:</Text>
+                  <Text style={styles.value}>
+                    {formatUSD(user.Assets.Investments.Stocks.totalValue)}
+                  </Text>
+                </View>
+
+                {Object.entries(user.Assets.Investments.Stocks.holdings).map(
+                  ([symbol, info]) => {
+                    const shares = info.shares ?? 0;
+                    const price = info.averagePrice ?? 0;
+                    const value = shares * price;
+                    return (
+                      <View key={symbol} style={styles.row}>
+                        <Text style={styles.label}>
+                          {symbol} ({shares} @ {formatUSD(price)}):
+                        </Text>
+                        <Text style={styles.value}>{formatUSD(value)}</Text>
+                      </View>
+                    );
+                  }
+                )}
+              </>
+            )}
+
             <View style={[styles.row, styles.totalRow]}>
               <Text style={styles.totalLabel}>Total Assets:</Text>
-              <Text style={styles.positive}>
-                {formatUSD(user.totalAssets ?? 0)}
-              </Text>
+              <Text style={styles.positive}>{formatUSD(calculateTotalAssets(user))}</Text>
+
             </View>
           </View>
         </View>
+
 
         {/* Liabilities */}
         <View style={styles.card}>
@@ -120,9 +166,7 @@ const FinancialStatement = () => {
             ))}
             <View style={[styles.row, styles.totalRow]}>
               <Text style={styles.totalLabel}>Total Liabilities:</Text>
-              <Text style={styles.negative}>
-                {formatUSD(user.totalLiabilites ?? 0)}
-              </Text>
+              <Text style={styles.negative}>{formatUSD(user.totalLiabilites ?? 0)}</Text>
             </View>
           </View>
         </View>
@@ -132,7 +176,6 @@ const FinancialStatement = () => {
 };
 
 const styles = StyleSheet.create({
-  // scrollable container
   scrollView: {
     backgroundColor: Theme.CFL_app_background,
     flex: 1,
@@ -141,25 +184,21 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingBottom: 20,
   },
-  // statement content container
   content: {
     padding: 0,
   },
-  // background container for each section
   card: {
-    marginVertical: Theme.CFL_card_spacing, // space between components
-    backgroundColor: Theme.CFL_card_background, // lighter card background
+    marginVertical: Theme.CFL_card_spacing,
+    backgroundColor: Theme.CFL_card_background,
     padding: 7,
     paddingVertical: 5,
     borderRadius: 10,
   },
-  // income/expenses/assets
   section: {
-    backgroundColor: Theme.CFL_transparent, // inner container black
+    backgroundColor: Theme.CFL_transparent,
     padding: 5,
     borderRadius: 10,
   },
-  // section titles
   sectionTitle: {
     fontSize: 18,
     fontWeight: "bold",
@@ -167,57 +206,47 @@ const styles = StyleSheet.create({
     fontFamily: Theme.CFL_title_font,
     marginBottom: 10,
   },
-  // row
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     paddingVertical: 8,
   },
-  // total values
   totalRow: {
     marginTop: 10,
     paddingTop: 10,
     borderTopWidth: 1,
     borderTopColor: Theme.CFL_gray,
   },
-  // labels
   label: {
     fontSize: 16,
     color: Theme.CFL_light_text,
     fontFamily: Theme.CFL_primary_font,
   },
-  // values
   value: {
     fontSize: 16,
     color: Theme.CFL_white,
     fontWeight: "500",
     fontFamily: Theme.CFL_primary_font,
   },
-  // labels for totals
   totalLabel: {
     fontSize: 16,
     fontWeight: "bold",
     color: Theme.CFL_white,
     fontFamily: Theme.CFL_primary_font,
   },
-  // if $ is positive
   positive: {
     color: Theme.CFL_lime_green,
     fontFamily: Theme.CFL_primary_font,
-
     fontSize: 16,
     fontWeight: "bold",
   },
-  // if $ is negative
   negative: {
     color: Theme.CFL_red,
     fontFamily: Theme.CFL_primary_font,
-
     fontSize: 16,
     fontWeight: "bold",
   },
-  // dividing line
   separator: {
     height: 1,
     backgroundColor: Theme.CFL_gray,
@@ -225,5 +254,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// export to be called in index.tsx from tab navigation
 export default FinancialStatement;

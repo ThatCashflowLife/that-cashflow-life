@@ -12,7 +12,7 @@ const defineConfig = ({ config }: ConfigContext): ExpoConfig => ({
   splash: {
     image: "./app/assets/icons/That-Cashflow-LIFE.png",
     resizeMode: "cover",
-    backgroundColor: "#121212",
+    backgroundColor: "#000000",
   },
   ios: {
     supportsTablet: true,
@@ -21,7 +21,7 @@ const defineConfig = ({ config }: ConfigContext): ExpoConfig => ({
   android: {
     adaptiveIcon: {
       foregroundImage: "./app/assets/icons/That-Cashflow-LIFE.png",
-      backgroundColor: "#121212",
+      backgroundColor: "#000000",
     },
     package: "com.thatcashflowlife.cashflowlife",
   },

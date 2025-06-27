@@ -1,8 +1,8 @@
 // TabLayout.tsx
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, TouchableOpacity, View } from "react-native";
+import { SafeAreaView, StyleSheet, TouchableOpacity, View, Text, ScrollView } from "react-native";
 import Theme from "../interfaces/theme";
 import { useTransactions } from "./components/context/TransactionProvider";
 import { useUser } from "./components/context/UserProvider";
@@ -22,7 +22,7 @@ import {
     createPaymentTransaction,
     applyPaymentToLoan,
     createDealTransaction,
-    applyDealToUser,createSavingsTransaction
+    applyDealToUser, createSavingsTransaction, createStockTransaction, updateStocks
 } from "./components/QrCodeScanner/ScannerLogic";
 import { LoanCategory, PassiveIncomeCategory } from "./components/QrCodeScanner/ScannerLogic";
 import { QRData } from "../interfaces/qrTypes";
@@ -30,6 +30,7 @@ import { calculateNetWorth } from "./components/UserFinances/FinancialOverview";
 import Profession from "../interfaces/Profession";
 import Transaction from "../interfaces/Transaction";
 import SavingsDialog from "./components/features/SavingsDialog";
+import StocksDialog from "./components/features/StocksDialog";
 
 const DynamicTabs = () => {
     const { user } = useUser();
@@ -103,6 +104,7 @@ export const TabLayout = () => {
     const [isPaymentDialogVisible, setIsPaymentDialogVisible] = useState(false);
     const [isDealDialogVisible, setIsDealDialogVisible] = useState(false);
     const [isSavingsDialogVisible, setIsSavingsDialogVisible] = useState(false);
+    const [isStocksDialogVisible, setIsStocksDialogVisible] = useState(false);
 
     const handleScan = (data: QRData) => {
         function isProfession(data: QRData): data is Profession {
@@ -150,25 +152,45 @@ export const TabLayout = () => {
         <View style={styles.container}>
             <SafeAreaView style={styles.container}>
                 <Header />
+                <View style={styles.sViewContainer}>
+                    <ScrollView
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        style={styles.fabContainer}
+                        contentContainerStyle={styles.scrollContent}>
 
-                <View style={styles.fabContainer}>
-                    <ScannerButton onScan={handleScan} buttonStyle={styles.fab} iconSize={38} />
-                    <TouchableOpacity style={styles.fab} onPress={() => setIsLoanDialogVisible(true)}>
-                        <MaterialIcons name="attach-money" size={48} color="#fff" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.fab} onPress={() => setIsPaymentDialogVisible(true)}>
-                        <MaterialIcons name="payment" size={40} color="#fff" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.fab} onPress={() => setIsDealDialogVisible(true)}>
-                        <MaterialIcons name="handshake" size={48} color="#fff" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.fab} onPress={() => setIsSavingsDialogVisible(true)}>
-                        <MaterialIcons name="savings" size={48} color="#fff" />
-                    </TouchableOpacity>
+                        <ScannerButton onScan={handleScan} buttonStyle={styles.fab} iconSize={38} text="Scan Qr" />
+
+                        <TouchableOpacity style={styles.fab} onPress={() => setIsLoanDialogVisible(true)}>
+                            <MaterialIcons name="attach-money" size={48} color="#fff" />
+                            <Text style={styles.fabText}>Borrow</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.fab} onPress={() => setIsPaymentDialogVisible(true)}>
+                            <MaterialIcons name="payment" size={40} color="#fff" />
+                            <Text style={styles.fabText}>Payments</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.fab} onPress={() => setIsDealDialogVisible(true)}>
+                            <MaterialIcons name="handshake" size={48} color="#fff" />
+                            <Text style={styles.fabText}>Deals</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.fab} onPress={() => setIsSavingsDialogVisible(true)}>
+                            <MaterialIcons name="savings" size={48} color="#fff" />
+                            <Text style={styles.fabText}>Savings</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.fab} onPress={() => setIsStocksDialogVisible(true)}>
+                            <MaterialCommunityIcons name="finance" size={48} color="#fff" />
+                            <Text style={styles.fabText}>Stocks</Text>
+                        </TouchableOpacity>
+
+
+                    </ScrollView>
                 </View>
 
-                {/* 🧩 CALL DynamicTabs */}
                 <DynamicTabs />
+
             </SafeAreaView>
 
             {/* Dialogs */}
@@ -196,6 +218,7 @@ export const TabLayout = () => {
             />
             <PaymentDialog
                 isVisible={isPaymentDialogVisible}
+                liabilities={user.Liabilities}  // <-- add this
                 onSubmit={(paymentAmount: number, selectedCategory: LoanCategory) => {
                     const updatedUser = applyPaymentToLoan(user, paymentAmount, selectedCategory);
                     const paymentTransaction = createPaymentTransaction(paymentAmount, selectedCategory);
@@ -207,6 +230,7 @@ export const TabLayout = () => {
                 }}
                 onCancel={() => setIsPaymentDialogVisible(false)}
             />
+
             <DealDialog
                 isVisible={isDealDialogVisible}
                 onSubmit={(cashflow: number, mortgage: number, incomeType: PassiveIncomeCategory) => {
@@ -233,13 +257,26 @@ export const TabLayout = () => {
                         updatedUser.Assets.Savings = Math.max(0, updatedUser.Assets.Savings - amount);
                     }
                     const transaction = createSavingsTransaction(amount, type);
-                    
-                    
+
+
                     setUser(updatedUser);
                     addTransactions([transaction]);
 
                     calculateNetWorth(updatedUser, setUser);
                     setIsSavingsDialogVisible(false);
+                }}
+            />
+            <StocksDialog
+                isVisible={isStocksDialogVisible}
+                onCancel={() => setIsStocksDialogVisible(false)}
+                onSubmit={(symbol, shares, price, type) => {
+                    const updatedUser = updateStocks(user, symbol, shares, price, type); // ✅ use the correct updater
+                    const transaction = createStockTransaction(symbol, shares, price, type);
+
+                    setUser(updatedUser);
+                    addTransactions([transaction]);
+                    calculateNetWorth(updatedUser, setUser);
+                    setIsStocksDialogVisible(false);
                 }}
             />
 
@@ -263,26 +300,37 @@ const styles = StyleSheet.create({
     },
     fabContainer: {
         flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        paddingVertical: 5,
         backgroundColor: "transparent",
-        position: "relative",
+        height: 90,
     },
     fab: {
-        width: 68,
-        height: 68,
-        borderRadius: 35,
+        width: 150,
+        height: 80,
+        borderRadius: 75,
         backgroundColor: "#333",
         justifyContent: "center",
         alignItems: "center",
         marginHorizontal: 5,
-        elevation: 5,
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 0,
+        elevation: 10,
+        shadowColor: "rgba(255,255,255,0)",
+        shadowOffset: { width: 0, height: 15 },
+        shadowOpacity: 0.8,
+        shadowRadius: 5,
     },
+    fabText: {
+        color: "white",
+        bottom: 5,
+    },
+    scrollContent: {
+
+        flexDirection: "row",
+        paddingVertical: 5,
+        height: 80,
+
+    },
+    sViewContainer: {
+        alignItems: "center"
+    }
 });
 
 export default TabLayout;

@@ -1,17 +1,28 @@
 export default interface Assets {
   Savings: number;
-  Investments?: Investments;
+  Investments: Investments;
 }
 
 export interface Investments {
   Mortgage: number;
   "Real Estate": RealEstate;
-  Stocks: number;
+  Stocks: StockData;
   Gold_Count: number;
   Bitcoin: number;
   "Bitcoin Value": number;
   "Certificate Deposit": number;
 }
+
+export interface StockData {
+  totalValue: number;
+  holdings: {
+    [symbol: string]: {
+      shares: number;
+      averagePrice: number;
+    };
+  };
+}
+
 
 export interface RealEstate {
   // for house/business assets and their "transaction"
