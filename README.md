@@ -88,9 +88,9 @@ Ensure you have the following installed:
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
+- Merge pull request #18 from ThatCashflowLife/auto-update-readme-15928747042 (ThatCashflowLife)
+- Auto-update README for commit: Merge pull request #17 from ThatCashflowLife/auto-update-readme-15928719662 (ThatCashflowLife)
 - Merge pull request #17 from ThatCashflowLife/auto-update-readme-15928719662 (ThatCashflowLife)
-- Auto-update README for commit: Multiple Changes - Updates/Adds (rmorrow23)
-- Multiple Changes - Updates/Adds (Randal Morrow)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
@@ -104,4 +104,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-06-27 10:29:18 -0400_
+_Last updated: 2025-06-27 10:30:01 -0400_
