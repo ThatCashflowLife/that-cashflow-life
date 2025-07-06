@@ -89,13 +89,13 @@ Ensure you have the following installed:
 
 ## 🔄 Recent Commits
 - Add files via upload (Randal Morrow)
-- Merge pull request #48 from ThatCashflowLife/auto-update-readme-16098590862 (ThatCashflowLife)
-- Auto-update README for commit: Add files via upload (rmorrow23)
+- Add files via upload (Randal Morrow)
+- Merge pull request #49 from ThatCashflowLife/auto-update-readme-16098605551 (ThatCashflowLife)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
-- [@rmorrow23](https://github.com/rmorrow23) (⭐ 62 commits)
-- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 51 commits)
+- [@rmorrow23](https://github.com/rmorrow23) (⭐ 55 commits)
+- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 49 commits)
 - [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 14 commits)
 - [@D-flyRobotics](https://github.com/D-flyRobotics) (⭐ 2 commits)
 - [@expo-bot](https://github.com/expo-bot) (⭐ 1 commits)
@@ -104,4 +104,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-07-06 06:37:03 -0500_
+_Last updated: 2025-07-06 06:38:08 -0500_
