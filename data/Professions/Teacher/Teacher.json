@@ -2,7 +2,7 @@
   "name": "Teacher",
   "scanType": "Profession",
   "income": {
-    "Salary": 3300,
+    "Salary": 3800,
     "Passive Income": {
       "Interest": 0,
       "Dividends": 0,
@@ -11,9 +11,9 @@
     }
   },
   "expenses": {
-    "Monthly Taxes": 630,
+    "Monthly Taxes": 1250,
     "Mortgage Payment": 500,
-    "School Loans": 60,
+    "School Loans": 300,
     "Car Payment": 100,
     "Credit Card Payment": 90,
     "Retail Spending": 50,
@@ -24,8 +24,8 @@
     "Savings": 400
   },
   "liabilities": {
-    "Mortgage Total": 50000,
-    "School Loans Total": 12000,
+    "Mortgage Total": 10400,
+    "School Loans Total": 60000,
     "Car Loans": 5000,
     "Credit Card Loans": 3000,
     "Retail Debt": 1000
