@@ -88,14 +88,14 @@ Ensure you have the following installed:
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
-- Delete data/Professions/TruckDriver/TruckDriver.png (Randal Morrow)
-- Merge pull request #40 from ThatCashflowLife/auto-update-readme-16098547594 (ThatCashflowLife)
-- Auto-update README for commit: Delete data/Professions/Lawyer/Lawyer.png (rmorrow23)
+- Add files via upload (Randal Morrow)
+- Merge pull request #42 from ThatCashflowLife/auto-update-readme-16098554215 (ThatCashflowLife)
+- Auto-update README for commit: Delete data/Professions/TruckDriver/TruckDriver.png (rmorrow23)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
-- [@rmorrow23](https://github.com/rmorrow23) (⭐ 62 commits)
-- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 51 commits)
+- [@rmorrow23](https://github.com/rmorrow23) (⭐ 55 commits)
+- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 49 commits)
 - [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 14 commits)
 - [@D-flyRobotics](https://github.com/D-flyRobotics) (⭐ 2 commits)
 - [@expo-bot](https://github.com/expo-bot) (⭐ 1 commits)
@@ -104,4 +104,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-07-06 06:31:04 -0500_
+_Last updated: 2025-07-06 06:31:39 -0500_
