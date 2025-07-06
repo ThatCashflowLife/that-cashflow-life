@@ -2,7 +2,7 @@
   "name": "Police Officer",
   "scanType": "Profession",
   "income": {
-    "Salary": 3000,
+    "Salary": 4400,
     "Passive Income": {
       "Dividends": 0,
       "Interest": 0,
@@ -11,8 +11,8 @@
     }
   },
   "expenses": {
-    "Monthly Taxes": 580,
-    "Mortgage Payment": 400,
+    "Monthly Taxes": 1600,
+    "Mortgage Payment": 900,
     "School Loans": 0,
     "Car Payment": 100,
     "Credit Card Payment": 60,
@@ -21,13 +21,46 @@
     "Per Child Expense": 160
   },
   "assets": {
-    "Savings": 520
+    "Savings": 520,
+    "Investments": {
+      "Mortgage": 0,
+      "Stocks": {
+        "totalValue": 0,
+        "holdings": {}
+      },
+      "Gold_Count": 0,
+      "Bitcoin": 0,
+      "Bitcoin Value": 0,
+      "Certificate Deposit": 0
+    },
+    "Real Estate": [
+      {
+        "name": "First Property",
+        "type": "2Br/2Ba House",
+        "description": "Your starter home.",
+        "Purchase Price": 200000,
+        "Sale Range": "220000-260000",
+        "Cash Flow": -900,
+        "Mortgage": 190000,
+        "Down Payment": 10000,
+        "purchaseTime": "2025-06-30T12:00:00.000Z",
+        "saleTime": ""
+      }
+    ]
   },
   "liabilities": {
-    "Mortgage Total": 46000,
-    "School Loans Total": 0,
-    "Car Loans": 5000,
-    "Credit Card Loans": 2000,
-    "Retail Debt": 1000
+    "School Loans": {
+      "School Loans": 0
+    },
+    "Car Loans": {
+      "Car Loan": 5000
+    },
+    "Credit Cards": {
+      "Credit Card Loan": 2000
+    },
+    "Retail Debts": {
+      "Retail Debt": 1000
+    },
+    "Personal Loans": {}
   }
 }
