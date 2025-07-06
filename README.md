@@ -88,14 +88,14 @@ Ensure you have the following installed:
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
-- Update Secretary.json (Randal Morrow)
-- Merge pull request #25 from ThatCashflowLife/auto-update-readme-16097951560 (ThatCashflowLife)
-- Auto-update README for commit: Update Police_Officer.json (rmorrow23)
+- Update Teacher.json (Randal Morrow)
+- Merge pull request #26 from ThatCashflowLife/auto-update-readme-16097972488 (ThatCashflowLife)
+- Auto-update README for commit: Update Secretary.json (rmorrow23)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
-- [@rmorrow23](https://github.com/rmorrow23) (⭐ 37 commits)
-- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 35 commits)
+- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 42 commits)
+- [@rmorrow23](https://github.com/rmorrow23) (⭐ 39 commits)
 - [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 14 commits)
 - [@D-flyRobotics](https://github.com/D-flyRobotics) (⭐ 2 commits)
 - [@expo-bot](https://github.com/expo-bot) (⭐ 1 commits)
@@ -104,4 +104,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-07-06 05:17:52 -0500_
+_Last updated: 2025-07-06 05:30:15 -0500_
