@@ -89,13 +89,13 @@ Ensure you have the following installed:
 
 ## 🔄 Recent Commits
 - Add files via upload (Randal Morrow)
-- Merge pull request #27 from ThatCashflowLife/auto-update-readme-16098073701 (ThatCashflowLife)
-- Auto-update README for commit: Update Teacher.json (rmorrow23)
+- Add files via upload (Randal Morrow)
+- Merge pull request #28 from ThatCashflowLife/auto-update-readme-16098141833 (ThatCashflowLife)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
-- [@rmorrow23](https://github.com/rmorrow23) (⭐ 37 commits)
-- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 35 commits)
+- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 40 commits)
+- [@rmorrow23](https://github.com/rmorrow23) (⭐ 38 commits)
 - [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 14 commits)
 - [@D-flyRobotics](https://github.com/D-flyRobotics) (⭐ 2 commits)
 - [@expo-bot](https://github.com/expo-bot) (⭐ 1 commits)
@@ -104,4 +104,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-07-06 05:38:41 -0500_
+_Last updated: 2025-07-06 05:40:02 -0500_
