@@ -88,9 +88,9 @@ Ensure you have the following installed:
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
-- Delete data/Professions/BusinessManager/BusinessManager.png (Randal Morrow)
-- Merge pull request #34 from ThatCashflowLife/auto-update-readme-16098533869 (ThatCashflowLife)
-- Add files via upload (Randal Morrow)
+- Delete data/Professions/Lawyer/Lawyer.png (Randal Morrow)
+- Merge pull request #36 from ThatCashflowLife/auto-update-readme-16098540284 (ThatCashflowLife)
+- Delete data/Professions/Janitor/Janitor.png (Randal Morrow)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
@@ -104,4 +104,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-07-06 06:29:30 -0500_
+_Last updated: 2025-07-06 06:30:19 -0500_
