@@ -21,13 +21,46 @@
     "Per Child Expense": 640
   },
   "assets": {
-    "Savings": 400
+    "Savings": 400,
+    "Investments": {
+      "Mortgage": 0,
+      "Stocks": {
+        "totalValue": 0,
+        "holdings": {}
+      },
+      "Gold_Count": 0,
+      "Bitcoin": 0,
+      "Bitcoin Value": 0,
+      "Certificate Deposit": 0
+    },
+    "Real Estate": [
+      {
+        "name": "First Property",
+        "type": "2Br/2Ba House",
+        "description": "Your starter home.",
+        "Purchase Price": 212000,
+        "Sale Range": "180000-220000",
+        "Cash Flow": -1900,
+        "Mortgage": 202000,
+        "Down Payment": 10000,
+        "purchaseTime": "2025-07-06T10:33:44.831Z",
+        "saleTime": ""
+      }
+    ]
   },
   "liabilities": {
-    "Mortgage Total": 202000,
-    "School Loans Total": 150000,
-    "Car Loans": 19000,
-    "Credit Card Loans": 9000,
-    "Retail Debt": 1000
+    "School Loans": {
+      "School Loan": 150000
+    },
+    "Car Loans": {
+      "Car Loan": 19000
+    },
+    "Credit Cards": {
+      "Credit Card Loan": 9000
+    },
+    "Retail Debts": {
+      "Retail Debt": 1000
+    },
+    "Personal Loans": {}
   }
 }
