@@ -88,14 +88,14 @@ Ensure you have the following installed:
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
-- Delete data/Professions/AirlinePilot/AirlinePilot.png (Randal Morrow)
-- Merge pull request #33 from ThatCashflowLife/auto-update-readme-16098162524 (ThatCashflowLife)
-- Auto-update README for commit: Add files via upload (rmorrow23)
+- Delete data/Professions/Janitor/Janitor.png (Randal Morrow)
+- Delete data/Professions/Engineer/Engineer.png (Randal Morrow)
+- Delete data/Professions/Doctor/Doctor.png (Randal Morrow)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
-- [@rmorrow23](https://github.com/rmorrow23) (⭐ 55 commits)
-- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 49 commits)
+- [@rmorrow23](https://github.com/rmorrow23) (⭐ 58 commits)
+- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 50 commits)
 - [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 14 commits)
 - [@D-flyRobotics](https://github.com/D-flyRobotics) (⭐ 2 commits)
 - [@expo-bot](https://github.com/expo-bot) (⭐ 1 commits)
@@ -104,4 +104,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-07-06 06:28:39 -0500_
+_Last updated: 2025-07-06 06:30:04 -0500_
