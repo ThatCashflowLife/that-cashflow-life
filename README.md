@@ -89,8 +89,8 @@ Ensure you have the following installed:
 
 ## 🔄 Recent Commits
 - Add files via upload (Randal Morrow)
-- Merge pull request #43 from ThatCashflowLife/auto-update-readme-16098560399 (ThatCashflowLife)
-- Auto-update README for commit: Add files via upload (rmorrow23)
+- Merge pull request #44 from ThatCashflowLife/auto-update-readme-16098568206 (ThatCashflowLife)
+- Add files via upload (Randal Morrow)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
@@ -104,4 +104,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-07-06 06:32:33 -0500_
+_Last updated: 2025-07-06 06:33:39 -0500_
