@@ -2,7 +2,7 @@
   "name": "Airline Pilot",
   "scanType": "Profession",
   "income": {
-    "Salary": 9500,
+    "Salary": 9000,
     "Passive Income": {
       "Interest": 0,
       "Dividends": 0,
@@ -11,8 +11,8 @@
     }
   },
   "expenses": {
-    "Monthly Taxes": 2350,
-    "Mortgage Payment": 1330,
+    "Monthly Taxes": 2000,
+    "Mortgage Payment": 1200,
     "School Loans": 0,
     "Car Payment": 300,
     "Credit Card Payment": 660,
@@ -21,13 +21,46 @@
     "Per Child Expense": 480
   },
   "assets": {
-    "Savings": 400
+    "Savings": 400,
+    "Investments": {
+      "Mortgage": 0,
+      "Stocks": {
+        "totalValue": 0,
+        "holdings": {}
+      },
+      "Gold_Count": 0,
+      "Bitcoin": 0,
+      "Bitcoin Value": 0,
+      "Certificate Deposit": 0
+    },
+    "Real Estate": [
+      {
+        "name": "First Property",
+        "type": "2Br/2Ba House",
+        "description": "Your starter home.",
+        "Purchase Price": 260000,
+        "Sale Range": "180000-220000",
+        "Cash Flow": -1200,
+        "Mortgage": 250000,
+        "Down Payment": 10000,
+        "purchaseTime": "2025-07-06T10:33:44.869Z",
+        "saleTime": ""
+      }
+    ]
   },
   "liabilities": {
-    "Mortgage Total": 143000,
-    "School Loans Total": 0,
-    "Car Loans": 15000,
-    "Credit Card Loans": 22000,
-    "Retail Debt": 1000
+    "School Loans": {
+      "School Loan": 0
+    },
+    "Car Loans": {
+      "Car Loan": 15000
+    },
+    "Credit Cards": {
+      "Credit Card Loan": 22000
+    },
+    "Retail Debts": {
+      "Retail Debt": 1000
+    },
+    "Personal Loans": {}
   }
 }
