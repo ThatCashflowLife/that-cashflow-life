@@ -14,34 +14,67 @@ export const calculateNetWorth = (
   setUser: Dispatch<SetStateAction<User>>
 ): void => {
   const assets = user.Assets;
-
-  // Sum top-level numeric fields in Assets (e.g., Savings)
   let totalAssets = 0;
-  for (const [key, value] of Object.entries(assets)) {
-    if (typeof value === "number") {
-      totalAssets += value;
-    }
+
+  // Sum numeric top-level fields like Savings
+  for (const [_, value] of Object.entries(assets)) {
+    if (typeof value === "number") totalAssets += value;
   }
 
-  // Add Stocks total value if available
+  // Add stocks value
   const stocksValue = assets.Investments?.Stocks?.totalValue ?? 0;
   totalAssets += stocksValue;
 
-  // Sum liabilities normally (assuming all values are numeric)
-  const totalLiabilities = Object.values(user.Liabilities).reduce(
-    (sum, val) => sum + val,
-    0
-  );
+  // Fallback-safe real estate access
+  const realEstate: any[] = Array.isArray(assets.Investments?.RealEstate)
+    ? assets.Investments?.RealEstate
+    : [];
+
+  // Add estimated sale value of real estate (average sale range midpoint or purchase price)
+  for (const property of realEstate) {
+    if (property["Sale Range"]) {
+      const [low, high] = property["Sale Range"].split("-").map(Number);
+      const averageValue = (low + high) / 2;
+      totalAssets += isFinite(averageValue)
+        ? averageValue
+        : property["Purchase Price"] ?? 0;
+    } else {
+      totalAssets += property["Purchase Price"] ?? 0;
+    }
+  }
+
+  // Sum liabilities from nested groups (CarLoans, PersonalLoans, etc.)
+  let totalLiabilities = 0;
+  for (const [_, group] of Object.entries(user.Liabilities)) {
+    if (typeof group === "object" && group !== null) {
+      for (const amount of Object.values(group)) {
+        totalLiabilities += amount;
+      }
+    } else if (typeof group === "number") {
+      totalLiabilities += group;
+    }
+  }
+
+  // Add mortgages from real estate
+  for (const property of realEstate) {
+    if (property.Mortgage && property.Mortgage > 0) {
+      totalLiabilities += property.Mortgage;
+    }
+  }
 
   const netWorth = totalAssets - totalLiabilities;
 
   setUser((prevUser) => ({
     ...prevUser,
     totalAssets,
-    totalLiabilites: totalLiabilities,
+    totalLiabilities,
     netWorth,
   }));
 };
+
+
+
+
 
 
 // calculate total income (Salary + passive income) and total expenses (all expenses summed)
@@ -153,7 +186,7 @@ const FinancialOverview = () => {
       <View style={styles.row}>
         <Text style={styles.label}>Total Liabilities:</Text>
         <Text style={styles.value}>
-          {formatUSD(user.totalLiabilites ?? 0)}
+          {formatUSD(user.totalLiabilities ?? 0)}
         </Text>
       </View>
 
@@ -162,7 +195,7 @@ const FinancialOverview = () => {
         <Text
           style={[
             styles.value,
-            user.netWorth ?? 0 >= 0 ? styles.negative : styles.positive,
+            user.netWorth ?? 0 >= 0 ? styles.positive : styles.negative,
           ]}
         >
           {formatUSD(user.netWorth ?? 0)}

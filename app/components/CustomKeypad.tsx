@@ -52,12 +52,12 @@ const styles = StyleSheet.create({
     },
     key: {
         backgroundColor: "#444",
-        paddingVertical: 10,
-        paddingHorizontal: 10,
+        paddingVertical: "1%",
+        paddingHorizontal: "10%",
         borderRadius: 200,
         alignItems: "center",
         justifyContent: "center",
-        width: 100,
+        width: "25%",
     },
     keyText: {
         color: "white",

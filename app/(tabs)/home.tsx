@@ -70,7 +70,12 @@ export const Home = () => {
             </View>
             <View style={[styles.row, styles.totalRow]}>
               <Text style={styles.totalLabel}>Estimated Monthly Paycheck:</Text>
-              <Text style={styles.positive}>
+              <Text
+                style={[
+                  styles.value,
+                  user.totalIncome ?? 0 <= 0 ? styles.positive : styles.negative,
+                ]}
+              >
                 {formatUSD((user.totalIncome ?? 0) - (user.totalExpenses ?? 0))}
               </Text>
             </View>

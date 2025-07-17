@@ -6,7 +6,8 @@ import formatTimestamp from "../../../utils/timeUtil";
 import Liabilities from "../../../interfaces/Liabilities";
 import { PassiveIncome } from "../../../interfaces/Income";
 import calculateTotalAssets from "../../../utils/calculateTotalAssets";
-
+import { RealEstate } from "../../../interfaces/Assets";
+import Assets from "../../../interfaces/Assets";
 
 
 export type PassiveIncomeCategory = keyof PassiveIncome;
@@ -60,7 +61,7 @@ export const populateFirstProfession = (
       Savings: scannedProfession.assets.Savings ?? 0,
       Investments: {
         Mortgage: scannedProfession.assets.Investments?.Mortgage ?? 0,
-        "Real Estate": scannedProfession.assets.Investments?.["Real Estate"] ?? {
+        RealEstate: scannedProfession.assets.Investments?.RealEstate ?? {
           name: "",
           type: "house",
           description: "",
@@ -261,41 +262,63 @@ export const createPaymentTransaction = (amount: number, category: LoanCategory)
   };
 };
 export type LoanCategory = keyof Liabilities;
+export function applyPaymentToLoan(user: User, amount: number, category: string): User {
+  const updatedUser = { ...user };
 
-export const applyPaymentToLoan = (
-  currentUser: User,
-  paymentAmount: number,
-  category: LoanCategory
-): User => {
-  const currentLoanBalance = currentUser.Liabilities[category] || 0;
+  // Split category if it's in the "Category: LoanName" format
+  console.log("Received Category: ", category);`  `
+  const [mainCategory, subCategory] = category.split(":").map(part => part.trim());
 
-  const newLoanBalance = Math.max(currentLoanBalance - paymentAmount, 0);
-
-  const updatedLiabilities = {
-    ...currentUser.Liabilities,
-    [category]: newLoanBalance,
-  };
-
-  //  If loan is paid off, remove loan payment from expenses
-  const updatedExpenses = { ...currentUser.expenses };
-
-  if (newLoanBalance === 0) {
-    // Set Loan Payment to 0
-    updatedExpenses["Loan Payment"] = 0;
+  if (mainCategory === "Real Estate" && subCategory) {
+    const property = updatedUser.Assets.Investments?.RealEstate?.find(p => p.name === subCategory);
+    if (property) {
+      property.Mortgage = Math.max(0, property.Mortgage - amount);
+    }
+  } else if (updatedUser.Liabilities[mainCategory]) {
+    if (typeof updatedUser.Liabilities[mainCategory] === "number") {
+      updatedUser.Liabilities[mainCategory] = Math.max(0, updatedUser.Liabilities[mainCategory] - amount);
+    } else if (typeof updatedUser.Liabilities[mainCategory] === "object" && subCategory) {
+      updatedUser.Liabilities[mainCategory][subCategory] = Math.max(0, updatedUser.Liabilities[mainCategory][subCategory] - amount);
+    }
   }
 
-  return {
-    ...currentUser,
-    Liabilities: updatedLiabilities,
-    expenses: updatedExpenses,
-  };
-};
+  return updatedUser;
+}
+
+
+
+
+
 export const applyDealToUser = (
   currentUser: User,
   cashflow: number,
   mortgage: number,
-  incomeType: keyof PassiveIncome
+  incomeType: keyof PassiveIncome,
+  propertyType: string,
+  saleRange: string
 ): User => {
+  const now = formatTimestamp(new Date().toISOString());
+
+  const newProperty: RealEstate = {
+    name: `${propertyType} ${currentUser.Assets.Investments.RealEstate.length + 1}`,
+    type: propertyType as RealEstate["type"],
+    description: `Deal for ${propertyType} added.`,
+    "Purchase Price": mortgage + 10000,
+    "Sale Range": saleRange,
+    "Cash Flow": cashflow,
+    Mortgage: mortgage,
+    "Down Payment": 10000,
+    purchaseTime: now,
+    saleTime: "",
+  };
+  console.log(newProperty.name);
+  
+
+  // Get current real estate list safely as array
+  const currentProperties = Array.isArray(currentUser.Assets?.Investments?.RealEstate)
+    ? currentUser.Assets.Investments?.RealEstate
+    : [];
+
   return {
     ...currentUser,
     income: {
@@ -305,12 +328,21 @@ export const applyDealToUser = (
         [incomeType]: (currentUser.income["Passive Income"][incomeType] || 0) + cashflow,
       },
     },
+    Assets: {
+      ...currentUser.Assets,
+      Investments: {
+        ...currentUser.Assets.Investments,
+       RealEstate: [...currentProperties, newProperty],
+      },
+    },
     Liabilities: {
       ...currentUser.Liabilities,
-      "Mortgage Total": (currentUser.Liabilities["Mortgage Total"] || 0) + mortgage,
+      //"Mortgage Total": (currentUser.Liabilities["Mortgage Total"] || 0) + mortgage,
     },
   };
 };
+
+
 
 
 

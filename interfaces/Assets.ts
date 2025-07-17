@@ -5,13 +5,14 @@ export default interface Assets {
 
 export interface Investments {
   Mortgage: number;
-  "Real Estate": RealEstate;
+  RealEstate: RealEstate[];
   Stocks: StockData;
   Gold_Count: number;
   Bitcoin: number;
   "Bitcoin Value": number;
   "Certificate Deposit": number;
 }
+
 
 export interface StockData {
   totalValue: number;
@@ -27,7 +28,7 @@ export interface StockData {
 export interface RealEstate {
   // for house/business assets and their "transaction"
   name: string;
-  type: "house" | "business"; // add more types based on cards
+  type: "3Br/2Ba House" | "Duplex" | "4-Plex" | "8-Plex" | "Apartment Complex" | "Business";
   description: string;
   "Purchase Price": number; // What was it bought for?
   "Sale Range": string; // What can it sell for? (estimated)

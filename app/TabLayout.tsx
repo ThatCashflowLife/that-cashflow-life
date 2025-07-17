@@ -218,11 +218,11 @@ export const TabLayout = () => {
             />
             <PaymentDialog
                 isVisible={isPaymentDialogVisible}
-                liabilities={user.Liabilities}  // <-- add this
-                onSubmit={(paymentAmount: number, selectedCategory: LoanCategory) => {
+                liabilities={user.Liabilities}
+                realEstate={user.Assets.Investments?.RealEstate ?? []}
+                onSubmit={(paymentAmount: number, selectedCategory: string) => {
                     const updatedUser = applyPaymentToLoan(user, paymentAmount, selectedCategory);
                     const paymentTransaction = createPaymentTransaction(paymentAmount, selectedCategory);
-
                     setUser(updatedUser);
                     addTransactions([paymentTransaction]);
                     calculateNetWorth(updatedUser, setUser);
@@ -233,8 +233,8 @@ export const TabLayout = () => {
 
             <DealDialog
                 isVisible={isDealDialogVisible}
-                onSubmit={(cashflow: number, mortgage: number, incomeType: PassiveIncomeCategory) => {
-                    const updatedUser = applyDealToUser(user, cashflow, mortgage, incomeType);
+                onSubmit={(cashflow: number, mortgage: number, incomeType: PassiveIncomeCategory, propertyType:string, saleRange:string) => {
+                    const updatedUser = applyDealToUser(user, cashflow, mortgage, incomeType, propertyType, saleRange);
                     const dealTransaction = createDealTransaction(cashflow, mortgage, incomeType);
 
                     setUser(updatedUser);

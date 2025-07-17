@@ -14,7 +14,7 @@ export interface User {
   Assets: Assets;
   totalAssets?: number; // possibly undefined when scanned in, calculated after
   Liabilities: Liabilities; 
-  totalLiabilites?: number; // possibly undefined when scanned in, calculated after
+  totalLiabilities?: number; // possibly undefined when scanned in, calculated after
   netWorth?: number; // possibly undefined when scanned in, calculated after
   Children: number;
   ChildCost: number;
