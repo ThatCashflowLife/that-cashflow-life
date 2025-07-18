@@ -1,8 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useContext, useEffect, useState } from "react";
-
 import blankUser from "../../../data/testData/blankUser";
 import User from "../../../interfaces/User";
+import addValuesTogether from "../../../utils/additionUtil";
 
 // define UserContext type
 interface UserContextType {
@@ -21,6 +21,37 @@ export function useUser() {
   return useContext(UserContext);
 }
 
+export const recalculateTotals = (user: User): User => {
+  const passiveIncome = user.income?.["Passive Income"] || {};
+  const activeIncome = user.income?.["Salary"] || 0;
+
+  // Sum up all property mortgages
+  const realEstate = user.Assets?.Investments?.RealEstate || [];
+  const totalMortgages = realEstate.reduce((sum, property) => sum + (property.Mortgage || 0), 0);
+
+  // Total assets
+  const cashAssets = {
+    ...user.Assets,
+    Investments: undefined
+  };
+  const totalAssetValue =
+    addValuesTogether(cashAssets || {}) +
+    realEstate.reduce((sum, p) => sum + (p["Purchase Price"] || 0), 0);
+
+  const totalIncome = addValuesTogether(passiveIncome) + activeIncome;
+  const totalExpenses = addValuesTogether(user.expenses || {});
+  const totalLiabilities = addValuesTogether(user.Liabilities || {}) + totalMortgages;
+
+  return {
+    ...user,
+    totalIncome,
+    totalExpenses,
+    totalLiabilities,
+    totalAssets: totalAssetValue,
+    netWorth: totalAssetValue - totalLiabilities,
+  };
+};
+
 // create user provider
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -33,7 +64,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
       try {
         const savedUser = await AsyncStorage.getItem("user");
         if (savedUser) {
-          setUser(JSON.parse(savedUser));
+          setUser(recalculateTotals(JSON.parse(savedUser)));
+
         }
       } catch (error) {
         console.error("Error loading user:", error);
@@ -53,11 +85,26 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     };
     saveUser();
   }, [user]);
+  
+  
+
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider
+      value={{
+        user,
+        setUser: (updater) => {
+          // allow both functional and object-based updates
+          setUser((prev) => {
+            const nextUser = typeof updater === "function" ? updater(prev) : updater;
+            return recalculateTotals(nextUser);
+          });
+        },
+      }}
+    >
       {children}
     </UserContext.Provider>
+
   );
 };
 export default UserProvider;

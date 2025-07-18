@@ -8,7 +8,9 @@ import { PassiveIncome } from "../../../interfaces/Income";
 import calculateTotalAssets from "../../../utils/calculateTotalAssets";
 import { RealEstate } from "../../../interfaces/Assets";
 import { CertificateOfDeposit } from "../../../interfaces/Assets";
+import MonthlyExpenses from "../../../interfaces/MonthlyExpenses";
 
+import { calculateTotals } from "../UserFinances/FinancialOverview";
 
 export type PassiveIncomeCategory = keyof PassiveIncome;
 
@@ -254,6 +256,13 @@ export const addLoanToUser = (
 
 
 
+const loanExpenseMap: { [key: string]: keyof MonthlyExpenses } = {
+  "Car Loans": "Car Loan Payment",
+  "Credit Cards": "Credit Cards Payment",
+  "School Loans": "School Loans Payment",
+  "Retail Debts": "Retail Debt Payment",
+  "Personal Loans": "Personal Loan Payment",
+};
 
 export const createPaymentTransaction = (amount: number, category: LoanCategory): Transaction => {
   const timestamp = formatTimestamp(new Date().toISOString());
@@ -272,25 +281,66 @@ export type LoanCategory = keyof Liabilities;
 export function applyPaymentToLoan(user: User, amount: number, category: string): User {
   const updatedUser = { ...user };
 
-  // Split category if it's in the "Category: LoanName" format
-  console.log("Received Category: ", category);`  `
   const [mainCategory, subCategory] = category.split(":").map(part => part.trim());
+
+  const loanExpenseMap: { [key: string]: keyof MonthlyExpenses } = {
+    "Car Loans": "Car Loan Payment",
+    "Credit Cards": "Credit Cards Payment",
+    "School Loans": "School Loans Payment",
+    "Retail Debt": "Retail Debt Payment",
+    "Personal Loans": "Personal Loan Payment",
+  };
 
   if (mainCategory === "Real Estate" && subCategory) {
     const property = updatedUser.Assets.Investments?.RealEstate?.find(p => p.name === subCategory);
     if (property) {
       property.Mortgage = Math.max(0, property.Mortgage - amount);
     }
+
+    const remainingMortgagePayment = updatedUser.Assets.Investments?.RealEstate
+      ?.filter(p => p.Mortgage > 0)
+      .reduce((total, p) => {
+        const purchasePrice = p["Purchase Price"] || 0;
+        return total + (purchasePrice * 0.10) / 12;
+      }, 0) || 0;
+
+    updatedUser.expenses["Mortgage Payment"] = remainingMortgagePayment;
+
   } else if (updatedUser.Liabilities[mainCategory]) {
     if (typeof updatedUser.Liabilities[mainCategory] === "number") {
       updatedUser.Liabilities[mainCategory] = Math.max(0, updatedUser.Liabilities[mainCategory] - amount);
+      if (updatedUser.Liabilities[mainCategory] === 0) {
+        const expenseKey = loanExpenseMap[mainCategory];
+        if (expenseKey) {
+          updatedUser.expenses[expenseKey] = 0;
+        }
+      }
     } else if (typeof updatedUser.Liabilities[mainCategory] === "object" && subCategory) {
-      updatedUser.Liabilities[mainCategory][subCategory] = Math.max(0, updatedUser.Liabilities[mainCategory][subCategory] - amount);
+      updatedUser.Liabilities[mainCategory][subCategory] = Math.max(
+        0,
+        updatedUser.Liabilities[mainCategory][subCategory] - amount
+      );
+
+      // Check if all sub-loans are now 0
+      const allZero = Object.values(updatedUser.Liabilities[mainCategory]).every(val => val === 0);
+      if (allZero) {
+        const expenseKey = loanExpenseMap[mainCategory];
+        if (expenseKey) {
+          updatedUser.expenses[expenseKey] = 0;
+        }
+      }
     }
   }
 
+  // Recalculate total monthly expenses
+  updatedUser.totalExpenses = Object.values(updatedUser.expenses).reduce((sum, val) => sum + (val || 0), 0);
+
   return updatedUser;
 }
+
+
+
+
 
 
 
@@ -306,7 +356,7 @@ export const applyDealToUser = (
 ): User => {
   const now = formatTimestamp(new Date().toISOString());
 
-  const realEstateList = currentUser.Assets.Investments.RealEstate || [];
+  const realEstateList = currentUser.Assets?.Investments?.RealEstate ?? [];
 
   const typeCount = realEstateList.filter(
     (property) => property.type === propertyType
@@ -318,7 +368,7 @@ export const applyDealToUser = (
     name: `${propertyType} ${countForName}`,
     type: propertyType as RealEstate["type"],
     description: `Deal for ${propertyType} added.`,
-    "Purchase Price": mortgage + 10000,
+    "Purchase Price": mortgage,
     "Sale Range": saleRange,
     "Cash Flow": cashflow,
     Mortgage: mortgage,
@@ -327,14 +377,14 @@ export const applyDealToUser = (
     saleTime: "",
   };
 
-  console.log(newProperty.name);
+  const updatedProperties = [...realEstateList, newProperty];
 
-  
-
-  // Get current real estate list safely as array
-  const currentProperties = Array.isArray(currentUser.Assets?.Investments?.RealEstate)
-    ? currentUser.Assets.Investments?.RealEstate
-    : [];
+  const remainingMortgagePayment = updatedProperties
+    .filter(p => p.Mortgage > 0)
+    .reduce((total, p) => {
+      const purchasePrice = p["Purchase Price"] || 0;
+      return total + (purchasePrice * 0.10) / 12;
+    }, 0);
 
   return {
     ...currentUser,
@@ -348,16 +398,18 @@ export const applyDealToUser = (
     Assets: {
       ...currentUser.Assets,
       Investments: {
-        ...currentUser.Assets.Investments,
-       RealEstate: [...currentProperties, newProperty],
+        ...currentUser.Assets?.Investments,
+        RealEstate: updatedProperties,
       },
     },
-    Liabilities: {
-      ...currentUser.Liabilities,
-      //"Mortgage Total": (currentUser.Liabilities["Mortgage Total"] || 0) + mortgage,
+    expenses: {
+      ...currentUser.expenses,
+      "Mortgage Payment": remainingMortgagePayment,
     },
   };
 };
+
+
 
 
 
@@ -541,6 +593,23 @@ export const createCDTransaction = (
     fieldName: name, // Or "cd" if you want a generic field reference
   };
 };
+export const createPropertySaleTransaction = (
+  propertyName: string,
+  salePrice: number
+): Transaction => {
+  const timestamp = formatTimestamp(new Date().toISOString());
+
+  return {
+    scanType: "Transaction",
+    name: `Sold: ${propertyName}`,
+    timestamp,
+    type: "Property Sale",
+    description: `Sold ${propertyName} for $${salePrice.toFixed(2)}.`,
+    amount: salePrice,
+    fieldName: "Real Estate",
+  };
+};
+
 
 
 

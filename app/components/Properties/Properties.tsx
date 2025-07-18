@@ -1,14 +1,19 @@
-import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-
+import React, { useState } from "react";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View, Alert } from "react-native";
+import { useTransactions } from "../../components/context/TransactionProvider";
 import { RealEstate } from "../../../interfaces/Assets";
 import Theme from "../../../interfaces/theme";
 import { useUser } from "../context/UserProvider";
 import { formatUSD } from "../../../utils/currencyUtil";
 import { formatTimestamp } from "../../../utils/timeUtil";
-
+import SellPropertyDialog from "../features/SellPropertyDialog";
+import { PassiveIncome } from "../../../interfaces/Income";
+import { createPropertySaleTransaction } from "../QrCodeScanner/ScannerLogic";
 const Properties = () => {
   const { user } = useUser();
+  const [selectedProperty, setSelectedProperty] = useState<RealEstate | null>(null);
+  const [showSellDialog, setShowSellDialog] = useState(false);
+  const { addTransactions } = useTransactions();
 
   const getTypeColor = (type: RealEstate["type"]) => {
     switch (type) {
@@ -27,6 +32,87 @@ const Properties = () => {
       default:
         return Theme.CFL_gray;
     }
+  };
+  const handleSale = (property: RealEstate) => {
+    setSelectedProperty(property);
+    setShowSellDialog(true);
+  };
+
+
+  const getAverageFromRange = (range: string): number => {
+    if (!range.includes("-")) return 0;
+    const [lowStr, highStr] = range.split("-");
+    const low = parseFloat(lowStr.trim());
+    const high = parseFloat(highStr.trim());
+    if (isNaN(low) || isNaN(high)) return 0;
+    return Math.round((low + high) / 2);
+  };
+  const typeToPassiveIncomeMap: Record<string, keyof PassiveIncome> = {
+    "3Br/2Ba House": "Real Estate Income",
+    "Duplex": "Real Estate Income",
+    "4-Plex": "Real Estate Income",
+    "8-Plex": "Real Estate Income",
+    "Apartment Complex": "Real Estate Income",
+    "Business": "Business Income"
+  };
+
+
+  const { setUser } = useUser(); // if available
+
+  const handleConfirmSale = (salePrice: number) => {
+    if (!selectedProperty) return;
+
+    const updatedUser = { ...user };
+
+    // Remove the sold property
+    updatedUser.Assets.Investments.RealEstate = updatedUser.Assets.Investments.RealEstate.filter(
+      p => p.name !== selectedProperty.name
+    );
+
+    const incomeKey = typeToPassiveIncomeMap[selectedProperty.type] || "Real Estate Income";
+
+    // Filter out the sold property
+    const remainingProperties = updatedUser.Assets.Investments.RealEstate.filter(
+      p => p.name !== selectedProperty.name
+    );
+
+    // Recalculate passive income for that income category
+    const updatedIncome = remainingProperties
+      .filter(p => typeToPassiveIncomeMap[p.type] === incomeKey)
+      .reduce((sum, p) => sum + (p["Cash Flow"] || 0), 0);
+
+    updatedUser.income["Passive Income"][incomeKey] = updatedIncome;
+
+
+    // Pay off mortgage and add profit to savings
+    const mortgageAmount = selectedProperty.Mortgage || 0;
+    const profit = Math.max(0, salePrice - mortgageAmount);
+
+    // Add profit to savings
+    updatedUser.Assets.Savings = (updatedUser.Assets.Savings || 0) + profit;
+
+
+    // Recalculate mortgage payment
+    const remainingMortgagePayment = updatedUser.Assets.Investments?.RealEstate
+      ?.filter(p => p.Mortgage > 0)
+      .reduce((total, p) => {
+        const purchasePrice = p["Purchase Price"] || 0;
+        return total + (purchasePrice * 0.10) / 12;
+      }, 0) || 0;
+
+    updatedUser.expenses["Mortgage Payment"] = remainingMortgagePayment;
+
+    // 🧾 Add transaction to history
+    const saleTransaction = createPropertySaleTransaction(selectedProperty.name, salePrice);
+    addTransactions([saleTransaction]);
+    console.log(saleTransaction);
+
+
+
+    // Save everything
+    setUser(updatedUser);
+    setSelectedProperty(null);
+    setShowSellDialog(false);
   };
 
   const renderProperty = (property: RealEstate) => (
@@ -92,8 +178,12 @@ const Properties = () => {
             </Text>
           </View>
 
+
         </View>
       </View>
+      <TouchableOpacity onPress={() => handleSale(property)} style={styles.button}>
+        <Text style={styles.propertySell}>Sell Property</Text>
+      </TouchableOpacity>
     </View>
   );
 
@@ -108,9 +198,23 @@ const Properties = () => {
           </Text>
         )}
         </View>
+        <SellPropertyDialog
+          isVisible={showSellDialog}
+          property={selectedProperty}
+          onCancel={() => {
+            setSelectedProperty(null);
+            setShowSellDialog(false);
+          }}
+          onConfirm={handleConfirmSale}
+        />
+
       </ScrollView>
     </View>
   );
+
+
+  
+
 };
 
 const styles = StyleSheet.create({
@@ -125,9 +229,13 @@ const styles = StyleSheet.create({
   card: {
     marginVertical: Theme.CFL_card_spacing,
     backgroundColor: Theme.CFL_card_background,
-    padding: 7,
-    paddingVertical: 13,
-    borderRadius: 10,
+    padding: 0,
+    paddingTop: 13,
+    paddingBottom:0,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
   },
   propertyCard: {
     backgroundColor: Theme.CFL_transparent,
@@ -175,7 +283,9 @@ const styles = StyleSheet.create({
   changesContainer: {
     borderTopWidth: 1,
     borderTopColor: Theme.CFL_gray,
-    paddingTop: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: Theme.CFL_gray,
+    paddingVertical: 8,
   },
   detailRow: {
     flexDirection: "row",
@@ -212,6 +322,30 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginVertical: 20,
   },
+  button: {
+    backgroundColor: "rgba(40,55,40,1)",
+    borderBottomColor: Theme.CFL_green,
+    borderBottomWidth: 4,
+    borderTopColor: Theme.CFL_light_gray,
+    borderTopWidth: 0.5,
+    borderLeftColor: Theme.CFL_light_gray,
+    borderLeftWidth: 0.5,
+    borderRightColor: Theme.CFL_light_gray,
+    borderRightWidth: 0.5,
+    borderRadius: 50,
+    marginTop: 15,
+    height: 55,
+    width:"100%",
+    justifyContent: "center",
+  },
+  propertySell: {
+    fontFamily: Theme.CFL_title_font,
+    color: Theme.CFL_white,
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 4,
+    textAlign:"center"
+  }
 });
 
 export default Properties;

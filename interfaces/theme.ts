@@ -42,7 +42,7 @@ export const Theme = {
   CFL_transparent:"rgba(0,0,0,0)",
 
   // spacings
-  CFL_card_spacing: 7,
+  CFL_card_spacing: 20,
 
   // text colors
   CFL_dark_text: "#121212",

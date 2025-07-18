@@ -92,15 +92,21 @@ const StocksDialog: React.FC<Props> = ({ isVisible, onSubmit, onCancel }) => {
                             style={[styles.toggle, type === "deposit" && styles.selected]}
                             onPress={() => setType("deposit")}
                         >
-                            <Text style={styles.toggleText}>Buy</Text>
+                            <Text style={[styles.toggleText, type === "deposit" && styles.selectedText]}>
+                                Buy
+                            </Text>
                         </TouchableOpacity>
+
                         <TouchableOpacity
                             style={[styles.toggle, type === "withdrawal" && styles.selected]}
                             onPress={() => setType("withdrawal")}
                         >
-                            <Text style={styles.toggleText}>Sell</Text>
+                            <Text style={[styles.toggleText, type === "withdrawal" && styles.selectedText]}>
+                                Sell
+                            </Text>
                         </TouchableOpacity>
                     </View>
+
 
                     <View style={styles.actionRow}>
                         <TouchableOpacity style={styles.cancel} onPress={onCancel}>
@@ -119,30 +125,33 @@ const StocksDialog: React.FC<Props> = ({ isVisible, onSubmit, onCancel }) => {
 const styles = StyleSheet.create({
     overlay: {
         flex: 1,
-        backgroundColor: "rgba(0,0,0,0.8)",
         justifyContent: "center",
-        alignItems: "center",
+        backgroundColor: "rgba(0,0,0,1)",
+        paddingHorizontal: 0
     },
     dialog: {
-        width: "85%",
-        backgroundColor: "#282828",
-        borderRadius: 20,
-        padding: 20,
+        backgroundColor: "#000",
+        borderRadius: 0,
+        paddingTop: 10,
+        flex: 1,
+        justifyContent: "center"
     },
     title: {
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: "bold",
-        fontFamily: Theme.CFL_primary_font,
         marginBottom: 15,
-        color: "#fff",
+        marginLeft: 15,
+        marginRight: 15,
+        color: "#fff"
     },
     input: {
-        backgroundColor: "#333",
-        color: "#fff",
-        padding: 10,
-        borderRadius: 10,
-        marginBottom: 12,
-        fontSize: 16,
+        padding: 5,
+        marginBottom: 25,
+        marginLeft: 15,
+        marginRight: 15,
+        borderRadius:25,
+        borderBottomColor: "#bbb",
+        borderBottomWidth: 2 
     },
     buttonRow: {
         flexDirection: "row",
@@ -158,39 +167,55 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     selected: {
-        backgroundColor: "#000",
+        backgroundColor: "rgba(40,55,40,1)",
         borderBottomColor: Theme.CFL_green,
-        borderBottomWidth:2
+        borderBottomWidth: 4,
+        borderTopColor: Theme.CFL_light_gray,
+        borderTopWidth: 0.5,
+        borderLeftColor: Theme.CFL_light_gray,
+        borderLeftWidth: 0.5,
+        borderRightColor: Theme.CFL_light_gray,
+        borderRightWidth: 0.5
     },
     toggleText: {
-        color: "#fff",
         fontWeight: "bold",
+        color: "#bbb",
+        fontFamily: Theme.CFL_primary_font 
+    },
+    selectedText: {
+        color: "#fff" 
     },
     actionRow: {
         flexDirection: "row",
-        justifyContent: "flex-end",
+        justifyContent: "space-between",
+        backgroundColor: "#000",
+        marginHorizontal: 15,
+        marginTop: "15%",
+        marginBottom: "10%"
     },
     cancel: {
-        marginRight: 15,
-        backgroundColor: Theme.CFL_red,
-        paddingHorizontal: 16,
-        paddingVertical: 10,
+        flex: 1,
+        paddingVertical: 12,
+        backgroundColor: Theme.CFL_danger_button,
         borderRadius: 8,
-    },
-    cancelText: {
-        color: "#000",
-        fontSize: 16,
+        alignItems: "center",
+        marginRight: 5
     },
     submit: {
+        flex: 3,
+        paddingVertical: 12,
         backgroundColor: Theme.CFL_green,
-        paddingHorizontal: 16,
-        paddingVertical: 10,
         borderRadius: 8,
+        alignItems: "center",
+        marginLeft: 5
+    },
+    cancelText: {
+        color: "#fff",
+        fontWeight: "bold"
     },
     submitText: {
-        color: "#000",
-        fontWeight: "bold",
-        fontSize: 16,
+        color: "#fff",
+        fontWeight: "bold"
     },
 });
 
