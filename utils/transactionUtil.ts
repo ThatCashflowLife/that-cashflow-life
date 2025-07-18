@@ -16,6 +16,14 @@ export const getTypeColor = (type: Transaction["type"]) => {
       return Theme.CFL_orange; // liability orange
     case "career":
       return Theme.CFL_cyan;
+    case "deal":
+      return Theme.CFL_pink;
+    case "cd":
+      return Theme.CFL_dark_green;
+    case "savings":
+      return Theme.CFL_green;
+    case "stocks":
+      return Theme.CFL_green;
     default:
       return Theme.CFL_light_gray; // default gray
   }

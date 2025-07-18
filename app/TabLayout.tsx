@@ -22,7 +22,7 @@ import {
     createPaymentTransaction,
     applyPaymentToLoan,
     createDealTransaction,
-    applyDealToUser, createSavingsTransaction, createStockTransaction, updateStocks
+    applyDealToUser, createSavingsTransaction, createStockTransaction, updateStocks, addCertificateOfDeposit, createCDTransaction
 } from "./components/QrCodeScanner/ScannerLogic";
 import { LoanCategory, PassiveIncomeCategory } from "./components/QrCodeScanner/ScannerLogic";
 import { QRData } from "../interfaces/qrTypes";
@@ -31,6 +31,7 @@ import Profession from "../interfaces/Profession";
 import Transaction from "../interfaces/Transaction";
 import SavingsDialog from "./components/features/SavingsDialog";
 import StocksDialog from "./components/features/StocksDialog";
+import CertificateDialog from "./components/features/CertificateDialog";
 
 const DynamicTabs = () => {
     const { user } = useUser();
@@ -39,20 +40,37 @@ const DynamicTabs = () => {
         <Tabs
             screenOptions={{
                 headerShown: false,
-                tabBarActiveTintColor: Theme.CFL_dark_text,
-                tabBarActiveBackgroundColor: Theme.CFL_green,
-                tabBarInactiveTintColor: Theme.CFL_white,
-                tabBarInactiveBackgroundColor: "rgba(255,255,255,0.1)",
-                tabBarIconStyle: { width: 24, height: 24, marginTop: 5 },
-                tabBarStyle: styles.tabBar,
-                tabBarAllowFontScaling: true,
+                tabBarStyle: {
+                    position: "absolute",
+                    bottom: 10,
+                    left: 50,
+                    right: 20,
+                    height: 75,
+                    backgroundColor: "#111",
+                    borderRadius: 80,
+                    elevation: 18,
+                    shadowColor: "#000",
+                    shadowOffset: { width: 0, height: 20 },
+                    shadowOpacity: 0.5,
+                    shadowRadius: 15,
+                    zIndex: 1000,
+                },
                 tabBarItemStyle: {
                     flex: 1,
-                    width: "25%",
-                    height: 65,
                 },
+                tabBarLabelStyle: {
+                    fontSize: 12,
+                    fontFamily: Theme.CFL_primary_font,
+                    paddingBottom: 4,
+                },
+                tabBarActiveTintColor: Theme.CFL_dark_text,
+                tabBarInactiveTintColor: Theme.CFL_white,
+                tabBarActiveBackgroundColor: Theme.CFL_green,
+                tabBarInactiveBackgroundColor: "rgba(255,255,255,0.1)",
+                tabBarIconStyle: { width: 24, height: 24, marginTop: 7 },
             }}
         >
+
             <Tabs.Screen
                 name="home"
                 options={{
@@ -82,6 +100,7 @@ const DynamicTabs = () => {
                     ),
                     tabBarLabelStyle: styles.tabLabel,
                 }}
+                
             />
             <Tabs.Screen
                 name="assets"
@@ -104,6 +123,7 @@ export const TabLayout = () => {
     const [isPaymentDialogVisible, setIsPaymentDialogVisible] = useState(false);
     const [isDealDialogVisible, setIsDealDialogVisible] = useState(false);
     const [isSavingsDialogVisible, setIsSavingsDialogVisible] = useState(false);
+    const [isCertificateDialogVisible, setIsCertificateDialogVisible] = useState(false);
     const [isStocksDialogVisible, setIsStocksDialogVisible] = useState(false);
 
     const handleScan = (data: QRData) => {
@@ -149,7 +169,7 @@ export const TabLayout = () => {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={styles.MainContainer}>
             <SafeAreaView style={styles.container}>
                 <Header />
                 <View style={styles.sViewContainer}>
@@ -247,6 +267,10 @@ export const TabLayout = () => {
             <SavingsDialog
                 isVisible={isSavingsDialogVisible}
                 onCancel={() => setIsSavingsDialogVisible(false)}
+                user={user}
+                onManageCDs={() => {
+                    setIsCertificateDialogVisible(true);
+                  }}
                 onSubmit={(amount, type) => {
                     const updatedUser = { ...user };
                     if (!updatedUser.Assets.Savings) updatedUser.Assets.Savings = 0;
@@ -270,7 +294,7 @@ export const TabLayout = () => {
                 isVisible={isStocksDialogVisible}
                 onCancel={() => setIsStocksDialogVisible(false)}
                 onSubmit={(symbol, shares, price, type) => {
-                    const updatedUser = updateStocks(user, symbol, shares, price, type); // ✅ use the correct updater
+                    const updatedUser = updateStocks(user, symbol, shares, price, type);
                     const transaction = createStockTransaction(symbol, shares, price, type);
 
                     setUser(updatedUser);
@@ -279,15 +303,38 @@ export const TabLayout = () => {
                     setIsStocksDialogVisible(false);
                 }}
             />
+            <CertificateDialog
+                isVisible={isCertificateDialogVisible}
+                onCancel={() => { setIsCertificateDialogVisible(false);  }}
+                onSubmit={(cd) => {
+                    const updatedUser = addCertificateOfDeposit(user, cd);
+                    const transaction = createCDTransaction(
+                        cd.name,
+                        cd.amount,
+                        cd.interestRate,
+                        cd.termMonths,
+                        cd.startDate,
+                        cd.maturityDate
+                    );
+                    setUser(updatedUser);
+                    addTransactions([transaction]);
+                    calculateNetWorth(updatedUser, setUser);
+                    setIsCertificateDialogVisible(false);
+                }}
+            />
 
         </View>
     );
 };
 
 const styles = StyleSheet.create({
+    MainContainer: {
+        height: "100%",
+        backgroundColor: "black",
+    },
     container: {
-        flex: 1,
-        backgroundColor: Theme.CFL_app_background,
+        height: "100%",
+        backgroundColor: "transparent",
     },
     tabLabel: {
         fontSize: 12,
@@ -295,8 +342,21 @@ const styles = StyleSheet.create({
         paddingTop: 5,
     },
     tabBar: {
-        height: 65,
-        backgroundColor: Theme.CFL_app_background,
+        position: "absolute",
+        bottom: 20, // distance from bottom
+        left: 50,
+        right: 20,
+        height: 75,
+        backgroundColor: "#111", // or use Theme.CFL_green for the pill effect
+        borderRadius: 80,
+        flexDirection: "row",
+        justifyContent: "space-around",
+        elevation: 8, // shadow on Android
+        shadowColor: "#000", // iOS shadow
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.3,
+        shadowRadius: 6,
+        zIndex: 1000,
     },
     fabContainer: {
         flexDirection: "row",
@@ -329,7 +389,8 @@ const styles = StyleSheet.create({
 
     },
     sViewContainer: {
-        alignItems: "center"
+        alignItems: "center",
+        backgroundColor:"black"
     }
 });
 

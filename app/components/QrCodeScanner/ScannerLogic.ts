@@ -7,7 +7,7 @@ import Liabilities from "../../../interfaces/Liabilities";
 import { PassiveIncome } from "../../../interfaces/Income";
 import calculateTotalAssets from "../../../utils/calculateTotalAssets";
 import { RealEstate } from "../../../interfaces/Assets";
-import Assets from "../../../interfaces/Assets";
+import { CertificateOfDeposit } from "../../../interfaces/Assets";
 
 
 export type PassiveIncomeCategory = keyof PassiveIncome;
@@ -80,7 +80,7 @@ export const populateFirstProfession = (
         Gold_Count: scannedProfession.assets.Investments?.Gold_Count ?? 0,
         Bitcoin: scannedProfession.assets.Investments?.Bitcoin ?? 0,
         "Bitcoin Value": scannedProfession.assets.Investments?.["Bitcoin Value"] ?? 0,
-        "Certificate Deposit": scannedProfession.assets.Investments?.["Certificate Deposit"] ?? 0,
+        CDs:scannedProfession.assets.Investments.CDs ?? 0
       }
     },
     Liabilities: scannedProfession.liabilities,
@@ -228,13 +228,18 @@ export const addLoanToUser = (
     purpose: string;
   }
 ): User => {
+  const category = "Personal Loans"; // or "School Loans", etc.
+  const existingLoans = currentUser.Liabilities[category] || {};
+
   const updatedLiabilities = {
     ...currentUser.Liabilities,
-    [loanDetails.purpose]: loanDetails.amount, 
+    [category]: {
+      ...(existingLoans as { [loanName: string]: number }),
+      [loanDetails.purpose]: loanDetails.amount,
+    },
   };
 
   const existingLoanPayment = currentUser.expenses["Loan Payment"] || 0;
-
   const updatedExpenses = {
     ...currentUser.expenses,
     "Loan Payment": existingLoanPayment + loanDetails.payment,
@@ -246,6 +251,8 @@ export const addLoanToUser = (
     expenses: updatedExpenses,
   };
 };
+
+
 
 
 export const createPaymentTransaction = (amount: number, category: LoanCategory): Transaction => {
@@ -299,8 +306,16 @@ export const applyDealToUser = (
 ): User => {
   const now = formatTimestamp(new Date().toISOString());
 
+  const realEstateList = currentUser.Assets.Investments.RealEstate || [];
+
+  const typeCount = realEstateList.filter(
+    (property) => property.type === propertyType
+  ).length;
+
+  const countForName = typeCount > 0 ? typeCount + 1 : 1;
+
   const newProperty: RealEstate = {
-    name: `${propertyType} ${currentUser.Assets.Investments.RealEstate.length + 1}`,
+    name: `${propertyType} ${countForName}`,
     type: propertyType as RealEstate["type"],
     description: `Deal for ${propertyType} added.`,
     "Purchase Price": mortgage + 10000,
@@ -311,7 +326,9 @@ export const applyDealToUser = (
     purchaseTime: now,
     saleTime: "",
   };
+
   console.log(newProperty.name);
+
   
 
   // Get current real estate list safely as array
@@ -476,7 +493,7 @@ export const createStockTransaction = (
   return {
     scanType: "Transaction",
     name: `Stock ${type === "deposit" ? "Buy" : "Sell"}: ${symbol}`,
-    timestamp,
+    timestamp: timestamp,
     type: "stocks",
     description: `${type === "deposit" ? "Bought" : "Sold"} ${shares} share(s) of ${symbol} at $${price}/share.`,
     amount: shares * price,
@@ -484,6 +501,46 @@ export const createStockTransaction = (
   };
 };
 
+//add CD
+
+export const addCertificateOfDeposit = (
+  user: User,
+  cd: CertificateOfDeposit
+): User => {
+  const existingCDs = user.Assets.Investments?.CDs ?? [];
+  console.log(existingCDs);
+  return {
+    ...user,
+    Assets: {
+      ...user.Assets,
+      Investments: {
+        ...user.Assets.Investments,
+        CDs: [...existingCDs, cd],
+      },
+    },
+  };
+  
+};
+export const createCDTransaction = (
+  name: string,
+  amount: number,
+  interestRate: number,
+  termMonths: number,
+  startDate: string,
+  maturityDate: string
+): Transaction => {
+  const timestamp = formatTimestamp(new Date().toISOString());
+  
+  return {
+    scanType: "Transaction",
+    name: `CD Purchase: ${name}`,
+    timestamp,
+    type: "cd",
+    description: `Purchased a ${termMonths}-month CD for $${amount.toFixed(2)} at ${interestRate}% APR. Matures on ${maturityDate}.`,
+    amount,
+    fieldName: name, // Or "cd" if you want a generic field reference
+  };
+};
 
 
 

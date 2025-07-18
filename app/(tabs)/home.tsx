@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   },
   // scrollable
   scrollContent: {
-    paddingBottom: 20,
+    paddingBottom: 100,
   },
   // all conntent
   content: {

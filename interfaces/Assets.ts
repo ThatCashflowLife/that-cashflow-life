@@ -10,7 +10,7 @@ export interface Investments {
   Gold_Count: number;
   Bitcoin: number;
   "Bitcoin Value": number;
-  "Certificate Deposit": number;
+  CDs: CertificateOfDeposit[];
 }
 
 
@@ -38,4 +38,12 @@ export interface RealEstate {
   "Down Payment": number;
   purchaseTime: string;
   saleTime: string;
+}
+export interface CertificateOfDeposit {
+  name: string;
+  amount: number;
+  interestRate: number; // e.g., 0.05 for 5%
+  termMonths: number;
+  startDate: string; // ISO format
+  maturityDate: string;
 }

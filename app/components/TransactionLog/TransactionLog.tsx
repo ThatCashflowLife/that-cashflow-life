@@ -22,7 +22,7 @@ const TransactionLog = () => {
           <View
             style={[
               styles.typeTag,
-              { backgroundColor: getTypeColor(transaction.type) },
+              { backgroundColor: getTypeColor(transaction.type), borderRadius:50 },
             ]}
           >
             <Text style={styles.typeText}>
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
   // page content
   content: {
     padding: 0,
+      paddingBottom: 100,
   },
   // card for each transaction
   transactionCard: {

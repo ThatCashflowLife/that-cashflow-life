@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, Animated, ScrollView } from "react-native";
+import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, Animated, Easing, ScrollView } from "react-native";
 import Theme from "../../../interfaces/theme";
 import { RealEstate } from "../../../interfaces/Assets";
+import CustomKeypad from "../CustomKeypad";
 
 interface PaymentDialogProps {
     isVisible: boolean;
@@ -21,6 +22,8 @@ const PaymentDialog: React.FC<PaymentDialogProps> = ({
     const [amount, setAmount] = useState("");
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [selectedLoan, setSelectedLoan] = useState<string | null>(null);
+    const [activeField, setActiveField] = useState(null);
+    const [error, setError] = useState("");
 
     const [focusAnim, setFocusAnim] = useState({
         amount: new Animated.Value(0),
@@ -48,7 +51,10 @@ const PaymentDialog: React.FC<PaymentDialogProps> = ({
         ...Object.keys(liabilities),
         ...(realEstate.length > 0 ? ["Real Estate"] : []),
     ];
-
+    const handleKeypadPress = (key) => {
+        const update = (current) => (key === "←" ? current.slice(0, -1) : current + key);
+        if (activeField === "amount") setAmount(update(amount));
+    };
     const selectedLiabilityAmount =
         selectedCategory === "Real Estate" && selectedLoan
             ? realEstate.find(p => p.name === selectedLoan)?.Mortgage ?? 0
@@ -64,19 +70,14 @@ const PaymentDialog: React.FC<PaymentDialogProps> = ({
                 <View style={styles.container}>
                     <Text style={styles.title}>Submit a Payment</Text>
 
-                    <Animated.View style={[styles.inputContainer, { borderColor: amountBorderColor, borderBottomWidth: amountBorderWidth }]}>
+                    
                         <Text style={styles.label}>Payment Amount</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Enter payment amount"
-                            placeholderTextColor="#777"
-                            keyboardType="numeric"
-                            value={amount}
-                            onChangeText={setAmount}
-                            onFocus={() => handleFocus("amount")}
-                            onBlur={() => handleBlur("amount")}
-                        />
-                    </Animated.View>
+                        <TouchableOpacity onPress={() => { setActiveField("amount"); }}>
+                            <Animated.View style={[styles.inputContainer, { borderColor: amountBorderColor, borderBottomWidth: amountBorderWidth }]}>
+                                <Text style={amount ? styles.inputText : styles.inputPlaceholder}>{amount || "Enter payment amount"}</Text>
+                            </Animated.View>
+                        </TouchableOpacity>
+                    
 
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Select Category</Text>
@@ -107,7 +108,7 @@ const PaymentDialog: React.FC<PaymentDialogProps> = ({
                                         onPress={() => setSelectedLoan(loanName)}
                                     >
                                         <Text style={[styles.incomePillText, selectedLoan === loanName && styles.incomePillTextSelected]}>
-                                            {loanName} 
+                                            {loanName}
                                         </Text>
                                     </TouchableOpacity>
                                 ))}
@@ -136,7 +137,6 @@ const PaymentDialog: React.FC<PaymentDialogProps> = ({
                             </Text>
                         )}
                     </View>
-
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.cancelButton} onPress={onCancel}>
                             <Text style={styles.cancelText}>Cancel</Text>
@@ -153,6 +153,7 @@ const PaymentDialog: React.FC<PaymentDialogProps> = ({
                             <Text style={styles.confirmText}>Submit Payment</Text>
                         </TouchableOpacity>
                     </View>
+                    <CustomKeypad onPress={handleKeypadPress} />
                 </View>
             </View>
         </Modal>
@@ -160,22 +161,51 @@ const PaymentDialog: React.FC<PaymentDialogProps> = ({
 };
 
 const styles = StyleSheet.create({
-    overlay: { flex: 1, justifyContent: "center", backgroundColor: "rgba(0,0,0,0.9)", padding: 20 },
-    container: { backgroundColor: "#222", borderRadius: 10, padding: 20 },
-    title: { fontSize: 25, fontWeight: "bold", marginBottom: 15, color: "#fff" },
-    inputContainer: { padding: 8, borderRadius: 8, marginBottom: 15 },
-    input: { fontSize: 20, color: "#fff" },
-    label: { fontSize: 16, color: "#aaa", marginBottom: 5, fontFamily: Theme.CFL_primary_font },
-    incomePillsContainer: { flexDirection: "row", flexWrap: "wrap", marginTop: 10 },
-    incomePill: { paddingVertical: 8, paddingHorizontal: 12, backgroundColor: "#444", borderRadius: 25, margin: 4 },
-    incomePillSelected: { backgroundColor: "#000", borderBottomColor: Theme.CFL_green, borderBottomWidth: 2 },
-    incomePillText: { color: "#fff", fontFamily: Theme.CFL_primary_font },
+    overlay: {
+        flex: 1,
+        justifyContent: "center",
+        backgroundColor: "rgba(0,0,0,1)",
+        paddingHorizontal: 0
+    },
+    container: {
+        backgroundColor: "#000",
+        borderRadius: 0,
+        paddingTop: 10,
+        flex: 1,
+        justifyContent: "center"
+    },
+    title: {
+        fontSize: 18,
+        fontWeight: "bold",
+        marginBottom: 15,
+        marginLeft: 15,
+        marginRight: 15,
+        color: "#fff"
+    },
+    label: { fontSize: 12, color: "#aaa", marginBottom: 5, marginLeft: 15, marginRight: 15 },
+    inputContainer: { padding: 5, marginBottom: 15, marginLeft: 15, marginRight: 15, borderRadius: 50 },
+    inputText: { fontSize: 17, color: "#fff", paddingLeft: 5 },
+    inputPlaceholder: { fontSize: 17, color: "#aaa", paddingLeft: 5 },
+    incomePillsContainer: { flexDirection: "row", flexWrap: "wrap", justifyContent: "flex-start", marginTop: 10, marginLeft: 5 },
+    incomePill: { paddingVertical: 8, paddingHorizontal: 12, backgroundColor: "#444", borderRadius: 50, marginVertical: 4, marginHorizontal: 4 },
+    incomePillSelected: { backgroundColor: "rgba(40,55,40,1)", borderBottomColor: Theme.CFL_green, borderBottomWidth: 4, borderTopColor: Theme.CFL_light_gray, borderTopWidth: 0.5, borderLeftColor: Theme.CFL_light_gray, borderLeftWidth: 0.5, borderRightColor: Theme.CFL_light_gray, borderRightWidth: 0.5 },
+    incomePillText: { color: "#bbb", fontFamily: Theme.CFL_primary_font },
     incomePillTextSelected: { color: "#fff" },
-    buttonContainer: { flexDirection: "row", justifyContent: "space-between", width: "100%", marginTop: 25 },
+    messageContainer: { width: "95%", padding: 10, borderRadius: 5, marginTop: 10, marginBottom: 10, alignSelf: "center" },
+    errorMessage: { backgroundColor: "#f8d7da" },
+    errorText: { color: "#721c24", textAlign: "center", fontSize: 14 },
+    buttonContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        backgroundColor: "#000",
+        marginHorizontal: 15,
+        marginTop: "25%",
+        marginBottom: "10%"
+    },
     cancelButton: { flex: 1, paddingVertical: 12, backgroundColor: Theme.CFL_danger_button, borderRadius: 8, alignItems: "center", marginRight: 5 },
     confirmButton: { flex: 3, paddingVertical: 12, backgroundColor: Theme.CFL_green, borderRadius: 8, alignItems: "center", marginLeft: 5 },
-    cancelText: { color: Theme.CFL_white, fontWeight: "bold", fontFamily: Theme.CFL_primary_font },
-    confirmText: { color: Theme.CFL_white, fontWeight: "bold", fontFamily: Theme.CFL_primary_font },
+    cancelText: { color: "#fff", fontWeight: "bold" },
+    confirmText: { color: "#fff", fontWeight: "bold" },
     remainingText: { color: "#aaa", fontSize: 16, marginTop: 10, fontFamily: Theme.CFL_primary_font },
 });
 

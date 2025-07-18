@@ -185,30 +185,30 @@ const styles = StyleSheet.create({
     overlay: {
         flex: 1,
         justifyContent: "center",
-        backgroundColor: "rgba(0,0,0,0.9)",
-        padding: 20,
+        backgroundColor: "rgba(0,0,0,1)",
+        paddingHorizontal: 0
     },
     container: {
-        backgroundColor: "#222",
-        borderRadius: 10,
-        padding: 20,
+        backgroundColor: "#000",
+        borderRadius: 0,
+        paddingTop: 10,
+        flex: 1,
+        justifyContent: "center"
     },
     title: {
-        fontSize: 25,
+        fontSize: 28,
         fontWeight: "bold",
         marginBottom: 15,
-        color: "#fff",
+        marginLeft: 15,
+        marginRight: 15,
+        color: "#fff"
     },
-    inputContainer: {
-        borderBottomWidth: 1,
-        padding: 8,
-        borderRadius: 8,
-        marginBottom: 15,
-    },
-
+    inputContainer: { padding: 5, marginBottom: 15, marginLeft: 15, marginRight: 15, borderRadius: 10 },
+    inputPlaceholder: { fontSize: 17, color: "#aaa", paddingLeft: 5 },
     input: {
         fontSize: 20,
         color: "#fff",
+        paddingLeft:5
     },
 
 
@@ -217,7 +217,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         width: "100%",
-        marginTop: 25,
+        marginTop: "35%",
+        paddingHorizontal:15
     },
     // cancel btn
     cancelButton: {
@@ -244,17 +245,24 @@ const styles = StyleSheet.create({
     },
     // confirm btn
     aprButton: {
-        width: "25%",
-        paddingVertical: 12,
-        backgroundColor: "rgba(255,255,255,0.1)",
+        paddingVertical: 8,
+        paddingHorizontal: 12,
+        backgroundColor: "#444",
         borderRadius: 50,
-        alignItems: "center",
+        marginVertical: 4,
+        marginHorizontal: 4
     },
 
     aprSelected: {
+        backgroundColor: "rgba(40,55,40,1)",
         borderBottomColor: Theme.CFL_green,
-        borderBottomWidth: 2,
-        backgroundColor:"#000"
+        borderBottomWidth: 4,
+        borderTopColor: Theme.CFL_light_gray,
+        borderTopWidth: 0.5,
+        borderLeftColor: Theme.CFL_light_gray,
+        borderLeftWidth: 0.5,
+        borderRightColor: Theme.CFL_light_gray,
+        borderRightWidth: 0.5
     },
       
       

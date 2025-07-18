@@ -181,7 +181,6 @@ const DealDialog = ({ isVisible, onSubmit, onCancel }) => {
 
                     
                 </View>
-                <CustomKeypad onPress={handleKeypadPress} />
                 <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.cancelButton} onPress={onCancel}>
                             <Text style={styles.cancelText}>Cancel</Text>
@@ -190,6 +189,8 @@ const DealDialog = ({ isVisible, onSubmit, onCancel }) => {
                             <Text style={styles.confirmText}>Add Deal</Text>
                         </TouchableOpacity>
                     </View>
+                <CustomKeypad onPress={handleKeypadPress} />
+                
             </View>
         </Modal>
     );
@@ -203,26 +204,29 @@ const styles = StyleSheet.create({
         paddingHorizontal: 0
     },
     container: {
-        backgroundColor: "#222",
+        backgroundColor: "#000",
         borderRadius: 0,
-        padding: 20
+        paddingTop: 10,
+        flex:1,
     },
     title: {
         fontSize: 18,
         fontWeight: "bold",
         marginBottom: 15,
+        marginLeft: 15,
+        marginRight: 15,
         color: "#fff"
     },
-    label: { fontSize: 12, color: "#aaa", marginBottom: 5 },
-    inputBox: { padding: 8, marginBottom: 15 },
-    inputText: { fontSize: 15, color: "#fff" },
-    inputPlaceholder: { fontSize: 15, color: "#aaa" },
-    incomePillsContainer: { flexDirection: "row", flexWrap: "wrap", justifyContent: "flex-start", marginTop: 10 },
-    incomePill: { paddingVertical: 8, paddingHorizontal: 12, backgroundColor: "#444", borderRadius: 25, marginVertical: 4, marginHorizontal: 4 },
-    incomePillSelected: { backgroundColor: "#000", borderBottomColor: Theme.CFL_green, borderBottomWidth: 2 },
-    incomePillText: { color: "#fff", fontFamily: Theme.CFL_primary_font },
+    label: { fontSize: 12, color: "#aaa", marginBottom: 5, marginLeft: 15, marginRight: 15 },
+    inputBox: { padding: 8,  marginBottom: 15, marginLeft: 15,marginRight: 15, borderRadius:50 },
+    inputText: { fontSize: 17, color: "#fff",paddingLeft:5 },
+    inputPlaceholder: { fontSize: 17, color: "#aaa", paddingLeft:5 },
+    incomePillsContainer: { flexDirection: "row", flexWrap: "wrap", justifyContent: "flex-start", marginTop: 10, marginLeft: 5 },
+    incomePill: { paddingVertical: 8, paddingHorizontal: 12, backgroundColor: "#444", borderRadius: 50, marginVertical: 4, marginHorizontal: 4 },
+    incomePillSelected: { backgroundColor: "rgba(40,55,40,1)", borderBottomColor: Theme.CFL_green, borderBottomWidth: 4, borderTopColor: Theme.CFL_light_gray, borderTopWidth: 0.5, borderLeftColor: Theme.CFL_light_gray, borderLeftWidth: 0.5, borderRightColor: Theme.CFL_light_gray, borderRightWidth: 0.5 },
+    incomePillText: { color: "#bbb", fontFamily: Theme.CFL_primary_font },
     incomePillTextSelected: { color: "#fff" },
-    messageContainer: { width: "100%", padding: 10, borderRadius: 5, marginTop: 10, marginBottom: 10, alignSelf: "center" },
+    messageContainer: { width: "95%", padding: 10, borderRadius: 5, marginTop: 10, marginBottom: 10, alignSelf: "center" },
     errorMessage: { backgroundColor: "#f8d7da" },
     errorText: { color: "#721c24", textAlign: "center", fontSize: 14 },
     buttonContainer: {

@@ -15,12 +15,15 @@ const Properties = () => {
       case "3Br/2Ba House":
         return Theme.CFL_pink;
       case "Duplex":
+        return Theme.CFL_purple;
       case "4-Plex":
+        return Theme.CFL_red;
       case "8-Plex":
+        return Theme.CFL_orange;
       case "Apartment Complex":
         return Theme.CFL_cyan;
       case "Business":
-        return Theme.CFL_lime_green;
+        return Theme.CFL_green;
       default:
         return Theme.CFL_gray;
     }
@@ -36,7 +39,7 @@ const Properties = () => {
           <View
             style={[
               styles.typeTag,
-              { backgroundColor: getTypeColor(property.type) },
+              { backgroundColor: getTypeColor(property.type), borderRadius: 50 },
             ]}
           >
             <Text style={styles.typeText}>
@@ -46,7 +49,7 @@ const Properties = () => {
         </View>
 
 
-        <Text style={styles.propertyName}>{property.type}</Text>
+        <Text style={styles.propertyName}>{property.name}</Text>
         <Text style={styles.description}>{property.description}</Text>
 
         <View style={styles.changesContainer}>
@@ -117,6 +120,7 @@ const styles = StyleSheet.create({
   content: {
     padding: 0,
     backgroundColor: Theme.CFL_app_background,
+    paddingBottom: 100,
   },
   card: {
     marginVertical: Theme.CFL_card_spacing,

@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   typeTag: {
     paddingHorizontal: 8,
     paddingVertical: 4,
-    borderRadius: 4,
+    borderRadius: 50
   },
   // type of transaction txt
   typeText: {
