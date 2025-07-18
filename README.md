@@ -60,7 +60,7 @@ Ensure you have the following installed:
 - **@react-native-async-storage/async-storage**: 2.1.2
 - **@react-native-picker/picker**: 2.11.1
 - **eas**: ^0.1.0
-- **expo**: 53.0.17
+- **expo**: 53.0.19
 - **expo-blur**: ~14.1.5
 - **expo-camera**: ~16.1.10
 - **expo-config**: ^1.0.0
@@ -74,7 +74,7 @@ Ensure you have the following installed:
 - **expo-router**: ~5.1.3
 - **expo-symbols**: ~0.4.5
 - **expo-system-ui**: ~5.0.10
-- **expo-updates**: ~0.28.16
+- **expo-updates**: ~0.28.17
 - **expo-web-browser**: ~14.2.0
 - **fs-extra**: ^11.3.0
 - **metro-config**: ^0.81.1
@@ -88,14 +88,14 @@ Ensure you have the following installed:
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
-- Add files via upload (Randal Morrow)
-- Merge pull request #49 from ThatCashflowLife/auto-update-readme-16098605551 (ThatCashflowLife)
-- Auto-update README for commit: Add files via upload (rmorrow23)
+- Add Real Estate Selling (Randal Morrow)
+- Add New Feature / Update Existing (Randal Morrow)
+- Re-implement Real Estate Deals (Randal Morrow)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
-- [@rmorrow23](https://github.com/rmorrow23) (⭐ 58 commits)
-- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 50 commits)
+- [@rmorrow23](https://github.com/rmorrow23) (⭐ 89 commits)
+- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 61 commits)
 - [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 14 commits)
 - [@D-flyRobotics](https://github.com/D-flyRobotics) (⭐ 2 commits)
 - [@expo-bot](https://github.com/expo-bot) (⭐ 1 commits)
@@ -104,4 +104,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-07-06 06:37:42 -0500_
+_Last updated: 2025-07-18 06:01:55 -0400_
