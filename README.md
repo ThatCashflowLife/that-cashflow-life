@@ -88,14 +88,14 @@ Ensure you have the following installed:
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
+- Merge pull request #58 from ThatCashflowLife/auto-update-readme-16384929433 (ThatCashflowLife)
+- Auto-update README for commit: Merge pull request #57 from ThatCashflowLife/auto-update-readme-16384920846 (ThatCashflowLife)
 - Merge pull request #57 from ThatCashflowLife/auto-update-readme-16384920846 (ThatCashflowLife)
-- Auto-update README for commit: bug fix (rmorrow23)
-- bug fix (Randal Morrow)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
-- [@rmorrow23](https://github.com/rmorrow23) (⭐ 90 commits)
-- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 61 commits)
+- [@rmorrow23](https://github.com/rmorrow23) (⭐ 91 commits)
+- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 64 commits)
 - [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 14 commits)
 - [@D-flyRobotics](https://github.com/D-flyRobotics) (⭐ 2 commits)
 - [@expo-bot](https://github.com/expo-bot) (⭐ 1 commits)
@@ -104,4 +104,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-07-19 00:25:17 -0400_
+_Last updated: 2025-07-19 00:26:00 -0400_
