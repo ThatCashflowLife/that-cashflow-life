@@ -241,10 +241,10 @@ export const addLoanToUser = (
     },
   };
 
-  const existingLoanPayment = currentUser.expenses["Loan Payment"] || 0;
+  const existingLoanPayment = currentUser.expenses["Personal Loan Payment"] || 0;
   const updatedExpenses = {
     ...currentUser.expenses,
-    "Loan Payment": existingLoanPayment + loanDetails.payment,
+    "Personal Loan Payment": existingLoanPayment + loanDetails.payment,
   };
 
   return {
@@ -559,8 +559,9 @@ export const addCertificateOfDeposit = (
   user: User,
   cd: CertificateOfDeposit
 ): User => {
-  const existingCDs = user.Assets.Investments?.CDs ?? [];
-  console.log(existingCDs);
+  const existingCDsRaw = user.Assets.Investments?.CDs;
+  const existingCDs = Array.isArray(existingCDsRaw) ? existingCDsRaw : [];
+
   return {
     ...user,
     Assets: {

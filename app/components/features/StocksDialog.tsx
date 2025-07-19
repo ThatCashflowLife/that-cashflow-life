@@ -62,7 +62,7 @@ const StocksDialog: React.FC<Props> = ({ isVisible, onSubmit, onCancel }) => {
 
                     <TextInput
                         placeholder="Stock Symbol (e.g. AAPL)"
-                        placeholderTextColor="#aaa"
+                        placeholderTextColor="#bbb"
                         style={styles.input}
                         value={symbol}
                         onChangeText={setSymbol}
@@ -71,7 +71,7 @@ const StocksDialog: React.FC<Props> = ({ isVisible, onSubmit, onCancel }) => {
 
                     <TextInput
                         placeholder="Number of Shares"
-                        placeholderTextColor="#aaa"
+                        placeholderTextColor="#bbb"
                         keyboardType="numeric"
                         style={styles.input}
                         value={shares}
@@ -80,7 +80,7 @@ const StocksDialog: React.FC<Props> = ({ isVisible, onSubmit, onCancel }) => {
 
                     <TextInput
                         placeholder="Price per Share"
-                        placeholderTextColor="#aaa"
+                        placeholderTextColor="#bbb"
                         keyboardType="numeric"
                         style={styles.input}
                         value={price}
@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
     },
     input: {
         padding: 5,
+        color:"white",
         marginBottom: 25,
         marginLeft: 15,
         marginRight: 15,

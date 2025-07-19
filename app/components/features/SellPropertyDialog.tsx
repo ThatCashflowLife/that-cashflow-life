@@ -6,10 +6,11 @@ import {
     TextInput,
     TouchableOpacity,
     StyleSheet,
-    Alert,
+    Alert,Animated
 } from "react-native";
 import { RealEstate } from "../../../interfaces/Assets";
 import Theme from "../../../interfaces/theme";
+import CustomKeypad from "../CustomKeypad";
 
 interface SellPropertyDialogProps {
     isVisible: boolean;
@@ -25,16 +26,23 @@ const SellPropertyDialog: React.FC<SellPropertyDialogProps> = ({
     onConfirm,
 }) => {
     const [salePrice, setSalePrice] = useState("");
+    const [amount, setAmount] = useState("");
+    const [activeField, setActiveField] = useState(null);
 
     const handleConfirm = () => {
-        const parsedPrice = parseFloat(salePrice);
+        const parsedPrice = parseFloat(amount);
         if (isNaN(parsedPrice) || parsedPrice <= 0) {
             Alert.alert("Invalid Price", "Please enter a valid sale price.");
             return;
         }
 
         onConfirm(parsedPrice);
-        setSalePrice("");
+        setAmount(""); // clear keypad value after confirm
+    };
+
+    const handleKeypadPress = (key) => {
+        const update = (current) => (key === "←" ? current.slice(0, -1) : current + key);
+        if (activeField === "amount") setAmount(update(amount));
     };
 
     return (
@@ -45,14 +53,12 @@ const SellPropertyDialog: React.FC<SellPropertyDialogProps> = ({
                     {property && (
                         <>
                             <Text style={styles.label}>Property: {property.name}</Text>
-                            <TextInput
-                                placeholder="Enter Sale Price"
-                                placeholderTextColor="#aaa"
-                                keyboardType="numeric"
-                                style={styles.input}
-                                value={salePrice}
-                                onChangeText={setSalePrice}
-                            />
+                            
+                            <TouchableOpacity onPress={() => { setActiveField("amount");}}>
+                                                        <Animated.View style={[styles.inputCont]}>
+                                                            <Text style={amount ? styles.input : styles.input}>{amount || "Enter Sale Price"}</Text>
+                                                        </Animated.View>
+                                                    </TouchableOpacity>
 
                             <View style={styles.buttons}>
                                 <TouchableOpacity style={styles.cancel} onPress={onCancel}>
@@ -62,6 +68,8 @@ const SellPropertyDialog: React.FC<SellPropertyDialogProps> = ({
                                     <Text style={styles.confirmText}>Confirm Sale</Text>
                                 </TouchableOpacity>
                             </View>
+
+                            <CustomKeypad onPress={handleKeypadPress} />
                         </>
                     )}
                 </View>
@@ -74,61 +82,39 @@ const styles = StyleSheet.create({
     overlay: {
         flex: 1,
         justifyContent: "center",
-        backgroundColor: "rgba(0,0,0,0.8)",
-        padding: 20,
+        backgroundColor: "rgba(0,0,0,1)",
+        paddingHorizontal: 0
     },
     dialog: {
-        backgroundColor: Theme.CFL_card_background,
-        padding: 20,
-        borderRadius: 16,
+        backgroundColor: "#000",
+        borderRadius: 0,
+        paddingTop: 10,
+        flex: 1,
+        justifyContent: "center"
     },
     title: {
-        fontSize: 20,
+        fontSize: 45,
         fontWeight: "bold",
-        color: Theme.CFL_white,
-        marginBottom: 12,
+        marginBottom: 15,
+        marginLeft: 15,
+        marginRight: 15,
+        color: "#fff"
     },
-    label: {
-        color: Theme.CFL_light_text,
-        fontSize: 16,
-        marginBottom: 10,
-    },
-    input: {
-        borderBottomColor: Theme.CFL_gray,
-        borderBottomWidth: 1.5,
-        marginBottom: 20,
-        color: Theme.CFL_white,
-        fontSize: 16,
-        paddingVertical: 6,
-    },
+    label: { fontSize: 18, color: "#aaa", marginBottom: 5, marginLeft: 15, marginRight: 15 },
+    inputCont: { padding: 5, marginBottom: 15, marginLeft: 15, marginRight: 15, borderRadius: 20, borderBottomWidth:2, borderBottomColor:"#ccc" },
+    input: { fontSize: 35, color: "#fff", paddingLeft: 5 },
     buttons: {
         flexDirection: "row",
         justifyContent: "space-between",
+        backgroundColor: "#000",
+        marginHorizontal: 15,
+        marginTop: "25%",
+        marginBottom: "10%"
     },
-    cancel: {
-        flex: 1,
-        marginRight: 10,
-        backgroundColor: Theme.CFL_danger_button,
-        padding: 12,
-        borderRadius: 8,
-        alignItems: "center",
-    },
-    confirm: {
-        flex: 1,
-        marginLeft: 10,
-        backgroundColor: Theme.CFL_green,
-        padding: 12,
-        borderRadius: 8,
-        alignItems: "center",
-    },
-    cancelText: {
-        color: "#fff",
-        fontWeight: "bold",
-    },
-    confirmText: {
-        color: "#fff",
-        fontWeight: "bold",
-    },
+    cancel: { flex: 1, paddingVertical: 12, backgroundColor: Theme.CFL_danger_button, borderRadius: 8, alignItems: "center", marginRight: 5 },
+    confirm: { flex: 3, paddingVertical: 12, backgroundColor: Theme.CFL_green, borderRadius: 8, alignItems: "center", marginLeft: 5 },
+    cancelText: { color: "#fff", fontWeight: "bold" },
+    confirmText: { color: "#fff", fontWeight: "bold" },
 });
 
 export default SellPropertyDialog;

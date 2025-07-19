@@ -190,14 +190,18 @@ const Properties = () => {
   return (
     <View style={{ flex: 1, backgroundColor: Theme.CFL_app_background }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View style={styles.content}> {(user?.Assets?.Investments?.RealEstate ?? []).length > 0 ? (
-          user.Assets.Investments?.RealEstate.map(renderProperty)
-        ) : (
-          <Text style={styles.emptyMessage}>
-            No properties owned yet. Add a deal to get started!
-          </Text>
-        )}
+        <View style={styles.content}>
+          {(user?.Assets?.Investments?.RealEstate ?? []).length > 0 ? (
+            <>
+              {user.Assets.Investments?.RealEstate.map(renderProperty)}
+            </>
+          ) : (
+            <Text style={styles.emptyMessage}>
+              No properties owned yet. Add a deal to get started!
+            </Text>
+          )}
         </View>
+
         <SellPropertyDialog
           isVisible={showSellDialog}
           property={selectedProperty}
