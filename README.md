@@ -90,14 +90,14 @@ Ensure you have the following installed:
 - **typescript**: ^5.7.3
 
 ## 🔄 Recent Commits
+- Merge pull request #61 from ThatCashflowLife/auto-update-readme-16716046869 (ThatCashflowLife)
+- Auto-update README for commit: UI - Upgrade (rmorrow23)
 - UI - Upgrade (Randal Morrow)
-- bug fix (Randal Morrow)
-- Add Real Estate Selling (Randal Morrow)
 
 ## 👥 Contributors
 - [@Nathanvititoe](https://github.com/Nathanvititoe) (⭐ 204 commits)
-- [@rmorrow23](https://github.com/rmorrow23) (⭐ 91 commits)
-- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 61 commits)
+- [@rmorrow23](https://github.com/rmorrow23) (⭐ 92 commits)
+- [@ThatCashflowLife](https://github.com/ThatCashflowLife) (⭐ 62 commits)
 - [@ClaytonHin](https://github.com/ClaytonHin) (⭐ 14 commits)
 - [@D-flyRobotics](https://github.com/D-flyRobotics) (⭐ 2 commits)
 - [@expo-bot](https://github.com/expo-bot) (⭐ 1 commits)
@@ -106,4 +106,4 @@ Ensure you have the following installed:
 
 ---
 
-_Last updated: 2025-08-04 02:46:23 -0400_
+_Last updated: 2025-08-04 02:47:47 -0400_
