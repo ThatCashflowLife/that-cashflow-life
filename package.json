@@ -41,6 +41,8 @@
     "expo-updates": "~0.28.16",
     "expo-web-browser": "~14.2.0",
     "fs-extra": "^11.3.0",
+    "lottie-ios": "^4.5.1",
+    "lottie-react-native": "7.2.2",
     "metro-config": "^0.81.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",

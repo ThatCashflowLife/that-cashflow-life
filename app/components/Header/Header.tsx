@@ -155,8 +155,9 @@ const styles = StyleSheet.create({
   header: {
     marginTop: 0,
     width: "100%",
-    backgroundColor: Theme.CFL_green,
-    padding: 10,
+    backgroundColor: Theme.CFL_dark_green,
+    paddingHorizontal: 10,
+    paddingBottom:10,
     alignItems: "flex-start",
     justifyContent: "center",
     zIndex: 1000,
@@ -171,7 +172,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 150,
     height: 60,
-    marginTop: 20,
+    marginTop: 10,
     marginRight: 30,
     marginLeft: -10,
   },
@@ -181,7 +182,7 @@ const styles = StyleSheet.create({
     color: Theme.CFL_dark_text,
     fontFamily: Theme.CFL_primary_font,
     textAlign: "center",
-    marginTop: 15,
+    marginTop: 5,
     padding: 3,
     minWidth: 100,
   },
@@ -191,7 +192,7 @@ const styles = StyleSheet.create({
     color: Theme.CFL_dark_text,
     fontFamily: Theme.CFL_primary_font,
     textAlign: "center",
-    marginTop: 15,
+    marginTop: 5,
     padding: 3,
     minWidth: 120,
     backgroundColor: Theme.CFL_dark_green,
@@ -202,7 +203,7 @@ const styles = StyleSheet.create({
     padding: 8,
     position: "absolute",
     right: 20,
-    top:30,
+    top:12
   },
 });
 

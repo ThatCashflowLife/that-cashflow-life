@@ -8,6 +8,7 @@ import formatUSD from "../../../utils/currencyUtil";
 import formatTimestamp from "../../../utils/timeUtil";
 import getTypeColor, { findLatestTransaction } from "../../../utils/transactionUtil";
 import { useTransactions } from "../context/TransactionProvider";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const LatestTransaction = () => {
   const { getTransactions } = useTransactions();
@@ -23,8 +24,12 @@ const LatestTransaction = () => {
   // if no transactions, display this message
   if (!latestTransaction) {
     return (
-      <View style={styles.card}>
-        <Text style={styles.noTransaction}>No Transactions Available</Text>
+      <View style={styles.noTcardCont}>
+        <MaterialIcons name="qr-code-scanner" size={60} color="rgba(243, 208, 103, 1)" />
+        <View style={styles.noTcard}>
+        <Text style={styles.noTransaction}>You haven't made any moves yet!</Text>
+        <Text style={styles.noTransaction}>Scan a Profession to get started.</Text>
+        </View>
       </View>
     );
   }
@@ -82,6 +87,20 @@ const styles = StyleSheet.create({
     marginVertical: Theme.CFL_card_spacing, // space between components
     backgroundColor: "rgba(0,0,0,0)", // lighter card background
     borderRadius: 10,
+  },
+  noTcard: {
+    backgroundColor: "rgba(0,0,0,0)", // lighter card background
+    borderRadius: 10,
+    flexDirection: "column",
+    paddingLeft: 15,
+    justifyContent:"center"
+  },
+  noTcardCont: {
+    backgroundColor: "rgba(0,0,0,0)", // lighter card background
+    borderRadius: 10,
+    flexDirection: "row",
+    paddingVertical: 15,
+    justifyContent: "center"
   },
   // card for each transaction
   transactionCard: {
@@ -150,8 +169,7 @@ const styles = StyleSheet.create({
   noTransaction: {
     fontFamily: Theme.CFL_primary_font,
     color: Theme.CFL_light_text,
-    fontSize: 12,
-    padding: 2,
+    fontSize: 15,
     marginLeft: 20,
   },
   // transaction description

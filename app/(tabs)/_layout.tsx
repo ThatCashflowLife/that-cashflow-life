@@ -7,8 +7,8 @@ import Theme from "../../interfaces/theme";
 
 export default function Layout() {
   return (
-
-    <SafeAreaView style={{ flex: 1, backgroundColor:'#4CB348', }} edges={['top', 'bottom']}>
+//#4CB348
+    <SafeAreaView style={{ flex: 1, backgroundColor:Theme.CFL_dark_green, }} edges={['top', 'bottom']}>
       <TabLayout />
     </SafeAreaView>
   );

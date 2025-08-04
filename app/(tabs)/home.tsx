@@ -105,7 +105,7 @@ export const Home = () => {
 const styles = StyleSheet.create({
   // card for each component
   card: {
-    marginVertical: Theme.CFL_card_spacing, // space between components
+    marginBottom: Theme.CFL_card_spacing, // space between components
     backgroundColor: Theme.CFL_card_background, // lighter card background
     borderRadius: 10,
   },
