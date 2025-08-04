@@ -366,14 +366,21 @@ export const TabLayout = () => {
                 onSubmit={(symbol, shares, price, type) => {
                     const updatedUser = updateStocks(user, symbol, shares, price, type);
                     const transaction = createStockTransaction(symbol, shares, price, type);
-
                     setUser(updatedUser);
                     addTransactions([transaction]);
                     calculateNetWorth(updatedUser, setUser);
                     setIsStocksDialogVisible(false);
                     setSuccessVisible(true);
                 }}
+                stocks={
+                    user?.Assets?.Investments?.Stocks ?? {
+                        totalValue: 0,
+                        holdings: {},
+                    }
+                }
             />
+
+
             <CertificateDialog
                 isVisible={isCertificateDialogVisible}
                 onCancel={() => { setIsCertificateDialogVisible(false); }}
