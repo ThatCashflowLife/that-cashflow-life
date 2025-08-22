@@ -63,27 +63,27 @@ export const populateFirstProfession = (
       Savings: scannedProfession.assets.Savings ?? 0,
       Investments: {
         Mortgage: scannedProfession.assets.Investments?.Mortgage ?? 0,
-        RealEstate: scannedProfession.assets.Investments?.RealEstate ?? {
-          name: "",
-          type: "house",
-          description: "",
-          "Purchase Price": 0,
-          "Sale Range": "",
-          "Cash Flow": 0,
-          Mortgage: 0,
-          "Down Payment": 0,
-          purchaseTime: "",
-          saleTime: "",
-        },
+
+        // Always an array
+        RealEstate: Array.isArray(scannedProfession.assets.Investments?.RealEstate)
+          ? scannedProfession.assets.Investments.RealEstate
+          : [],
+
+        // Stocks fallback
         Stocks: scannedProfession.assets.Investments?.Stocks ?? {
           totalValue: 0,
           holdings: {},
         },
+
         Gold_Count: scannedProfession.assets.Investments?.Gold_Count ?? 0,
         Bitcoin: scannedProfession.assets.Investments?.Bitcoin ?? 0,
         "Bitcoin Value": scannedProfession.assets.Investments?.["Bitcoin Value"] ?? 0,
-        CDs:scannedProfession.assets.Investments.CDs ?? 0
-      }
+
+        // CDs always array
+        CDs: Array.isArray(scannedProfession.assets.Investments?.CDs)
+          ? scannedProfession.assets.Investments.CDs
+          : [],
+      },
     },
     Liabilities: scannedProfession.liabilities,
     professionIcon: getIcon(scannedProfession.name),
@@ -91,6 +91,7 @@ export const populateFirstProfession = (
 
   return userInitialValues;
 };
+
 
 /**
  * only populate profession name, icon and salary for all professions after the first

@@ -262,7 +262,7 @@ export const TabLayout = () => {
                                 size={42}
                                 color="rgba(243, 208, 103, 1)"
                             />
-                            <Text style={styles.fabText}>Stocks</Text>
+                            <Text style={styles.fabText}>Invest</Text>
                         </TouchableOpacity>
                     </ScrollView>
                 </View>
